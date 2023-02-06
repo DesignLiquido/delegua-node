@@ -3,7 +3,11 @@
     "version": "0.0.0",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
-        "testes-unitarios": "jest --coverage"
+        "testes-unitarios": "jest --coverage",
+        "testes:egua": "./bin/delegua-ts exemplos/dialetos/egua-classico/testes.egua",
+        "testes:delegua:bhaskara": "./bin/delegua-ts exemplos/dialetos/egua-classico/bhaskara.egua",
+        "testes:delegua:fibonacci": "./bin/delegua-ts exemplos/dialetos/egua-classico/fibonacci.egua",
+        "testes:egua-classico": "./bin/delegua-ts --dialeto egua exemplos/dialetos/egua-classico/testes.egua"
     },
     "dependencies": {
         "@designliquido/delegua": "^0.13.2",
