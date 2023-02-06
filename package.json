@@ -1,0 +1,15 @@
+{
+    "name": "@designliquido/delegua-node",
+    "version": "0.0.0",
+    "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
+    "dependencies": {
+        "@designliquido/delegua": "^0.13.2",
+        "chalk": "4.1.2",
+        "commander": "^9.4.1"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.19",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.5"
+    }
+}

@@ -1,0 +1,2 @@
+var teste = leia()
+escreva('Resultado: ' + teste)
