@@ -5,7 +5,7 @@ import chalk from 'chalk';
 
 import { Lexador } from '@designliquido/delegua/fontes/lexador/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/fontes/avaliador-sintatico/avaliador-sintatico';
-import { Interpretador } from '@designliquido/delegua/fontes/interpretador/interpretador';
+import { Interpretador } from './interpretador/interpretador';
 
 import tiposDeSimbolos from '@designliquido/delegua/fontes/tipos-de-simbolos/delegua';
 

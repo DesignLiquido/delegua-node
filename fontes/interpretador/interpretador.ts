@@ -6,7 +6,7 @@ import { DeleguaModulo } from '@designliquido/delegua/fontes/estruturas';
 import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
 import { InterpretadorBase } from '@designliquido/delegua/fontes/interpretador/interpretador-base';
 
-import carregarBibliotecaNode from '@designliquido/delegua/fontes/bibliotecas/importar-biblioteca';
+import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
 
 
 /**
