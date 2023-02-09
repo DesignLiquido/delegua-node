@@ -24,7 +24,6 @@ import { LexadorEguaClassico } from '@designliquido/delegua/fontes/lexador/diale
 import { LexadorEguaP } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-eguap';
 import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-eguap';
 import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
-import { ServidorDepuracao } from '@designliquido/delegua/fontes/depuracao';
 
 import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
 import { Importador, RetornoImportador } from '@designliquido/delegua/fontes/importador';
@@ -39,6 +38,7 @@ import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
 import { InterpretadorVisuAlgComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos';
 import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-portugol-studio';
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
+import { ServidorDepuracao } from './depuracao';
 
 /**
  * O núcleo da linguagem.
@@ -112,7 +112,7 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = new InterpretadorEguaClassico(this, process.cwd());
+                this.interpretador = new InterpretadorEguaClassico(process.cwd());
                 break;
             case 'eguap':
                 this.lexador = new LexadorEguaP();
