@@ -26,7 +26,7 @@ import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador
 import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 
 import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
-import { Importador, RetornoImportador } from '@designliquido/delegua/fontes/importador';
+import { Importador, RetornoImportador } from './importador';
 import { InterpretadorComDepuracao } from '@designliquido/delegua/fontes/interpretador/interpretador-com-depuracao';
 import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-visualg';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-visualg';
