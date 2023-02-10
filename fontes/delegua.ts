@@ -11,7 +11,6 @@ import tiposDeSimbolos from '@designliquido/delegua/fontes/tipos-de-simbolos/del
 
 import {
     AvaliadorSintaticoInterface,
-    DeleguaInterface,
     InterpretadorComDepuracaoInterface,
     InterpretadorInterface,
     LexadorInterface,
@@ -25,7 +24,6 @@ import { LexadorEguaP } from '@designliquido/delegua/fontes/lexador/dialetos/lex
 import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-eguap';
 import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 
-import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
 import { Importador, RetornoImportador } from './importador';
 import { InterpretadorComDepuracao } from '@designliquido/delegua/fontes/interpretador/interpretador-com-depuracao';
 import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-visualg';
@@ -39,6 +37,7 @@ import { InterpretadorVisuAlgComDepuracao } from '@designliquido/delegua/fontes/
 import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-portugol-studio';
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
 import { ServidorDepuracao } from './depuracao';
+import { DeleguaInterface, ImportadorInterface } from './interfaces';
 
 /**
  * O núcleo da linguagem.
@@ -124,8 +123,12 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = depurador
+                // TODO: Implementar Interpretador com depuração e suporte à importação
+                /* this.interpretador = depurador
                     ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
+                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+                this.interpretador = depurador
+                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
             case 'portugol-studio':
@@ -138,8 +141,12 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = depurador
+                // TODO: Implementar Interpretador com depuração e suporte à importação
+                /* this.interpretador = depurador
                     ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
+                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+                this.interpretador = depurador
+                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
             case 'visualg':
@@ -152,9 +159,13 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = depurador
+                // TODO: Implementar Interpretador com depuração e suporte à importação
+                /* this.interpretador = depurador
                     ? new InterpretadorVisuAlgComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new InterpretadorVisuAlg(this.importador, process.cwd(), false, console.log);
+                    : new InterpretadorVisuAlg(this.importador, process.cwd(), false, console.log); */
+                this.interpretador = depurador
+                    ? new InterpretadorVisuAlgComDepuracao(process.cwd(), funcaoDeRetorno)
+                    : new InterpretadorVisuAlg(process.cwd(), false, console.log);
                 break;
             default:
                 this.lexador = new Lexador(performance);
@@ -166,8 +177,12 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = depurador
+                // TODO: Implementar Interpretador com depuração e suporte à importação
+                /* this.interpretador = depurador
                     ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
+                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+                this.interpretador = depurador
+                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
         }
