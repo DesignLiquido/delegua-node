@@ -8,6 +8,15 @@ Em versões anteriores, o suporte ao ecossistema Node vinha embutido no pacote d
 
 Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `node:child_process` na parte de navegador de internet e as aplicações falham.
 
+### Implicações
+
+Se sua aplicação:
+
+- Precisa suportar importações, seja de outros fontes, seja de bibliotecas NPM
+- Pode executar no ambiente Node.js
+
+Ela pode, então, usar este pacote. Caso contrário, o uso apenas do núcleo da linguagem é uma escolha melhor.
+
 ## Instalação
 
 Se quiser instalar no seu computador,
