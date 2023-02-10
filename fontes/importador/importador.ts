@@ -6,8 +6,8 @@ import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/fontes/excecoes';
 import { AvaliadorSintaticoInterface, LexadorInterface } from '@designliquido/delegua/fontes/interfaces';
 
-import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
 import { RetornoImportador } from './retorno-importador';
+import { ImportadorInterface } from '../interfaces';
 
 /**
  * O Importador é responsável por manusear arquivos. Coordena as fases de lexação, avaliação sintática,

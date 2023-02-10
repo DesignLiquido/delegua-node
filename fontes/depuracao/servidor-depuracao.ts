@@ -1,10 +1,11 @@
 import * as net from 'net';
 import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
 
-import { DeleguaInterface, InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/fontes/interfaces';
+import { InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/fontes/interfaces';
 import { PilhaEscoposExecucaoInterface } from '@designliquido/delegua/fontes/interfaces/pilha-escopos-execucao-interface';
 import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
 import { PontoParada } from '@designliquido/delegua/fontes/depuracao/ponto-parada';
+import { DeleguaInterface } from '../interfaces';
 
 /**
  * Esta foi a primeira implementacão do mecanismo de depuração, usando comunicação por _sockets_.

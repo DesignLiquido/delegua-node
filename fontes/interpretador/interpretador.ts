@@ -3,7 +3,7 @@ import * as caminho from 'node:path';
 import { Importar } from '@designliquido/delegua/fontes/declaracoes';
 import { DeleguaModulo } from '@designliquido/delegua/fontes/estruturas';
 
-import { ImportadorInterface } from '@designliquido/delegua/fontes/interfaces/importador-interface';
+import { ImportadorInterface } from '../interfaces/importador-interface';
 import { InterpretadorBase } from '@designliquido/delegua/fontes/interpretador/interpretador-base';
 
 import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
@@ -14,13 +14,16 @@ import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
  * e de fato executa a lógica de programação descrita no código.
  */
 export class Interpretador extends InterpretadorBase {
+    importador: ImportadorInterface;
+
     constructor(
         importador: ImportadorInterface,
         diretorioBase: string,
         performance = false,
         funcaoDeRetorno: Function = null
     ) {
-        super(importador, diretorioBase, performance, funcaoDeRetorno);
+        super(diretorioBase, performance, funcaoDeRetorno);
+        this.importador = importador;
     }
 
     /**
