@@ -38,6 +38,8 @@ import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dia
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
 import { ServidorDepuracao } from './depuracao';
 import { DeleguaInterface, ImportadorInterface } from './interfaces';
+import { InterpretadorComDepuracaoImportacao } from './interpretador/interpretador-com-depuracao-importacao';
+import { InterpretadorVisuAlgComDepuracaoImportacao } from './interpretador/dialetos/interpretador-visualg-com-depuracao-importacao';
 
 /**
  * O núcleo da linguagem.
@@ -123,12 +125,9 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                // TODO: Implementar Interpretador com depuração e suporte à importação
-                /* this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+                
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
+                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
             case 'portugol-studio':
@@ -141,12 +140,9 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                // TODO: Implementar Interpretador com depuração e suporte à importação
-                /* this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+                
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
+                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
             case 'visualg':
@@ -159,12 +155,9 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                // TODO: Implementar Interpretador com depuração e suporte à importação
-                /* this.interpretador = depurador
-                    ? new InterpretadorVisuAlgComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new InterpretadorVisuAlg(this.importador, process.cwd(), false, console.log); */
+
                 this.interpretador = depurador
-                    ? new InterpretadorVisuAlgComDepuracao(process.cwd(), funcaoDeRetorno)
+                    ? new InterpretadorVisuAlgComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
                     : new InterpretadorVisuAlg(process.cwd(), false, console.log);
                 break;
             default:
@@ -177,12 +170,9 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                // TODO: Implementar Interpretador com depuração e suporte à importação
-                /* this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno); */
+
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracao(process.cwd(), funcaoDeRetorno)
+                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
                     : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
                 break;
         }
