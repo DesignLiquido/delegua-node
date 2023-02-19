@@ -517,6 +517,47 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "VisuAlg > Repita",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "visualg",
+                "./exemplos/dialetos/visualg/repita.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "VisuAlg > Repita 2",
+            "skipFiles": [
+                "<node_internals>/**",
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "visualg",
+                "./exemplos/dialetos/visualg/repita2.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy", 
+                "-r", 
+                "ts-node/register/transpile-only",
+                // "--preserve-symlinks", 
+                // "--preserve-symlinks-main", 
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "VisuAlg > Times",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
