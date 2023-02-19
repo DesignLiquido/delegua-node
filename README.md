@@ -53,6 +53,12 @@ delegua> 2 ** 10
 
 Para finalizar a execução do interpretador LAIR Delégua, use o atalho <key>Ctrl</key> + <key>C</key> (todos os sistemas operacionais).
 
+#### Dialetos que suportam o modo LAIR
+
+- Delégua
+- Égua Clássico
+- EguaP
+
 ### Executando arquivos
 
 É possível usar o interpretador com outros dialetos, como Égua.
