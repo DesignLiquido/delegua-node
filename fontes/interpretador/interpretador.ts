@@ -20,9 +20,10 @@ export class Interpretador extends InterpretadorBase {
         importador: ImportadorInterface,
         diretorioBase: string,
         performance = false,
-        funcaoDeRetorno: Function = null
+        funcaoDeRetorno: Function = null,
+        funcaoDeRetornoMesmaLinha: Function = null
     ) {
-        super(diretorioBase, performance, funcaoDeRetorno);
+        super(diretorioBase, performance, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
         this.importador = importador;
     }
 
