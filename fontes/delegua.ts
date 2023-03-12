@@ -68,6 +68,7 @@ export class Delegua implements DeleguaInterface {
     tradutorReversoJavascript: TradutorReversoJavaScript;
 
     funcaoDeRetorno: Function;
+    funcaoDeRetornoMesmaLinha: Function;
     modoDepuracao: boolean;
 
     servidorDepuracao: ServidorDepuracao;
@@ -77,13 +78,15 @@ export class Delegua implements DeleguaInterface {
         performance = false,
         depurador = false,
         traduzir: any = null,
-        funcaoDeRetorno: Function = null
+        funcaoDeRetorno: Function = null,
+        funcaoDeRetornoMesmaLinha: Function = null
     ) {
         this.arquivosAbertos = {};
         this.conteudoArquivosAbertos = {};
 
         this.dialeto = dialeto;
         this.funcaoDeRetorno = funcaoDeRetorno || console.log;
+        this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write;
         this.modoDepuracao = depurador;
 
         switch (this.dialeto) {
@@ -97,7 +100,12 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = new Interpretador(this.importador, process.cwd(), false, console.log);
+                this.interpretador = new Interpretador(
+                    this.importador, 
+                    process.cwd(), 
+                    false, 
+                    this.funcaoDeRetorno, 
+                    this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'egua':
                 if (depurador) {
@@ -127,8 +135,16 @@ export class Delegua implements DeleguaInterface {
                 );
                 
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
+                    ? new InterpretadorComDepuracaoImportacao(
+                        this.importador, 
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new Interpretador(this.importador, 
+                        process.cwd(), 
+                        performance, 
+                        this.funcaoDeRetorno,
+                        this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'portugol-studio':
                 this.lexador = new LexadorPortugolStudio();
@@ -142,8 +158,17 @@ export class Delegua implements DeleguaInterface {
                 );
                 
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
+                    ? new InterpretadorComDepuracaoImportacao(
+                        this.importador, 
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new Interpretador(
+                        this.importador, 
+                        process.cwd(), 
+                        performance, 
+                        this.funcaoDeRetorno,
+                        this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'visualg':
                 this.lexador = new LexadorVisuAlg();
@@ -157,8 +182,16 @@ export class Delegua implements DeleguaInterface {
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorVisuAlgComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new InterpretadorVisuAlg(process.cwd(), false, console.log);
+                    ? new InterpretadorVisuAlgComDepuracaoImportacao(
+                        this.importador, 
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new InterpretadorVisuAlg(
+                        process.cwd(), 
+                        false, 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha);
                 break;
             default:
                 this.lexador = new Lexador(performance);
@@ -172,8 +205,17 @@ export class Delegua implements DeleguaInterface {
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(this.importador, process.cwd(), funcaoDeRetorno)
-                    : new Interpretador(this.importador, process.cwd(), performance, funcaoDeRetorno);
+                    ? new InterpretadorComDepuracaoImportacao(
+                        this.importador, 
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new Interpretador(
+                        this.importador, 
+                        process.cwd(), 
+                        performance, 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha);
                 break;
         }
 
