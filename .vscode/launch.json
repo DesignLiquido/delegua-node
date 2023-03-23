@@ -437,6 +437,7 @@
         {
             "type": "node",
             "request": "launch",
+
             "name": "VisuAlg > Exemplos Biblioteca Caracteres",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
