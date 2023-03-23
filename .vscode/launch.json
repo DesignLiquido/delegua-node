@@ -437,7 +437,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "VisuAlg > Exemplos Biblioteca",
+            "name": "VisuAlg > Exemplos Biblioteca Caracteres",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
@@ -445,7 +445,23 @@
                 "${workspaceFolder}${pathSeparator}execucao.ts",
                 "--dialeto",
                 "visualg",
-                "./exemplos/dialetos/visualg/exemplos-biblioteca.alg"
+                "./exemplos/dialetos/visualg/exemplos-biblioteca-caracteres.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "VisuAlg > Exemplos Biblioteca Numérica",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "visualg",
+                "./exemplos/dialetos/visualg/exemplos-biblioteca-numerica.alg"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
