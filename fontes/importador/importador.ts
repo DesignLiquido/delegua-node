@@ -40,7 +40,7 @@ export class Importador implements ImportadorInterface {
     importar(
         caminhoRelativoArquivo: string,
         importacaoInicial: boolean = false,
-        traduzirJavaScriptParaDelegua: boolean = false
+        retornarConteudoArquivo: boolean = false
     ): RetornoImportador {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
@@ -62,7 +62,7 @@ export class Importador implements ImportadorInterface {
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
         const conteudoDoArquivo: string[] = dadosDoArquivo.toString().replace(sistemaOperacional.EOL, '\n').split('\n');
 
-        if (traduzirJavaScriptParaDelegua) {
+        if (retornarConteudoArquivo) {
             return {
                 conteudoArquivo: conteudoDoArquivo,
                 nomeArquivo,
