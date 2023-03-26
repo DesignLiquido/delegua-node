@@ -23,13 +23,14 @@ import { LexadorEguaClassico } from '@designliquido/delegua/fontes/lexador/diale
 import { LexadorEguaP } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-eguap';
 import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-eguap';
 import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
+import { TradutorVisualg } from '@designliquido/delegua/fontes/tradutores/tradutor-visualg';
 
 import { Importador, RetornoImportador } from './importador';
 import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-visualg';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-visualg';
 import { LexadorBirl } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-birl';
 import { AvaliadorSintaticoBirl } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-birl';
-import { TradutorJavaScript, TradutorReversoJavaScript, TradutorVisualg } from '@designliquido/delegua/fontes/tradutores';
+import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
 import { InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
