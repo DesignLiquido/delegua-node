@@ -33,7 +33,8 @@ import { AvaliadorSintaticoBirl } from '@designliquido/delegua/fontes/avaliador-
 import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
-import { InterpretadorVisuAlgComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos';
+import { InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
+import { InterpretadorPortugolStudioComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/portugol-studio/interpretador-portugol-studio-com-depuracao';
 import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-portugol-studio';
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
 import { ServidorDepuracao } from './depuracao';
@@ -158,17 +159,14 @@ export class Delegua implements DeleguaInterface {
                 );
                 
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(
-                        this.importador, 
+                    ? new InterpretadorPortugolStudioComDepuracao(
                         process.cwd(), 
                         this.funcaoDeRetorno, 
                         this.funcaoDeRetornoMesmaLinha)
-                    : new Interpretador(
-                        this.importador, 
-                        process.cwd(), 
+                    : new InterpretadorPortugolStudio(
+                        process.cwd(),
                         performance, 
-                        this.funcaoDeRetorno,
-                        this.funcaoDeRetornoMesmaLinha);
+                        this.funcaoDeRetorno);
                 break;
             case 'visualg':
                 this.lexador = new LexadorVisuAlg();
