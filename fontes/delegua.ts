@@ -25,12 +25,11 @@ import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador
 import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 
 import { Importador, RetornoImportador } from './importador';
-import { InterpretadorComDepuracao } from '@designliquido/delegua/fontes/interpretador/interpretador-com-depuracao';
 import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-visualg';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-visualg';
 import { LexadorBirl } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-birl';
 import { AvaliadorSintaticoBirl } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-birl';
-import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
+import { TradutorJavaScript, TradutorReversoJavaScript, TradutorVisualg } from '@designliquido/delegua/fontes/tradutores';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
 import { InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
@@ -67,6 +66,7 @@ export class Delegua implements DeleguaInterface {
     importador: ImportadorInterface;
     tradutorJavaScript: TradutorJavaScript;
     tradutorReversoJavascript: TradutorReversoJavaScript;
+    tradutorVisualg: TradutorVisualg;
 
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
@@ -226,6 +226,10 @@ export class Delegua implements DeleguaInterface {
                 case 'delegua':
                     this.tradutorReversoJavascript = new TradutorReversoJavaScript();
                     break;
+                case 'alg':
+                case 'visualg':
+                        this.tradutorVisualg = new TradutorVisualg();
+                        break;
                 default:
                     throw new Error(`Tradutor '${traduzir}' não implementado.`);
             }
@@ -352,7 +356,7 @@ export class Delegua implements DeleguaInterface {
      *                          Se verdadeiro, os arquivos de saída são escritos no mesmo diretório
      *                          do arquivo passado no primeiro parâmetro.
      */
-    traduzirArquivo(caminhoRelativoArquivo: string, gerarArquivoSaida: boolean, extensaoArquivoSaida: string): any {
+    traduzirArquivo(caminhoRelativoArquivo: string, gerarArquivoSaida: boolean): any {
         const caminhoAbsolutoPrimeiroArquivo = caminho.resolve(caminhoRelativoArquivo);
         const novoDiretorioBase = caminho.dirname(caminhoAbsolutoPrimeiroArquivo);
 
@@ -361,7 +365,7 @@ export class Delegua implements DeleguaInterface {
         const retornoImportador = this.importador.importar(
             caminhoRelativoArquivo,
             true,
-            !!this.tradutorReversoJavascript
+            !this.tradutorJavaScript
         );
 
         let resultado = null;
@@ -371,16 +375,20 @@ export class Delegua implements DeleguaInterface {
             }
 
             resultado = this.tradutorJavaScript.traduzir(retornoImportador.retornoAvaliadorSintatico.declaracoes);
-        } else {
+        } else if (this.tradutorReversoJavascript !== null && this.tradutorReversoJavascript !== undefined) {
             resultado = this.tradutorReversoJavascript.traduzir(retornoImportador.conteudoArquivo.join('\n'));
+        } else {
+            resultado = this.tradutorVisualg.traduzir(retornoImportador.conteudoArquivo.join('\n'));
         }
 
         if (gerarArquivoSaida) {
-            ['.delegua', '.js'].map((extensao) => {
+            ['.delegua', '.js', '.alg'].map((extensao) => {
+                const extensaoArquivoSaida = extensao === '.delegua' ? '.js' : '.delegua'
                 if (caminhoAbsolutoPrimeiroArquivo.includes(extensao)) {
-                    sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `.${extensaoArquivoSaida}`), resultado, (erro) => {
+                    sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `${extensaoArquivoSaida}`), resultado, (erro) => {
                         if (erro) throw erro;
                     });
+                    return;
                 }
             });
         }

@@ -1,5 +1,5 @@
 import { Delegua } from '../fontes/delegua';
-import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
+import { TradutorJavaScript, TradutorReversoJavaScript, TradutorVisualg } from '@designliquido/delegua/fontes/tradutores';
 
 describe('Delégua', () => {
     let delegua: Delegua;
@@ -22,6 +22,10 @@ describe('Delégua', () => {
 
         it('Traduzir javascript para delégua', () => {
             expect(new Delegua('', false, false, 'delegua').tradutorReversoJavascript).toBeInstanceOf(TradutorReversoJavaScript);
+        });
+
+        it('Traduzir visualg para delégua', () => {
+            expect(new Delegua('', false, false, 'visualg').tradutorVisualg).toBeInstanceOf(TradutorVisualg);
         });
     });
 

@@ -675,6 +675,78 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Tradutor > Delégua para JavaScript > Teste",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-t",
+                "js",
+                "-s",
+                "./exemplos/tradutores/delegua-para-javascript.delegua"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Tradutor > JavaScript para Delégua > Teste",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-t",
+                "delegua",
+                "-s",
+                "./exemplos/tradutores/javascript-para-delegua.js"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Tradutor > VisuAlg para Delégua > Teste",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-t",
+                "visualg",
+                "-s",
+                "./exemplos/tradutores/visualg-para-delegua.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register/transpile-only"
+            ]
+        },
     ]
 }
