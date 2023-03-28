@@ -1,0 +1,5 @@
+var n1 = 1;
+var n1 = leia("digite sua idade");
+var n2 = (365*n1);
+
+escreva("Você tem " +n2+" dias de vida");
