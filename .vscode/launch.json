@@ -612,6 +612,22 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "VisuAlg > Reatribuição de Variáveis",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "visualg",
+                "./exemplos/dialetos/visualg/reatribuicao-variaveis.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "VisuAlg > Repita",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
