@@ -330,10 +330,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.1.tgz#964834d127354857cda1c388f5de9327735b6747"
   integrity sha512-/O1/eXlTXPTWSZGZ862i6uHHKCW0cmP6KnOV29zK4d4hgn03QjcNDeFKVC9L9vz3OJ6pPY0d/S8ANJkgBnnoaQ==
 
-"@designliquido/delegua@^0.15.10":
-  version "0.15.10"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.15.10.tgz#b80bb899bbf16795fe0138ad1711e0e26ed62b4d"
-  integrity sha512-1fsun/L1E/pwik1nQ1aEDiGPS/9NvtZ5F6o2ImXzoPSKqKg4ucpeaxA6i3+cAtbeshIgN0fg93nzgmw+0b2itw==
+"@designliquido/delegua@^0.15.11":
+  version "0.15.11"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.15.11.tgz#30623d33def2b0c0b95646a0ff18bd7c566c4a0f"
+  integrity sha512-+65nfCzEo3KI8kkX09m5Kqrdad4s5y3+IIrSQh5eLw1aJNaZDL3dKSLzmKDSV+CDB44JPop7UEHpcm2Tm1d+dw==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
