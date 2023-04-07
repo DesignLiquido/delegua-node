@@ -26,11 +26,14 @@ import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/av
 import { TradutorVisualg } from '@designliquido/delegua/fontes/tradutores/tradutor-visualg';
 
 import { Importador, RetornoImportador } from './importador';
+import { LexadorMapler } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-mapler';
+import { AvaliadorSintaticoMapler } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-mapler';
 import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-visualg';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-visualg';
 import { LexadorBirl } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-birl';
 import { AvaliadorSintaticoBirl } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-birl';
 import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
+import { InterpretadorMapler } from '@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
 import { InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
@@ -41,6 +44,7 @@ import { ServidorDepuracao } from './depuracao';
 import { DeleguaInterface, ImportadorInterface } from './interfaces';
 import { InterpretadorComDepuracaoImportacao } from './interpretador/interpretador-com-depuracao-importacao';
 import { InterpretadorVisuAlgComDepuracaoImportacao } from './interpretador/dialetos/interpretador-visualg-com-depuracao-importacao';
+import { InterpretadorMaplerComDepuracaoImportacao } from './interpretador/dialetos/interpretador-mapler-com-depuracao-importacao';
 
 /**
  * O núcleo da linguagem.
@@ -54,6 +58,7 @@ export class Delegua implements DeleguaInterface {
         delegua: 'padrão',
         egua: 'Égua',
         eguap: 'ÉguaP',
+        mapler: 'mapler',
         'portugol-studio': 'Portugol Studio',
         visualg: 'VisuAlg',
     };
@@ -88,7 +93,9 @@ export class Delegua implements DeleguaInterface {
 
         this.dialeto = dialeto;
         this.funcaoDeRetorno = funcaoDeRetorno || console.log;
-        this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write;
+        // `process.stdout.write.bind(process.stdout)` é necessário por causa de 
+        // https://stackoverflow.com/questions/28874665/node-js-cannot-read-property-defaultencoding-of-undefined
+        this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write.bind(process.stdout);
         this.modoDepuracao = depurador;
 
         switch (this.dialeto) {
@@ -168,6 +175,29 @@ export class Delegua implements DeleguaInterface {
                         process.cwd(),
                         performance, 
                         this.funcaoDeRetorno);
+                break;
+            case 'mapler':
+                this.lexador = new LexadorMapler();
+                this.avaliadorSintatico = new AvaliadorSintaticoMapler();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.avaliadorSintatico,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+    
+                this.interpretador = depurador
+                    ? new InterpretadorMaplerComDepuracaoImportacao(
+                        this.importador, 
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new InterpretadorMapler(
+                        process.cwd(), 
+                        false, 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'visualg':
                 this.lexador = new LexadorVisuAlg();
