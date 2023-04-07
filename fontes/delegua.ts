@@ -93,7 +93,9 @@ export class Delegua implements DeleguaInterface {
 
         this.dialeto = dialeto;
         this.funcaoDeRetorno = funcaoDeRetorno || console.log;
-        this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write;
+        // `process.stdout.write.bind(process.stdout)` é necessário por causa de 
+        // https://stackoverflow.com/questions/28874665/node-js-cannot-read-property-defaultencoding-of-undefined
+        this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write.bind(process.stdout);
         this.modoDepuracao = depurador;
 
         switch (this.dialeto) {
