@@ -11,7 +11,7 @@ describe('Avaliador sintático (EguaP)', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);
@@ -21,7 +21,7 @@ describe('Avaliador sintático (EguaP)', () => {
             const codigo = ['classe Cachorro:', 'latir():', "escreva('Erro')"];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico.erros.length).toBeGreaterThan(0);
         });

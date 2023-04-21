@@ -10,7 +10,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);
@@ -22,7 +22,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);
@@ -34,7 +34,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);
@@ -42,7 +42,7 @@ describe('Avaliador sintático', () => {
 
         it('Sucesso - Undefined', () => {
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(undefined as any);
+                delegua.avaliadorSintatico.analisar(undefined as any, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(0);
@@ -50,7 +50,7 @@ describe('Avaliador sintático', () => {
 
         it('Sucesso - Null', () => {
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(null as any);
+                delegua.avaliadorSintatico.analisar(null as any, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(0);
@@ -62,7 +62,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.erros).toHaveLength(0);
@@ -74,7 +74,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.erros).toHaveLength(0);
@@ -87,7 +87,7 @@ describe('Avaliador sintático', () => {
                 "   escreva('Valor: ', i)",
                 "}"
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico.erros).toHaveLength(0);
         });
@@ -96,7 +96,7 @@ describe('Avaliador sintático', () => {
             const retornoLexador = delegua.lexador.mapear([
                 "sustar;",
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico.erros.length).toBeGreaterThan(0);
             expect(retornoAvaliadorSintatico.erros[0].message).toBe(
@@ -108,7 +108,7 @@ describe('Avaliador sintático', () => {
             const retornoLexador = delegua.lexador.mapear([
                 "continua;",
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico.erros.length).toBeGreaterThan(0);
             expect(retornoAvaliadorSintatico.erros[0].message).toBe(
@@ -122,7 +122,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico.erros.length).toBeGreaterThan(0);
             expect(retornoAvaliadorSintatico.erros[0].message).toBe(
@@ -146,7 +146,7 @@ describe('Avaliador sintático', () => {
                     -1
                 );
                 const retornoAvaliadorSintatico =
-                    delegua.avaliadorSintatico.analisar(retornoLexador);
+                    delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
                 expect(retornoAvaliadorSintatico).toBeTruthy();
                 expect(retornoAvaliadorSintatico.erros).toHaveLength(1);
@@ -162,7 +162,7 @@ describe('Avaliador sintático', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
         });

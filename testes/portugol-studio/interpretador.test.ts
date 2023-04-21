@@ -20,7 +20,7 @@ describe('Interpretador', () => {
                     '    }',
                     '}'
                 ], -1);
-                const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
                 const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 

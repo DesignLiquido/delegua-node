@@ -24,7 +24,7 @@ describe('Avaliador sintático (Portugol Studio)', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(2);
@@ -46,7 +46,7 @@ describe('Avaliador sintático (Portugol Studio)', () => {
             );
 
             const t = () => {
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
             };
 
             expect(t).toThrow(ErroAvaliadorSintatico);

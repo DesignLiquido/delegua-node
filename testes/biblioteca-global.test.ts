@@ -10,7 +10,7 @@ describe('Biblioteca Global', () => {
     describe('aleatorio()', () => {
         it('Trivial', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(aleatorio())"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -21,7 +21,7 @@ describe('Biblioteca Global', () => {
     describe('aleatorioEntre()', () => {
         it('Sucesso', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(aleatorioEntre(1, 5))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -32,7 +32,7 @@ describe('Biblioteca Global', () => {
     describe('inteiro()', () => {
         it('Sucesso', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(inteiro(1 + 1))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -41,7 +41,7 @@ describe('Biblioteca Global', () => {
 
         it('Sucesso - Nulo', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(inteiro(nulo))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -50,7 +50,7 @@ describe('Biblioteca Global', () => {
 
         it('Falha - Não inteiro', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(inteiro('Oi'))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -65,7 +65,7 @@ describe('Biblioteca Global', () => {
                 "escreva(mapear([1, 2, 3], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -78,7 +78,7 @@ describe('Biblioteca Global', () => {
                 "escreva(mapear([1, 2, 3], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -93,7 +93,7 @@ describe('Biblioteca Global', () => {
                 "escreva(todosEmCondicao([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -106,7 +106,7 @@ describe('Biblioteca Global', () => {
                 "escreva(todosEmCondicao([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -121,7 +121,7 @@ describe('Biblioteca Global', () => {
                 "escreva(filtrarPor([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -134,7 +134,7 @@ describe('Biblioteca Global', () => {
                 "escreva(filtrarPor([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -149,7 +149,7 @@ describe('Biblioteca Global', () => {
                 "escreva(primeiroEmCondicao([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -162,7 +162,7 @@ describe('Biblioteca Global', () => {
                 "escreva(primeiroEmCondicao([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -177,7 +177,7 @@ describe('Biblioteca Global', () => {
                 "escreva(paraCada([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -190,7 +190,7 @@ describe('Biblioteca Global', () => {
                 "escreva(paraCada([1, 2, 3, 4, 5, 6], f))"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -204,7 +204,7 @@ describe('Biblioteca Global', () => {
                 "ordenar([5, 12, 10, 1, 4, 25, 33, 9, 7, 6, 2])"
             ];
             const retornoLexador = delegua.lexador.mapear(codigo, -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -215,7 +215,7 @@ describe('Biblioteca Global', () => {
     describe('real()', () => {
         it('Sucesso', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(real(3.14))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -224,7 +224,7 @@ describe('Biblioteca Global', () => {
 
         it('Sucesso - Nulo ou Indefinido (resolve para zero)', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(real(nulo))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -233,7 +233,7 @@ describe('Biblioteca Global', () => {
 
         it('Falha - Não inteiro', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(real('Oi'))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -244,7 +244,7 @@ describe('Biblioteca Global', () => {
     describe('tamanho()', () => {
         it('Sucesso', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(tamanho([1, 2, 3]))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -253,7 +253,7 @@ describe('Biblioteca Global', () => {
 
         it('Falha - Argumento não é lista', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(tamanho(1))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -262,7 +262,7 @@ describe('Biblioteca Global', () => {
 
         it('Falha - Nulo', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(tamanho(nulo))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
@@ -273,7 +273,7 @@ describe('Biblioteca Global', () => {
     describe('texto()', () => {
         it('Trivial', async () => {
             const retornoLexador = delegua.lexador.mapear(["escreva(texto(123))"], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 

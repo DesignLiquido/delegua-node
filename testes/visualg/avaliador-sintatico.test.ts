@@ -15,7 +15,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 'escreva("Olá mundo")',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);
@@ -33,7 +33,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 'fimenquanto',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(3);
@@ -56,7 +56,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 'fimescolha',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
         });
@@ -81,7 +81,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 '   escreva(res)',
                 'Fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(8);
@@ -102,7 +102,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 'ate falso',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(3);
@@ -118,7 +118,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 '    fimpara',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(2);
@@ -136,7 +136,7 @@ describe('Avaliador sintático (VisuAlg)', () => {
                 'ate j > 10',
                 'fimalgoritmo'
             ], -1);
-            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(3);

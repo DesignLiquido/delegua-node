@@ -20,7 +20,7 @@ describe('Avaliador sintático (Guarani)', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                avaliadorSintatico.analisar(retornoLexador);
+                avaliadorSintatico.analisar(retornoLexador, -1);
 
             expect(retornoAvaliadorSintatico).toBeTruthy();
             expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(1);

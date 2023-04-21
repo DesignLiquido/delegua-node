@@ -12,7 +12,7 @@ describe('Resolvedor (Égua Clássico)', () => {
                 -1
             );
             const retornoAvaliadorSintatico =
-                delegua.avaliadorSintatico.analisar(retornoLexador);
+                delegua.avaliadorSintatico.analisar(retornoLexador, -1);
             resolvedor.resolver(retornoAvaliadorSintatico.declaracoes);
             expect(resolvedor.escopos).toBeTruthy();
             expect(resolvedor.escopos.pilha).toBeTruthy();

@@ -318,7 +318,7 @@ export class Delegua implements DeleguaInterface {
      */
     async executarUmaLinha(linha: string): Promise<RetornoExecucaoInterface> {
         const retornoLexador = this.lexador.mapear([linha], -1);
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(retornoLexador);
+        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(retornoLexador, -1);
         if (
             this.afericaoErros({
                 retornoLexador,

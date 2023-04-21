@@ -12,7 +12,7 @@ describe('Interpretador', () => {
             describe('Importar', () => {
                 it('Importar biblioteca externa', async () => {
                     const retornoLexador = delegua.lexador.mapear(["var commander = importar('commander')"], -1);
-                    const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                    const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                     const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                     expect(retornoInterpretador.erros).toHaveLength(0);
@@ -28,7 +28,7 @@ describe('Interpretador', () => {
                         })
                         it('estatística' , async () => {
                             const retornoLexador = delegua.lexador.mapear(["var estatística = importar('estatística')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -36,7 +36,7 @@ describe('Interpretador', () => {
 
                         it('estatistica' , async () => {
                             const retornoLexador = delegua.lexador.mapear(["var estatistica = importar('estatistica')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -52,7 +52,7 @@ describe('Interpretador', () => {
                         })
                         it('física' , async () => {
                             const retornoLexador = delegua.lexador.mapear(["var física = importar('física')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -60,7 +60,7 @@ describe('Interpretador', () => {
 
                         it('fisica' , async () => {
                             const retornoLexador = delegua.lexador.mapear(["var fisica = importar('fisica')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -76,7 +76,7 @@ describe('Interpretador', () => {
                         })
                         it('matemática com acento', async () => {
                             const retornoLexador = delegua.lexador.mapear(["var matemática = importar('matemática')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -84,7 +84,7 @@ describe('Interpretador', () => {
 
                         it('matematica sem acento', async () => {
                             const retornoLexador = delegua.lexador.mapear(["var matematica = importar('matematica')"], -1);
-                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                            const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                             const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                             expect(retornoInterpretador.erros).toHaveLength(0);
@@ -98,7 +98,7 @@ describe('Interpretador', () => {
             describe('Importar', () => {
                 it('Importar biblioteca externa que não existe', async () => {
                     const retornoLexador = delegua.lexador.mapear(["var naoexiste = importar('naoexiste')"], -1);
-                    const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador);
+                    const retornoAvaliadorSintatico = delegua.avaliadorSintatico.analisar(retornoLexador, -1);
                     const retornoInterpretador = await delegua.interpretador.interpretar(retornoAvaliadorSintatico.declaracoes);
 
                     expect(retornoInterpretador.erros.length).toBeGreaterThan(0);
