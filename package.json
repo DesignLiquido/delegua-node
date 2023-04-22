@@ -12,7 +12,7 @@
         "testes:servidor-depuracao": "ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/delegua": "0.16.4",
+        "@designliquido/delegua": "0.17.0",
         "chalk": "4.1.2",
         "commander": "^9.4.1"
     },
