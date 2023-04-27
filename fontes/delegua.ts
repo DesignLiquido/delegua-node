@@ -505,15 +505,21 @@ export class Delegua implements DeleguaInterface {
 
         if (retornoInterpretador.erros.length > 0) {
             for (const erroInterpretador of retornoInterpretador.erros) {
-                if (erroInterpretador.simbolo) {
+                if (erroInterpretador.hasOwnProperty('simbolo')) {
                     this.erroEmTempoDeExecucao(erroInterpretador);
                 } else {
-                    const erroEmJavaScript: any = erroInterpretador as ErroInterpretador;
-                    console.error(
-                        chalk.red(`[Linha: ${erroEmJavaScript.linha}] Erro em JavaScript: `) +
-                            `${erroEmJavaScript.erroInterno?.message}`
-                    );
-                    console.error(chalk.red(`Pilha de execução: `) + `${erroEmJavaScript.erroInterno?.stack}`);
+                    if (erroInterpretador.hasOwnProperty('erroInterno')) {
+                        const erroEmJavaScript: any = erroInterpretador as ErroInterpretador;
+                        console.error(
+                            chalk.red(`[Linha: ${erroEmJavaScript.linha}] Erro em JavaScript: `) +
+                                `${erroEmJavaScript.erroInterno?.message}`
+                        );
+                        console.error(chalk.red(`Pilha de execução: `) + `${erroEmJavaScript.erroInterno?.stack}`);
+                    } else {
+                        console.error(
+                            chalk.red(`Erro em JavaScript: `) + JSON.stringify(erroInterpretador)
+                        );
+                    }
                 }
             }
         }
