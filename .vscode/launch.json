@@ -423,6 +423,26 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Portugol IPT > Olá mundo",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "portugol-ipt",
+                "./exemplos/dialetos/portugol-ipt/ola-mundo.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy", 
+                "-r", 
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Portugol Studio > Número digitado",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",

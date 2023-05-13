@@ -22,7 +22,7 @@ import { InterpretadorEguaClassico } from '@designliquido/delegua/fontes/interpr
 import { LexadorEguaClassico } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-egua-classico';
 import { LexadorEguaP } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-eguap';
 import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-eguap';
-import { AvaliadorSintaticoEguaClassico } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
+import { AvaliadorSintaticoEguaClassico, AvaliadorSintaticoPortugolIpt } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 import { TradutorVisualg } from '@designliquido/delegua/fontes/tradutores/tradutor-visualg';
 
 import { Importador, RetornoImportador } from './importador';
@@ -36,7 +36,7 @@ import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/de
 import { InterpretadorMapler } from '@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
-import { InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
+import { InterpretadorPortugolIpt, InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
 import { InterpretadorPortugolStudioComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/portugol-studio/interpretador-portugol-studio-com-depuracao';
 import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-portugol-studio';
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
@@ -45,6 +45,7 @@ import { DeleguaInterface, ImportadorInterface } from './interfaces';
 import { InterpretadorComDepuracaoImportacao } from './interpretador/interpretador-com-depuracao-importacao';
 import { InterpretadorVisuAlgComDepuracaoImportacao } from './interpretador/dialetos/interpretador-visualg-com-depuracao-importacao';
 import { InterpretadorMaplerComDepuracaoImportacao } from './interpretador/dialetos/interpretador-mapler-com-depuracao-importacao';
+import { LexadorPortugolIpt } from '@designliquido/delegua/fontes/lexador/dialetos';
 
 /**
  * O núcleo da linguagem.
@@ -155,27 +156,6 @@ export class Delegua implements DeleguaInterface {
                         this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
-            case 'portugol-studio':
-                this.lexador = new LexadorPortugolStudio();
-                this.avaliadorSintatico = new AvaliadorSintaticoPortugolStudio();
-                this.importador = new Importador(
-                    this.lexador,
-                    this.avaliadorSintatico,
-                    this.arquivosAbertos,
-                    this.conteudoArquivosAbertos,
-                    depurador
-                );
-                
-                this.interpretador = depurador
-                    ? new InterpretadorPortugolStudioComDepuracao(
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
-                        this.funcaoDeRetornoMesmaLinha)
-                    : new InterpretadorPortugolStudio(
-                        process.cwd(),
-                        performance, 
-                        this.funcaoDeRetorno);
-                break;
             case 'mapler':
                 this.lexador = new LexadorMapler();
                 this.avaliadorSintatico = new AvaliadorSintaticoMapler();
@@ -198,6 +178,48 @@ export class Delegua implements DeleguaInterface {
                         false, 
                         this.funcaoDeRetorno, 
                         this.funcaoDeRetornoMesmaLinha);
+                break;
+            case 'portugol-ipt':
+                this.lexador = new LexadorPortugolIpt();
+                this.avaliadorSintatico = new AvaliadorSintaticoPortugolIpt();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.avaliadorSintatico,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+    
+                this.interpretador = depurador
+                    ? new InterpretadorPortugolIpt(
+                        process.cwd(), 
+                        this.funcaoDeRetornoMesmaLinha,
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new InterpretadorPortugolIpt(
+                        process.cwd(), 
+                        this.funcaoDeRetornoMesmaLinha,
+                        this.funcaoDeRetornoMesmaLinha);
+                break;
+            case 'portugol-studio':
+                this.lexador = new LexadorPortugolStudio();
+                this.avaliadorSintatico = new AvaliadorSintaticoPortugolStudio();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.avaliadorSintatico,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+                
+                this.interpretador = depurador
+                    ? new InterpretadorPortugolStudioComDepuracao(
+                        process.cwd(), 
+                        this.funcaoDeRetorno, 
+                        this.funcaoDeRetornoMesmaLinha)
+                    : new InterpretadorPortugolStudio(
+                        process.cwd(),
+                        performance, 
+                        this.funcaoDeRetorno);
                 break;
             case 'visualg':
                 this.lexador = new LexadorVisuAlg();
