@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/delegua-node",
-    "version": "0.20.14",
+    "version": "0.20.15",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
         "empacotar": "rimraf ./dist && tsc && copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && copyfiles -V ./package.json ./dist/bin && copyfiles -V ./README.md ./dist",
@@ -12,7 +12,7 @@
         "testes:servidor-depuracao": "ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/delegua": "0.20.14",
+        "@designliquido/delegua": "0.20.15",
         "chalk": "4.1.2",
         "commander": "^9.4.1",
         "lodash.clonedeep": "^4.5.0"
