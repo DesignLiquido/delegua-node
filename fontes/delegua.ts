@@ -2,6 +2,7 @@ import * as sistemaArquivos from 'node:fs';
 import * as caminho from 'node:path';
 import * as readline from 'node:readline';
 import chalk from 'chalk';
+import colorizeJson from 'json-colorizer';
 
 import { Lexador } from '@designliquido/delegua/fontes/lexador/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/fontes/avaliador-sintatico/avaliador-sintatico';
@@ -46,6 +47,8 @@ import { InterpretadorComDepuracaoImportacao } from './interpretador/interpretad
 import { InterpretadorVisuAlgComDepuracaoImportacao } from './interpretador/dialetos/interpretador-visualg-com-depuracao-importacao';
 import { InterpretadorMaplerComDepuracaoImportacao } from './interpretador/dialetos/interpretador-mapler-com-depuracao-importacao';
 import { LexadorPortugolIpt } from '@designliquido/delegua/fontes/lexador/dialetos';
+import { LexadorJson } from './lexador/lexador-json';
+import { FormatadorJson } from './formatadores';
 
 /**
  * O núcleo da linguagem.
@@ -308,6 +311,9 @@ export class Delegua implements DeleguaInterface {
      * ou seja, esperando como entrada linhas de código fornecidas pelo usuário.
      */
     iniciarLairDelegua(): void {
+        const lexadorJson = new LexadorJson();
+        const formatadorJson = new FormatadorJson();
+
         this.funcaoDeRetorno(`Usando dialeto: ${this.dialetos[this.dialeto]}`);
         this.funcaoDeRetorno(`Console da Linguagem Delégua v${this.versao()}`);
         this.funcaoDeRetorno('Pressione Ctrl + C para sair');
@@ -326,7 +332,9 @@ export class Delegua implements DeleguaInterface {
         interfaceLeitura.on('line', async (linha: string) => {
             const { resultado } = await isto.executarUmaLinha(linha);
             if (resultado && resultado.length) {
-                isto.funcaoDeRetorno(resultado[0]);
+                const resultadoLexacao = lexadorJson.getTokens(resultado[0]);
+                const resultadoFormatacao = formatadorJson.formatar(resultadoLexacao);
+                isto.funcaoDeRetorno(colorizeJson(resultadoFormatacao));
             }
 
             interfaceLeitura.prompt();
