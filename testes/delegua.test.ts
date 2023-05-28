@@ -1,5 +1,5 @@
 import { Delegua } from '../fontes/delegua';
-import { TradutorJavaScript, TradutorReversoJavaScript, TradutorVisualg } from '@designliquido/delegua/fontes/tradutores';
+import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorVisualg } from '@designliquido/delegua/fontes/tradutores';
 
 describe('Delégua', () => {
     let delegua: Delegua;
@@ -16,16 +16,22 @@ describe('Delégua', () => {
         });
 
         it('Traduzir delégua para javascript', () => {
-            expect(new Delegua('', false, false, 'js').tradutorJavaScript).toBeInstanceOf(TradutorJavaScript);
-            expect(new Delegua('', false, false, 'javascript').tradutorJavaScript).toBeInstanceOf(TradutorJavaScript);
+            expect(new Delegua('', false, false, 'delegua-para-javascript').tradutorJavaScript).toBeInstanceOf(TradutorJavaScript);
+            expect(new Delegua('', false, false, 'delegua-para-js').tradutorJavaScript).toBeInstanceOf(TradutorJavaScript);
+        });
+
+        it('Traduzir delégua para python', () => {
+            expect(new Delegua('', false, false, 'delegua-para-python').tradutorPython).toBeInstanceOf(TradutorPython);
+            expect(new Delegua('', false, false, 'delegua-para-py').tradutorPython).toBeInstanceOf(TradutorPython);
         });
 
         it('Traduzir javascript para delégua', () => {
-            expect(new Delegua('', false, false, 'delegua').tradutorReversoJavascript).toBeInstanceOf(TradutorReversoJavaScript);
+            expect(new Delegua('', false, false, 'javascript-para-delegua').tradutorReversoJavascript).toBeInstanceOf(TradutorReversoJavaScript);
+            expect(new Delegua('', false, false, 'js-para-delegua').tradutorReversoJavascript).toBeInstanceOf(TradutorReversoJavaScript);
         });
 
         it('Traduzir visualg para delégua', () => {
-            expect(new Delegua('', false, false, 'visualg').tradutorVisualg).toBeInstanceOf(TradutorVisualg);
+            expect(new Delegua('', false, false, 'visualg-para-delegua').tradutorVisualg).toBeInstanceOf(TradutorVisualg);
         });
     });
 
