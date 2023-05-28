@@ -1,1 +1,0 @@
-print('Delégua para Python!!!') 
