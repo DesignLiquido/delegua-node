@@ -84,6 +84,7 @@ export class Delegua implements DeleguaInterface {
         delegua: '.delegua',
         javascript: '.js',
         js: '.js',
+        alg: '.alg',
         visualg: '.alg',
         python: '.py',
         py: '.py',
@@ -308,6 +309,7 @@ export class Delegua implements DeleguaInterface {
             case 'javascript-para-delegua':
                 this.tradutorReversoJavascript = new TradutorReversoJavaScript();
                 break;
+            case 'alg-para-delegua':
             case 'visualg-para-delegua':
                 this.tradutorVisualg = new TradutorVisualg();
                 break;

@@ -32,6 +32,7 @@ describe('Delégua', () => {
 
         it('Traduzir visualg para delégua', () => {
             expect(new Delegua('', false, false, 'visualg-para-delegua').tradutorVisualg).toBeInstanceOf(TradutorVisualg);
+            expect(new Delegua('', false, false, 'alg-para-delegua').tradutorVisualg).toBeInstanceOf(TradutorVisualg);
         });
     });
 
