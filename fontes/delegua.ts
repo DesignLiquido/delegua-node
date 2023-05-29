@@ -33,7 +33,7 @@ import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos/l
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-visualg';
 import { LexadorBirl } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-birl';
 import { AvaliadorSintaticoBirl } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-birl';
-import { TradutorJavaScript, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
+import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/fontes/tradutores';
 import { InterpretadorMapler } from '@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
@@ -74,9 +74,21 @@ export class Delegua implements DeleguaInterface {
     lexador: LexadorInterface;
     avaliadorSintatico: AvaliadorSintaticoInterface;
     importador: ImportadorInterface;
+
+    traduzir: string = '';
     tradutorJavaScript: TradutorJavaScript;
     tradutorReversoJavascript: TradutorReversoJavaScript;
     tradutorVisualg: TradutorVisualg;
+    tradutorPython: TradutorPython;
+    extensoes = {
+        delegua: '.delegua',
+        javascript: '.js',
+        js: '.js',
+        alg: '.alg',
+        visualg: '.alg',
+        python: '.py',
+        py: '.py',
+    }
 
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
@@ -274,21 +286,7 @@ export class Delegua implements DeleguaInterface {
         }
 
         if (traduzir) {
-            switch (traduzir) {
-                case 'javascript':
-                case 'js':
-                    this.tradutorJavaScript = new TradutorJavaScript();
-                    break;
-                case 'delegua':
-                    this.tradutorReversoJavascript = new TradutorReversoJavaScript();
-                    break;
-                case 'alg':
-                case 'visualg':
-                        this.tradutorVisualg = new TradutorVisualg();
-                        break;
-                default:
-                    throw new Error(`Tradutor '${traduzir}' não implementado.`);
-            }
+            this.iniciarTradutor(traduzir)
         }
 
         if (depurador) {
@@ -296,13 +294,37 @@ export class Delegua implements DeleguaInterface {
         }
     }
 
+    iniciarTradutor(traduzir) {
+        this.traduzir = traduzir;
+        switch (traduzir) {
+            case 'delegua-para-js':
+            case 'delegua-para-javascript':
+                this.tradutorJavaScript = new TradutorJavaScript();
+                break;
+            case 'delegua-para-py':
+            case 'delegua-para-python':
+                this.tradutorPython = new TradutorPython();
+                break;
+            case 'js-para-delegua':
+            case 'javascript-para-delegua':
+                this.tradutorReversoJavascript = new TradutorReversoJavaScript();
+                break;
+            case 'alg-para-delegua':
+            case 'visualg-para-delegua':
+                this.tradutorVisualg = new TradutorVisualg();
+                break;
+            default:
+                throw new Error(`Tradutor '${traduzir}' não implementado.`);
+        }        
+    }
+
     versao(): string {
         try {
             const manifesto = caminho.resolve(__dirname, 'package.json');
 
-            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.20';
+            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.21';
         } catch (error: any) {
-            return '0.20 (desenvolvimento)';
+            return '0.21 (desenvolvimento)';
         }
     }
 
@@ -426,7 +448,7 @@ export class Delegua implements DeleguaInterface {
         const retornoImportador = this.importador.importar(
             caminhoRelativoArquivo,
             true,
-            !this.tradutorJavaScript
+            !this.tradutorJavaScript && !this.tradutorPython
         );
 
         let resultado = null;
@@ -436,6 +458,12 @@ export class Delegua implements DeleguaInterface {
             }
 
             resultado = this.tradutorJavaScript.traduzir(retornoImportador.retornoAvaliadorSintatico.declaracoes);
+        } else if (this.tradutorPython !== null && this.tradutorPython !== undefined) {
+            if (this.afericaoErros(retornoImportador)) {
+                process.exit(65); // Código para erro de avaliação antes da tradução
+            }
+
+            resultado = this.tradutorPython.traduzir(retornoImportador.retornoAvaliadorSintatico.declaracoes);
         } else if (this.tradutorReversoJavascript !== null && this.tradutorReversoJavascript !== undefined) {
             resultado = this.tradutorReversoJavascript.traduzir(retornoImportador.conteudoArquivo.join('\n'));
         } else {
@@ -443,15 +471,18 @@ export class Delegua implements DeleguaInterface {
         }
 
         if (gerarArquivoSaida) {
-            ['.delegua', '.js', '.alg'].map((extensao) => {
-                const extensaoArquivoSaida = extensao === '.delegua' ? '.js' : '.delegua'
-                if (caminhoAbsolutoPrimeiroArquivo.includes(extensao)) {
-                    sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `${extensaoArquivoSaida}`), resultado, (erro) => {
-                        if (erro) throw erro;
-                    });
-                    return;
-                }
-            });
+            const linguagem = this.traduzir?.split('-')[2] || '';
+            const extensaoAlvo = this.extensoes[linguagem]
+            if(extensaoAlvo) {
+                ['.delegua', '.js', '.alg'].map((extensao) => {
+                    if (caminhoAbsolutoPrimeiroArquivo.includes(extensao)) {
+                        sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `${extensaoAlvo}`), resultado, (erro) => {
+                            if (erro) throw erro;
+                        });
+                        return;
+                    }
+                });
+            }
         }
 
         this.funcaoDeRetorno(resultado);

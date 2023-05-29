@@ -16,7 +16,7 @@ função startTest(){
   escreva("|");
   escreva(tCasoEscolha());
   escreva("|");
-  escreva(tTentePegue());
+  //escreva(tTentePegue());
   escreva("|");
   escreva(tClasse());
 }

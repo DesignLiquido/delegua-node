@@ -780,9 +780,33 @@
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
                 "-t",
-                "js",
+                "delegua-para-javascript",
                 "-s",
                 "./exemplos/tradutores/delegua-para-javascript.delegua"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Tradutor > Delégua para Python > Teste",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-t",
+                "delegua-para-python",
+                "-s",
+                "./exemplos/tradutores/delegua-para-python.delegua"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
@@ -804,7 +828,7 @@
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
                 "-t",
-                "delegua",
+                "javascript-para-delegua",
                 "-s",
                 "./exemplos/tradutores/javascript-para-delegua.js"
             ],
@@ -828,7 +852,7 @@
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
                 "-t",
-                "visualg",
+                "visualg-para-delegua",
                 "-s",
                 "./exemplos/tradutores/visualg-para-delegua.alg"
             ],
