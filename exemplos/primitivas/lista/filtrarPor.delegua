@@ -1,0 +1,8 @@
+var numeros = [1, 2, 3, 4, 5];
+
+var numerosPares = numeros.filtrarPor(funcao (n) {
+    retorna n % 2 == 0;
+});
+
+escreva(numerosPares); 
+// Resultado: [2, 4]

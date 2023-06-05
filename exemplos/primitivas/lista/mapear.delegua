@@ -1,0 +1,8 @@
+var numeros = [1, 2, 3, 4, 5];
+
+var numerosDobrados = numeros.mapear(funcao (n) {
+  retorna n * 2;
+});
+
+escreva(numerosDobrados); 
+// Resultado: [2, 4, 6, 8, 10]
