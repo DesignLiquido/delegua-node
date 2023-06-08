@@ -6,7 +6,7 @@ Versão de Delégua com suporte a importação de pacotes pelo ecossistema do No
 
 Em versões anteriores, o suporte ao ecossistema Node vinha embutido no pacote do núcleo da linguagem. Isso virou um problema quando tentamos importar o pacote numa aplicação com [Webpack](https://webpack.js.org/). 
 
-Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `node:child_process` na parte de navegador de internet e as aplicações falham.
+Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `child_process` na parte de navegador de internet e as aplicações falham.
 
 ### Implicações
 

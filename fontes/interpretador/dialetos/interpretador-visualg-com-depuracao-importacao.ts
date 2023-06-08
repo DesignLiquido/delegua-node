@@ -1,4 +1,4 @@
-import * as caminho from 'node:path';
+import * as caminho from 'path';
 
 import { Importar } from "@designliquido/delegua/fontes/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/fontes/estruturas";

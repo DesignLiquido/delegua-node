@@ -1,6 +1,6 @@
-import * as processoFilho from 'node:child_process';
-import * as caminho from 'node:path';
-import * as sistemaArquivos from 'node:fs';
+import * as processoFilho from 'child_process';
+import * as caminho from 'path';
+import * as sistemaArquivos from 'fs';
 
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/fontes/excecoes';
 import { FuncaoPadrao } from '@designliquido/delegua/fontes/estruturas/funcao-padrao';

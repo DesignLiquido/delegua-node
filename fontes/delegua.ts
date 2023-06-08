@@ -1,6 +1,6 @@
-import * as sistemaArquivos from 'node:fs';
-import * as caminho from 'node:path';
-import * as readline from 'node:readline';
+import * as sistemaArquivos from 'fs';
+import * as caminho from 'path';
+import * as readline from 'readline';
 import chalk from 'chalk';
 import colorizeJson from 'json-colorizer';
 
