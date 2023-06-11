@@ -6,16 +6,17 @@ Versão de Delégua com suporte a importação de pacotes pelo ecossistema do No
 
 Em versões anteriores, o suporte ao ecossistema Node vinha embutido no pacote do núcleo da linguagem. Isso virou um problema quando tentamos importar o pacote numa aplicação com [Webpack](https://webpack.js.org/). 
 
-Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `child_process` na parte de navegador de internet e as aplicações falham.
+Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `child_process` ou `net` na parte de navegador de internet e as aplicações falham.
 
 ### Implicações
 
 Se sua aplicação:
 
 - Precisa suportar importações, seja de outros fontes, seja de bibliotecas NPM
-- Pode executar no ambiente Node.js
+- Executa código Delégua, ou outros dialetos, remotamente
+- Deve executar no ambiente Node.js
 
-Ela pode, então, usar este pacote. Caso contrário, o uso apenas do núcleo da linguagem é uma escolha melhor.
+Ela deve, então, usar este pacote. Caso contrário, o uso apenas do núcleo da linguagem é uma escolha melhor.
 
 ## Instalação
 
@@ -23,6 +24,12 @@ Se quiser instalar no seu computador,
 [você deve ter antes o Node.js instalado em seu ambiente](https://dicasdejavascript.com.br/instalacao-do-nodejs-e-npm-no-windows-passo-a-passo).
 
 Com o Node.js instalado, execute o seguinte comando em um _prompt_ de comando (Terminal, PowerShell ou `cmd` no Windows, Terminal ou `sh` em Mac e Linux):
+
+```
+npm install -g @designliquido/delegua-node
+```
+
+No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras. Para instalar a solução completa, com todas essas bibliotecas, utilize o comando:
 
 ```
 npm install -g delegua
@@ -68,12 +75,6 @@ delegua --dialeto egua
 ```
 
 [Veja aqui todos os dialetos suportados](https://github.com/DesignLiquido/delegua/wiki/Dialetos).
-
-Se não quiser instalar as bibliotecas que acompanham Delégua, apenas [o núcleo da linguagem](https://github.com/DesignLiquido/delegua) pode ser instalado:
-
-```
-npm install -g @designliquido/delegua
-```
 
 ## Tradução para outras linguagens
 
