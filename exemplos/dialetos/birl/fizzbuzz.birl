@@ -1,6 +1,6 @@
 HORA DO SHOW
     MONSTRO M;
-    MAIS QUERO MAIS (M = 1; M <= 100; M = M + 1 )
+    MAIS QUERO MAIS (M = 1; M <= 100; M++)
         ELE QUE A GENTE QUER? (M % 5 == 0 && M % 3 == 0)
             CE QUER VER ESSA PORRA?("FizzBuzz\n");
         QUE NAO VAI DAR O QUE? (M % 3 == 0)
