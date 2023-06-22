@@ -2,13 +2,13 @@ HORA DO SHOW
     MONSTRO M;
     MAIS QUERO MAIS (M = 1; M <= 100; M++)
         ELE QUE A GENTE QUER? (M % 5 == 0 && M % 3 == 0)
-            CE QUER VER ESSA PORRA?("FizzBuzz\n");
+            CE QUER VER ESSA PORRA?("FizzBuzz");
         QUE NAO VAI DAR O QUE? (M % 3 == 0)
-            CE QUER VER ESSA PORRA?("Fizz\n");
+            CE QUER VER ESSA PORRA?("Fizz");
         QUE NAO VAI DAR O QUE? (M % 5 == 0)
-            CE QUER VER ESSA PORRA?("Buzz\n");
+            CE QUER VER ESSA PORRA?("Buzz");
         NAO VAI DAR NAO
-            CE QUER VER ESSA PORRA?("%d\n", M);
+            CE QUER VER ESSA PORRA?("%d", M);
         BIRL
     BIRL
     BORA CUMPADE 0;

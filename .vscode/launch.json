@@ -7,6 +7,22 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Birl > fibonacci",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "birl",
+                "./exemplos/dialetos/birl/fibonacci.birl"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Lexador JSON",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
@@ -156,7 +172,7 @@
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
             "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts", 
+                "${workspaceFolder}${pathSeparator}execucao.ts",
                 // "--depurador",
                 "./exemplos/classes/heranca.delegua"
             ],
@@ -204,7 +220,7 @@
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
             "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts", 
+                "${workspaceFolder}${pathSeparator}execucao.ts",
                 // "--depurador",
                 "./exemplos/estruturas-de-dados/inteiros.delegua"
             ],
@@ -448,8 +464,8 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only"
             ]
         },
@@ -468,8 +484,8 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only"
             ]
         },
@@ -488,8 +504,8 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only"
             ]
         },
@@ -508,8 +524,8 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only"
             ]
         },
@@ -528,8 +544,8 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only"
             ]
         },
@@ -712,11 +728,11 @@
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
+                "--nolazy",
+                "-r",
                 "ts-node/register/transpile-only",
-                // "--preserve-symlinks", 
-                // "--preserve-symlinks-main", 
+                // "--preserve-symlinks",
+                // "--preserve-symlinks-main",
             ]
         },
         {
