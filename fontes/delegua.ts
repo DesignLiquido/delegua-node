@@ -37,7 +37,7 @@ import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@
 import { InterpretadorMapler } from '@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler';
 import { InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos/visualg/interpretador-visualg';
 import { ErroInterpretador } from '@designliquido/delegua/fontes/interpretador';
-import { InterpretadorPortugolIpt, InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
+import { InterpretadorBirl, InterpretadorPortugolIpt, InterpretadorPortugolStudio } from '@designliquido/delegua/fontes/interpretador/dialetos';
 import { InterpretadorPortugolStudioComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/portugol-studio/interpretador-portugol-studio-com-depuracao';
 import { LexadorPortugolStudio } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-portugol-studio';
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-portugol-studio';
@@ -125,11 +125,9 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                this.interpretador = new Interpretador(
-                    this.importador, 
-                    process.cwd(), 
-                    false, 
-                    this.funcaoDeRetorno, 
+                this.interpretador = new InterpretadorBirl(
+                    process.cwd(),
+                    this.funcaoDeRetorno,
                     this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'egua':
@@ -158,16 +156,16 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                
+
                 this.interpretador = depurador
                     ? new InterpretadorComDepuracaoImportacao(
-                        this.importador, 
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
+                        this.importador,
+                        process.cwd(),
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
-                    : new Interpretador(this.importador, 
-                        process.cwd(), 
-                        performance, 
+                    : new Interpretador(this.importador,
+                        process.cwd(),
+                        performance,
                         this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
@@ -181,17 +179,17 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-    
+
                 this.interpretador = depurador
                     ? new InterpretadorMaplerComDepuracaoImportacao(
-                        this.importador, 
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
+                        this.importador,
+                        process.cwd(),
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
                     : new InterpretadorMapler(
-                        process.cwd(), 
-                        false, 
-                        this.funcaoDeRetorno, 
+                        process.cwd(),
+                        false,
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
             case 'portugol-ipt':
@@ -204,14 +202,14 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-    
+
                 this.interpretador = depurador
                     ? new InterpretadorPortugolIpt(
-                        process.cwd(), 
+                        process.cwd(),
                         this.funcaoDeRetornoMesmaLinha,
                         this.funcaoDeRetornoMesmaLinha)
                     : new InterpretadorPortugolIpt(
-                        process.cwd(), 
+                        process.cwd(),
                         this.funcaoDeRetornoMesmaLinha,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
@@ -225,15 +223,15 @@ export class Delegua implements DeleguaInterface {
                     this.conteudoArquivosAbertos,
                     depurador
                 );
-                
+
                 this.interpretador = depurador
                     ? new InterpretadorPortugolStudioComDepuracao(
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
+                        process.cwd(),
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
                     : new InterpretadorPortugolStudio(
                         process.cwd(),
-                        performance, 
+                        performance,
                         this.funcaoDeRetorno);
                 break;
             case 'visualg':
@@ -249,14 +247,14 @@ export class Delegua implements DeleguaInterface {
 
                 this.interpretador = depurador
                     ? new InterpretadorVisuAlgComDepuracaoImportacao(
-                        this.importador, 
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
+                        this.importador,
+                        process.cwd(),
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
                     : new InterpretadorVisuAlg(
-                        process.cwd(), 
-                        false, 
-                        this.funcaoDeRetorno, 
+                        process.cwd(),
+                        false,
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
             default:
@@ -272,15 +270,15 @@ export class Delegua implements DeleguaInterface {
 
                 this.interpretador = depurador
                     ? new InterpretadorComDepuracaoImportacao(
-                        this.importador, 
-                        process.cwd(), 
-                        this.funcaoDeRetorno, 
+                        this.importador,
+                        process.cwd(),
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
                     : new Interpretador(
-                        this.importador, 
-                        process.cwd(), 
-                        performance, 
-                        this.funcaoDeRetorno, 
+                        this.importador,
+                        process.cwd(),
+                        performance,
+                        this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
         }
@@ -315,7 +313,7 @@ export class Delegua implements DeleguaInterface {
                 break;
             default:
                 throw new Error(`Tradutor '${traduzir}' não implementado.`);
-        }        
+        }
     }
 
     versao(): string {
@@ -473,7 +471,7 @@ export class Delegua implements DeleguaInterface {
         if (gerarArquivoSaida) {
             const linguagem = this.traduzir?.split('-')[2] || '';
             const extensaoAlvo = this.extensoes[linguagem]
-            if(extensaoAlvo) {
+            if (extensaoAlvo) {
                 ['.delegua', '.js', '.alg'].map((extensao) => {
                     if (caminhoAbsolutoPrimeiroArquivo.includes(extensao)) {
                         sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `${extensaoAlvo}`), resultado, (erro) => {
@@ -573,7 +571,7 @@ export class Delegua implements DeleguaInterface {
                         const erroEmJavaScript: any = erroInterpretador as ErroInterpretador;
                         console.error(
                             chalk.red(`[Linha: ${erroEmJavaScript.linha}] Erro em JavaScript: `) +
-                                `${erroEmJavaScript.erroInterno?.message}`
+                            `${erroEmJavaScript.erroInterno?.message}`
                         );
                         console.error(chalk.red(`Pilha de execução: `) + `${erroEmJavaScript.erroInterno?.stack}`);
                     } else {
