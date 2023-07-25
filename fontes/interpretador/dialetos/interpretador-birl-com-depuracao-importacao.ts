@@ -1,32 +1,27 @@
 import * as caminho from 'path';
 
+import { InterpretadorBirl } from "@designliquido/delegua/fontes/interpretador/dialetos";
+import { ImportadorInterface } from "../../interfaces";
 import { Importar } from "@designliquido/delegua/fontes/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/fontes/estruturas";
-import { InterpretadorVisuAlgComDepuracao } from "@designliquido/delegua/fontes/interpretador/dialetos";
-import { ImportadorInterface } from "../../interfaces";
 
 import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
 
-export class InterpretadorVisuAlgComDepuracaoImportacao extends InterpretadorVisuAlgComDepuracao {
-    importador: ImportadorInterface;
+export class InterpretadorBirlImportacao extends InterpretadorBirl {
+    importador: ImportadorInterface
 
     constructor(
         importador: ImportadorInterface,
-        diretorioBase: string, 
-        funcaoDeRetorno: Function, 
-        funcaoDeRetornoMesmaLinha: Function) 
-    {
+        diretorioBase: string,
+        funcaoDeRetorno: Function,
+        funcaoDeRetornoMesmaLinha: Function
+    ) {
         super(diretorioBase, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
         this.importador = importador;
     }
 
-    /**
-     * Importa um arquivo como módulo.
-     * @param declaracao A declaração de importação.
-     * @returns Ou um `DeleguaModulo`, ou um dicionário de funções.
-     */
+    // @Todo: Revisitar
     async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
-        // @Todo: Revisitar
         const caminhoRelativo = await this.avaliar(declaracao.caminho);
         const caminhoTotal = caminho.join(this.diretorioBase, caminhoRelativo);
         const nomeArquivo = caminho.basename(caminhoTotal);
