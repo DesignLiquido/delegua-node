@@ -21,8 +21,8 @@ import {
 
 import { InterpretadorEguaClassico } from '@designliquido/delegua/fontes/interpretador/dialetos/egua-classico/interpretador-egua-classico';
 import { LexadorEguaClassico } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-egua-classico';
-import { LexadorEguaP } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-eguap';
-import { AvaliadorSintaticoEguaP } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-eguap';
+import { LexadorPituguês } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-pitugues';
+import { AvaliadorSintaticoPituguês } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-pitugues';
 import { AvaliadorSintaticoEguaClassico, AvaliadorSintaticoPortugolIpt } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 import { TradutorVisualg } from '@designliquido/delegua/fontes/tradutores/tradutor-visualg';
 
@@ -61,7 +61,7 @@ export class Delegua implements DeleguaInterface {
         birl: 'BIRL',
         delegua: 'padrão',
         egua: 'Égua',
-        eguap: 'ÉguaP',
+        pitugues: 'ÉguaP',
         mapler: 'mapler',
         'portugol-studio': 'Portugol Studio',
         visualg: 'VisuAlg',
@@ -146,9 +146,9 @@ export class Delegua implements DeleguaInterface {
                 );
                 this.interpretador = new InterpretadorEguaClassico(process.cwd());
                 break;
-            case 'eguap':
-                this.lexador = new LexadorEguaP();
-                this.avaliadorSintatico = new AvaliadorSintaticoEguaP();
+            case 'pitugues':
+                this.lexador = new LexadorPituguês();
+                this.avaliadorSintatico = new AvaliadorSintaticoPituguês();
                 this.importador = new Importador(
                     this.lexador,
                     this.avaliadorSintatico,

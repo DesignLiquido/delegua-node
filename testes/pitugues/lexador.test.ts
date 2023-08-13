@@ -1,8 +1,8 @@
 import { Delegua } from '../../fontes/delegua';
 
-describe('Lexador (EguaP)', () => {
+describe('Lexador (Pituguês)', () => {
     describe('mapear()', () => {
-        const delegua = new Delegua('eguap');
+        const delegua = new Delegua('pitugues');
 
         describe('Cenários de sucesso', () => {
             it('Sucesso - Código vazio', () => {

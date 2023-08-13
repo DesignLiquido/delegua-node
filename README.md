@@ -64,7 +64,7 @@ Para finalizar a execução do interpretador LAIR Delégua, use o atalho <key>Ct
 
 - Delégua
 - Égua Clássico
-- EguaP
+- Pituguês
 
 ### Executando arquivos
 

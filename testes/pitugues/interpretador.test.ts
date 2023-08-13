@@ -1,11 +1,11 @@
 import { Delegua } from "../../fontes/delegua";
 
-describe('Interpretador (EguaP)', () => {
+describe('Interpretador (Pituguês)', () => {
     describe('interpretar()', () => {
         let delegua: Delegua;
 
         beforeEach(() => {
-            delegua = new Delegua('eguap');
+            delegua = new Delegua('pitugues');
         });
 
         describe('Cenários de sucesso', () => {

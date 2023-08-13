@@ -1,9 +1,8 @@
 import { Delegua } from '../../fontes/delegua';
-import { RetornoLexador } from '@designliquido/delegua/fontes/interfaces/retornos/retorno-lexador';
 
-describe('Avaliador sintático (EguaP)', () => {
+describe('Avaliador sintático (Pituguês)', () => {
     describe('analisar()', () => {
-        const delegua = new Delegua('eguap');
+        const delegua = new Delegua('pitugues');
 
         it('Sucesso - Olá Mundo', () => {
             const retornoLexador = delegua.lexador.mapear(
