@@ -21,8 +21,8 @@ import {
 
 import { InterpretadorEguaClassico } from '@designliquido/delegua/fontes/interpretador/dialetos/egua-classico/interpretador-egua-classico';
 import { LexadorEguaClassico } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-egua-classico';
-import { LexadorPituguês } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-pitugues';
-import { AvaliadorSintaticoPituguês } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-pitugues';
+import { LexadorPitugues } from '@designliquido/delegua/fontes/lexador/dialetos/lexador-pitugues';
+import { AvaliadorSintaticoPitugues } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos/avaliador-sintatico-pitugues';
 import { AvaliadorSintaticoEguaClassico, AvaliadorSintaticoPortugolIpt } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 import { TradutorVisualg } from '@designliquido/delegua/fontes/tradutores/tradutor-visualg';
 
@@ -147,8 +147,8 @@ export class Delegua implements DeleguaInterface {
                 this.interpretador = new InterpretadorEguaClassico(process.cwd());
                 break;
             case 'pitugues':
-                this.lexador = new LexadorPituguês();
-                this.avaliadorSintatico = new AvaliadorSintaticoPituguês();
+                this.lexador = new LexadorPitugues();
+                this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
                 this.importador = new Importador(
                     this.lexador,
                     this.avaliadorSintatico,
@@ -320,9 +320,9 @@ export class Delegua implements DeleguaInterface {
         try {
             const manifesto = caminho.resolve(__dirname, 'package.json');
 
-            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.22';
+            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.23';
         } catch (error: any) {
-            return '0.22 (desenvolvimento)';
+            return '0.23 (desenvolvimento)';
         }
     }
 
