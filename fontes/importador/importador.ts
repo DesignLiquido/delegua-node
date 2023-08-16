@@ -4,10 +4,11 @@ import * as sistemaOperacional from 'os';
 
 import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/fontes/excecoes';
-import { AvaliadorSintaticoInterface, LexadorInterface } from '@designliquido/delegua/fontes/interfaces';
+import { AvaliadorSintaticoInterface, LexadorInterface, SimboloInterface } from '@designliquido/delegua/fontes/interfaces';
 
 import { RetornoImportador } from './retorno-importador';
 import { ImportadorInterface } from '../interfaces';
+import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
 
 /**
  * O Importador é responsável por manusear arquivos. Coordena as fases de lexação, avaliação sintática,
@@ -17,15 +18,15 @@ import { ImportadorInterface } from '../interfaces';
  */
 export class Importador implements ImportadorInterface {
     diretorioBase: string = process.cwd();
-    lexador: LexadorInterface;
-    avaliadorSintatico: AvaliadorSintaticoInterface;
+    lexador: LexadorInterface<SimboloInterface>;
+    avaliadorSintatico: AvaliadorSintaticoInterface<SimboloInterface, Declaracao>;
     arquivosAbertos: { [identificador: string]: string };
     conteudoArquivosAbertos: { [identificador: string]: string[] };
     depuracao: boolean;
 
     constructor(
-        lexador: LexadorInterface,
-        avaliadorSintatico: AvaliadorSintaticoInterface,
+        lexador: LexadorInterface<SimboloInterface>,
+        avaliadorSintatico: AvaliadorSintaticoInterface<SimboloInterface, Declaracao>,
         arquivosAbertos: { [identificador: string]: string },
         conteudoArquivosAbertos: { [identificador: string]: string[] },
         depuracao: boolean
@@ -39,8 +40,7 @@ export class Importador implements ImportadorInterface {
 
     importar(
         caminhoRelativoArquivo: string,
-        importacaoInicial: boolean = false,
-        retornarConteudoArquivo: boolean = false
+        importacaoInicial: boolean = false
     ): RetornoImportador {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
@@ -61,14 +61,6 @@ export class Importador implements ImportadorInterface {
 
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
         const conteudoDoArquivo: string[] = dadosDoArquivo.toString().replace(sistemaOperacional.EOL, '\n').split('\n');
-
-        if (retornarConteudoArquivo) {
-            return {
-                conteudoArquivo: conteudoDoArquivo,
-                nomeArquivo,
-                hashArquivo,
-            } as RetornoImportador;
-        }
 
         for (let linha = 0; linha < conteudoDoArquivo.length; linha++) {
             conteudoDoArquivo[linha] += '\0';

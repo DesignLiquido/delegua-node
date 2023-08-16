@@ -1,13 +1,13 @@
 import { Delegua } from './fontes/delegua';
 import { Command } from 'commander';
 
-const principal = () => {
+const principal = async () => {
     const analisadorArgumentos = new Command();
     let codigoOuNomeArquivo: string;
 
     analisadorArgumentos
         .option(
-            '-c, --codigo <codigo>',
+            '-c, --codigo <código>',
             'Código a ser avaliado.',
             ''
         )
@@ -32,8 +32,8 @@ const principal = () => {
             false
         )
         .option(
-            '-t, --traduzir <linguagem>',
-            'Traduz o código do arquivo passado como parâmetro.',
+            '-t, --traduzir <linguagem-para-linguagem>',
+            'Traduz o código do arquivo passado como parâmetro de arquivo. O argumento deve ser no formato linguagem-para-linguagem, como por exemplo `delegua-para-js`.',
         )
         .argument('[arquivos...]', 'Nomes dos arquivos (opcional)')
         .action((argumentos) => {
@@ -45,24 +45,23 @@ const principal = () => {
     analisadorArgumentos.parse();
     const opcoes = analisadorArgumentos.opts();
 
-    const delegua = new Delegua(
-        opcoes.dialeto,
-        opcoes.performance,
-        codigoOuNomeArquivo ? opcoes.depurador : false,
-        opcoes.traduzir
-    );
+    const delegua = new Delegua();
 
     if (opcoes.codigo) {
-        delegua.executarCodigoComoArgumento(opcoes.codigo || codigoOuNomeArquivo);
+        await delegua.executarCodigoComoArgumento(
+            opcoes.codigo || codigoOuNomeArquivo,
+            opcoes.dialeto,
+            Boolean(opcoes.performance)
+        );
     } else {
         if (codigoOuNomeArquivo) {
             if (opcoes.traduzir) {
-                delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.saida);
+                delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.saida);
             } else {
-                delegua.carregarArquivo(codigoOuNomeArquivo);
+                await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo);
             }
         } else {
-            delegua.iniciarLairDelegua();
+            delegua.iniciarLair();
         }
     }   
 };

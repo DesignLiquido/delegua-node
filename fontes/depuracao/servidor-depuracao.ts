@@ -1,11 +1,12 @@
 import * as net from 'net';
 import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
 
+import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
 import { InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/fontes/interfaces';
 import { PilhaEscoposExecucaoInterface } from '@designliquido/delegua/fontes/interfaces/pilha-escopos-execucao-interface';
-import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
 import { PontoParada } from '@designliquido/delegua/fontes/depuracao/ponto-parada';
-import { DeleguaInterface } from '../interfaces';
+
+import { NucleoExecucaoInterface } from '../interfaces/nucleo-execucao-interface';
 
 /**
  * Esta foi a primeira implementacão do mecanismo de depuração, usando comunicação por _sockets_.
@@ -16,16 +17,16 @@ import { DeleguaInterface } from '../interfaces';
  * Mecanismo poderá ser maturado num futuro próximo. Para mais detalhes, ler `README.md`.
  */
 export class ServidorDepuracao {
-    instanciaDelegua: DeleguaInterface;
+    instanciaNucleoExecucao: NucleoExecucaoInterface;
     servidor: net.Server;
     conexoes: { [chave: number]: any };
     contadorConexoes: number;
     interpretador: InterpretadorComDepuracaoInterface;
 
-    constructor(_instanciaDelegua: DeleguaInterface) {
-        this.instanciaDelegua = _instanciaDelegua;
-        this.instanciaDelegua.funcaoDeRetorno = this.escreverSaidaParaTodosClientes.bind(this);
-        this.interpretador = this.instanciaDelegua.interpretador as InterpretadorComDepuracaoInterface;
+    constructor(instanciaNucleoExecucao: NucleoExecucaoInterface) {
+        this.instanciaNucleoExecucao = instanciaNucleoExecucao;
+        this.instanciaNucleoExecucao.funcaoDeRetorno = this.escreverSaidaParaTodosClientes.bind(this);
+        this.interpretador = this.instanciaNucleoExecucao.interpretador as InterpretadorComDepuracaoInterface;
         this.interpretador.funcaoDeRetorno = this.escreverSaidaParaTodosClientes.bind(this);
 
         this.servidor = net.createServer();
@@ -36,12 +37,12 @@ export class ServidorDepuracao {
 
     validarPontoParada = (caminhoArquivo: string, linha: number, conexao: net.Socket): any => {
         const hashArquivo = cyrb53(caminhoArquivo.toLowerCase());
-        if (!this.instanciaDelegua.arquivosAbertos.hasOwnProperty(hashArquivo)) {
+        if (!this.instanciaNucleoExecucao.arquivosAbertos.hasOwnProperty(hashArquivo)) {
             conexao.write(`[adicionar-ponto-parada]: Arquivo '${caminhoArquivo}' não encontrado\n`);
             return { sucesso: false };
         }
 
-        if (this.instanciaDelegua.conteudoArquivosAbertos[hashArquivo].length < linha) {
+        if (this.instanciaNucleoExecucao.conteudoArquivosAbertos[hashArquivo].length < linha) {
             conexao.write(`[adicionar-ponto-parada]: Linha ${linha} não existente em arquivo '${caminhoArquivo}'\n`);
             return { sucesso: false };
         }
@@ -84,7 +85,7 @@ export class ServidorDepuracao {
         let retornoInterpretacao: RetornoExecucaoInterface;
         let resultadoInterpretacao: any[];
         try {
-            retornoInterpretacao = await this.instanciaDelegua.executarUmaLinha(expressaoAvaliar);
+            retornoInterpretacao = await this.instanciaNucleoExecucao.executarUmaLinha(expressaoAvaliar);
             resultadoInterpretacao = retornoInterpretacao.resultado;
         } catch (erro: any) {
             resultadoInterpretacao = [String(erro)];
@@ -142,11 +143,11 @@ export class ServidorDepuracao {
                 const declaracaoAtual: Declaracao = elementoPilha.declaracoes[posicaoDeclaracaoAtual];
 
                 linhasResposta +=
-                    this.instanciaDelegua.conteudoArquivosAbertos[declaracaoAtual.hashArquivo][
+                    this.instanciaNucleoExecucao.conteudoArquivosAbertos[declaracaoAtual.hashArquivo][
                         declaracaoAtual.linha - 1
                     ].trim() +
                     ' --- ' +
-                    this.instanciaDelegua.arquivosAbertos[declaracaoAtual.hashArquivo] +
+                    this.instanciaNucleoExecucao.arquivosAbertos[declaracaoAtual.hashArquivo] +
                     '::' +
                     declaracaoAtual.assinaturaMetodo +
                     '::' +
@@ -166,7 +167,7 @@ export class ServidorDepuracao {
         linhasResposta += "Recebido comando 'pontos-parada'\n";
         for (const pontoParada of this.interpretador.pontosParada) {
             linhasResposta +=
-                this.instanciaDelegua.arquivosAbertos[pontoParada.hashArquivo] + ': ' + pontoParada.linha + '\n';
+                this.instanciaNucleoExecucao.arquivosAbertos[pontoParada.hashArquivo] + ': ' + pontoParada.linha + '\n';
         }
 
         conexao.write(linhasResposta);

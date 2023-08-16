@@ -416,7 +416,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Delégua > REPL",
+            "name": "Delégua > Modo LAIR (REPL)",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
