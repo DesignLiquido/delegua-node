@@ -9,7 +9,7 @@ import { NucleoComum } from './nucleo-comum';
 export class NucleoTraducao 
     extends NucleoComum
 {
-    importador: ImportadorInterface;
+    importador: ImportadorInterface<any, any>;
     tradutor: TradutorInterface;
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;

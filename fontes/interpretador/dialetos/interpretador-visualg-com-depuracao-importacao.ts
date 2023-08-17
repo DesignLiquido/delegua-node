@@ -1,17 +1,18 @@
 import * as caminho from 'path';
 
-import { Importar } from "@designliquido/delegua/fontes/declaracoes";
+import { Declaracao, Importar } from "@designliquido/delegua/fontes/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/fontes/estruturas";
 import { InterpretadorVisuAlgComDepuracao } from "@designliquido/delegua/fontes/interpretador/dialetos";
 import { ImportadorInterface } from "../../interfaces";
 
 import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
+import { SimboloInterface } from '@designliquido/delegua/fontes/interfaces';
 
 export class InterpretadorVisuAlgComDepuracaoImportacao extends InterpretadorVisuAlgComDepuracao {
-    importador: ImportadorInterface;
+    importador: ImportadorInterface<SimboloInterface, Declaracao>;
 
     constructor(
-        importador: ImportadorInterface,
+        importador: ImportadorInterface<SimboloInterface, Declaracao>,
         diretorioBase: string, 
         funcaoDeRetorno: Function, 
         funcaoDeRetornoMesmaLinha: Function) 
@@ -40,7 +41,7 @@ export class InterpretadorVisuAlgComDepuracaoImportacao extends InterpretadorVis
             }
         }
 
-        const conteudoImportacao = this.importador.importar(caminhoRelativo, false, false);
+        const conteudoImportacao = this.importador.importar(caminhoRelativo, false);
         const retornoInterpretador = await this.interpretar(
             conteudoImportacao.retornoAvaliadorSintatico.declaracoes,
             true

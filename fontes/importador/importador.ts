@@ -16,7 +16,7 @@ import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
  * `conteudoArquivosAbertos`) e aponta erros caso ocorram.
  *
  */
-export class Importador implements ImportadorInterface {
+export class Importador implements ImportadorInterface<SimboloInterface, Declaracao> {
     diretorioBase: string = process.cwd();
     lexador: LexadorInterface<SimboloInterface>;
     avaliadorSintatico: AvaliadorSintaticoInterface<SimboloInterface, Declaracao>;
@@ -41,7 +41,7 @@ export class Importador implements ImportadorInterface {
     importar(
         caminhoRelativoArquivo: string,
         importacaoInicial: boolean = false
-    ): RetornoImportador {
+    ): RetornoImportador<SimboloInterface, Declaracao> {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
         if (importacaoInicial) {
@@ -79,6 +79,6 @@ export class Importador implements ImportadorInterface {
             hashArquivo,
             retornoLexador,
             retornoAvaliadorSintatico,
-        } as RetornoImportador;
+        } as RetornoImportador<SimboloInterface, Declaracao>;
     }
 }

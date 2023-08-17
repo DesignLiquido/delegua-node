@@ -9,14 +9,15 @@ import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/fontes/aval
 
 import { ImportadorInterface } from "../interfaces";
 import { RetornoImportador } from "./retorno-importador";
+import { Statement, Directive, ModuleDeclaration } from 'estree';
 
-export class ImportadorJavaScript implements ImportadorInterface {
+export class ImportadorJavaScript implements ImportadorInterface<(Statement | Directive | ModuleDeclaration), (Statement | Directive | ModuleDeclaration)> {
     diretorioBase: string;
     conteudoArquivosAbertos: { [identificador: string]: string[]; };
     lexador: LexadorJavaScript;
     avaliadorSintatico: AvaliadorSintaticoJavaScript;
 
-    importar(caminhoRelativoArquivo: string, importacaoInicial: boolean): RetornoImportador {
+    importar(caminhoRelativoArquivo: string, importacaoInicial: boolean): RetornoImportador<(Statement | Directive | ModuleDeclaration), (Statement | Directive | ModuleDeclaration)> {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
         if (importacaoInicial) {
@@ -41,7 +42,7 @@ export class ImportadorJavaScript implements ImportadorInterface {
             hashArquivo,
             retornoLexador,
             retornoAvaliadorSintatico,
-        } as RetornoImportador;
+        } as RetornoImportador<(Statement | Directive | ModuleDeclaration), (Statement | Directive | ModuleDeclaration)>;
     }
     
 }

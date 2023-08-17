@@ -1,13 +1,14 @@
-import { Importar } from "@designliquido/delegua/fontes/declaracoes";
+import { Declaracao, Importar } from "@designliquido/delegua/fontes/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/fontes/estruturas";
 import { InterpretadorMaplerComDepuracao } from "@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler-com-depuracao";
 import { ImportadorInterface } from "../../interfaces";
+import { SimboloInterface } from "@designliquido/delegua/fontes/interfaces";
 
 export class InterpretadorMaplerComDepuracaoImportacao extends InterpretadorMaplerComDepuracao {
-    importador: ImportadorInterface;
+    importador: ImportadorInterface<SimboloInterface, Declaracao>;
 
     constructor(
-        importador: ImportadorInterface,
+        importador: ImportadorInterface<SimboloInterface, Declaracao>,
         diretorioBase: string, 
         funcaoDeRetorno: Function, 
         funcaoDeRetornoMesmaLinha: Function) 
@@ -24,7 +25,7 @@ export class InterpretadorMaplerComDepuracaoImportacao extends InterpretadorMapl
     async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
         const caminhoRelativo = await this.avaliar(declaracao.caminho);
 
-        const conteudoImportacao = this.importador.importar(caminhoRelativo, false, false);
+        const conteudoImportacao = this.importador.importar(caminhoRelativo, false);
         const retornoInterpretador = await this.interpretar(
             conteudoImportacao.retornoAvaliadorSintatico.declaracoes,
             true
