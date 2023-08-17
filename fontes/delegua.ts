@@ -16,7 +16,7 @@ import { NucleoTraducao } from './nucleo-traducao';
 export class Delegua implements DeleguaInterface {
     lexador: LexadorInterface<any>;
     avaliadorSintatico: AvaliadorSintaticoInterface<any, any>;
-    importador: ImportadorInterface;
+    importador: ImportadorInterface<any, any>;
 
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;

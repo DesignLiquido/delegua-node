@@ -33,7 +33,7 @@ export class NucleoExecucao
     interpretador: InterpretadorInterface;
     lexador: LexadorInterface<any>;
     avaliadorSintatico: AvaliadorSintaticoInterface<any, any>;
-    importador: ImportadorInterface;
+    importador: ImportadorInterface<any, any>;
     servidorDepuracao: ServidorDepuracao;
 
     dialeto: string;
@@ -364,7 +364,7 @@ export class NucleoExecucao
      *                       para LAIR, falso para execução por arquivo.
      * @returns Um objeto com o resultado da execução.
      */
-    async executar(retornoImportador: RetornoImportador, manterAmbiente = false): Promise<RetornoExecucaoInterface> {
+    async executar(retornoImportador: RetornoImportador<any, any>, manterAmbiente = false): Promise<RetornoExecucaoInterface> {
         const retornoInterpretador = await this.interpretador.interpretar(
             retornoImportador.retornoAvaliadorSintatico.declaracoes,
             manterAmbiente
@@ -409,7 +409,7 @@ export class NucleoExecucao
             this.afericaoErros({
                 retornoLexador,
                 retornoAvaliadorSintatico,
-            } as RetornoImportador)
+            } as RetornoImportador<any, any>)
         ) {
             return { resultado: [] } as RetornoExecucaoInterface;
         }
@@ -418,7 +418,7 @@ export class NucleoExecucao
             {
                 retornoLexador,
                 retornoAvaliadorSintatico,
-            } as RetornoImportador,
+            } as RetornoImportador<any, any>,
             true
         );
     }

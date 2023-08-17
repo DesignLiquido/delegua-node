@@ -11,7 +11,7 @@ export abstract class NucleoComum {
      * @param retornoImportador Um objeto que implementa a interface RetornoImportador.
      * @returns Verdadeiro se há erros. Falso caso contrário.
      */
-    protected afericaoErros(retornoImportador: RetornoImportador): boolean {
+    protected afericaoErros(retornoImportador: RetornoImportador<any, any>): boolean {
         if (retornoImportador.retornoLexador.erros.length > 0) {
             for (const erroLexador of retornoImportador.retornoLexador.erros) {
                 this.reportar(erroLexador.linha, ` no '${erroLexador.caractere}'`, erroLexador.mensagem);
