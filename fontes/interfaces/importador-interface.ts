@@ -6,7 +6,6 @@ export interface ImportadorInterface {
 
     importar(
         caminhoRelativoArquivo: string,
-        importacaoInicial: boolean,
-        traduzirJavaScriptParaDelegua: boolean
+        importacaoInicial: boolean
     ): RetornoImportador;
 }
