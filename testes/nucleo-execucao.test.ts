@@ -4,7 +4,7 @@ import {expect, jest, test} from '@jest/globals';
 
 import { NucleoExecucao } from '../fontes/nucleo-execucao';
 
-jest.mock('sistemaArquivos');
+jest.mock('fs');
 jest.mock('path');
 
 describe('Núcleo de execução', () => {
