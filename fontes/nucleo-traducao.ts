@@ -5,6 +5,13 @@ import { TradutorInterface } from '@designliquido/delegua/fontes/interfaces';
 import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorReversoVisuAlg } from '@designliquido/delegua/fontes/tradutores';
 import { ImportadorInterface } from './interfaces';
 import { NucleoComum } from './nucleo-comum';
+import { TradutorAssemblyScript } from '@designliquido/delegua/fontes/tradutores/tradutor-assemblyscript';
+import { Importador } from './importador';
+import { Lexador } from '@designliquido/delegua/fontes/lexador';
+import { AvaliadorSintatico } from '@designliquido/delegua/fontes/avaliador-sintatico';
+import { ImportadorJavaScript } from './importador/importador-javascript';
+import { LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
 
 export class NucleoTraducao 
     extends NucleoComum
@@ -14,9 +21,13 @@ export class NucleoTraducao
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
 
+    arquivosAbertos: { [identificador: string]: string };
+    conteudoArquivosAbertos: { [identificador: string]: string[] };
+
     comandoTraducao: string = '';
 
     extensoes = {
+        assemblyscript: '.wat',
         delegua: '.delegua',
         javascript: '.js',
         js: '.js',
@@ -31,6 +42,9 @@ export class NucleoTraducao
         funcaoDeRetornoMesmaLinha: Function = null
     ) {
         super();
+        this.arquivosAbertos = {};
+        this.conteudoArquivosAbertos = {};
+
         this.funcaoDeRetorno = funcaoDeRetorno || console.log;
         // `process.stdout.write.bind(process.stdout)` é necessário por causa de 
         // https://stackoverflow.com/questions/28874665/node-js-cannot-read-property-defaultencoding-of-undefined
@@ -39,20 +53,52 @@ export class NucleoTraducao
 
     iniciarTradutor(comandoTraducao: string) {
         switch (comandoTraducao) {
+            case 'delegua-para-assemblyscript':
+            case 'delegua-para-wat':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    new AvaliadorSintatico(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
+                this.tradutor = new TradutorAssemblyScript();
             case 'delegua-para-js':
             case 'delegua-para-javascript':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    new AvaliadorSintatico(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
                 this.tradutor = new TradutorJavaScript();
                 break;
             case 'delegua-para-py':
             case 'delegua-para-python':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    new AvaliadorSintatico(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
                 this.tradutor = new TradutorPython();
                 break;
             case 'js-para-delegua':
             case 'javascript-para-delegua':
+                this.importador = new ImportadorJavaScript();
                 this.tradutor = new TradutorReversoJavaScript();
                 break;
             case 'alg-para-delegua':
             case 'visualg-para-delegua':
+                this.importador = new Importador(
+                    new LexadorVisuAlg(),
+                    new AvaliadorSintaticoVisuAlg(),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    false
+                );
                 this.tradutor = new TradutorReversoVisuAlg();
                 break;
             default:

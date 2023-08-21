@@ -786,6 +786,30 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Tradutor > Delégua para AssemblyScript > Teste",
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-t",
+                "delegua-para-assemblyscript",
+                "-s",
+                "./exemplos/tradutores/delegua-para-assemblyscript.delegua"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Tradutor > Delégua para JavaScript > Teste",
             "skipFiles": [
                 "<node_internals>/**",
