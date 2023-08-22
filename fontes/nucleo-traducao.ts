@@ -27,7 +27,7 @@ export class NucleoTraducao
     comandoTraducao: string = '';
 
     extensoes = {
-        assemblyscript: '.wat',
+        assemblyscript: '.as',
         delegua: '.delegua',
         javascript: '.js',
         js: '.js',
@@ -54,7 +54,7 @@ export class NucleoTraducao
     iniciarTradutor(comandoTraducao: string) {
         switch (comandoTraducao) {
             case 'delegua-para-assemblyscript':
-            case 'delegua-para-wat':
+            case 'delegua-para-as':
                 this.importador = new Importador(
                     new Lexador(false),
                     new AvaliadorSintatico(false),
@@ -63,6 +63,7 @@ export class NucleoTraducao
                     false
                 );
                 this.tradutor = new TradutorAssemblyScript();
+                break;
             case 'delegua-para-js':
             case 'delegua-para-javascript':
                 this.importador = new Importador(
