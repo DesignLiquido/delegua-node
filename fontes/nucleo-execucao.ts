@@ -286,13 +286,19 @@ export class NucleoExecucao
             interpretador: [],
         };
 
-        const interfaceLeitura = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-            prompt: '\n> ',
-        });
-
-        this.interpretador.interfaceEntradaSaida = interfaceLeitura;
+        // Se a interface de entrada e saída ainda não está definida, definimos agora.
+        // A interface pode ser definida por um teste unitário antes da execução
+        // aqui, por exemplo.
+        let interfaceLeitura: any;
+        if (!this.interpretador.interfaceEntradaSaida) {
+            interfaceLeitura = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout,
+                prompt: '\n> ',
+            });
+    
+            this.interpretador.interfaceEntradaSaida = interfaceLeitura;
+        }
 
         if (this.modoDepuracao) {
             try {
@@ -307,7 +313,10 @@ export class NucleoExecucao
             errosExecucao = erros;
         }
 
-        interfaceLeitura.close();
+        if (interfaceLeitura && interfaceLeitura.hasOwnProperty('close')) {
+            interfaceLeitura.close();
+        }
+        
         if (errosExecucao.length > 0) process.exit(70); // Código com exceções não tratadas
     }
 

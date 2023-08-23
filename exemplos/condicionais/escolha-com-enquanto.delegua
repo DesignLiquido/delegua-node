@@ -1,0 +1,38 @@
+funcao exibirTabuleiro() {
+    escreva("+------------+--------+--------+--------+")
+    escreva("|            |    1   |    2   |    3   |")
+    escreva("|            |    4   |    5   |    6   |")
+    escreva("|            |    7   |    8   |    9   |")
+    escreva("|            |   10   |   11   |   12   |")
+    escreva("|            |   13   |   14   |   15   |")
+    escreva("|            |   16   |   17   |   18   |")
+    escreva("|            |   19   |   20   |   21   |")
+    escreva("|            |   22   |   23   |   24   |")
+    escreva("|            |   25   |   26   |   27   |")
+    escreva("|            |   28   |   29   |   30   |")
+    escreva("|            |   31   |   32   |   33   |")
+    escreva("|            |   34   |   35   |   36   |")
+    escreva("+------------+--------+--------+--------+")
+    escreva("|            | Coluna | Coluna | Coluna |")
+    escreva("+------------+--------+--------+--------+")
+}
+
+escreva("Rodada de Roleta")
+escreva("--------------------------------")
+escreva("Opções: ")
+escreva("1. Exibir Tabuleiro")
+escreva("2. Adicionar ou modificar aposta")
+escreva("3. Rodar a roleta")
+
+var opcao = leia("Digite a opção desejada: ")
+enquanto opcao != '0' {
+    escolha opcao {
+        caso '1':
+            exibirTabuleiro()
+        caso '3':
+            var numero = aleatorioEntre(0, 36)
+            escreva(numero) // Retornará um valor entre 0 e 36.
+    }
+
+    opcao = leia("Digite a opção desejada: ")
+}

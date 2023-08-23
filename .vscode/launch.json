@@ -784,6 +784,20 @@
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
         },
         {
+            "name": "Testes unitários",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/jest/bin/jest.js",
+                // "nucleo-execucao",
+                "--runInBand"
+            ],
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Tradutor > Delégua para AssemblyScript > Teste",
