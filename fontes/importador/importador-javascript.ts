@@ -17,6 +17,11 @@ export class ImportadorJavaScript implements ImportadorInterface<(Statement | Di
     lexador: LexadorJavaScript;
     avaliadorSintatico: AvaliadorSintaticoJavaScript;
 
+    constructor() {
+        this.lexador = new LexadorJavaScript();
+        this.avaliadorSintatico = new AvaliadorSintaticoJavaScript();
+    }
+
     importar(caminhoRelativoArquivo: string, importacaoInicial: boolean): RetornoImportador<(Statement | Directive | ModuleDeclaration), (Statement | Directive | ModuleDeclaration)> {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
@@ -27,10 +32,6 @@ export class ImportadorJavaScript implements ImportadorInterface<(Statement | Di
         const hashArquivo = cyrb53(caminhoAbsolutoArquivo.toLowerCase());
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
         const conteudoDoArquivo: string[] = dadosDoArquivo.toString().replace(sistemaOperacional.EOL, '\n').split('\n');
-
-        for (let linha = 0; linha < conteudoDoArquivo.length; linha++) {
-            conteudoDoArquivo[linha] += '\0';
-        }
 
         const retornoLexador = this.lexador.mapear(conteudoDoArquivo, hashArquivo);
         const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(retornoLexador, hashArquivo);
@@ -44,5 +45,4 @@ export class ImportadorJavaScript implements ImportadorInterface<(Statement | Di
             retornoAvaliadorSintatico,
         } as RetornoImportador<(Statement | Directive | ModuleDeclaration), (Statement | Directive | ModuleDeclaration)>;
     }
-    
 }

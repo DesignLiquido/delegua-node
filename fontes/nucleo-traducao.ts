@@ -17,7 +17,7 @@ export class NucleoTraducao
     extends NucleoComum
 {
     importador: ImportadorInterface<any, any>;
-    tradutor: TradutorInterface;
+    tradutor: TradutorInterface<any>;
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
 
