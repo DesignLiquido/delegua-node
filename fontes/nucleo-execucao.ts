@@ -1,4 +1,3 @@
-import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 import * as readline from 'readline';
 
@@ -36,6 +35,7 @@ export class NucleoExecucao
     importador: ImportadorInterface<any, any>;
     servidorDepuracao: ServidorDepuracao;
 
+    versao: string;
     dialeto: string;
     modoDepuracao: boolean;
     arquivosAbertos: { [identificador: string]: string };
@@ -55,10 +55,12 @@ export class NucleoExecucao
     funcaoDeRetornoMesmaLinha: Function;
 
     constructor(
+        versao: string,
         funcaoDeRetorno: Function = null,
         funcaoDeRetornoMesmaLinha: Function = null
     ) {
         super();
+        this.versao = versao;
         this.arquivosAbertos = {};
         this.conteudoArquivosAbertos = {};
 
@@ -329,7 +331,7 @@ export class NucleoExecucao
         const formatadorJson = new FormatadorJson();
 
         this.funcaoDeRetorno(`Usando dialeto: ${this.dialetos[this.dialeto]}`);
-        this.funcaoDeRetorno(`Console da Linguagem Delégua v${this.versao()}`);
+        this.funcaoDeRetorno(`Console da Linguagem Delégua v${this.versao}`);
         this.funcaoDeRetorno('Pressione Ctrl + C para sair');
 
         const interfaceLeitura = readline.createInterface({
@@ -353,16 +355,6 @@ export class NucleoExecucao
 
             interfaceLeitura.prompt();
         });
-    }
-
-    versao(): string {
-        try {
-            const manifesto = caminho.resolve(__dirname, 'package.json');
-
-            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.24';
-        } catch (error: any) {
-            return '0.24 (desenvolvimento)';
-        }
     }
 
     /**

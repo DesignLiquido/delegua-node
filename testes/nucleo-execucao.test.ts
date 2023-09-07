@@ -11,7 +11,7 @@ describe('Núcleo de execução', () => {
     it('`executarCodigoComoArgumento`, trivial', async () => {
         let retornoSaida: string = '';
         const funcaoDeRetorno = (saida: string) => retornoSaida = saida;
-        const nucleoExecucao = new NucleoExecucao(funcaoDeRetorno);
+        const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
         nucleoExecucao.configurarDialeto();
         await nucleoExecucao.executarCodigoComoArgumento('escreva("Olá mundo!")');
 
@@ -21,7 +21,7 @@ describe('Núcleo de execução', () => {
     it('`executarCodigoComoArgumento`, arquivo', async () => {
         let retornoSaida: string = '';
         const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
-        const nucleoExecucao = new NucleoExecucao(funcaoDeRetorno);
+        const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
         nucleoExecucao.configurarDialeto();
         
         // Aqui vamos simular a resposta para duas variáveis de `leia()`.

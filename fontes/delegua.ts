@@ -1,3 +1,6 @@
+import * as sistemaArquivos from 'fs';
+import * as caminho from 'path';
+
 import {
     AvaliadorSintaticoInterface,
     LexadorInterface
@@ -31,12 +34,22 @@ export class Delegua implements DeleguaInterface {
         this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write.bind(process.stdout);
     }
 
+    versao(): string {
+        try {
+            const manifesto = caminho.resolve(process.cwd(), 'package.json');
+
+            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.24';
+        } catch (error: any) {
+            return '0.24 (desenvolvimento)';
+        }
+    }
+
     async executarCodigoComoArgumento(
         codigo: string,
         dialeto: string = 'delegua',
         performance: boolean = false
     ): Promise<void> {
-        const nucleoExecucao = new NucleoExecucao(this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
+        const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, performance);
         await nucleoExecucao.executarCodigoComoArgumento(codigo);
     }
@@ -46,13 +59,13 @@ export class Delegua implements DeleguaInterface {
         dialeto: string = 'delegua',
         performance: boolean = false
     ): Promise<any> {
-        const nucleoExecucao = new NucleoExecucao(this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
+        const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, performance);
         await nucleoExecucao.carregarEExecutarArquivo(caminhoRelativoArquivo);
     }
 
     async iniciarLair(dialeto: string = 'delegua'): Promise<void> { 
-        const nucleoExecucao = new NucleoExecucao(this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
+        const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, false);
         await nucleoExecucao.iniciarLairDelegua();
     }

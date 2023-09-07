@@ -35,6 +35,11 @@ const principal = async () => {
             '-t, --traduzir <linguagem-para-linguagem>',
             'Traduz o código do arquivo passado como parâmetro de arquivo. O argumento deve ser no formato linguagem-para-linguagem, como por exemplo `delegua-para-js`.',
         )
+        .option(
+            '-v, --versao',
+            'Imprime o número da versão atual de Delégua',
+            false
+        )
         .argument('[arquivos...]', 'Nomes dos arquivos (opcional)')
         .action((argumentos) => {
             if (argumentos.length > 0) {
@@ -46,6 +51,10 @@ const principal = async () => {
     const opcoes = analisadorArgumentos.opts();
 
     const delegua = new Delegua();
+    if (opcoes.versao) {
+        console.log(delegua.versao());
+        return;
+    }
 
     if (opcoes.codigo) {
         await delegua.executarCodigoComoArgumento(
