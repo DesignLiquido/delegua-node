@@ -1,6 +1,6 @@
 # delegua-node
 
-Versão de Delégua com suporte a importação de pacotes pelo ecossistema do Node.js.
+Versão de Delégua com suporte a importação de pacotes pelo ecossistema do Node.js. Também funciona com o [Bun](https://bun.sh/).
 
 ## Motivação
 
@@ -14,7 +14,7 @@ Se sua aplicação:
 
 - Precisa suportar importações, seja de outros fontes, seja de bibliotecas NPM
 - Executa código Delégua, ou outros dialetos, remotamente
-- Deve executar no ambiente Node.js
+- Deve executar no ambiente Node.js ou Bun
 
 Ela deve, então, usar este pacote. Caso contrário, o uso apenas do núcleo da linguagem é uma escolha melhor.
 
@@ -75,6 +75,14 @@ delegua --dialeto egua
 ```
 
 [Veja aqui todos os dialetos suportados](https://github.com/DesignLiquido/delegua/wiki/Dialetos).
+
+### Executando código
+
+É possível passar código como argumento para Delégua usando a opção `-c`:
+
+```
+delegua -c "escreva('Olá mundo')"
+```
 
 ## Tradução para outras linguagens
 
