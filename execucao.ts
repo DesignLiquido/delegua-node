@@ -3,10 +3,11 @@ import { Command } from 'commander';
 
 const principal = async () => {
     const analisadorArgumentos = new Command();
-    analisadorArgumentos.helpOption('-h, --help, --ajuda', 'Exibe a ajuda para o comando.');
+    analisadorArgumentos;
     let codigoOuNomeArquivo: string;
 
     analisadorArgumentos
+        .helpOption('-h, --ajuda', 'Exibe a ajuda para o comando.')
         .option(
             '-c, --codigo <código>',
             'Código a ser avaliado.',
