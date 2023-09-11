@@ -44,9 +44,12 @@ export class NucleoExecucao
     dialetos: { [identificador: string]: string } = {
         birl: 'BIRL',
         delegua: 'padrão',
+        delégua: 'padrão',
         egua: 'Égua',
+        égua: 'Égua',
         mapler: 'Mapler',
         pitugues: 'Pituguês',
+        pituguês: 'Pituguês',
         'portugol-studio': 'Portugol Studio',
         visualg: 'VisuAlg',
     };
@@ -110,6 +113,7 @@ export class NucleoExecucao
                 this.interpretador = new InterpretadorEguaClassico(process.cwd());
                 break;
             case 'pitugues':
+            case 'pituguês':
                 this.lexador = new LexadorPitugues();
                 this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
                 this.importador = new Importador(

@@ -39,7 +39,7 @@ npm install -g delegua
 
 Feita a instalação no seu ambiente, execute o seguinte comando:
 
-```
+```sh
 delegua
 ```
 
@@ -60,6 +60,18 @@ delegua> 2 ** 10
 
 Para finalizar a execução do interpretador LAIR Delégua, use o atalho <key>Ctrl</key> + <key>C</key> (todos os sistemas operacionais).
 
+Se quiser apenas ver a versão instalada (sem executar), use:
+
+```sh
+delegua -v
+```
+
+Ou
+
+```sh
+delegua --versao
+```
+
 #### Dialetos que suportam o modo LAIR
 
 - Delégua
@@ -70,8 +82,14 @@ Para finalizar a execução do interpretador LAIR Delégua, use o atalho <key>Ct
 
 É possível usar o interpretador com outros dialetos, como Égua.
 
-```
+```sh
 delegua --dialeto egua
+```
+
+Ou
+
+```sh
+delegua -d pitugues
 ```
 
 [Veja aqui todos os dialetos suportados](https://github.com/DesignLiquido/delegua/wiki/Dialetos).
