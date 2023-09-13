@@ -14,10 +14,10 @@ import { ServidorDepuracao } from './depuracao';
 import { FormatadorJson } from './formatadores';
 import { LexadorJson } from './lexador/lexador-json';
 import { AvaliadorSintatico } from '@designliquido/delegua/fontes/avaliador-sintatico';
-import { AvaliadorSintaticoBirl, AvaliadorSintaticoEguaClassico, AvaliadorSintaticoPitugues, AvaliadorSintaticoMapler, AvaliadorSintaticoPortugolIpt, AvaliadorSintaticoPortugolStudio, AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
-import { InterpretadorBirl, InterpretadorEguaClassico, InterpretadorMapler, InterpretadorPortugolIpt, InterpretadorPortugolStudioComDepuracao, InterpretadorPortugolStudio, InterpretadorVisuAlg } from '@designliquido/delegua/fontes/interpretador/dialetos';
+import { AvaliadorSintaticoBirl, AvaliadorSintaticoEguaClassico, AvaliadorSintaticoPitugues, AvaliadorSintaticoMapler, AvaliadorSintaticoPortugolIpt, AvaliadorSintaticoPortugolStudio, AvaliadorSintaticoVisuAlg, AvaliadorSintaticoPotigol } from '@designliquido/delegua/fontes/avaliador-sintatico/dialetos';
+import { InterpretadorBirl, InterpretadorEguaClassico, InterpretadorMapler, InterpretadorPortugolIpt, InterpretadorPortugolStudioComDepuracao, InterpretadorPortugolStudio, InterpretadorVisuAlg, InterpretadorPotigol } from '@designliquido/delegua/fontes/interpretador/dialetos';
 import { Lexador } from '@designliquido/delegua/fontes/lexador';
-import { LexadorBirl, LexadorEguaClassico, LexadorPitugues, LexadorMapler, LexadorPortugolIpt, LexadorPortugolStudio, LexadorVisuAlg } from '@designliquido/delegua/fontes/lexador/dialetos';
+import { LexadorBirl, LexadorEguaClassico, LexadorPitugues, LexadorMapler, LexadorPortugolIpt, LexadorPortugolStudio, LexadorVisuAlg, LexadorPotigol } from '@designliquido/delegua/fontes/lexador/dialetos';
 import { Interpretador } from './interpretador';
 import { InterpretadorMaplerComDepuracaoImportacao } from './interpretador/dialetos/interpretador-mapler-com-depuracao-importacao';
 import { InterpretadorVisuAlgComDepuracaoImportacao } from './interpretador/dialetos/interpretador-visualg-com-depuracao-importacao';
@@ -50,6 +50,7 @@ export class NucleoExecucao
         mapler: 'Mapler',
         pitugues: 'Pituguês',
         pituguês: 'Pituguês',
+        potigol: 'Potigol',
         'portugol-studio': 'Portugol Studio',
         visualg: 'VisuAlg',
     };
@@ -112,30 +113,7 @@ export class NucleoExecucao
                 );
                 this.interpretador = new InterpretadorEguaClassico(process.cwd());
                 break;
-            case 'pitugues':
-            case 'pituguês':
-                this.lexador = new LexadorPitugues();
-                this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
-                this.importador = new Importador(
-                    this.lexador,
-                    this.avaliadorSintatico,
-                    this.arquivosAbertos,
-                    this.conteudoArquivosAbertos,
-                    depurador
-                );
-
-                this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(
-                        this.importador,
-                        process.cwd(),
-                        this.funcaoDeRetorno,
-                        this.funcaoDeRetornoMesmaLinha)
-                    : new Interpretador(this.importador,
-                        process.cwd(),
-                        performance,
-                        this.funcaoDeRetorno,
-                        this.funcaoDeRetornoMesmaLinha);
-                break;
+            
             case 'mapler':
                 this.lexador = new LexadorMapler();
                 this.avaliadorSintatico = new AvaliadorSintaticoMapler();
@@ -159,6 +137,31 @@ export class NucleoExecucao
                         this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha);
                 break;
+                case 'pitugues':
+                case 'pituguês':
+                    this.lexador = new LexadorPitugues();
+                    this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
+                    this.importador = new Importador(
+                        this.lexador,
+                        this.avaliadorSintatico,
+                        this.arquivosAbertos,
+                        this.conteudoArquivosAbertos,
+                        depurador
+                    );
+    
+                    this.interpretador = depurador
+                        ? new InterpretadorComDepuracaoImportacao(
+                            this.importador,
+                            process.cwd(),
+                            this.funcaoDeRetorno,
+                            this.funcaoDeRetornoMesmaLinha)
+                        : new Interpretador(this.importador,
+                            process.cwd(),
+                            performance,
+                            this.funcaoDeRetorno,
+                            this.funcaoDeRetornoMesmaLinha);
+                    break;
+
             case 'portugol-ipt':
                 this.lexador = new LexadorPortugolIpt();
                 this.avaliadorSintatico = new AvaliadorSintaticoPortugolIpt();
@@ -197,6 +200,28 @@ export class NucleoExecucao
                         this.funcaoDeRetorno,
                         this.funcaoDeRetornoMesmaLinha)
                     : new InterpretadorPortugolStudio(
+                        process.cwd(),
+                        performance,
+                        this.funcaoDeRetorno);
+                break;
+
+            case 'potigol':
+                this.lexador = new LexadorPotigol();
+                this.avaliadorSintatico = new AvaliadorSintaticoPotigol();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.avaliadorSintatico,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+
+                this.interpretador = depurador
+                    ? new InterpretadorPotigol(
+                        process.cwd(),
+                        false,
+                        this.funcaoDeRetorno)
+                    : new InterpretadorPotigol(
                         process.cwd(),
                         performance,
                         this.funcaoDeRetorno);
