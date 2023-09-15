@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/delegua-node",
-    "version": "0.25.1",
+    "version": "0.25.2",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
         "empacotar": "rimraf ./dist && tsc && copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && copyfiles -V ./package.json ./dist/bin && copyfiles -V ./README.md ./dist",
