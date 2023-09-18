@@ -1,4 +1,4 @@
 algoritmo "ola-mundo"
 inicio
-escreva("Ola mundo")
+escreval("Ola mundo")
 fimalgoritmo

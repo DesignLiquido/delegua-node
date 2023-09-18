@@ -413,6 +413,7 @@ export class NucleoExecucao
     }
 
     if (errosExecucao.length > 0) process.exit(70); // Código com exceções não tratadas
+    process.exit(0);
   }
 
   /**
