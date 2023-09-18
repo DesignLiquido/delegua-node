@@ -69,7 +69,7 @@ const principal = async () => {
             if (opcoes.traduzir) {
                 delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.saida);
             } else {
-                await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo);
+                await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
             }
         } else {
             delegua.iniciarLair();
