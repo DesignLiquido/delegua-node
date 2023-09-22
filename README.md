@@ -2,6 +2,19 @@
 
 Versão de Delégua com suporte a importação de pacotes pelo ecossistema do Node.js. Também funciona com o [Bun](https://bun.sh/).
 
+<p align="center">
+    <a href="https://github.com/DesignLiquido/delegua-node/issues" target="_blank">
+        <img src="https://img.shields.io/github/issues/Designliquido/delegua" />
+    </a>
+    <img src="https://img.shields.io/github/stars/Designliquido/delegua-node" />
+    <img src="https://img.shields.io/github/forks/Designliquido/delegua-node" />
+    <a href="https://www.npmjs.com/package/@designliquido/delegua-node" target="_blank">
+        <img src="https://img.shields.io/npm/v/@designliquido/delegua-node" />
+    </a>
+    <img src="https://img.shields.io/npm/dw/@designliquido/delegua-node" />
+    <img src="https://img.shields.io/github/license/Designliquido/delegua-node" />
+</p>
+
 ## Motivação
 
 Em versões anteriores, o suporte ao ecossistema Node vinha embutido no pacote do núcleo da linguagem. Isso virou um problema quando tentamos importar o pacote numa aplicação com [Webpack](https://webpack.js.org/). 
