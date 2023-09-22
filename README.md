@@ -4,7 +4,7 @@ Versão de Delégua com suporte a importação de pacotes pelo ecossistema do No
 
 <p align="center">
     <a href="https://github.com/DesignLiquido/delegua-node/issues" target="_blank">
-        <img src="https://img.shields.io/github/issues/Designliquido/delegua" />
+        <img src="https://img.shields.io/github/issues/Designliquido/delegua-node" />
     </a>
     <img src="https://img.shields.io/github/stars/Designliquido/delegua-node" />
     <img src="https://img.shields.io/github/forks/Designliquido/delegua-node" />
