@@ -546,6 +546,26 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Potigol > Olá mundo",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "potigol",
+                "./exemplos/dialetos/potigol/ola-mundo.poti"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy", 
+                "-r", 
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "VisuAlg > Cardápio",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
