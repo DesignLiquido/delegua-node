@@ -17,16 +17,16 @@ import { NucleoTraducao } from './nucleo-traducao';
  * correspondente à operação solicitada e observar a execução.
  */
 export class Delegua implements DeleguaInterface {
-    lexador: LexadorInterface<any>;
-    avaliadorSintatico: AvaliadorSintaticoInterface<any, any>;
-    importador: ImportadorInterface<any, any>;
+    lexador: LexadorInterface<any> | undefined;
+    avaliadorSintatico: AvaliadorSintaticoInterface<any, any> | undefined;
+    importador: ImportadorInterface<any, any> | undefined;
 
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
 
     constructor(
-        funcaoDeRetorno: Function = null,
-        funcaoDeRetornoMesmaLinha: Function = null
+        funcaoDeRetorno?: Function,
+        funcaoDeRetornoMesmaLinha?: Function
     ) {
         this.funcaoDeRetorno = funcaoDeRetorno || console.log;
         // `process.stdout.write.bind(process.stdout)` é necessário por causa de 

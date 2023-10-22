@@ -7,19 +7,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Lexador JSON",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}teste-json.ts"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Delégua > Bhaskara",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
@@ -466,6 +453,39 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Lexador JSON",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}teste-json.ts"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mapler > Olá Mundo",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "mapler",
+                "./exemplos/dialetos/mapler/ola-mundo.mapler"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--nolazy", 
+                "-r", 
+                "ts-node/register/transpile-only"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Portugol IPT > Olá mundo",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
@@ -515,26 +535,6 @@
                 "--dialeto",
                 "portugol-studio",
                 "./exemplos/dialetos/portugol-studio/ola-mundo.por"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Mapler > Olá Mundo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "mapler",
-                "./exemplos/dialetos/mapler/ola-mundo.mapler"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": [
@@ -672,6 +672,22 @@
                 "--dialeto",
                 "visualg",
                 "./exemplos/dialetos/visualg/multiplicar.alg"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "VisuAlg > Negativos",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--dialeto",
+                "visualg",
+                "./exemplos/dialetos/visualg/negativos.alg"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]

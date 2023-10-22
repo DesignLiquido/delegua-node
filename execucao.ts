@@ -4,7 +4,7 @@ import { Command } from 'commander';
 const principal = async () => {
     const analisadorArgumentos = new Command();
     analisadorArgumentos;
-    let codigoOuNomeArquivo: string;
+    let codigoOuNomeArquivo: string | undefined = undefined;
 
     analisadorArgumentos
         .helpOption('-h, --ajuda', 'Exibe a ajuda para o comando.')
