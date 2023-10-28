@@ -38,7 +38,7 @@ export class Delegua implements DeleguaInterface {
         try {
             const manifesto = caminho.resolve(process.cwd(), 'package.json');
 
-            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.24';
+            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.26';
         } catch (error: any) {
             return '0.24 (desenvolvimento)';
         }
