@@ -3,7 +3,7 @@
     "version": "0.29.4",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
-        "empacotar": "rimraf ./dist && tsc && copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && copyfiles -V ./package.json ./dist/bin && copyfiles -V ./README.md ./dist",
+        "empacotar": "rimraf ./dist && tsc && copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && copyfiles -V ./package.json ./dist/bin && copyfiles -V ./README.md ./dist && copyfiles -V ./LICENSE ./dist",
         "testes-unitarios": "jest --coverage",
         "testes:egua": "./bin/delegua-ts exemplos/dialetos/egua-classico/testes.egua",
         "testes:delegua:bhaskara": "./bin/delegua-ts exemplos/dialetos/egua-classico/bhaskara.egua",
