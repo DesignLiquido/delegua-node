@@ -59,7 +59,7 @@ const principal = async () => {
     }
 
     if (opcoes.codigo) {
-        await delegua.executarCodigoComoArgumento(
+        return await delegua.executarCodigoComoArgumento(
             opcoes.codigo || codigoOuNomeArquivo,
             opcoes.dialeto,
             Boolean(opcoes.performance)

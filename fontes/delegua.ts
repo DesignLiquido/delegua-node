@@ -51,7 +51,7 @@ export class Delegua implements DeleguaInterface {
     ): Promise<void> {
         const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, performance);
-        await nucleoExecucao.executarCodigoComoArgumento(codigo);
+        return await nucleoExecucao.executarCodigoComoArgumento(codigo);
     }
 
     async executarCodigoPorArquivo(
@@ -61,13 +61,13 @@ export class Delegua implements DeleguaInterface {
     ): Promise<any> {
         const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, performance);
-        await nucleoExecucao.carregarEExecutarArquivo(caminhoRelativoArquivo);
+        return await nucleoExecucao.carregarEExecutarArquivo(caminhoRelativoArquivo);
     }
 
     async iniciarLair(dialeto: string = 'delegua'): Promise<void> { 
         const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
         nucleoExecucao.configurarDialeto(dialeto, false);
-        await nucleoExecucao.iniciarLairDelegua();
+        return await nucleoExecucao.iniciarLairDelegua();
     }
 
     traduzirArquivo(

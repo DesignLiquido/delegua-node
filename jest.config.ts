@@ -7,5 +7,6 @@ export default async (): Promise<Config.InitialOptions> => {
         preset: 'ts-jest',
         testEnvironment: 'node',
         coverageReporters: ['json-summary', 'lcov', 'text', 'text-summary'],
+        detectOpenHandles: true
     };
 };
