@@ -46,9 +46,9 @@ import {
   LexadorPotigol,
 } from "@designliquido/delegua/fontes/lexador/dialetos";
 
-import { LexadorPortugolStudio } from "@designliquido/portugol-studio/fontes/lexador";
-import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/fontes/avaliador-sintatico';
-import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/fontes/interpretador';
+import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
+import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
+import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
 
 import { LexadorVisuAlg } from '@designliquido/visualg/fontes/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/fontes/avaliador-sintatico';
