@@ -354,13 +354,13 @@
   dependencies:
     "@designliquido/delegua" "^0.32.2"
 
-"@designliquido/visualg@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.0.tgz#26b7331848e79c32b44a4bf2a9175d768efaaea8"
-  integrity sha512-paRPLUKz1EsuSBf0ipt9K/+kUbWgMf2GvPkFV2FsYT0OwOTi+77ivGGMP8sCs+AKEv9r3WM0QemOLyFk5FL/kg==
+"@designliquido/visualg@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.1.tgz#650e24ad914aeae0465a72b6a9eea6cb1c2b6619"
+  integrity sha512-SV2O9g51iN6VM/dmYkml23BUYbKEwT9eIVja/koGTrKcG3tRfL5vMaiWSdghSLuBmBgtmOPJ6Tenj3y1nc66Rg==
   dependencies:
     "@designliquido/delegua" "^0.32.2"
-    lodash.clonedeep "^4.5.0"
+    lodash "^4.17.21"
 
 "@iarna/toml@2.2.5":
   version "2.2.5"
