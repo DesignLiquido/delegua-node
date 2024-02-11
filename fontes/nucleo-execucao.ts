@@ -26,8 +26,6 @@ import {
   AvaliadorSintaticoPitugues,
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
-  AvaliadorSintaticoPortugolStudio,
-  AvaliadorSintaticoVisuAlg,
   AvaliadorSintaticoPotigol,
 } from "@designliquido/delegua/fontes/avaliador-sintatico/dialetos";
 import {
@@ -35,9 +33,6 @@ import {
   InterpretadorEguaClassico,
   InterpretadorMapler,
   InterpretadorPortugolIpt,
-  InterpretadorPortugolStudioComDepuracao,
-  InterpretadorPortugolStudio,
-  InterpretadorVisuAlg,
   InterpretadorPotigol,
 } from "@designliquido/delegua/fontes/interpretador/dialetos";
 import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
@@ -48,10 +43,17 @@ import {
   LexadorPitugues,
   LexadorMapler,
   LexadorPortugolIpt,
-  LexadorPortugolStudio,
-  LexadorVisuAlg,
   LexadorPotigol,
 } from "@designliquido/delegua/fontes/lexador/dialetos";
+
+import { LexadorPortugolStudio } from "@designliquido/portugol-studio/fontes/lexador";
+import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/fontes/avaliador-sintatico';
+import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/fontes/interpretador';
+
+import { LexadorVisuAlg } from '@designliquido/visualg/fontes/lexador';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/fontes/avaliador-sintatico';
+import { InterpretadorVisuAlg } from '@designliquido/visualg/fontes/interpretador';
+
 import { Interpretador } from "./interpretador";
 import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";
 import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-visualg-com-depuracao-importacao";
