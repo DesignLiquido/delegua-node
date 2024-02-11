@@ -24,12 +24,12 @@ describe('Núcleo de execução', () => {
         const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
         nucleoExecucao.configurarDialeto();
 
-        const realProcess = process;
+        const processReal = process;
         const exitMock = jest.fn();
 
         // Mock de `process.exit`.
         // Se não for feito, o teste falha.
-        global.process = { ...realProcess, exit: exitMock as any };
+        global.process = { ...processReal, exit: exitMock as any };
         
         // Aqui vamos simular a resposta para duas variáveis de `leia()`.
         const respostas = [
@@ -44,6 +44,6 @@ describe('Núcleo de execução', () => {
 
         expect(exitMock).toHaveBeenCalledWith(0);
         expect(retornoSaida.length).toBeGreaterThan(0);
-        global.process = realProcess;
+        global.process = processReal;
     });
 });
