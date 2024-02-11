@@ -5,6 +5,7 @@ describe('Núcleo de tradução', () => {
         let retornoSaida: string = '';
         const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
         const nucleoTraducao = new NucleoTraducao(funcaoDeRetorno);
+
         nucleoTraducao.iniciarTradutor('javascript-para-delegua');
         nucleoTraducao.traduzirArquivo('./exemplos/tradutores/javascript-para-delegua.js', false);
 

@@ -3,7 +3,7 @@
     "version": "0.32.2",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
-        "empacotar": "rimraf ./dist && tsc && copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && copyfiles -V ./package.json ./dist/bin && copyfiles -V ./README.md ./dist && copyfiles -V ./LICENSE ./dist",
+        "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && yarn copyfiles -V ./package.json ./dist/bin && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
         "testes-unitarios": "jest --coverage",
         "testes:egua": "./bin/delegua-ts exemplos/dialetos/egua-classico/testes.egua",
         "testes:delegua:bhaskara": "./bin/delegua-ts exemplos/dialetos/egua-classico/bhaskara.egua",
@@ -13,10 +13,11 @@
     },
     "dependencies": {
         "@designliquido/delegua": "0.32.2",
+        "@designliquido/portugol-studio": "^0.0.0",
+        "@designliquido/visualg": "^0.0.1",
         "chalk": "4.1.2",
         "commander": "^9.4.1",
-        "json-colorizer": "^2.2.2",
-        "lodash.clonedeep": "^4.5.0"
+        "json-colorizer": "^2.2.2"
     },
     "devDependencies": {
         "@designliquido/delegua-estatistica": "^0.0.5",

@@ -26,8 +26,6 @@ import {
   AvaliadorSintaticoPitugues,
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
-  AvaliadorSintaticoPortugolStudio,
-  AvaliadorSintaticoVisuAlg,
   AvaliadorSintaticoPotigol,
 } from "@designliquido/delegua/fontes/avaliador-sintatico/dialetos";
 import {
@@ -35,9 +33,6 @@ import {
   InterpretadorEguaClassico,
   InterpretadorMapler,
   InterpretadorPortugolIpt,
-  InterpretadorPortugolStudioComDepuracao,
-  InterpretadorPortugolStudio,
-  InterpretadorVisuAlg,
   InterpretadorPotigol,
 } from "@designliquido/delegua/fontes/interpretador/dialetos";
 import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
@@ -48,10 +43,17 @@ import {
   LexadorPitugues,
   LexadorMapler,
   LexadorPortugolIpt,
-  LexadorPortugolStudio,
-  LexadorVisuAlg,
   LexadorPotigol,
 } from "@designliquido/delegua/fontes/lexador/dialetos";
+
+import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
+import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
+import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
+
+import { LexadorVisuAlg } from '@designliquido/visualg/fontes/lexador';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/fontes/avaliador-sintatico';
+import { InterpretadorVisuAlg } from '@designliquido/visualg/fontes/interpretador';
+
 import { Interpretador } from "./interpretador";
 import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";
 import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-visualg-com-depuracao-importacao";
@@ -379,7 +381,7 @@ export class NucleoExecucao
     // Se a interface de entrada e saída ainda não está definida, definimos agora.
     // A interface pode ser definida por um teste unitário antes da execução
     // aqui, por exemplo.
-    let interfaceLeitura: any;
+    let interfaceLeitura: readline.Interface | any;
     if (!this.interpretador.interfaceEntradaSaida) {
       interfaceLeitura = readline.createInterface({
         input: process.stdin,
@@ -408,19 +410,19 @@ export class NucleoExecucao
       errosExecucao = erros;
     }
 
-    if (interfaceLeitura && interfaceLeitura.hasOwnProperty("close")) {
+    if (interfaceLeitura && (interfaceLeitura instanceof readline.Interface || interfaceLeitura.hasOwnProperty("close"))) {
       interfaceLeitura.close();
     }
 
-    if (errosExecucao.length > 0) process.exit(70); // Código com exceções não tratadas
-    process.exit(0);
+    if (errosExecucao.length > 0) process.exitCode = 70; // Código com exceções não tratadas
+    return;
   }
 
   /**
    * LAIR (Leia-Avalie-Imprima-Repita) é o modo em que Delégua executa em modo console,
    * ou seja, esperando como entrada linhas de código fornecidas pelo usuário.
    */
-  iniciarLairDelegua(): void {
+  async iniciarLairDelegua(): Promise<void> {
     const lexadorJson = new LexadorJson();
     const formatadorJson = new FormatadorJson();
 
