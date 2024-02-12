@@ -4,7 +4,7 @@ import * as caminho from 'path';
 import {
     AvaliadorSintaticoInterface,
     LexadorInterface
-} from '@designliquido/delegua/fontes/interfaces';
+} from '@designliquido/delegua/interfaces';
 
 import { DeleguaInterface, ImportadorInterface } from './interfaces';
 import { NucleoExecucao } from './nucleo-execucao';

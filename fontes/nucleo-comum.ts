@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
-import tiposDeSimbolos from '@designliquido/delegua/fontes/tipos-de-simbolos/delegua';
-import { SimboloInterface } from "@designliquido/delegua/fontes/interfaces";
+import tiposDeSimbolos from '@designliquido/delegua/tipos-de-simbolos/delegua';
+import { SimboloInterface } from "@designliquido/delegua/interfaces";
 
 import { RetornoImportador } from "./importador";
 

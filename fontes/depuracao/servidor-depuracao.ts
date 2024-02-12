@@ -1,10 +1,10 @@
 import * as net from 'net';
-import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
 
-import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
-import { InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/fontes/interfaces';
-import { PilhaEscoposExecucaoInterface } from '@designliquido/delegua/fontes/interfaces/pilha-escopos-execucao-interface';
-import { PontoParada } from '@designliquido/delegua/fontes/depuracao/ponto-parada';
+import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
+import { Declaracao } from '@designliquido/delegua/declaracoes';
+import { InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/interfaces';
+import { PilhaEscoposExecucaoInterface } from '@designliquido/delegua/interfaces/pilha-escopos-execucao-interface';
+import { PontoParada } from '@designliquido/delegua/depuracao/ponto-parada';
 
 import { NucleoExecucaoInterface } from '../interfaces/nucleo-execucao-interface';
 

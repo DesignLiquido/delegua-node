@@ -2,10 +2,10 @@ import * as processoFilho from 'child_process';
 import * as caminho from 'path';
 import * as sistemaArquivos from 'fs';
 
-import { ErroEmTempoDeExecucao } from '@designliquido/delegua/fontes/excecoes';
-import { FuncaoPadrao } from '@designliquido/delegua/fontes/estruturas/funcao-padrao';
-import { DeleguaModulo } from '@designliquido/delegua/fontes/estruturas/modulo';
-import { ClassePadrao } from '@designliquido/delegua/fontes/estruturas/classe-padrao';
+import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
+import { FuncaoPadrao } from '@designliquido/delegua/estruturas/funcao-padrao';
+import { DeleguaModulo } from '@designliquido/delegua/estruturas/modulo';
+import { ClassePadrao } from '@designliquido/delegua/estruturas/classe-padrao';
 
 const carregarBibliotecaDelegua = (nome: string) => {
     let dadosDoModulo: any;

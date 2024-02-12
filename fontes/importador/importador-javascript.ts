@@ -2,10 +2,10 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 
-import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
+import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
 
-import { LexadorJavaScript } from "@designliquido/delegua/fontes/lexador/traducao/lexador-javascript";
-import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/fontes/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
+import { LexadorJavaScript } from "@designliquido/delegua/lexador/traducao/lexador-javascript";
+import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
 
 import { ImportadorInterface } from "../interfaces";
 import { RetornoImportador } from "./retorno-importador";

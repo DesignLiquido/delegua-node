@@ -1,8 +1,9 @@
-import { Declaracao, Importar } from "@designliquido/delegua/fontes/declaracoes";
-import { DeleguaModulo } from "@designliquido/delegua/fontes/estruturas";
-import { InterpretadorMaplerComDepuracao } from "@designliquido/delegua/fontes/interpretador/dialetos/mapler/interpretador-mapler-com-depuracao";
+import { Declaracao, Importar } from "@designliquido/delegua/declaracoes";
+import { DeleguaModulo } from "@designliquido/delegua/estruturas";
+import { InterpretadorMaplerComDepuracao } from "@designliquido/delegua/interpretador/dialetos/mapler/interpretador-mapler-com-depuracao";
+import { SimboloInterface } from "@designliquido/delegua/interfaces";
+
 import { ImportadorInterface } from "../../interfaces";
-import { SimboloInterface } from "@designliquido/delegua/fontes/interfaces";
 
 export class InterpretadorMaplerComDepuracaoImportacao extends InterpretadorMaplerComDepuracao {
     importador: ImportadorInterface<SimboloInterface, Declaracao>;

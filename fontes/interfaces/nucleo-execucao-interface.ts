@@ -1,4 +1,4 @@
-import { InterpretadorInterface, RetornoExecucaoInterface } from "@designliquido/delegua/fontes/interfaces";
+import { InterpretadorInterface, RetornoExecucaoInterface } from "@designliquido/delegua/interfaces";
 
 export interface NucleoExecucaoInterface {
     arquivosAbertos: { [identificador: string]: string };

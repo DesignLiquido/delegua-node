@@ -1,5 +1,5 @@
-import { RetornoAvaliadorSintatico } from '@designliquido/delegua/fontes/interfaces/retornos/retorno-avaliador-sintatico';
-import { RetornoLexador } from '@designliquido/delegua/fontes/interfaces/retornos/retorno-lexador';
+import { RetornoAvaliadorSintatico } from '@designliquido/delegua/interfaces/retornos/retorno-avaliador-sintatico';
+import { RetornoLexador } from '@designliquido/delegua/interfaces/retornos/retorno-lexador';
 
 export interface RetornoImportador<TSimbolo, TDeclaracao> {
     conteudoArquivo: string[];

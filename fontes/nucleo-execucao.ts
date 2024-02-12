@@ -10,8 +10,8 @@ import {
   InterpretadorInterface,
   LexadorInterface,
   RetornoExecucaoInterface
-} from "@designliquido/delegua/fontes/interfaces";
-import { ErroInterpretador } from "@designliquido/delegua/fontes/interpretador";
+} from "@designliquido/delegua/interfaces";
+import { ErroInterpretador } from "@designliquido/delegua/interpretador";
 
 import { Importador, RetornoImportador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
@@ -19,7 +19,7 @@ import { ServidorDepuracao } from "./depuracao";
 
 import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
-import { AvaliadorSintatico } from "@designliquido/delegua/fontes/avaliador-sintatico";
+import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
 import {
   AvaliadorSintaticoBirl,
   AvaliadorSintaticoEguaClassico,
@@ -28,7 +28,7 @@ import {
   AvaliadorSintaticoPortugolIpt,
   AvaliadorSintaticoPotigol,
   AvaliadorSintaticoVisuAlg,
-} from "@designliquido/delegua/fontes/avaliador-sintatico/dialetos";
+} from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
   InterpretadorBirl,
   InterpretadorEguaClassico,
@@ -36,9 +36,9 @@ import {
   InterpretadorPortugolIpt,
   InterpretadorPotigol,
   InterpretadorVisuAlg,
-} from "@designliquido/delegua/fontes/interpretador/dialetos";
-import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/fontes/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
-import { Lexador } from "@designliquido/delegua/fontes/lexador";
+} from "@designliquido/delegua/interpretador/dialetos";
+import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
+import { Lexador } from "@designliquido/delegua/lexador";
 import {
   LexadorBirl,
   LexadorEguaClassico,
@@ -47,7 +47,7 @@ import {
   LexadorPortugolIpt,
   LexadorPotigol,
   LexadorVisuAlg,
-} from "@designliquido/delegua/fontes/lexador/dialetos";
+} from "@designliquido/delegua/lexador/dialetos";
 
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';

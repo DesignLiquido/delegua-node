@@ -2,13 +2,13 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 
-import cyrb53 from '@designliquido/delegua/fontes/depuracao/cyrb53';
-import { ErroEmTempoDeExecucao } from '@designliquido/delegua/fontes/excecoes';
-import { AvaliadorSintaticoInterface, LexadorInterface, SimboloInterface } from '@designliquido/delegua/fontes/interfaces';
+import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
+import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
+import { AvaliadorSintaticoInterface, LexadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
 
 import { RetornoImportador } from './retorno-importador';
 import { ImportadorInterface } from '../interfaces';
-import { Declaracao } from '@designliquido/delegua/fontes/declaracoes';
+import { Declaracao } from '@designliquido/delegua/declaracoes';
 
 /**
  * O Importador é responsável por manusear arquivos. Coordena as fases de lexação, avaliação sintática,

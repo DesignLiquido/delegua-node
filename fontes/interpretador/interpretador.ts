@@ -1,13 +1,13 @@
 import * as caminho from 'path';
 
-import { Declaracao, Importar } from '@designliquido/delegua/fontes/declaracoes';
-import { DeleguaModulo } from '@designliquido/delegua/fontes/estruturas';
+import { Declaracao, Importar } from '@designliquido/delegua/declaracoes';
+import { DeleguaModulo } from '@designliquido/delegua/estruturas';
 
 import { ImportadorInterface } from '../interfaces/importador-interface';
-import { InterpretadorBase } from '@designliquido/delegua/fontes/interpretador/interpretador-base';
+import { InterpretadorBase } from '@designliquido/delegua/interpretador/interpretador-base';
 
 import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
-import { SimboloInterface } from '@designliquido/delegua/fontes/interfaces';
+import { SimboloInterface } from '@designliquido/delegua/interfaces';
 
 
 /**
