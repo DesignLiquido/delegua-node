@@ -1,6 +1,6 @@
 import * as net from 'net';
 
-import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
+import { cyrb53 } from '@designliquido/delegua/depuracao';
 import { Declaracao } from '@designliquido/delegua/declaracoes';
 import { InterpretadorComDepuracaoInterface, RetornoExecucaoInterface } from '@designliquido/delegua/interfaces';
 import { PilhaEscoposExecucaoInterface } from '@designliquido/delegua/interfaces/pilha-escopos-execucao-interface';

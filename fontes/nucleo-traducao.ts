@@ -11,7 +11,7 @@ import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { ImportadorJavaScript } from './importador/importador-javascript';
 import { LexadorVisuAlg } from '@designliquido/delegua/lexador/dialetos';
-import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/avaliador-sintatico/dialetos';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/avaliador-sintatico/dialetos/visualg/avaliador-sintatico-visualg';
 
 export class NucleoTraducao 
     extends NucleoComum

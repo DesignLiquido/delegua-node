@@ -1,6 +1,6 @@
 import { Declaracao, Importar } from "@designliquido/delegua/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/estruturas";
-import { InterpretadorMaplerComDepuracao } from "@designliquido/delegua/interpretador/dialetos/mapler/interpretador-mapler-com-depuracao";
+import { InterpretadorMaplerComDepuracao } from "@designliquido/delegua/interpretador/dialetos/mapler";
 import { SimboloInterface } from "@designliquido/delegua/interfaces";
 
 import { ImportadorInterface } from "../../interfaces";

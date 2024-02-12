@@ -2,8 +2,8 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 
-import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
-import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
+import { cyrb53 } from '@designliquido/delegua/depuracao';
+// import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { AvaliadorSintaticoInterface, LexadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
 
 import { RetornoImportador } from './retorno-importador';
