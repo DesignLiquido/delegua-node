@@ -337,10 +337,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.1.tgz#964834d127354857cda1c388f5de9327735b6747"
   integrity sha512-/O1/eXlTXPTWSZGZ862i6uHHKCW0cmP6KnOV29zK4d4hgn03QjcNDeFKVC9L9vz3OJ6pPY0d/S8ANJkgBnnoaQ==
 
-"@designliquido/delegua@0.33.0", "@designliquido/delegua@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.0.tgz#9d9df531fe21724d15c416b56b55641528675e6c"
-  integrity sha512-NmCsYQcNeKKT3pn9jqPnmw3pYep52rIxXDgYMIVsfdNtkM2xEttzFNUPbU1BLm/laneYKj6Pf1fAXRtPUuIxFA==
+"@designliquido/delegua@0.33.1":
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.1.tgz#3145786c566d6546ff12e032b6585c2c2d48e38e"
+  integrity sha512-2SKqpnX0IxH46OVNQ0p61rTLaeY605qKIgziql1nxIWmKYNcjVyS2ZdYtq3/kUIdNsUG+5dTo7/KssvrJuFNGw==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
@@ -351,6 +351,16 @@
   version "0.32.2"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.32.2.tgz#97dbffc39b17fd280ada32e141da7547a80edbfa"
   integrity sha512-2iEW78j+SMt57uvDeC366RuDcOWkmU2wQ1lMhbGvF8JnbrjK4vijXk/aEHtsr03M0wGnjUERoGx4l/jCWmedFA==
+  dependencies:
+    antlr4ts "^0.5.0-alpha.4"
+    browser-process-hrtime "^1.0.0"
+    esprima "^4.0.1"
+    lodash.clonedeep "^4.5.0"
+
+"@designliquido/delegua@^0.33.0":
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.0.tgz#9d9df531fe21724d15c416b56b55641528675e6c"
+  integrity sha512-NmCsYQcNeKKT3pn9jqPnmw3pYep52rIxXDgYMIVsfdNtkM2xEttzFNUPbU1BLm/laneYKj6Pf1fAXRtPUuIxFA==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
