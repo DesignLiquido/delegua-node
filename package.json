@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/delegua-node",
-    "version": "0.33.1",
+    "version": "0.33.3",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
         "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && yarn copyfiles -V ./package.json ./dist/bin && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
