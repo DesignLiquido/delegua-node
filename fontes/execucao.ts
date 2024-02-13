@@ -1,4 +1,4 @@
-import { Delegua } from './fontes/delegua';
+import { Delegua } from './delegua';
 import { Command } from 'commander';
 
 const principal = async () => {
