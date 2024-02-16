@@ -11,15 +11,8 @@ import {
   LexadorInterface,
   RetornoExecucaoInterface
 } from "@designliquido/delegua/interfaces";
-import { ErroInterpretador } from "@designliquido/delegua/interpretador";
-
-import { Importador, RetornoImportador } from "./importador";
-import { ImportadorInterface } from "./interfaces";
-import { ServidorDepuracao } from "./depuracao";
-
-import { FormatadorJson } from "./formatadores";
-import { LexadorJson } from "./lexador/lexador-json";
 import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
+
 import {
   AvaliadorSintaticoBirl,
   AvaliadorSintaticoEguaClassico,
@@ -48,10 +41,16 @@ import {
   LexadorPotigol,
   LexadorVisuAlg,
 } from "@designliquido/delegua/lexador/dialetos";
-
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
 import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
+
+import { Importador, RetornoImportador } from "./importador";
+import { ImportadorInterface } from "./interfaces";
+import { ServidorDepuracao } from "./depuracao";
+
+import { FormatadorJson } from "./formatadores";
+import { LexadorJson } from "./lexador/lexador-json";
 
 // Removido por enquanto. Biblioteca ainda apresenta problemas.
 // import { LexadorVisuAlg } from '@designliquido/visualg/fontes/lexador';
@@ -64,6 +63,7 @@ import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dial
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
+import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
 
 export class NucleoExecucao
   extends NucleoComum
