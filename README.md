@@ -1,6 +1,6 @@
 # delegua-node
 
-Versão de Delégua com suporte a importação de pacotes pelo ecossistema do Node.js. Também funciona com o [Bun](https://bun.sh/).
+Versão de Delégua com suporte a funcionalidades do ecossistema do Node.js. Também funciona com o [Bun](https://bun.sh/).
 
 <p align="center">
     <a href="https://github.com/DesignLiquido/delegua-node/issues" target="_blank">
@@ -21,15 +21,17 @@ Em versões anteriores, o suporte ao ecossistema Node vinha embutido no pacote d
 
 Como o Webpack tenta ler todas as referências de todos os módulos recursivamente, independente se estamos importando um módulo ou vários, há problemas quando tentamos importar `child_process` ou `net` na parte de navegador de internet e as aplicações falham.
 
+Mais adiante, este pacote ganhou a função de concentrar todos os dialetos em um único lugar, já que implementa a funcionalidade de execução de código por linha de comando.
+
 ### Implicações
 
 Se sua aplicação:
 
 - Precisa suportar importações, seja de outros fontes, seja de bibliotecas NPM
 - Executa código Delégua, ou outros dialetos, remotamente
-- Deve executar no ambiente Node.js ou Bun
+- Deve executar no ambiente Node.js ou Bun, ou qualquer outro motor de JavaScript fora do navegador de internet
 
-Ela deve, então, usar este pacote. Caso contrário, o uso apenas do núcleo da linguagem é uma escolha melhor.
+Ela deve, então, usar este pacote. Caso contrário, o uso apenas do [núcleo de Delégua](https://github.com/DesignLiquido/delegua), ou pacote de dialeto, é uma escolha melhor.
 
 ## Instalação
 
