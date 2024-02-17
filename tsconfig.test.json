@@ -1,5 +1,12 @@
 {
     "compilerOptions": {
+        // Em teoria, habilitando isso temos o Jest reconhecendo Delégua linkado, 
+        // mas os testes falham assim mesmo.
+        "baseUrl": ".",
+        "paths": {
+            "@designliquido/delegua": ["node_modules/@designliquido/delegua/dist"],
+            "@designliquido/delegua/*": ["node_modules/@designliquido/delegua/dist/*"],
+        },
         "esModuleInterop": true,
         "sourceMap": true,
         "preserveSymlinks": true

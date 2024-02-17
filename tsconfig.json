@@ -1,5 +1,12 @@
 {
     "compilerOptions": {
+        // Isso faz o VSCode reconhecer Delégua como módulo linkado,
+        // mas os testes falham no Jest.
+        "baseUrl": ".",
+        "paths": {
+            "@designliquido/delegua": ["node_modules/@designliquido/delegua/dist"],
+            "@designliquido/delegua/*": ["node_modules/@designliquido/delegua/dist/*"],
+        },
         "outDir": "dist",
         "module": "CommonJS",
         "target": "es2017",
