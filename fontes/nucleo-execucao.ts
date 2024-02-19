@@ -21,12 +21,15 @@ import {
   AvaliadorSintaticoPortugolIpt,
   AvaliadorSintaticoPotigol,
   AvaliadorSintaticoVisuAlg,
+  AvaliadorSintaticoPortugolStudio,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
   InterpretadorBirl,
   InterpretadorEguaClassico,
   InterpretadorMapler,
   InterpretadorPortugolIpt,
+  InterpretadorPortugolStudio,
+  InterpretadorPortugolStudioComDepuracao,
   InterpretadorPotigol,
   InterpretadorVisuAlg,
 } from "@designliquido/delegua/interpretador/dialetos";
@@ -40,10 +43,14 @@ import {
   LexadorPortugolIpt,
   LexadorPotigol,
   LexadorVisuAlg,
+  LexadorPortugolStudio,
 } from "@designliquido/delegua/lexador/dialetos";
-import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
-import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
-import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
+
+// TODO: Atualizar biblioteca do Portugol Studio com pelo menos a versão 0.33.6
+// dele Delégua antes de descomentar essas linhas.
+// import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
+// import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
+// import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
 
 import { Importador, RetornoImportador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
