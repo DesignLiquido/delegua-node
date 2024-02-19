@@ -12,13 +12,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "birl",
         "./exemplos/fibo.birl"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -28,11 +40,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/dialetos/egua-classico/bhaskara.egua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -42,11 +66,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/enquanto.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -56,11 +92,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/enquanto-continua.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -70,11 +118,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -84,11 +144,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/fazer-enquanto-continua.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -98,11 +170,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/para.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -112,11 +196,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/para-continua.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -126,11 +222,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/condicionais/se.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -140,11 +248,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/classes/classe-vazia.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -154,11 +274,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/classes/construtor-classe.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -168,12 +300,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/classes/heranca.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -183,11 +327,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/dias-de-vida.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -197,11 +353,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/enquanto-sustar.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -211,11 +379,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/condicionais/escolha.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -225,12 +405,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/estruturas-de-dados/inteiros.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -240,11 +432,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -254,11 +458,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/fibonacci.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -268,11 +484,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/fila-estatica.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -282,11 +510,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/fizzbuzz.egua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -296,12 +536,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/funcoes/funcoes-anonimas.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -311,12 +563,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/importacao/inicial.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -326,12 +590,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/importacao/animais.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -341,12 +617,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
         "./exemplos/estruturas-de-dados/inteiros.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -356,11 +644,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/leia.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -370,11 +670,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/media.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -384,12 +696,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--codigo",
         "escreva(2+1)"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -399,11 +723,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/perceptron.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -413,11 +749,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/primitivas/texto/minusculo.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -427,11 +775,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/primitivas/lista/inclui.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -442,7 +802,19 @@
       "console": "integratedTerminal",
       "args": ["${workspaceFolder}${pathSeparator}execucao.ts"],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -451,9 +823,21 @@
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
-      "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "--versao"],
+      "args": ["${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts", "--versao"],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -463,11 +847,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/classes/teste-classe.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -477,12 +873,24 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-p",
         "./exemplos/testes.egua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -492,11 +900,23 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "./exemplos/dialetos/egua-classico/tente-pegue.egua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -507,7 +927,19 @@
       "console": "integratedTerminal",
       "args": ["${workspaceFolder}${pathSeparator}teste-json.ts"],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -517,13 +949,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "mapler",
         "./exemplos/dialetos/mapler/ola-mundo.mapler"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -533,13 +977,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "portugol-ipt",
         "./exemplos/dialetos/portugol-ipt/ola-mundo.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -549,13 +1005,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "portugol-studio",
         "./exemplos/dialetos/portugol-studio/numero-digitado.por"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -565,13 +1033,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "portugol-studio",
         "./exemplos/dialetos/portugol-studio/ola-mundo.por"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -581,13 +1061,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/cardapio.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -597,13 +1089,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/divisao-inteira.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -614,13 +1118,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/exemplos-biblioteca-caracteres.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -630,13 +1146,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/exemplos-biblioteca-numerica.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -646,13 +1174,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/exemplos-escreva.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -662,13 +1202,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/imc.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -678,13 +1230,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/media-vetor.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -694,13 +1258,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/multiplicar.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -710,13 +1286,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/negativos.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -726,13 +1314,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/ola-mundo.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -742,13 +1342,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/reatribuicao-variaveis.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -758,24 +1370,35 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/repita.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
       "request": "launch",
       "name": "VisuAlg > Repita 2",
       "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/repita2.alg"
@@ -784,9 +1407,15 @@
       "runtimeArgs": [
         "--nolazy",
         "-r",
-        "ts-node/register/transpile-only"
-        // "--preserve-symlinks",
-        // "--preserve-symlinks-main",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
       ]
     },
     {
@@ -797,13 +1426,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/times.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -820,29 +1461,46 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy", 
-        "-r", "ts-node/register/transpile-only", 
-        "-r", "tsconfig-paths/register",
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
         "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
-        "**/node_modules/**"
-      ],
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "VisuAlg > 1 a 10 (com Build)",
-      "program": "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+      "name": "VisuAlg > 1 a 10 com Repita + Interrompa",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
       "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/um-a-dez-interrompa.alg"
       ],
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -852,13 +1510,25 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
         "./exemplos/dialetos/visualg/variaveis.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "name": "Testes unitários",
@@ -882,14 +1552,26 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-t",
         "delegua-para-assemblyscript",
         "-s",
         "./exemplos/tradutores/delegua-para-assemblyscript.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -899,14 +1581,26 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-t",
         "delegua-para-javascript",
         "-s",
         "./exemplos/tradutores/delegua-para-javascript.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -916,14 +1610,26 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-t",
         "delegua-para-python",
         "-s",
         "./exemplos/tradutores/delegua-para-python.delegua"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -933,14 +1639,26 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-t",
         "javascript-para-delegua",
         "-s",
         "./exemplos/tradutores/javascript-para-delegua.js"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     },
     {
       "type": "node",
@@ -950,14 +1668,26 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-t",
         "visualg-para-delegua",
         "-s",
         "./exemplos/tradutores/visualg-para-delegua.alg"
       ],
       "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
     }
   ]
 }
