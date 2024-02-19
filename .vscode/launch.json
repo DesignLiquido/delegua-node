@@ -1,965 +1,963 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Birl > Fibo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "birl",
-                "./exemplos/fibo.birl"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bhaskara",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/dialetos/egua-classico/bhaskara.egua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Enquanto",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/enquanto.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Enquanto (com Continua)",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/enquanto-continua.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Fazer ... Enquanto",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Fazer ... Enquanto (com Continua)",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/fazer-enquanto-continua.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Para",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/para.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Para (com Continua)",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/estruturas-de-repeticao/para-continua.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Bloco Se",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/condicionais/se.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Classes > Classe vazia",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/classes/classe-vazia.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Classes > Construtor",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/classes/construtor-classe.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Classes > Herança",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts", 
-                // "--depurador",
-                "./exemplos/classes/heranca.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Dias de Vida",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/dias-de-vida.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Enquanto com Sustar",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/estruturas-de-repeticao/enquanto-sustar.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Escolha",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/condicionais/escolha.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Estruturas de Dados > Inteiros",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts", 
-                // "--depurador",
-                "./exemplos/estruturas-de-dados/inteiros.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Estruturas de Repetição > Fazer ... Enquanto",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Fibonacci",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/fibonacci.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Fila estática",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/fila-estatica.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > FizzBuzz",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/fizzbuzz.egua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Funções Anônimas",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                // "--depurador",
-                "./exemplos/funcoes/funcoes-anonimas.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Importação",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                // "--depurador",
-                "./exemplos/importacao/inicial.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Importação > Animais",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                // "--depurador",
-                "./exemplos/importacao/animais.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Inteiros",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                // "--depurador",
-                "./exemplos/estruturas-de-dados/inteiros.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Leia",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/leia.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Média",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/media.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Parâmetro -c",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--codigo",
-                "escreva(2+1)"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Perceptron",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/perceptron.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Primitivas > Texto > Minúsculo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/primitivas/texto/minusculo.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Primitivas > Lista > Inclui",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "./exemplos/primitivas/lista/inclui.delegua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Modo LAIR (REPL)",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Modo LAIR (REPL) > Versão",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--versao"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Teste de Classe",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/classes/teste-classe.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Delégua > Todos os Testes de Égua",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "-p", "./exemplos/testes.egua"],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Égua > Teste de Classe",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "./exemplos/dialetos/egua-classico/tente-pegue.egua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Lexador JSON",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}teste-json.ts"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Mapler > Olá Mundo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "mapler",
-                "./exemplos/dialetos/mapler/ola-mundo.mapler"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Portugol IPT > Olá mundo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "portugol-ipt",
-                "./exemplos/dialetos/portugol-ipt/ola-mundo.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Portugol Studio > Número digitado",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "portugol-studio",
-                "./exemplos/dialetos/portugol-studio/numero-digitado.por"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Portugol Studio > Olá mundo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "portugol-studio",
-                "./exemplos/dialetos/portugol-studio/ola-mundo.por"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Cardápio",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/cardapio.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Divisão Inteira",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/divisao-inteira.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Birl > Fibo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "birl",
+        "./exemplos/fibo.birl"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bhaskara",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/dialetos/egua-classico/bhaskara.egua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Enquanto",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/enquanto.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Enquanto (com Continua)",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/enquanto-continua.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Fazer ... Enquanto",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Fazer ... Enquanto (com Continua)",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/fazer-enquanto-continua.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Para",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/para.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Para (com Continua)",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/para-continua.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Bloco Se",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/condicionais/se.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Classes > Classe vazia",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/classes/classe-vazia.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Classes > Construtor",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/classes/construtor-classe.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Classes > Herança",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/classes/heranca.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Dias de Vida",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/dias-de-vida.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Enquanto com Sustar",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/enquanto-sustar.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Escolha",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/condicionais/escolha.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Estruturas de Dados > Inteiros",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/estruturas-de-dados/inteiros.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Estruturas de Repetição > Fazer ... Enquanto",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/fazer-enquanto.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Fibonacci",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/fibonacci.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Fila estática",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/fila-estatica.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > FizzBuzz",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/fizzbuzz.egua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Funções Anônimas",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/funcoes/funcoes-anonimas.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Importação",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/importacao/inicial.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Importação > Animais",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/importacao/animais.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Inteiros",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/estruturas-de-dados/inteiros.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Leia",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/leia.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Média",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/media.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Parâmetro -c",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--codigo",
+        "escreva(2+1)"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Perceptron",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/perceptron.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Primitivas > Texto > Minúsculo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/primitivas/texto/minusculo.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Primitivas > Lista > Inclui",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/primitivas/lista/inclui.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Modo LAIR (REPL)",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": ["${workspaceFolder}${pathSeparator}execucao.ts"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Modo LAIR (REPL) > Versão",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": ["${workspaceFolder}${pathSeparator}execucao.ts", "--versao"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Teste de Classe",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/classes/teste-classe.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Delégua > Todos os Testes de Égua",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-p",
+        "./exemplos/testes.egua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Égua > Teste de Classe",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "./exemplos/dialetos/egua-classico/tente-pegue.egua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Lexador JSON",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": ["${workspaceFolder}${pathSeparator}teste-json.ts"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mapler > Olá Mundo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "mapler",
+        "./exemplos/dialetos/mapler/ola-mundo.mapler"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Portugol IPT > Olá mundo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "portugol-ipt",
+        "./exemplos/dialetos/portugol-ipt/ola-mundo.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Portugol Studio > Número digitado",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "portugol-studio",
+        "./exemplos/dialetos/portugol-studio/numero-digitado.por"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Portugol Studio > Olá mundo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "portugol-studio",
+        "./exemplos/dialetos/portugol-studio/ola-mundo.por"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Cardápio",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/cardapio.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Divisão Inteira",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/divisao-inteira.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
 
-            "name": "VisuAlg > Exemplos Biblioteca Caracteres",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/exemplos-biblioteca-caracteres.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Exemplos Biblioteca Numérica",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/exemplos-biblioteca-numerica.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Exemplos Escreva",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/exemplos-escreva.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > IMC",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/imc.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Média Vetor",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/media-vetor.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Multiplicar",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/multiplicar.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Negativos",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/negativos.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Olá Mundo",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/ola-mundo.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Reatribuição de Variáveis",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/reatribuicao-variaveis.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Repita",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/repita.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Repita 2",
-            "skipFiles": [
-                "<node_internals>/**",
-            ],
-            "sourceMaps": true,
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/repita2.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy", 
-                "-r", 
-                "ts-node/register/transpile-only",
-                // "--preserve-symlinks", 
-                // "--preserve-symlinks-main", 
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Times",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/times.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > 1 a 10",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/um-a-dez-interrompa.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "VisuAlg > Variáveis",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "--dialeto",
-                "visualg",
-                "./exemplos/dialetos/visualg/variaveis.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
-        },
-        {
-            "name": "Testes unitários",
-            "type": "node",
-            "request": "launch",
-            "runtimeArgs": [
-                "--inspect-brk",
-                "${workspaceRoot}/node_modules/jest/bin/jest.js",
-                // "nucleo-execucao",
-                "--runInBand"
-            ],
-            "skipFiles": ["<node_internals>/**", "node_modules/**"],
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Tradutor > Delégua para AssemblyScript > Teste",
-            "skipFiles": [
-                "<node_internals>/**",
-                "node_modules/**"
-            ],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "-t",
-                "delegua-para-assemblyscript",
-                "-s",
-                "./exemplos/tradutores/delegua-para-assemblyscript.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Tradutor > Delégua para JavaScript > Teste",
-            "skipFiles": [
-                "<node_internals>/**",
-                "node_modules/**"
-            ],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "-t",
-                "delegua-para-javascript",
-                "-s",
-                "./exemplos/tradutores/delegua-para-javascript.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Tradutor > Delégua para Python > Teste",
-            "skipFiles": [
-                "<node_internals>/**",
-                "node_modules/**"
-            ],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "-t",
-                "delegua-para-python",
-                "-s",
-                "./exemplos/tradutores/delegua-para-python.delegua"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Tradutor > JavaScript para Delégua > Teste",
-            "skipFiles": [
-                "<node_internals>/**",
-                "node_modules/**"
-            ],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "-t",
-                "javascript-para-delegua",
-                "-s",
-                "./exemplos/tradutores/javascript-para-delegua.js"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register/transpile-only"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Tradutor > VisuAlg para Delégua > Teste",
-            "skipFiles": [
-                "<node_internals>/**",
-                "node_modules/**"
-            ],
-            "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal",
-            "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
-                "-t",
-                "visualg-para-delegua",
-                "-s",
-                "./exemplos/tradutores/visualg-para-delegua.alg"
-            ],
-            "runtimeExecutable": "node",
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register/transpile-only"
-            ]
-        },
-    ]
+      "name": "VisuAlg > Exemplos Biblioteca Caracteres",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/exemplos-biblioteca-caracteres.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Exemplos Biblioteca Numérica",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/exemplos-biblioteca-numerica.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Exemplos Escreva",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/exemplos-escreva.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > IMC",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/imc.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Média Vetor",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/media-vetor.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Multiplicar",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/multiplicar.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Negativos",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/negativos.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Olá Mundo",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/ola-mundo.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Reatribuição de Variáveis",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/reatribuicao-variaveis.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Repita",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/repita.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Repita 2",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/repita2.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only"
+        // "--preserve-symlinks",
+        // "--preserve-symlinks-main",
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Times",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/times.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > 1 a 10",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/um-a-dez-interrompa.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy", 
+        "-r", "ts-node/register/transpile-only", 
+        "-r", "tsconfig-paths/register",
+        "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/**"
+      ],
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > 1 a 10 (com Build)",
+      "program": "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+      "args": [
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/um-a-dez-interrompa.alg"
+      ],
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "VisuAlg > Variáveis",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/variaveis.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "name": "Testes unitários",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/jest/bin/jest.js",
+        // "nucleo-execucao",
+        "--runInBand"
+      ],
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tradutor > Delégua para AssemblyScript > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-t",
+        "delegua-para-assemblyscript",
+        "-s",
+        "./exemplos/tradutores/delegua-para-assemblyscript.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tradutor > Delégua para JavaScript > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-t",
+        "delegua-para-javascript",
+        "-s",
+        "./exemplos/tradutores/delegua-para-javascript.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tradutor > Delégua para Python > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-t",
+        "delegua-para-python",
+        "-s",
+        "./exemplos/tradutores/delegua-para-python.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tradutor > JavaScript para Delégua > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-t",
+        "javascript-para-delegua",
+        "-s",
+        "./exemplos/tradutores/javascript-para-delegua.js"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tradutor > VisuAlg para Delégua > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}execucao.ts",
+        "-t",
+        "visualg-para-delegua",
+        "-s",
+        "./exemplos/tradutores/visualg-para-delegua.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+    }
+  ]
 }
