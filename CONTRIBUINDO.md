@@ -28,7 +28,7 @@ Para os fontes, usamos [TypeScript](https://www.typescriptlang.org/) (versão ma
 
 Nós usamos testes unitários para testar todos os componentes de Delégua Node. Nossa biblioteca de testes é a Jest: https://jestjs.io/. Não é preciso escrever testes unitários para contribuir com o pacote.
 
-### Trabalhando na sua modificação
+## Trabalhando na sua modificação
 
 Recomendamos fazer um _fork_ do projeto (ou seja, uma cópia em separado), modificar essa cópia e abrir uma _Pull Request_ da sua cópia para o repositório oficial. [Este vídeo pode ajudar](https://www.youtube.com/watch?v=l1rwvDvD1og). 
 
@@ -43,7 +43,30 @@ Isso testa a modificação com exemplos de dialetos e situações de execução 
 ```bash
 yarn testes-unitarios
 ```
-### Testando o servidor do depurador
+
+## Trabalhando com pacotes linkados
+
+Este pacote agrega outros, como o núcleo de Delégua e dialetos, que podem fazer parte do monolito do núcleo ou serem implementados em pacotes separados. Pode ser interessante, juntamente com as modificações deste pacote, alterar fontes de outros pacotes dependentes, como o próprio núcleo de Delégua. 
+
+Para isso, você precisará clonar este repositório e os repositórios dependentes. Em cada repositório dependente, utilize o comando:
+
+```sh
+yarn link
+```
+
+Isso cadastra o repositório como um link simbólico. Para considerar este link simbólico neste repositório, utilize o comando:
+
+```sh
+yarn link "@designliquido/nome-do-pacote"
+```
+
+Por exemplo, se formos linkar o núcleo de Delégua, usamos:
+
+```sh
+yarn link "@designliquido/delegua"
+```
+
+## Testando o servidor do depurador
 
 Para testar o servidor do depurador, para depuração remota, execute:
 
