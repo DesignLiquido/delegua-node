@@ -305,6 +305,13 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@designliquido/birl@0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.0.0.tgz#02fd0ea865d61bb6fbd013cfe38e5f4c6bc46c85"
+  integrity sha512-7ndilzFrzWDjzZeSleU8Qvt/15WY05eeUE8pSPqdSDtRCRqOpGIqxc73nANrr3BKG9Mpl9WVno+t7qvKr3Wn2g==
+  dependencies:
+    "@designliquido/delegua" "^0.33.6"
+
 "@designliquido/delegua-estatistica@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.0.5.tgz#d1b0a6353e2f194849bff7797b4dec23efc96d5e"
@@ -337,7 +344,7 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.1.tgz#964834d127354857cda1c388f5de9327735b6747"
   integrity sha512-/O1/eXlTXPTWSZGZ862i6uHHKCW0cmP6KnOV29zK4d4hgn03QjcNDeFKVC9L9vz3OJ6pPY0d/S8ANJkgBnnoaQ==
 
-"@designliquido/delegua@0.33.6":
+"@designliquido/delegua@0.33.6", "@designliquido/delegua@^0.33.6":
   version "0.33.6"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.6.tgz#8b772acce55af699557562d5ad04c71a160954d9"
   integrity sha512-dQLjqmz8W2vbEcouIwSQKJma3yLujoi4zTLyB/drWKkQYVBBZ2SYZJM4QUOBxkdriugDsx/jJs89VDo8ZGA2bg==
@@ -373,6 +380,13 @@
   integrity sha512-ByJQ2Ku5o8ayEQmTt2brzmPO7BMoiLm69TMNT/Tzar8uZ8arzHF5YrFubbHuCDaeh72bDhFicvzWwr8xMsPqog==
   dependencies:
     "@designliquido/delegua" "^0.33.0"
+
+"@designliquido/potigol@0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.0.0.tgz#4082e13b946eb598e58af57d5e7239d8b27c3366"
+  integrity sha512-YciTv+e7I1InIY9Xl4vLNBi9Sak0Rh4zTWgexriniYON743g3rruS9lD8pvlC5Ne8ZQDkC/bEv5H6N+EBGYeQg==
+  dependencies:
+    "@designliquido/delegua" "^0.33.6"
 
 "@designliquido/visualg@^0.0.1":
   version "0.0.1"

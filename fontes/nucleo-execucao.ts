@@ -46,8 +46,6 @@ import {
   LexadorPortugolStudio,
 } from "@designliquido/delegua/lexador/dialetos";
 
-// TODO: Atualizar biblioteca do Portugol Studio com pelo menos a versão 0.33.6
-// dele Delégua antes de descomentar essas linhas.
 // import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 // import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
 // import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
