@@ -8,5 +8,5 @@ repita
    se x = 10 entao
       interrompa
    fimse
-ate verdadeiro
+ate falso
 fimalgoritmo
