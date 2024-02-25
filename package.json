@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "@designliquido/birl": "0.0.0",
-        "@designliquido/delegua": "0.33.6",
+        "@designliquido/delegua": "0.33.7",
         "@designliquido/portugol-studio": "^0.0.1",
         "@designliquido/potigol": "0.0.0",
         "@designliquido/visualg": "^0.0.2",
