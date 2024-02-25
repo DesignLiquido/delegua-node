@@ -354,16 +354,6 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/delegua@^0.32.2":
-  version "0.32.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.32.2.tgz#97dbffc39b17fd280ada32e141da7547a80edbfa"
-  integrity sha512-2iEW78j+SMt57uvDeC366RuDcOWkmU2wQ1lMhbGvF8JnbrjK4vijXk/aEHtsr03M0wGnjUERoGx4l/jCWmedFA==
-  dependencies:
-    antlr4ts "^0.5.0-alpha.4"
-    browser-process-hrtime "^1.0.0"
-    esprima "^4.0.1"
-    lodash.clonedeep "^4.5.0"
-
 "@designliquido/delegua@^0.33.0":
   version "0.33.0"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.0.tgz#9d9df531fe21724d15c416b56b55641528675e6c"
@@ -388,12 +378,12 @@
   dependencies:
     "@designliquido/delegua" "^0.33.6"
 
-"@designliquido/visualg@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.1.tgz#650e24ad914aeae0465a72b6a9eea6cb1c2b6619"
-  integrity sha512-SV2O9g51iN6VM/dmYkml23BUYbKEwT9eIVja/koGTrKcG3tRfL5vMaiWSdghSLuBmBgtmOPJ6Tenj3y1nc66Rg==
+"@designliquido/visualg@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.2.tgz#b6e5715fcc1bd4b9bb06f7097815808b7ef02125"
+  integrity sha512-j8JPe6/8KzARSb+LF2QB44nceXSjTiTf/H5ILjvGCWeCYuTM8MwUXKU8LhoSc5zs61a43ST6WMLVqqe8pPaOAw==
   dependencies:
-    "@designliquido/delegua" "^0.32.2"
+    "@designliquido/delegua" "^0.33.6"
     lodash "^4.17.21"
 
 "@iarna/toml@2.2.5":

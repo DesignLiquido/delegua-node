@@ -1457,7 +1457,7 @@
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",
         "visualg",
-        "./exemplos/dialetos/visualg/um-a-dez-interrompa.alg"
+        "./exemplos/dialetos/visualg/um-a-10.alg"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [

@@ -20,7 +20,7 @@ import {
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
   AvaliadorSintaticoPotigol,
-  AvaliadorSintaticoVisuAlg,
+//  AvaliadorSintaticoVisuAlg,
   AvaliadorSintaticoPortugolStudio,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
@@ -31,7 +31,7 @@ import {
   InterpretadorPortugolStudio,
   InterpretadorPortugolStudioComDepuracao,
   InterpretadorPotigol,
-  InterpretadorVisuAlg,
+//  InterpretadorVisuAlg,
 } from "@designliquido/delegua/interpretador/dialetos";
 import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
 import { Lexador } from "@designliquido/delegua/lexador";
@@ -42,7 +42,7 @@ import {
   LexadorMapler,
   LexadorPortugolIpt,
   LexadorPotigol,
-  LexadorVisuAlg,
+//  LexadorVisuAlg,
   LexadorPortugolStudio,
 } from "@designliquido/delegua/lexador/dialetos";
 
@@ -58,9 +58,9 @@ import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
 
 // Removido por enquanto. Biblioteca ainda apresenta problemas.
-// import { LexadorVisuAlg } from '@designliquido/visualg/fontes/lexador';
-// import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/fontes/avaliador-sintatico';
-// import { InterpretadorVisuAlg } from '@designliquido/visualg/fontes/interpretador';
+import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
+import { InterpretadorVisuAlg } from '@designliquido/visualg/interpretador';
 
 import { Interpretador } from "./interpretador";
 import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";

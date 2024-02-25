@@ -16,7 +16,7 @@
         "@designliquido/delegua": "0.33.6",
         "@designliquido/portugol-studio": "^0.0.1",
         "@designliquido/potigol": "0.0.0",
-        "@designliquido/visualg": "^0.0.1",
+        "@designliquido/visualg": "^0.0.2",
         "chalk": "4.1.2",
         "commander": "^9.4.1",
         "json-colorizer": "^2.2.2"
