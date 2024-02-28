@@ -19,7 +19,7 @@ import {
   AvaliadorSintaticoPitugues,
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
-  AvaliadorSintaticoPotigol,
+//  AvaliadorSintaticoPotigol,
 //  AvaliadorSintaticoVisuAlg,
   AvaliadorSintaticoPortugolStudio,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
@@ -30,10 +30,10 @@ import {
   InterpretadorPortugolIpt,
   InterpretadorPortugolStudio,
   InterpretadorPortugolStudioComDepuracao,
-  InterpretadorPotigol,
+//  InterpretadorPotigol,
 //  InterpretadorVisuAlg,
 } from "@designliquido/delegua/interpretador/dialetos";
-import { InterpretadorPotigolComDepuracao } from '@designliquido/delegua/interpretador/dialetos/potigol/interpretador-potigol-com-depuracao';
+
 import { Lexador } from "@designliquido/delegua/lexador";
 import {
   LexadorBirl,
@@ -41,7 +41,7 @@ import {
   LexadorPitugues,
   LexadorMapler,
   LexadorPortugolIpt,
-  LexadorPotigol,
+//  LexadorPotigol,
 //  LexadorVisuAlg,
   LexadorPortugolStudio,
 } from "@designliquido/delegua/lexador/dialetos";
@@ -57,10 +57,11 @@ import { ServidorDepuracao } from "./depuracao";
 import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
 
-// Removido por enquanto. Biblioteca ainda apresenta problemas.
 import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { InterpretadorVisuAlg } from '@designliquido/visualg/interpretador';
+import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
+import { AvaliadorSintaticoPotigol, InterpretadorPotigol, InterpretadorPotigolComDepuracao, LexadorPotigol } from "@designliquido/potigol";
 
 import { Interpretador } from "./interpretador";
 import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";
@@ -68,7 +69,6 @@ import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dial
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
-import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
 
 export class NucleoExecucao
   extends NucleoComum

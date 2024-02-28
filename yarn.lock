@@ -381,10 +381,10 @@
   dependencies:
     "@designliquido/delegua" "^0.33.0"
 
-"@designliquido/potigol@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.0.0.tgz#4082e13b946eb598e58af57d5e7239d8b27c3366"
-  integrity sha512-YciTv+e7I1InIY9Xl4vLNBi9Sak0Rh4zTWgexriniYON743g3rruS9lD8pvlC5Ne8ZQDkC/bEv5H6N+EBGYeQg==
+"@designliquido/potigol@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.0.1.tgz#745e5ae8c72bbe083cf6886bd6145ae125b76078"
+  integrity sha512-SDvibQAU/0ncAIJ9jcqMW5+5YGELKJ6xBipJHmYz3cnr6PmdBBjiGHuSxcOxfvfLvyVLjtUxE2925F+etlhxTw==
   dependencies:
     "@designliquido/delegua" "^0.33.6"
 

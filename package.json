@@ -15,7 +15,7 @@
         "@designliquido/birl": "0.0.0",
         "@designliquido/delegua": "0.33.7",
         "@designliquido/portugol-studio": "^0.0.1",
-        "@designliquido/potigol": "0.0.0",
+        "@designliquido/potigol": "0.0.1",
         "@designliquido/visualg": "^0.0.2",
         "chalk": "4.1.2",
         "commander": "^9.4.1",
