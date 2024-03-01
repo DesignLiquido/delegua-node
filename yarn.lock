@@ -388,10 +388,10 @@
   dependencies:
     "@designliquido/delegua" "^0.33.6"
 
-"@designliquido/visualg@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.2.tgz#b6e5715fcc1bd4b9bb06f7097815808b7ef02125"
-  integrity sha512-j8JPe6/8KzARSb+LF2QB44nceXSjTiTf/H5ILjvGCWeCYuTM8MwUXKU8LhoSc5zs61a43ST6WMLVqqe8pPaOAw==
+"@designliquido/visualg@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.3.tgz#b8587c2ee25abcdc9e0ce52df495f1f6bffcd8ff"
+  integrity sha512-uRCw1T0UPRt5aherziuS2w3uVzhDpgUGRBG3HCFKxxme1+1+uNCX644fjDdPTytAkV9MqLFajh+f4vRQ3UK3Pw==
   dependencies:
     "@designliquido/delegua" "^0.33.6"
     lodash "^4.17.21"
