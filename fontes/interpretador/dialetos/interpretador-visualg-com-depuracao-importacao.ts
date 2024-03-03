@@ -2,11 +2,12 @@ import * as caminho from 'path';
 
 import { Declaracao, Importar } from "@designliquido/delegua/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/estruturas";
-import { InterpretadorVisuAlgComDepuracao } from "@designliquido/delegua/interpretador/dialetos";
+import { SimboloInterface } from '@designliquido/delegua/interfaces';
+import { InterpretadorVisuAlgComDepuracao } from '@designliquido/visualg/interpretador';
+
 import { ImportadorInterface } from "../../interfaces";
 
 import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
-import { SimboloInterface } from '@designliquido/delegua/interfaces';
 
 export class InterpretadorVisuAlgComDepuracaoImportacao extends InterpretadorVisuAlgComDepuracao {
     importador: ImportadorInterface<SimboloInterface, Declaracao>;
