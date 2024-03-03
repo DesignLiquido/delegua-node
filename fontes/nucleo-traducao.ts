@@ -2,7 +2,7 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
 import { TradutorInterface } from '@designliquido/delegua/interfaces';
-import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorReversoVisuAlg } from '@designliquido/delegua/tradutores';
+import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
 import { ImportadorInterface } from './interfaces';
 import { NucleoComum } from './nucleo-comum';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
@@ -10,8 +10,8 @@ import { Importador } from './importador';
 import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { ImportadorJavaScript } from './importador/importador-javascript';
-import { LexadorVisuAlg } from '@designliquido/delegua/lexador/dialetos';
-import { AvaliadorSintaticoVisuAlg } from '@designliquido/delegua/avaliador-sintatico/dialetos/visualg/avaliador-sintatico-visualg';
+import { LexadorVisuAlg, AvaliadorSintaticoVisuAlg } from '@designliquido/visualg';
+import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
 
 export class NucleoTraducao 
     extends NucleoComum
