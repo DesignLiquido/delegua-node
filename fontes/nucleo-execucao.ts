@@ -9,66 +9,69 @@ import {
   InterpretadorComDepuracaoInterface,
   InterpretadorInterface,
   LexadorInterface,
-  RetornoExecucaoInterface
+  RetornoExecucaoInterface,
 } from "@designliquido/delegua/interfaces";
 import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
 
 import {
-  AvaliadorSintaticoBirl,
+  // AvaliadorSintaticoBirl,
   AvaliadorSintaticoEguaClassico,
   AvaliadorSintaticoPitugues,
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
-//  AvaliadorSintaticoPotigol,
-//  AvaliadorSintaticoVisuAlg,
-  AvaliadorSintaticoPortugolStudio,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
-  InterpretadorBirl,
+  // InterpretadorBirl,
   InterpretadorEguaClassico,
   InterpretadorMapler,
   InterpretadorPortugolIpt,
-  InterpretadorPortugolStudio,
-  InterpretadorPortugolStudioComDepuracao,
-//  InterpretadorPotigol,
-//  InterpretadorVisuAlg,
 } from "@designliquido/delegua/interpretador/dialetos";
 
 import { Lexador } from "@designliquido/delegua/lexador";
 import {
-  LexadorBirl,
+  // LexadorBirl,
   LexadorEguaClassico,
   LexadorPitugues,
   LexadorMapler,
   LexadorPortugolIpt,
-//  LexadorPotigol,
-//  LexadorVisuAlg,
-  LexadorPortugolStudio,
 } from "@designliquido/delegua/lexador/dialetos";
-
-// import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
-// import { AvaliadorSintaticoPortugolStudio } from '@designliquido/portugol-studio/avaliador-sintatico';
-// import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from '@designliquido/portugol-studio/interpretador';
+import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
 
 import { Importador, RetornoImportador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
 import { ServidorDepuracao } from "./depuracao";
-
 import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
-
-import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
-import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
-import { InterpretadorVisuAlg } from '@designliquido/visualg/interpretador';
-import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
-import { AvaliadorSintaticoPotigol, InterpretadorPotigol, InterpretadorPotigolComDepuracao, LexadorPotigol } from "@designliquido/potigol";
-
 import { Interpretador } from "./interpretador";
 import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";
 import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-visualg-com-depuracao-importacao";
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
+
+import { LexadorBirl } from "@designliquido/birl/lexador";
+import { AvaliadorSintaticoBirl } from "@designliquido/birl/avaliador-sintatico";
+import { InterpretadorBirl } from "@designliquido/birl/interpretador";
+
+import {
+  LexadorPortugolStudio,
+  AvaliadorSintaticoPortugolStudio,
+  InterpretadorPortugolStudio,
+  InterpretadorPortugolStudioComDepuracao,
+} from "@designliquido/portugol-studio";
+
+import {
+  AvaliadorSintaticoPotigol,
+  InterpretadorPotigol,
+  InterpretadorPotigolComDepuracao,
+  LexadorPotigol,
+} from "@designliquido/potigol";
+
+import {
+  LexadorVisuAlg,
+  AvaliadorSintaticoVisuAlg,
+  InterpretadorVisuAlg,
+} from "@designliquido/visualg";
 
 export class NucleoExecucao
   extends NucleoComum
@@ -419,7 +422,11 @@ export class NucleoExecucao
       errosExecucao = erros;
     }
 
-    if (interfaceLeitura && (interfaceLeitura instanceof readline.Interface || interfaceLeitura.hasOwnProperty("close"))) {
+    if (
+      interfaceLeitura &&
+      (interfaceLeitura instanceof readline.Interface ||
+        interfaceLeitura.hasOwnProperty("close"))
+    ) {
       interfaceLeitura.close();
     }
 
