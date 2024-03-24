@@ -1,6 +1,6 @@
 import * as caminho from 'path';
 
-import { InterpretadorBirl } from "@designliquido/delegua/interpretador/dialetos";
+import { InterpretadorBirl } from "@designliquido/birl/interpretador";
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Declaracao, Importar } from "@designliquido/delegua/declaracoes";
 import { DeleguaModulo } from "@designliquido/delegua/estruturas";
