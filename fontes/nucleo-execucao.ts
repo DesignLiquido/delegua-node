@@ -14,14 +14,12 @@ import {
 import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
 
 import {
-  // AvaliadorSintaticoBirl,
   AvaliadorSintaticoEguaClassico,
   AvaliadorSintaticoPitugues,
   AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
-  // InterpretadorBirl,
   InterpretadorEguaClassico,
   InterpretadorMapler,
   InterpretadorPortugolIpt,
@@ -29,7 +27,6 @@ import {
 
 import { Lexador } from "@designliquido/delegua/lexador";
 import {
-  // LexadorBirl,
   LexadorEguaClassico,
   LexadorPitugues,
   LexadorMapler,
