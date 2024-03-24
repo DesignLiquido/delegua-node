@@ -344,10 +344,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.1.tgz#964834d127354857cda1c388f5de9327735b6747"
   integrity sha512-/O1/eXlTXPTWSZGZ862i6uHHKCW0cmP6KnOV29zK4d4hgn03QjcNDeFKVC9L9vz3OJ6pPY0d/S8ANJkgBnnoaQ==
 
-"@designliquido/delegua@0.33.10":
-  version "0.33.10"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.10.tgz#02b0ca91883eb4e6fbf7a6326086e55e4c75a5e4"
-  integrity sha512-4iC2UI0CUDF9+pZJlni5Ue/iVdcUFy9oJ51ssSNoqZgj2BAaJbhcU+xRcjX3zThRGxOSmT/rzDTJjAyoqwefew==
+"@designliquido/delegua@0.33.11", "@designliquido/delegua@^0.33.11":
+  version "0.33.11"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.11.tgz#4a5eed6d65e9209984a1bbf12a174452309981b2"
+  integrity sha512-kCFAjaevxWuzQMl1qwE9tz4ftw3iUSIuDLQ68pgASzFGwM6HgyXyw+9EsAD+PImxfoDxco9ewik5jHidrObySQ==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
@@ -378,12 +378,12 @@
   dependencies:
     "@designliquido/delegua" "^0.33.6"
 
-"@designliquido/visualg@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.3.tgz#b8587c2ee25abcdc9e0ce52df495f1f6bffcd8ff"
-  integrity sha512-uRCw1T0UPRt5aherziuS2w3uVzhDpgUGRBG3HCFKxxme1+1+uNCX644fjDdPTytAkV9MqLFajh+f4vRQ3UK3Pw==
+"@designliquido/visualg@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.4.tgz#a21aa66f978a5ec07a9caa841d8ef82a270768a2"
+  integrity sha512-ODNyvECjhlL7IPsdBHNgDiOvhhRpo3CbmCYZ8evOQzqGOR0KE4E69hXyQ4wml2EKQzQQmaLY60fQiphkPnUUYg==
   dependencies:
-    "@designliquido/delegua" "^0.33.6"
+    "@designliquido/delegua" "^0.33.11"
     lodash "^4.17.21"
 
 "@iarna/toml@2.2.5":
