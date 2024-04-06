@@ -33,6 +33,23 @@ import {
   LexadorPortugolIpt,
 } from "@designliquido/delegua/lexador/dialetos";
 import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
+import { LexadorBirl } from "@designliquido/birl/lexador";
+import { AvaliadorSintaticoBirl } from "@designliquido/birl/avaliador-sintatico";
+import { InterpretadorBirl } from "@designliquido/birl/interpretador";
+
+// Aparentemente o Jest não trabalha bem com barreling de pacotes externos,
+// então cada importação precisa ser feita separadamente.
+import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
+import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
+import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from "@designliquido/portugol-studio/interpretador";
+
+import { AvaliadorSintaticoPotigol } from "@designliquido/potigol/avaliador-sintatico";
+import { InterpretadorPotigol, InterpretadorPotigolComDepuracao } from "@designliquido/potigol/interpretador";
+import { LexadorPotigol } from "@designliquido/potigol/lexador";
+
+import { LexadorVisuAlg } from "@designliquido/visualg/lexador";
+import { AvaliadorSintaticoVisuAlg } from "@designliquido/visualg/avaliador-sintatico";
+import { InterpretadorVisuAlg } from "@designliquido/visualg/interpretador";
 
 import { Importador, RetornoImportador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
@@ -45,30 +62,6 @@ import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dial
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
-
-import { LexadorBirl } from "@designliquido/birl/lexador";
-import { AvaliadorSintaticoBirl } from "@designliquido/birl/avaliador-sintatico";
-import { InterpretadorBirl } from "@designliquido/birl/interpretador";
-
-import {
-  LexadorPortugolStudio,
-  AvaliadorSintaticoPortugolStudio,
-  InterpretadorPortugolStudio,
-  InterpretadorPortugolStudioComDepuracao,
-} from "@designliquido/portugol-studio";
-
-import {
-  AvaliadorSintaticoPotigol,
-  InterpretadorPotigol,
-  InterpretadorPotigolComDepuracao,
-  LexadorPotigol,
-} from "@designliquido/potigol";
-
-import {
-  LexadorVisuAlg,
-  AvaliadorSintaticoVisuAlg,
-  InterpretadorVisuAlg,
-} from "@designliquido/visualg";
 
 export class NucleoExecucao
   extends NucleoComum

@@ -10,20 +10,22 @@ export default async (): Promise<Config.InitialOptions> => {
         coverageReporters: ['json-summary', 'lcov', 'text', 'text-summary'],
         detectOpenHandles: true,
         moduleNameMapper: {
-            // Se for utilizar módulos linkados, comentar a linha abaixo:
-            '@designliquido/delegua/(.*)': '<rootDir>/node_modules/@designliquido/delegua/$1'
-            // E descomentar a linha abaixo:
-            // '@designliquido/delegua/(.*)': '<rootDir>/node_modules/@designliquido/delegua/dist/$1'
+            // Se for utilizar módulos linkados, comentar as linhas abaixo:
+            '@designliquido/delegua/(.*)': '<rootDir>/node_modules/@designliquido/delegua/$1',
+            '@designliquido/portugol-studio/(.*)': '<rootDir>/node_modules/@designliquido/portugol-studio/$1'
+            // E descomentar as linhas abaixo:
+            // '@designliquido/delegua/(.*)': '<rootDir>/node_modules/@designliquido/delegua/fontes/$1',
+            // '@designliquido/portugol-studio/(.*)': '<rootDir>/node_modules/@designliquido/portugol-studio/fontes/$1'
         },
-        // TODO: Até então não conseguimos fazer funcionar.
-        // Mantido aqui caso seja útil no futuro.
-        transform: {
+        // TODO: Funciona, mas por enquanto não tem utilidade.
+        // Isso pode mudar no futuro.
+        /* transform: {
             '^.+\\.ts$': [
                 'ts-jest',
                 {
                     tsconfig: 'tsconfig.test.json'
                 },
             ]
-        }
+        } */
     };
 };
