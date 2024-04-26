@@ -344,7 +344,7 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.1.tgz#964834d127354857cda1c388f5de9327735b6747"
   integrity sha512-/O1/eXlTXPTWSZGZ862i6uHHKCW0cmP6KnOV29zK4d4hgn03QjcNDeFKVC9L9vz3OJ6pPY0d/S8ANJkgBnnoaQ==
 
-"@designliquido/delegua@0.33.16":
+"@designliquido/delegua@0.33.16", "@designliquido/delegua@^0.33.16":
   version "0.33.16"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.16.tgz#64ddcd836eb1ee8b5b5807b9b842a99b5da3e919"
   integrity sha512-/roqa8CJikOPPSLTcOLjEA1BqK1ON6V7gv6s8lEn8/p/bGhxm6DKYbNkgrfkN/WSvJaunCZkzdKMGLlmXJ37Ew==
@@ -354,7 +354,7 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/delegua@^0.33.11", "@designliquido/delegua@^0.33.12", "@designliquido/delegua@^0.33.13", "@designliquido/delegua@^0.33.15":
+"@designliquido/delegua@^0.33.12", "@designliquido/delegua@^0.33.13", "@designliquido/delegua@^0.33.15":
   version "0.33.15"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.33.15.tgz#c7ab793e4931fbaea51ab671e47e1924078914d7"
   integrity sha512-5Tv8qxVcnYOPA+MZ8Y7HyobxZOsWM1/bOkwcbdgrGenL4iUMucRmwx3DILbIrg5uPWVtNibWUlMxrEGYf3+jTQ==
@@ -378,12 +378,12 @@
   dependencies:
     "@designliquido/delegua" "^0.33.13"
 
-"@designliquido/visualg@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.4.tgz#a21aa66f978a5ec07a9caa841d8ef82a270768a2"
-  integrity sha512-ODNyvECjhlL7IPsdBHNgDiOvhhRpo3CbmCYZ8evOQzqGOR0KE4E69hXyQ4wml2EKQzQQmaLY60fQiphkPnUUYg==
+"@designliquido/visualg@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.0.5.tgz#c0ac2b5e726c37e82186180c0236df2c18d59ed1"
+  integrity sha512-CAPo7thWk9FIPYCjh5SHAyr5esH8NldIYoI/i4OA4C8+SdZSCJnR55uyRPJR/wMkLZcszYIVYCKl50zUCitACA==
   dependencies:
-    "@designliquido/delegua" "^0.33.11"
+    "@designliquido/delegua" "^0.33.16"
     lodash "^4.17.21"
 
 "@iarna/toml@2.2.5":
