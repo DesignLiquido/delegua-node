@@ -355,10 +355,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/portugol-studio@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.0.tgz#ba57ed8b9894d36d78f5bc73a2c6f219ff6598b9"
-  integrity sha512-soNn/eOQuBa6qzf4iIVCItyg2C5qEcjUFob/RcVZQh9Q2ylralcUUF7P1LS36TX4No8/a34PWcaQLewvjlmSMQ==
+"@designliquido/portugol-studio@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.1.tgz#46f7daa77a7848875fcfdae8d607062dc7ffeab5"
+  integrity sha512-D5Z0L6b7/wbK1yiVgWBkKT2Q365zrWiwOc/CmWbD0vxc0UDA9DVcuhF/JaQw02MImtBF0e5vo2l0eI+RQsVhNQ==
   dependencies:
     "@designliquido/delegua" "^0.34.0"
     lodash "^4.17.21"
