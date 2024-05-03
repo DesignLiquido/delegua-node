@@ -371,10 +371,10 @@
     "@designliquido/delegua" "^0.34.0"
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.1.2.tgz#07d1ae160a327f845b8f6ca735f2fd81ff564b82"
-  integrity sha512-+Hl2S6DbwEapOOnY0t4t+euWbjZ5aC6Gmvla0HRrDzupWIZUDwE47pxYvR+3UsdV6ii5IKXxeLI1fwLOZ7Ylhw==
+"@designliquido/visualg@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.1.4.tgz#cc48858dbc5a0f4477b32d33224f62d8fbb637d4"
+  integrity sha512-CwUmCDhAugDTxFzyGNSiVhqCdG8sFxJQ/gEXDXnV+czqmRo42oRnVCXKtGS53Lqhgm7cHOchF0SIOJYmyVlZOg==
   dependencies:
     "@designliquido/delegua" "^0.34.0"
     lodash "^4.17.21"
