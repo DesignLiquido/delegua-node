@@ -16,9 +16,10 @@ export class InterpretadorVisuAlgComDepuracaoImportacao extends InterpretadorVis
         importador: ImportadorInterface<SimboloInterface, Declaracao>,
         diretorioBase: string, 
         funcaoDeRetorno: Function, 
-        funcaoDeRetornoMesmaLinha: Function) 
-    {
-        super(diretorioBase, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
+        funcaoDeRetornoMesmaLinha: Function,
+        funcaoLimpaTela: Function
+    ) {
+        super(diretorioBase, funcaoDeRetorno, funcaoDeRetornoMesmaLinha, funcaoLimpaTela);
         this.importador = importador;
     }
 

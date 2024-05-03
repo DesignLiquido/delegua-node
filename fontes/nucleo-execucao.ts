@@ -95,11 +95,13 @@ export class NucleoExecucao
 
   funcaoDeRetorno: Function;
   funcaoDeRetornoMesmaLinha: Function;
+  funcaoLimpaTela: Function;
 
   constructor(
     versao: string,
     funcaoDeRetorno: Function = null,
-    funcaoDeRetornoMesmaLinha: Function = null
+    funcaoDeRetornoMesmaLinha: Function = null,
+    funcaoLimpaTela: Function = null
   ) {
     super();
     this.versao = versao;
@@ -111,7 +113,15 @@ export class NucleoExecucao
     // https://stackoverflow.com/questions/28874665/node-js-cannot-read-property-defaultencoding-of-undefined
     this.funcaoDeRetornoMesmaLinha =
       funcaoDeRetornoMesmaLinha || process.stdout.write.bind(process.stdout);
+
+    
+    this.funcaoLimpaTela = 
+      funcaoLimpaTela || this.funcaoLimpaTelaPadrao;
   }
+
+  funcaoLimpaTelaPadrao() { 
+    process.stdout.write('\x1Bc');
+  };
 
   configurarDialeto(
     dialeto: string = "delegua",
@@ -293,13 +303,15 @@ export class NucleoExecucao
               this.importador,
               process.cwd(),
               this.funcaoDeRetorno,
-              this.funcaoDeRetornoMesmaLinha
+              this.funcaoDeRetornoMesmaLinha,
+              this.funcaoLimpaTela
             )
           : new InterpretadorVisuAlg(
               process.cwd(),
               false,
               this.funcaoDeRetorno,
-              this.funcaoDeRetornoMesmaLinha
+              this.funcaoDeRetornoMesmaLinha,
+              this.funcaoLimpaTela
             );
         break;
       default:
