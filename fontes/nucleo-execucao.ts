@@ -255,12 +255,14 @@ export class NucleoExecucao
           ? new InterpretadorPortugolStudioComDepuracao(
               process.cwd(),
               this.funcaoDeRetorno,
-              this.funcaoDeRetornoMesmaLinha
+              this.funcaoDeRetornoMesmaLinha,
+              this.funcaoLimpaTela
             )
           : new InterpretadorPortugolStudio(
               process.cwd(),
               performance,
-              this.funcaoDeRetorno
+              this.funcaoDeRetorno,
+              this.funcaoLimpaTela
             );
         break;
 
