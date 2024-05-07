@@ -800,7 +800,7 @@
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
-      "args": ["${workspaceFolder}${pathSeparator}execucao.ts"],
+      "args": ["${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts"],
       "runtimeExecutable": "node",
       "runtimeArgs": [
         "--nolazy",
