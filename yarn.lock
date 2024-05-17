@@ -355,10 +355,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/mapler@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.0.1.tgz#2e46e7e8b300928c0ada19fae65c068f59a7d436"
-  integrity sha512-T09SZ7R4YVkvzD6zZhZ5AoT0o4XWrO6cIHgtEprccnk93nkS/eZYJ0k6Gjdgz3GYYedc8MgqZtGgxqoNk3LHrQ==
+"@designliquido/mapler@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.1.0.tgz#3c5cced76040390874f577d2be3fa79f0ec9dfc0"
+  integrity sha512-siTiGxRln66fQUQyVXgBMxgvmwl8qqzCat38YNQDW7+ioEfqjmugo+kld5uglubWdi5eyzfCs0OF2h86ML4keQ==
   dependencies:
     "@designliquido/delegua" "^0.34.3"
     lodash "^4.17.21"
@@ -381,10 +381,10 @@
     "@designliquido/delegua" "^0.34.0"
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.1.5.tgz#1cb95202d995887a22f527eaef187240ef325166"
-  integrity sha512-WqNGiZUhIpjh0Gx4S9QjiYR948zi35li2LidmZTWwc/ZNesnmY1t1mhNWZaZ+Aq7eWdBkPJLCitan4+VD4sDZg==
+"@designliquido/visualg@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.1.6.tgz#412b3c6aed784f4874b9eee407e318f385eefb6a"
+  integrity sha512-44kBHOLk6vWLQVWGAND5halzpn4oXjwPmS3AsksWDFwcy2RzT4iZnyPTbCYzjg0pvyugPb9pOOLZPSpQItpJtg==
   dependencies:
     "@designliquido/delegua" "^0.34.3"
     lodash "^4.17.21"
