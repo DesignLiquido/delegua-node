@@ -355,10 +355,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/mapler@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.1.0.tgz#3c5cced76040390874f577d2be3fa79f0ec9dfc0"
-  integrity sha512-siTiGxRln66fQUQyVXgBMxgvmwl8qqzCat38YNQDW7+ioEfqjmugo+kld5uglubWdi5eyzfCs0OF2h86ML4keQ==
+"@designliquido/mapler@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.1.1.tgz#64fb9e10980d8e75f43463569dcdc5c0d8a65263"
+  integrity sha512-AVuJfGyHXrI4O/oRDiETOBonfSsY+p+8t7ifqMvHK++OaEk5f/UYATNzmMXpSSbljRhPcku1LhnhqtXTzQ+2JA==
   dependencies:
     "@designliquido/delegua" "^0.34.3"
     lodash "^4.17.21"

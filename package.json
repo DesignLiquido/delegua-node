@@ -14,7 +14,7 @@
     "dependencies": {
         "@designliquido/birl": "^0.1.0",
         "@designliquido/delegua": "0.34.3",
-        "@designliquido/mapler": "^0.1.0",
+        "@designliquido/mapler": "^0.1.1",
         "@designliquido/portugol-studio": "^0.2.3",
         "@designliquido/potigol": "^0.1.0",
         "@designliquido/visualg": "^0.1.6",
