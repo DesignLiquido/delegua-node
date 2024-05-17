@@ -6,7 +6,8 @@ import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
-import { LexadorVisuAlg, AvaliadorSintaticoVisuAlg } from '@designliquido/visualg';
+import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
+import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
 
 import { ImportadorInterface } from './interfaces';

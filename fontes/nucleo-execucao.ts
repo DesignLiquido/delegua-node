@@ -16,12 +16,10 @@ import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
 import {
   AvaliadorSintaticoEguaClassico,
   AvaliadorSintaticoPitugues,
-  AvaliadorSintaticoMapler,
   AvaliadorSintaticoPortugolIpt,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
   InterpretadorEguaClassico,
-  InterpretadorMapler,
   InterpretadorPortugolIpt,
 } from "@designliquido/delegua/interpretador/dialetos";
 
@@ -29,7 +27,6 @@ import { Lexador } from "@designliquido/delegua/lexador";
 import {
   LexadorEguaClassico,
   LexadorPitugues,
-  LexadorMapler,
   LexadorPortugolIpt,
 } from "@designliquido/delegua/lexador/dialetos";
 import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
@@ -39,6 +36,10 @@ import { InterpretadorBirl } from "@designliquido/birl/interpretador";
 
 // Aparentemente o Jest não trabalha bem com barreling de pacotes externos,
 // então cada importação precisa ser feita separadamente.
+import { LexadorMapler } from "@designliquido/mapler/lexador";
+import { AvaliadorSintaticoMapler } from "@designliquido/mapler/avaliador-sintatico";
+import { InterpretadorMapler } from "@designliquido/mapler/interpretador";
+
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
 import { InterpretadorPortugolStudio, InterpretadorPortugolStudioComDepuracao } from "@designliquido/portugol-studio/interpretador";
