@@ -24,7 +24,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -50,7 +50,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -76,7 +76,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -102,7 +102,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -128,7 +128,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -154,7 +154,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -180,7 +180,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -206,7 +206,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -232,7 +232,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -258,7 +258,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -284,7 +284,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -311,7 +311,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -337,7 +337,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -363,7 +363,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -389,7 +389,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -416,7 +416,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -442,7 +442,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -468,7 +468,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -494,7 +494,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -520,7 +520,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -547,7 +547,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -574,7 +574,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -601,7 +601,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -628,7 +628,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -654,7 +654,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -680,7 +680,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -707,7 +707,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -733,7 +733,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -759,7 +759,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -785,7 +785,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -808,7 +808,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -831,7 +831,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -857,7 +857,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -884,7 +884,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -910,7 +910,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -933,7 +933,35 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mapler > Módulos e Operações Bancárias",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "mapler",
+        "./exemplos/dialetos/mapler/modulos-operacoes-bancarias.mapler"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -961,7 +989,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -989,7 +1017,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1017,7 +1045,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1045,7 +1073,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1073,7 +1101,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1101,7 +1129,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1129,7 +1157,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1158,7 +1186,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1186,7 +1214,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1214,7 +1242,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1242,7 +1270,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1270,7 +1298,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1298,7 +1326,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1326,7 +1354,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1354,7 +1382,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1382,7 +1410,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1410,7 +1438,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1438,7 +1466,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1466,7 +1494,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1494,7 +1522,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1522,7 +1550,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1550,7 +1578,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1578,7 +1606,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1621,7 +1649,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1650,7 +1678,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1679,7 +1707,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1708,7 +1736,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1737,7 +1765,7 @@
         "ts-node/register/transpile-only",
         "-r",
         "tsconfig-paths/register",
-        "--preserve-symlinks"
+        // "--preserve-symlinks"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
