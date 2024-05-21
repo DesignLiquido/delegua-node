@@ -39,7 +39,7 @@ import { InterpretadorBirl } from "@designliquido/birl/interpretador";
 import { LexadorMapler } from "@designliquido/mapler/lexador";
 import { AvaliadorSintaticoMapler } from "@designliquido/mapler/avaliador-sintatico";
 import { ResolvedorMapler } from "@designliquido/mapler/resolvedor";
-import { InterpretadorMapler } from "@designliquido/mapler/interpretador";
+import { InterpretadorMapler, InterpretadorMaplerComDepuracao } from "@designliquido/mapler/interpretador";
 
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
@@ -57,7 +57,7 @@ import { LexadorPotigol } from "@designliquido/potigol/lexador";
 
 import { LexadorVisuAlg } from "@designliquido/visualg/lexador";
 import { AvaliadorSintaticoVisuAlg } from "@designliquido/visualg/avaliador-sintatico";
-import { InterpretadorVisuAlg } from "@designliquido/visualg/interpretador";
+import { InterpretadorVisuAlg, InterpretadorVisuAlgComDepuracao } from "@designliquido/visualg/interpretador";
 import { Declaracao } from "@designliquido/delegua/declaracoes";
 
 import { Importador, RetornoImportador } from "./importador";
@@ -66,8 +66,6 @@ import { ServidorDepuracao } from "./depuracao";
 import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
 import { Interpretador } from "./interpretador";
-import { InterpretadorMaplerComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-mapler-com-depuracao-importacao";
-import { InterpretadorVisuAlgComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-visualg-com-depuracao-importacao";
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
@@ -192,11 +190,9 @@ export class NucleoExecucao
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorMaplerComDepuracaoImportacao(
-                          this.importador,
+                    ? new InterpretadorMaplerComDepuracao(
                           process.cwd(),
-                          this.funcaoDeRetorno,
-                          this.funcaoDeRetornoMesmaLinha
+                          this.funcaoDeRetorno
                       )
                     : new InterpretadorMapler(
                           process.cwd(),
@@ -318,8 +314,7 @@ export class NucleoExecucao
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorVisuAlgComDepuracaoImportacao(
-                          this.importador,
+                    ? new InterpretadorVisuAlgComDepuracao(
                           process.cwd(),
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha,
