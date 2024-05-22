@@ -374,10 +374,10 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.5.tgz#6f0e37fa0beef5b8e6cb56712e8c85fce0882fa3"
-  integrity sha512-VJC2SpbwQfmgOHPTCE4Pqu8R0j0Nsqpgm3QC2CTrdFcir/u296HKahpQAW0MfOVxcRt2hbyJurBx1KUEMqQraA==
+"@designliquido/portugol-studio@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.6.tgz#8807f8f539e17444a4aaa58234886f8e52ec5853"
+  integrity sha512-YzBtXJkn5FT0hUj4UoILyOUr2BQT6GA2ES+8drHKrRRAlxIW9q/hwWg3062GGEr7MEwrzcV5S5LYiqvAUPyvoA==
   dependencies:
     "@designliquido/delegua" "^0.35.1"
     lodash "^4.17.21"
