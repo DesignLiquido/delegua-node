@@ -305,12 +305,12 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@designliquido/birl@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.1.1.tgz#311a3b3f2207cb6642164bed4c68cda6ee4c7f8f"
-  integrity sha512-mVIehQwQZyokK5DUY6Y5ROhwgze+aPZUH7xO8ObrwAlbxhCRkZBSzTfS6oOy51rZXcKLHwny1zHFJF6qUwX8fw==
+"@designliquido/birl@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.1.2.tgz#c98567c1e69b031656c8a276920da23ba884fb05"
+  integrity sha512-gQaLP+cjKL3XIWlO7zVToNdxhhMyEdOMoCVnOs1j/sinlcysm8BILmE/Bj8gjX9wlsyFvreo25vli06PygTUbw==
   dependencies:
-    "@designliquido/delegua" "^0.35.0"
+    "@designliquido/delegua" "^0.35.1"
     lodash "^4.17.21"
 
 "@designliquido/delegua-estatistica@^0.0.5":
@@ -374,21 +374,21 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.7.tgz#5471d3d09859e2f430cc30bd5976497bc35adedf"
-  integrity sha512-xbSrSmLFG/hZv0xqYB3gtCN+bl3VIcP0Xifmuv5rzqNvjTv2K/Ed5mpMtNYlIrPQy2RKHWuMO9zEXYYCKhKlsQ==
+"@designliquido/portugol-studio@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.8.tgz#ac6b3930638efa7c315d8e6b3ee82139f796817c"
+  integrity sha512-UX2dasfWqCN779crSLu3tmuThmPOO3yvkwKOUCzgBTMmUwaeDsolVbnMivmHLEm1dt1WX+ccYp7idEQOf+fu8Q==
   dependencies:
     "@designliquido/delegua" "^0.35.1"
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/potigol@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.1.1.tgz#6cbff9a8cd9c8aa308a771cf17002aa6a5d4f677"
-  integrity sha512-GjuhAa1FBvt7GwyrWFlSbTZv/P/Gt7uYoEFE7XmTLoCKo7rndBNLL0QQYppQzHVQvsPEVyYkJ0CF0T+kyja0Fg==
+"@designliquido/potigol@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.1.2.tgz#4955d892ecad04592b9d6158c1e98405ae41d770"
+  integrity sha512-/SkJkvs2Oi7+jnnAbxS7Z/wBHeBQWON2wRm0jblD0i5h1GZiWRiADdpnz7kCOPy6TpBTQ9JFXFMO3u3RnEjiaQ==
   dependencies:
-    "@designliquido/delegua" "^0.35.0"
+    "@designliquido/delegua" "^0.35.1"
     lodash "^4.17.21"
 
 "@designliquido/visualg@^0.2.0":
