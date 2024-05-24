@@ -383,10 +383,10 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/potigol@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.1.2.tgz#4955d892ecad04592b9d6158c1e98405ae41d770"
-  integrity sha512-/SkJkvs2Oi7+jnnAbxS7Z/wBHeBQWON2wRm0jblD0i5h1GZiWRiADdpnz7kCOPy6TpBTQ9JFXFMO3u3RnEjiaQ==
+"@designliquido/potigol@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.1.3.tgz#822651e6ff3679ca82fe2ef9faeebf826cd663f4"
+  integrity sha512-fq1OzWrBvMfSYSXaoyPsQlUswvRuM5Xg5wPiR95YQKdyNU2c8tRRU1Fk478XrweqyGul4aGGgQnt7jLf+Ma0mQ==
   dependencies:
     "@designliquido/delegua" "^0.35.1"
     lodash "^4.17.21"
