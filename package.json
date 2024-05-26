@@ -23,12 +23,12 @@
         "json-colorizer": "^2.2.2"
     },
     "devDependencies": {
-        "@designliquido/delegua-estatistica": "^0.0.5",
+        "@designliquido/delegua-estatistica": "^0.0.6",
         "@designliquido/delegua-fisica": "^0.0.2",
         "@designliquido/delegua-http": "^0.0.2",
         "@designliquido/delegua-json": "^0.0.0",
         "@designliquido/delegua-matematica": "^0.2.0",
-        "@designliquido/delegua-tempo": "^0.0.1",
+        "@designliquido/delegua-tempo": "^0.0.2",
         "@types/estree": "^1.0.5",
         "@types/jest": "^29.4.0",
         "@types/node": "^18.11.19",

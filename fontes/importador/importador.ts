@@ -60,11 +60,11 @@ export class Importador implements ImportadorInterface<SimboloInterface, Declara
         }
 
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo.toString().replace(sistemaOperacional.EOL, '\n').split('\n');
-
-        for (let linha = 0; linha < conteudoDoArquivo.length; linha++) {
-            conteudoDoArquivo[linha] += '\0';
-        }
+        const conteudoDoArquivo: string[] = dadosDoArquivo
+            .toString()
+            .replace(sistemaOperacional.EOL, '\n')
+            .split('\n')
+            .map(linha => linha + '\0');
 
         const retornoLexador = this.lexador.mapear(conteudoDoArquivo, hashArquivo);
         const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(retornoLexador, hashArquivo);
