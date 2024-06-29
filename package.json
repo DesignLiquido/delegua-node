@@ -13,11 +13,11 @@
     },
     "dependencies": {
         "@designliquido/birl": "^0.1.4",
-        "@designliquido/delegua": "0.35.2",
+        "@designliquido/delegua": "0.35.3",
         "@designliquido/mapler": "^0.1.4",
         "@designliquido/portugol-studio": "^0.2.10",
         "@designliquido/potigol": "^0.1.6",
-        "@designliquido/visualg": "^0.2.3",
+        "@designliquido/visualg": "^0.3.0",
         "chalk": "4.1.2",
         "commander": "^9.4.1",
         "json-colorizer": "^2.2.2"
