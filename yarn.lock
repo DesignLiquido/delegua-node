@@ -374,14 +374,15 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.2.10":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.2.10.tgz#b2e125bc65e0a09602dad852a256ef37fe69284f"
-  integrity sha512-ld3QjZOX7mUvyNnVBoPg/2T6RfKPiSDqTniXBtmY2BKEyY2NR9M5jqR87BrIFBvwkuytltCW9anH1lPXIlbXxQ==
+"@designliquido/portugol-studio@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.3.0.tgz#575926d665b71f0edc3337024b649dea1b2d61ca"
+  integrity sha512-CBoAeYwahFz2jp3AZ4fDFVp1Msi1kAi5t+dioEPkH0caGbP+MVVMlpB87TkACXLC6pBIotEvtzAz8AnNRcJpvA==
   dependencies:
-    "@designliquido/delegua" "^0.35.2"
+    "@designliquido/delegua" "^0.35.3"
     lodash "^4.17.21"
     node-fetch "2"
+    xml2js "^0.6.2"
 
 "@designliquido/potigol@^0.1.6":
   version "0.1.6"
@@ -391,10 +392,10 @@
     "@designliquido/delegua" "^0.35.2"
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.3.0.tgz#02aef95101654b39b9b8d9334fabfe7aa786e4ff"
-  integrity sha512-ggfH1BmtF7boQA1L+MKDb2xtw25JDrtUmIB4eiAEDyc4Xz5avfTxQW3HERibhpSwXe5HCVbRtcGMZwN9lM1b2A==
+"@designliquido/visualg@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.3.1.tgz#a4a857c7aa41dca322973df4c4e5f4e0da3fe90b"
+  integrity sha512-PWIxvO/AB2rFPy1dslqV+iXjiXQCpWjQaRBR5Dg3GCdcFgs0QdHaCa9Q/Oi/38WGEBGpvsatl9gGgOQ4HbSlnQ==
   dependencies:
     "@designliquido/delegua" "^0.35.3"
     lodash "^4.17.21"
@@ -4281,6 +4282,11 @@ safe-regex-test@^1.0.3:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
+sax@>=0.6.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.1.tgz#44cc8988377f126304d3b3fc1010c733b929ef0f"
+  integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
+
 semver-diff@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-4.0.0.tgz#3afcf5ed6d62259f5c72d0d5d50dffbdc9680df5"
@@ -5009,6 +5015,19 @@ xdg-basedir@^5.0.1, xdg-basedir@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-5.1.0.tgz#1efba19425e73be1bc6f2a6ceb52a3d2c884c0c9"
   integrity sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ==
+
+xml2js@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.6.2.tgz#dd0b630083aa09c161e25a4d0901e2b2a929b499"
+  integrity sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==
+  dependencies:
+    sax ">=0.6.0"
+    xmlbuilder "~11.0.0"
+
+xmlbuilder@~11.0.0:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-11.0.1.tgz#be9bae1c8a046e76b31127726347d0ad7002beb3"
+  integrity sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==
 
 xtend@~4.0.1:
   version "4.0.2"
