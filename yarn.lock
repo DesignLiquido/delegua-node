@@ -365,7 +365,7 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/mapler@^0.1.4":
+"@designliquido/mapler@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.1.5.tgz#ccc6c6d0e3669dc03f8243567aae3721dbf96ae5"
   integrity sha512-9BXyVY70hCsR2n+kyKGFLV646jfBzasYZuL/vtbHqm0gi4CFEvUCAKXZ8KccRdU5f8P9w9fKNZ4BpF3JBTWWig==
@@ -374,10 +374,10 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.3.0.tgz#575926d665b71f0edc3337024b649dea1b2d61ca"
-  integrity sha512-CBoAeYwahFz2jp3AZ4fDFVp1Msi1kAi5t+dioEPkH0caGbP+MVVMlpB87TkACXLC6pBIotEvtzAz8AnNRcJpvA==
+"@designliquido/portugol-studio@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.3.1.tgz#843afd23a813005f9db2ce8d56e63dda71c30974"
+  integrity sha512-tE8AE1UWE8XvoiUYbW9ekDMW3cCsaO5BtoTTsEPNA63yQeeLZmbeMdmoTkGrVG59b0ha+LKwB92cJalNwBBSTA==
   dependencies:
     "@designliquido/delegua" "^0.35.3"
     lodash "^4.17.21"
