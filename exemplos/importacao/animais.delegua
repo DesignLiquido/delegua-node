@@ -1,4 +1,4 @@
-var cachorro = importar('./objetos/cachorro.delegua')
+var animal = importar('./objetos/cachorro.delegua')
 
-var thor = cachorro.Cachorro()
+var thor = animal.Cachorro()
 thor.corre()

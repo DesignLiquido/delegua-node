@@ -37,4 +37,16 @@ describe('Núcleo de execução', () => {
 
         expect(retornoSaida.length).toBeGreaterThan(0);
     });
+
+    it('Importação de classes', async () => {
+        let retornoSaida: string = '';
+        const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
+        const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+        nucleoExecucao.configurarDialeto();
+        
+        await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/animais.delegua');
+
+        expect(retornoSaida.length).toBeGreaterThan(0);
+        expect(retornoSaida).toBe('correndo');
+    });
 });
