@@ -8,6 +8,11 @@ import { NucleoExecucao } from '../fontes/nucleo-execucao';
 // jest.mock('path');
 
 describe('Núcleo de execução', () => {
+    afterAll(() => {
+        // Necessário para prevenir problemas com open handles do Jest.
+        process.stdin.destroy();
+    });
+
     it('`executarCodigoComoArgumento`, trivial', async () => {
         let retornoSaida: string = '';
         const funcaoDeRetorno = (saida: string) => retornoSaida = saida;
