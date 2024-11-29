@@ -44,79 +44,10 @@ Com o Node.js instalado, execute o seguinte comando em um _prompt_ de comando (T
 npm install -g @designliquido/delegua-node
 ```
 
-No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras. Para instalar a solução completa, com todas essas bibliotecas, utilize o comando:
+No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras. Para instalar [a solução completa, com todas essas bibliotecas](https://github.com/DesignLiquido/delegua-completo), utilize o comando:
 
 ```
 npm install -g delegua
 ```
 
-### Usando como LAIR (Leia-Avalie-Imprima-Repita) em console
-
-Feita a instalação no seu ambiente, execute o seguinte comando:
-
-```sh
-delegua
-```
-
-Você terá um interpretador Delégua que avalia expressões linha a linha.
-
-Um exemplo de uso é como uma calculadora:
-
-```js
-delegua> 2 + 2
-4
-
-delegua> 2 * 3
-6
-
-delegua> 2 ** 10
-1024
-```
-
-Para finalizar a execução do interpretador LAIR Delégua, use o atalho <key>Ctrl</key> + <key>C</key> (todos os sistemas operacionais).
-
-Se quiser apenas ver a versão instalada (sem executar), use:
-
-```sh
-delegua -v
-```
-
-Ou
-
-```sh
-delegua --versao
-```
-
-#### Dialetos que suportam o modo LAIR
-
-- Delégua
-- Égua Clássico
-- Pituguês
-
-### Executando arquivos
-
-É possível usar o interpretador com outros dialetos, como Égua.
-
-```sh
-delegua --dialeto egua
-```
-
-Ou
-
-```sh
-delegua -d pitugues
-```
-
-[Veja aqui todos os dialetos suportados](https://github.com/DesignLiquido/delegua/wiki/Dialetos).
-
-### Executando código
-
-É possível passar código como argumento para Delégua usando a opção `-c`:
-
-```
-delegua -c "escreva('Olá mundo')"
-```
-
-## Tradução para outras linguagens
-
-Delégua traduz para JavaScript e vice-versa. [Mais informações aqui](https://github.com/DesignLiquido/delegua/wiki/Tradu%C3%A7%C3%A3o-para-outras-linguagens). 
+A implementação do [Modo LAIR (Leia-Avalie-Imprima-Repita)] fica neste pacote, mas o recomendado é a utilização da solução completa, ao invés deste pacote puro.
