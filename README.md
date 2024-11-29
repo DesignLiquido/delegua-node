@@ -50,4 +50,4 @@ No entanto, este pacote por si só não contém as bibliotecas que fazem parte d
 npm install -g delegua
 ```
 
-A implementação do [Modo LAIR (Leia-Avalie-Imprima-Repita)] fica neste pacote, mas o recomendado é a utilização da solução completa, ao invés deste pacote puro.
+A implementação do [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console) fica neste pacote, mas o recomendado é a utilização da solução completa, ao invés deste pacote puro.
