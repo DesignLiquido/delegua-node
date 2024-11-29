@@ -2,7 +2,7 @@ import * as caminho from "path";
 import * as readline from "readline";
 
 import chalk from "chalk";
-import colorizeJson from "json-colorizer";
+import { colorize } from "json-colorizer";
 
 import {
     AvaliadorSintaticoInterface,
@@ -486,7 +486,7 @@ export class NucleoExecucao
                 const resultadoLexacao = lexadorJson.getTokens(resultado[0]);
                 const resultadoFormatacao =
                     formatadorJson.formatar(resultadoLexacao);
-                isto.funcaoDeRetorno(colorizeJson(resultadoFormatacao));
+                isto.funcaoDeRetorno(colorize(resultadoFormatacao));
             }
 
             interfaceLeitura.prompt();

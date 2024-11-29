@@ -12,15 +12,15 @@
         "testes:servidor-depuracao": "yarn ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/birl": "^0.1.8",
-        "@designliquido/delegua": "^0.37.0",
-        "@designliquido/mapler": "^0.1.9",
-        "@designliquido/portugol-studio": "^0.4.5",
-        "@designliquido/potigol": "^0.1.10",
+        "@designliquido/birl": "^0.1.9",
+        "@designliquido/delegua": "^0.37.2",
+        "@designliquido/mapler": "^0.1.10",
+        "@designliquido/portugol-studio": "^0.4.6",
+        "@designliquido/potigol": "^0.1.11",
         "@designliquido/visualg": "^0.3.6",
         "chalk": "4.1.2",
-        "commander": "^9.4.1",
-        "json-colorizer": "^2.2.2"
+        "commander": "^12.1.0",
+        "json-colorizer": "^3.0.1"
     },
     "devDependencies": {
         "@designliquido/delegua-estatistica": "^0.0.6",
@@ -29,17 +29,17 @@
         "@designliquido/delegua-json": "^0.0.1",
         "@designliquido/delegua-matematica": "^0.2.0",
         "@designliquido/delegua-tempo": "^0.0.2",
-        "@types/estree": "^1.0.5",
-        "@types/jest": "^29.5.13",
-        "@types/node": "^22.7.6",
+        "@types/estree": "^1.0.6",
+        "@types/jest": "^29.5.14",
+        "@types/node": "^22.10.1",
         "copyfiles": "^2.4.1",
         "jest": "^29.7.0",
         "jest-mock-process": "^2.0.0",
-        "release-it": "^15.6.0",
-        "rimraf": "^4.1.2",
-        "ts-jest": "^29.0.5",
+        "release-it": "^17.10.0",
+        "rimraf": "^6.0.1",
+        "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
-        "typescript": "^5.6.3"
+        "typescript": "^5.7.2"
     }
 }

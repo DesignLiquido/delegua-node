@@ -55,7 +55,7 @@ export class LexadorJson {
    * @returns {boolean} checkResult - Check result
    * @private
    */
-  private _allTokensAnalyzed(input: any, foundToken: any) {
+  private _allTokensAnalyzed(input: any, foundToken: any): boolean {
     const safeInput = input || {};
 
     const inputLength = safeInput.length;
