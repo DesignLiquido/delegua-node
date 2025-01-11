@@ -15,9 +15,9 @@
         "@designliquido/birl": "^0.1.9",
         "@designliquido/delegua": "^0.37.2",
         "@designliquido/mapler": "^0.1.10",
-        "@designliquido/portugol-studio": "^0.4.6",
+        "@designliquido/portugol-studio": "^0.4.7",
         "@designliquido/potigol": "^0.1.11",
-        "@designliquido/visualg": "^0.3.6",
+        "@designliquido/visualg": "^0.3.7",
         "chalk": "4.1.2",
         "commander": "^12.1.0",
         "json-colorizer": "^3.0.1"

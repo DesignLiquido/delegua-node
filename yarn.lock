@@ -327,7 +327,7 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-0.0.2.tgz#c22fba26060b899c0f021f2c8e48974ef3578031"
   integrity sha512-RbnUVvTtfXg3JdCuKgFFRdEiSA0v7dZe+8PYC+jRbuhcDF5A+jomx9kl1Y453EzNC23HOS0rkZmk+RbRmfyZZQ==
 
-"@designliquido/delegua@^0.37.0", "@designliquido/delegua@^0.37.2":
+"@designliquido/delegua@^0.37.2":
   version "0.37.2"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-0.37.2.tgz#9870c738a4b6654e24f12c6f83410a11b1136879"
   integrity sha512-5DT3s2maJpbCrrPOezttev8vai83iz4M3o/u3RR8sarQ0rKCexUhpMrVEMzAfsASt7j02drW3u6JZHRzlwxhbQ==
@@ -346,10 +346,10 @@
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.4.6.tgz#83a72fb018d34e5b54c38c87d70c46b62d06fae9"
-  integrity sha512-KRlnVFZFnjIoWx7KPvN900CaCi/OvjrMtuHuExMUEgqPo0idWgqCuVuGkRw0Be1/2ZehKwVhavldsdkolKHYBg==
+"@designliquido/portugol-studio@^0.4.7":
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.4.7.tgz#9ed80563bbaff43f0da378caa7c626d621e53762"
+  integrity sha512-mrFFtFi938GU43YieNwH7qsTZC9n0pfC6pZC9EdMmtlCCyx4J//yh4owjmJpT625K5CHqZm2h6L/It/FAf2Pcg==
   dependencies:
     "@designliquido/delegua" "^0.37.2"
     lodash "^4.17.21"
@@ -364,12 +364,12 @@
     "@designliquido/delegua" "^0.37.2"
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.3.6":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.3.6.tgz#11eb64a29f75de828c94b53696f760eee0944c15"
-  integrity sha512-Cm/M+WGnlrH7MFEbM8Ok4zUGfXK4m5nUMS0Vyy0tZJwchukc0zaYwJx2JNWD5z0xx1tbd1l4T/JTs/2N4H0VhQ==
+"@designliquido/visualg@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.3.7.tgz#7f87762ad93950b662c768e2fc8ec21747d82797"
+  integrity sha512-hj3FvN/vo93TuFATlDCYNPz/kna1L8kFYHPgcCBQ6ntQ39+akODEtbifdWdTz/XowCLpycatwr+VvSjGzpV89w==
   dependencies:
-    "@designliquido/delegua" "^0.37.0"
+    "@designliquido/delegua" "^0.37.2"
     lodash "^4.17.21"
 
 "@iarna/toml@2.2.5":
