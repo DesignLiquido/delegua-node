@@ -69,6 +69,7 @@ import { Interpretador } from "./interpretador";
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
+import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -327,6 +328,7 @@ export class NucleoExecucao
                           this.funcaoDeRetornoMesmaLinha,
                           this.funcaoLimpaTela
                       );
+                (this.interpretador as InterpretadorVisuAlgInterface).deveEscreverPrompt = true;
                 break;
             default:
                 this.lexador = new Lexador(performance);
