@@ -1421,6 +1421,34 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "VisuAlg > Negativos (ISO-8859-1)",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "visualg",
+        "./exemplos/dialetos/visualg/negativos-iso8859-1.alg"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "VisuAlg > Olá Mundo",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
