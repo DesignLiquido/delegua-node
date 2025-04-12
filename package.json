@@ -16,7 +16,7 @@
         "@designliquido/delegua": "^0.40.0",
         "@designliquido/mapler": "^0.1.12",
         "@designliquido/portugol-studio": "^0.4.10",
-        "@designliquido/potigol": "^0.1.13",
+        "@designliquido/potigol": "^0.1.14",
         "@designliquido/visualg": "^0.3.10",
         "chalk": "4.1.2",
         "commander": "^12.1.0",
