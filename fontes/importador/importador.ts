@@ -3,36 +3,32 @@ import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 
 import { cyrb53 } from '@designliquido/delegua/depuracao';
-// import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
-import { AvaliadorSintaticoInterface, LexadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
+import { LexadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
 
 import { RetornoImportador } from './retorno-importador';
 import { ImportadorInterface } from '../interfaces';
-import { Declaracao } from '@designliquido/delegua/declaracoes';
+import { ErroImportacao } from '../excecoes';
 
 /**
- * O Importador é responsável por manusear arquivos. Coordena as fases de lexação, avaliação sintática,
- * cataloga informações do arquivo no núcleo da linguagem (através das referências `arquivosAbertos` e
+ * O Importador é responsável por manusear arquivos. Coordena a fase de lexação e cataloga 
+ * informações do arquivo no núcleo da linguagem (através das referências `arquivosAbertos` e
  * `conteudoArquivosAbertos`) e aponta erros caso ocorram.
  *
  */
-export class Importador implements ImportadorInterface<SimboloInterface, Declaracao> {
+export class Importador implements ImportadorInterface<SimboloInterface> {
     diretorioBase: string = process.cwd();
     lexador: LexadorInterface<SimboloInterface>;
-    avaliadorSintatico: AvaliadorSintaticoInterface<SimboloInterface, Declaracao>;
     arquivosAbertos: { [identificador: string]: string };
     conteudoArquivosAbertos: { [identificador: string]: string[] };
     depuracao: boolean;
 
     constructor(
         lexador: LexadorInterface<SimboloInterface>,
-        avaliadorSintatico: AvaliadorSintaticoInterface<SimboloInterface, Declaracao>,
         arquivosAbertos: { [identificador: string]: string },
         conteudoArquivosAbertos: { [identificador: string]: string[] },
         depuracao: boolean
     ) {
         this.lexador = lexador;
-        this.avaliadorSintatico = avaliadorSintatico;
         this.arquivosAbertos = arquivosAbertos;
         this.conteudoArquivosAbertos = conteudoArquivosAbertos;
         this.depuracao = depuracao;
@@ -41,7 +37,7 @@ export class Importador implements ImportadorInterface<SimboloInterface, Declara
     importar(
         caminhoRelativoArquivo: string,
         importacaoInicial: boolean = false
-    ): RetornoImportador<SimboloInterface, Declaracao> {
+    ): RetornoImportador<SimboloInterface> {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
         if (importacaoInicial) {
@@ -50,13 +46,11 @@ export class Importador implements ImportadorInterface<SimboloInterface, Declara
 
         const hashArquivo = cyrb53(caminhoAbsolutoArquivo.toLowerCase());
 
-        if (!sistemaArquivos.existsSync(nomeArquivo)) {
-            // TODO: Terminar.
-            /* throw new ErroEmTempoDeExecucao(
-                declaracao.simboloFechamento,
-                'Não foi possível encontrar arquivo importado.',
-                declaracao.linha
-            ); */
+        if (!sistemaArquivos.existsSync(caminhoAbsolutoArquivo)) {
+            throw new ErroImportacao(
+                caminhoAbsolutoArquivo,
+                `Não foi possível encontrar arquivo importado: ${nomeArquivo}.`,
+            )
         }
 
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
@@ -67,7 +61,6 @@ export class Importador implements ImportadorInterface<SimboloInterface, Declara
             .map(linha => linha + '\0');
 
         const retornoLexador = this.lexador.mapear(conteudoDoArquivo, hashArquivo);
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(retornoLexador, hashArquivo);
         this.arquivosAbertos[hashArquivo] = caminho.resolve(caminhoRelativoArquivo);
 
         if (this.depuracao) {
@@ -77,8 +70,7 @@ export class Importador implements ImportadorInterface<SimboloInterface, Declara
         return {
             nomeArquivo,
             hashArquivo,
-            retornoLexador,
-            retornoAvaliadorSintatico,
-        } as RetornoImportador<SimboloInterface, Declaracao>;
+            retornoLexador
+        } as RetornoImportador<SimboloInterface>;
     }
 }

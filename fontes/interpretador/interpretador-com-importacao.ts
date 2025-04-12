@@ -1,24 +1,31 @@
 import * as caminho from 'path';
 
-import { Declaracao, Importar } from '@designliquido/delegua/declaracoes';
+import { Importar } from '@designliquido/delegua/declaracoes';
 import { DeleguaModulo } from '@designliquido/delegua/estruturas';
 
 import { ImportadorInterface } from '../interfaces/importador-interface';
-import { InterpretadorBase } from '@designliquido/delegua/interpretador/interpretador-base';
 
-import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
+import { Interpretador } from '@designliquido/delegua/interpretador';
+import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
+import { ModuloDeclaracoes } from '../declaracoes';
+
+import * as comum from './comum';
+import { ImportarBiblioteca } from '../construtos';
 
 
 /**
  * O Interpretador visita todos os elementos complexos gerados pelo avaliador sintático (_parser_),
  * e de fato executa a lógica de programação descrita no código.
  */
-export class Interpretador extends InterpretadorBase {
-    importador: ImportadorInterface<SimboloInterface, Declaracao>;
+export class InterpretadorComImportacao 
+    extends Interpretador 
+    implements InterpretadorComImportacaoInterface
+{
+    importador: ImportadorInterface<SimboloInterface>;
 
     constructor(
-        importador: ImportadorInterface<SimboloInterface, Declaracao>,
+        importador: ImportadorInterface<SimboloInterface>,
         diretorioBase: string,
         performance = false,
         funcaoDeRetorno: Function = null,
@@ -28,12 +35,20 @@ export class Interpretador extends InterpretadorBase {
         this.importador = importador;
     }
 
+    async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
+        return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
+        return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+    }
+
     /**
      * Importa um arquivo como módulo.
      * @param declaracao A declaração de importação.
      * @returns Ou um `DeleguaModulo`, ou um dicionário de funções.
      */
-    async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
+    /* async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
         const caminhoRelativo = await this.avaliar(declaracao.caminho);
         const caminhoTotal = caminho.join(this.diretorioBase, caminhoRelativo);
         const nomeArquivo = caminho.basename(caminhoTotal);
@@ -74,5 +89,5 @@ export class Interpretador extends InterpretadorBase {
         }
 
         return novoModulo;
-    }
+    } */
 }

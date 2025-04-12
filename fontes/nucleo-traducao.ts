@@ -1,7 +1,7 @@
 import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
-import { TradutorInterface } from '@designliquido/delegua/interfaces';
+import { AvaliadorSintaticoInterface, SimboloInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
 import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
@@ -9,6 +9,8 @@ import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
+import { Declaracao } from '@designliquido/delegua/declaracoes';
+import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
 
 import { ImportadorInterface } from './interfaces';
 import { NucleoComum } from './nucleo-comum';
@@ -18,7 +20,8 @@ import { ImportadorJavaScript } from './importador/importador-javascript';
 export class NucleoTraducao 
     extends NucleoComum
 {
-    importador: ImportadorInterface<any, any>;
+    importador: ImportadorInterface<any>;
+    avaliadorSintatico: AvaliadorSintaticoInterface<any, any>;
     tradutor: TradutorInterface<any>;
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
@@ -59,49 +62,51 @@ export class NucleoTraducao
             case 'delegua-para-as':
                 this.importador = new Importador(
                     new Lexador(false),
-                    new AvaliadorSintatico(false),
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos, 
                     false
                 );
+                this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorAssemblyScript();
                 break;
             case 'delegua-para-js':
             case 'delegua-para-javascript':
                 this.importador = new Importador(
                     new Lexador(false),
-                    new AvaliadorSintatico(false),
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos, 
                     false
                 );
+
+                this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorJavaScript();
                 break;
             case 'delegua-para-py':
             case 'delegua-para-python':
                 this.importador = new Importador(
                     new Lexador(false),
-                    new AvaliadorSintatico(false),
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos, 
                     false
                 );
+                this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorPython();
                 break;
             case 'js-para-delegua':
             case 'javascript-para-delegua':
                 this.importador = new ImportadorJavaScript();
+                this.avaliadorSintatico = new AvaliadorSintaticoJavaScript();
                 this.tradutor = new TradutorReversoJavaScript();
                 break;
             case 'alg-para-delegua':
             case 'visualg-para-delegua':
                 this.importador = new Importador(
                     new LexadorVisuAlg(),
-                    new AvaliadorSintaticoVisuAlg(),
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     false
                 );
+                this.avaliadorSintatico = new AvaliadorSintaticoVisuAlg()
                 this.tradutor = new TradutorReversoVisuAlg();
                 break;
             default:
@@ -128,11 +133,16 @@ export class NucleoTraducao
         );
 
         let resultado = null;
-        if (this.afericaoErros(retornoImportador)) {
+        if (this.afericaoErrosLexador(retornoImportador.retornoLexador)) {
             process.exit(65); // Código para erro de avaliação antes da tradução
         }
 
-        resultado = this.tradutor.traduzir(retornoImportador.retornoAvaliadorSintatico.declaracoes);
+        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+            retornoImportador.retornoLexador, 
+            retornoImportador.hashArquivo
+        );
+
+        resultado = this.tradutor.traduzir(retornoAvaliadorSintatico.declaracoes);
 
         if (gerarArquivoSaida) {
             const linguagem = this.comandoTraducao?.split('-')[2] || '';

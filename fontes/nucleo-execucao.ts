@@ -59,17 +59,18 @@ import { LexadorVisuAlg } from "@designliquido/visualg/lexador";
 import { AvaliadorSintaticoVisuAlg } from "@designliquido/visualg/avaliador-sintatico";
 import { InterpretadorVisuAlg, InterpretadorVisuAlgComDepuracao } from "@designliquido/visualg/interpretador";
 import { Declaracao } from "@designliquido/delegua/declaracoes";
+import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces";
 
 import { Importador, RetornoImportador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
 import { ServidorDepuracao } from "./depuracao";
 import { FormatadorJson } from "./formatadores";
 import { LexadorJson } from "./lexador/lexador-json";
-import { Interpretador } from "./interpretador";
+import { InterpretadorComImportacao } from "./interpretador";
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
-import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces";
+import { AvaliadorSintaticoComImportacao } from "./avaliador-sintatico/avaliador-sintatico-com-importacao";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -78,7 +79,7 @@ export class NucleoExecucao
     interpretador: InterpretadorInterface;
     lexador: LexadorInterface<any>;
     avaliadorSintatico: AvaliadorSintaticoInterface<any, any>;
-    importador: ImportadorInterface<any, any>;
+    importador: ImportadorInterface<any>;
     resolvedor: {
         resolver: (declaracoes: Declaracao[]) => Promise<Declaracao[]>;
     };
@@ -146,7 +147,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoBirl();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -168,7 +168,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoEguaClassico();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -184,7 +183,6 @@ export class NucleoExecucao
                 this.resolvedor = new ResolvedorMapler();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -208,7 +206,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -221,7 +218,7 @@ export class NucleoExecucao
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha
                       )
-                    : new Interpretador(
+                    : new InterpretadorComImportacao(
                           this.importador,
                           process.cwd(),
                           performance,
@@ -235,7 +232,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoPortugolIpt();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -259,7 +255,6 @@ export class NucleoExecucao
                     new AvaliadorSintaticoPortugolStudio();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -285,7 +280,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoPotigol();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -308,7 +302,6 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoVisuAlg();
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
@@ -332,14 +325,13 @@ export class NucleoExecucao
                 break;
             default:
                 this.lexador = new Lexador(performance);
-                this.avaliadorSintatico = new AvaliadorSintatico(performance);
                 this.importador = new Importador(
                     this.lexador,
-                    this.avaliadorSintatico,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
                 );
+                this.avaliadorSintatico = new AvaliadorSintaticoComImportacao(this.importador);
 
                 this.interpretador = depurador
                     ? new InterpretadorComDepuracaoImportacao(
@@ -348,7 +340,7 @@ export class NucleoExecucao
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha
                       )
-                    : new Interpretador(
+                    : new InterpretadorComImportacao(
                           this.importador,
                           process.cwd(),
                           performance,
@@ -369,13 +361,7 @@ export class NucleoExecucao
             retornoLexador,
             -1
         );
-        const { erros } = await this.executar({
-            conteudoArquivo: [codigo],
-            nomeArquivo: "",
-            hashArquivo: -1,
-            retornoLexador: retornoLexador,
-            retornoAvaliadorSintatico: retornoAvaliadorSintatico,
-        });
+        const { erros } = await this.executar(retornoAvaliadorSintatico.declaracoes);
 
         if (erros.length > 0) process.exit(70); // Código com exceções não tratadas
     }
@@ -402,7 +388,16 @@ export class NucleoExecucao
             true
         );
 
-        if (this.afericaoErros(retornoImportador)) {
+        if (this.afericaoErrosLexador(retornoImportador.retornoLexador)) {
+            process.exit(65); // Código para erro de avaliação antes da execução
+        }
+
+        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+            retornoImportador.retornoLexador, 
+            retornoImportador.hashArquivo
+        );
+
+        if (this.afericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico)) {
             process.exit(65); // Código para erro de avaliação antes da execução
         }
 
@@ -427,7 +422,7 @@ export class NucleoExecucao
         }
 
         if (this.modoDepuracao) {
-            let declaracoes = retornoImportador.retornoAvaliadorSintatico.declaracoes;
+            let declaracoes = retornoAvaliadorSintatico.declaracoes;
             if (this.resolvedor) {
                 declaracoes = await this.resolvedor.resolver(declaracoes);
             }
@@ -443,7 +438,7 @@ export class NucleoExecucao
                 );
             }
         } else {
-            const { erros } = await this.executar(retornoImportador);
+            const { erros } = await this.executar(retornoAvaliadorSintatico.declaracoes);
             errosExecucao = erros;
         }
 
@@ -504,11 +499,9 @@ export class NucleoExecucao
      * @returns Um objeto com o resultado da execução.
      */
     async executar(
-        retornoImportador: RetornoImportador<any, any>,
+        declaracoes: Declaracao[],
         manterAmbiente = false
     ): Promise<RetornoExecucaoInterface> {
-        let declaracoes = retornoImportador.retornoAvaliadorSintatico.declaracoes;
-
         if (this.resolvedor) {
             declaracoes = await this.resolvedor.resolver(declaracoes);
         }
@@ -563,19 +556,12 @@ export class NucleoExecucao
             -1
         );
         if (
-            this.afericaoErros({
-                retornoLexador,
-                retornoAvaliadorSintatico,
-            } as RetornoImportador<any, any>)
+            this.afericaoErrosLexador(retornoLexador) || this.afericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico)
         ) {
             return { resultado: [] } as RetornoExecucaoInterface;
         }
 
-        return await this.executar(
-            {
-                retornoLexador,
-                retornoAvaliadorSintatico,
-            } as RetornoImportador<any, any>,
+        return await this.executar(retornoAvaliadorSintatico.declaracoes,
             true
         );
     }

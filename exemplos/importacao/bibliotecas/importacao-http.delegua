@@ -1,0 +1,4 @@
+var http = importar("http");
+
+const clienteHttp = http.novoClienteHttp("https://github.com")
+escreva(clienteHttp.requisicaoGet("/DesignLiquido/delegua"))

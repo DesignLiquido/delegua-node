@@ -4,6 +4,6 @@ var resultadoRetornoNulo = teste.testeRetornoNulo()
 escreva(resultadoRetornoNulo)
 
 var resultadoSoma = teste.testeSoma(15, 10)
-escreva(resultadoSoma)testeEscreva
+escreva(resultadoSoma)
 
 teste.testeEscreva()

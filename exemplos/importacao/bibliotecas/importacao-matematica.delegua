@@ -1,0 +1,2 @@
+var matematica = importar('matematica')
+escreva(matematica.jurosSimples(2000, 1.9, 7))

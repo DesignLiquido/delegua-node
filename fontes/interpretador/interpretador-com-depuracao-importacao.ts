@@ -5,14 +5,21 @@ import { DeleguaModulo } from "@designliquido/delegua/estruturas";
 import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador";
 import { ImportadorInterface } from "../interfaces";
 
-import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
+import { ModuloDeclaracoes } from '../declaracoes';
 
-export class InterpretadorComDepuracaoImportacao extends InterpretadorComDepuracao {
-    importador: ImportadorInterface<SimboloInterface, Declaracao>;
+import * as comum from './comum';
+import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
+import { ImportarBiblioteca } from '../construtos';
+
+export class InterpretadorComDepuracaoImportacao 
+    extends InterpretadorComDepuracao 
+    implements InterpretadorComImportacaoInterface
+{
+    importador: ImportadorInterface<SimboloInterface>;
 
     constructor(
-        importador: ImportadorInterface<SimboloInterface, Declaracao>,
+        importador: ImportadorInterface<SimboloInterface>,
         diretorioBase: string, 
         funcaoDeRetorno: Function, 
         funcaoDeRetornoMesmaLinha: Function) 
@@ -21,12 +28,20 @@ export class InterpretadorComDepuracaoImportacao extends InterpretadorComDepurac
         this.importador = importador;
     }
 
+    async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
+        return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
+        return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+    }
+
     /**
      * Importa um arquivo como módulo.
      * @param declaracao A declaração de importação.
      * @returns Ou um `DeleguaModulo`, ou um dicionário de funções.
      */
-    async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
+    /* async visitarDeclaracaoImportar(declaracao: Importar): Promise<DeleguaModulo> {
         const caminhoRelativo = await this.avaliar(declaracao.caminho);
         const caminhoTotal = caminho.join(this.diretorioBase, caminhoRelativo);
         const nomeArquivo = caminho.basename(caminhoTotal);
@@ -67,5 +82,5 @@ export class InterpretadorComDepuracaoImportacao extends InterpretadorComDepurac
         }
 
         return novoModulo;
-    }
+    } */
 }
