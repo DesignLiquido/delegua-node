@@ -11,7 +11,7 @@ import {
     LexadorInterface,
     RetornoExecucaoInterface,
 } from "@designliquido/delegua/interfaces";
-import { AvaliadorSintatico } from "@designliquido/delegua/avaliador-sintatico";
+import { AvaliadorSintatico, PilhaEscopos } from "@designliquido/delegua/avaliador-sintatico";
 
 import {
     AvaliadorSintaticoEguaClassico,
@@ -71,6 +71,7 @@ import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretad
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
 import { AvaliadorSintaticoComImportacao } from "./avaliador-sintatico/avaliador-sintatico-com-importacao";
+import { InformacaoEscopo } from "@designliquido/delegua/avaliador-sintatico/informacao-escopo";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -461,6 +462,10 @@ export class NucleoExecucao
     async iniciarLairDelegua(): Promise<void> {
         const lexadorJson = new LexadorJson();
         const formatadorJson = new FormatadorJson();
+
+        // No modo LAIR, o avaliador sintático precisa manter as referências
+        // de tipos declaradas anteriormente.
+        (this.avaliadorSintatico as AvaliadorSintaticoComImportacao).modoLair = true;
 
         this.funcaoDeRetorno(`Usando dialeto: ${this.dialetos[this.dialeto]}`);
         this.funcaoDeRetorno(`Console da Linguagem Delégua v${this.versao}`);

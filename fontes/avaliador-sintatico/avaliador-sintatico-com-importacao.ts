@@ -28,6 +28,7 @@ import { ImportarBiblioteca } from "../construtos";
 export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     importador: ImportadorInterface<SimboloInterface>;
     arquivosImportados: string[];
+    modoLair: boolean;
 
     constructor(importador: ImportadorInterface<SimboloInterface>) {
         super();
@@ -220,6 +221,18 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             inicializador,
             tipo
         );
+    }
+
+    /**
+     * No modo LAIR, a pilha de escopos não deve ser reinicializada a cada execução.
+     * @returns Nada.
+     */
+    protected override inicializarPilhaEscopos(): void {
+        if (this.modoLair && !this.pilhaEscopos.eVazio()) {
+            return;
+        }
+
+        super.inicializarPilhaEscopos();
     }
 
     override analisar(
