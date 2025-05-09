@@ -72,7 +72,7 @@ const principal = async () => {
                 await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
             }
         } else {
-            delegua.iniciarLair();
+            delegua.iniciarLair(opcoes.dialeto || 'delegua');
         }
     }   
 };
