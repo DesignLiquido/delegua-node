@@ -3,9 +3,7 @@ import * as caminho from 'path';
 import * as sistemaArquivos from 'fs';
 
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
-import { FuncaoPadrao } from '@designliquido/delegua/estruturas/funcao-padrao';
-import { DeleguaModulo } from '@designliquido/delegua/estruturas/modulo';
-import { ClassePadrao } from '@designliquido/delegua/estruturas/classe-padrao';
+import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
 const carregarBibliotecaDelegua = (nome: string) => {
     let dadosDoModulo: any;
