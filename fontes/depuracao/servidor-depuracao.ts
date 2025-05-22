@@ -85,7 +85,7 @@ export class ServidorDepuracao {
         let retornoInterpretacao: RetornoExecucaoInterface;
         let resultadoInterpretacao: any[];
         try {
-            retornoInterpretacao = await this.instanciaNucleoExecucao.executarLinhas(expressaoAvaliar);
+            retornoInterpretacao = await this.instanciaNucleoExecucao.executarLinhas([expressaoAvaliar]);
             resultadoInterpretacao = retornoInterpretacao.resultado;
         } catch (erro: any) {
             resultadoInterpretacao = [String(erro)];
