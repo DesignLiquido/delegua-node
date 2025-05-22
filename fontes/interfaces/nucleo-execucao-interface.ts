@@ -7,5 +7,5 @@ export interface NucleoExecucaoInterface {
     funcaoDeRetorno: Function;
     interpretador: InterpretadorInterface;
 
-    executarUmaLinha(linha: string): Promise<RetornoExecucaoInterface>;
+    executarLinhas(linhas: string[]): Promise<RetornoExecucaoInterface>;
 }

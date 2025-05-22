@@ -2,7 +2,6 @@ import * as caminho from "path";
 import * as readline from "readline";
 
 import chalk from "chalk";
-import { colorize } from "json-colorizer";
 
 import {
     AvaliadorSintaticoInterface,
@@ -11,7 +10,6 @@ import {
     LexadorInterface,
     RetornoExecucaoInterface,
 } from "@designliquido/delegua/interfaces";
-import { AvaliadorSintatico, PilhaEscopos } from "@designliquido/delegua/avaliador-sintatico";
 
 import {
     AvaliadorSintaticoEguaClassico,
@@ -61,7 +59,7 @@ import { InterpretadorVisuAlg, InterpretadorVisuAlgComDepuracao } from "@designl
 import { Declaracao } from "@designliquido/delegua/declaracoes";
 import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces";
 
-import { Importador, RetornoImportador } from "./importador";
+import { Importador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
 import { ServidorDepuracao } from "./depuracao";
 import { FormatadorJson } from "./formatadores";
@@ -71,7 +69,7 @@ import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretad
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
 import { NucleoComum } from "./nucleo-comum";
 import { AvaliadorSintaticoComImportacao } from "./avaliador-sintatico/avaliador-sintatico-com-importacao";
-import { InformacaoEscopo } from "@designliquido/delegua/avaliador-sintatico/informacao-escopo";
+import { MaquinaEstadosLairBase, MaquinaEstadosLairDelegua, MaquinaEstadosLairPitugues } from "./maquinas-estados-lair";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -460,9 +458,6 @@ export class NucleoExecucao
      * ou seja, esperando como entrada linhas de código fornecidas pelo usuário.
      */
     async iniciarLairDelegua(): Promise<void> {
-        const lexadorJson = new LexadorJson();
-        const formatadorJson = new FormatadorJson();
-
         // No modo LAIR, o avaliador sintático precisa manter as referências
         // de tipos declaradas anteriormente.
         (this.avaliadorSintatico as AvaliadorSintaticoComImportacao).modoLair = true;
@@ -471,28 +466,24 @@ export class NucleoExecucao
         this.funcaoDeRetorno(`Console da Linguagem Delégua v${this.versao}`);
         this.funcaoDeRetorno("Pressione Ctrl + C para sair");
 
-        const interfaceLeitura = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-            prompt: "\ndelegua> ",
-        });
+        let maquinaEstadosLair: MaquinaEstadosLairBase;
+        switch (this.dialeto) {
+            case 'delegua':
+                maquinaEstadosLair = new MaquinaEstadosLairDelegua(
+                    this.executarLinhas.bind(this),
+                    this.funcaoDeRetorno.bind(this)
+                );
+                break;
+            case 'pitugues':
+                maquinaEstadosLair = new MaquinaEstadosLairPitugues(
+                    this.executarLinhas.bind(this),
+                    this.funcaoDeRetorno.bind(this)
+                );
+                break;
+        }
 
-        const isto = this;
-
-        this.interpretador.interfaceEntradaSaida = interfaceLeitura;
-
-        interfaceLeitura.prompt();
-        interfaceLeitura.on("line", async (linha: string) => {
-            const { resultado } = await isto.executarUmaLinha(linha);
-            if (resultado && resultado.length) {
-                const resultadoLexacao = lexadorJson.getTokens(resultado[0]);
-                const resultadoFormatacao =
-                    formatadorJson.formatar(resultadoLexacao);
-                isto.funcaoDeRetorno(colorize(resultadoFormatacao));
-            }
-
-            interfaceLeitura.prompt();
-        });
+        maquinaEstadosLair.interfaceLeitura.prompt();
+        maquinaEstadosLair.interfaceLeitura.on("line", async (linha: string) => await maquinaEstadosLair.executarOuAcumular(linha));
     }
 
     /**
@@ -551,11 +542,11 @@ export class NucleoExecucao
 
     /**
      * Executa uma linha. Usado pelo modo LAIR e pelo servidor de depuração, quando recebe um comando 'avaliar'.
-     * @param linha A linha a ser avaliada.
+     * @param linhas As linhas a serem avaliada.
      * @returns O resultado da execução, com os retornos e respectivos erros, se houverem.
      */
-    async executarUmaLinha(linha: string): Promise<RetornoExecucaoInterface> {
-        const retornoLexador = this.lexador.mapear([linha], -1);
+    async executarLinhas(linhas: string[]): Promise<RetornoExecucaoInterface> {
+        const retornoLexador = this.lexador.mapear(linhas, -1);
         const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
             retornoLexador,
             -1
