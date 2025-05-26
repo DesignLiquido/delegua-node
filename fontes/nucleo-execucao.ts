@@ -62,8 +62,6 @@ import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces
 import { Importador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
 import { ServidorDepuracao } from "./depuracao";
-import { FormatadorJson } from "./formatadores";
-import { LexadorJson } from "./lexador/lexador-json";
 import { InterpretadorComImportacao } from "./interpretador";
 import { InterpretadorComDepuracaoImportacao } from "./interpretador/interpretador-com-depuracao-importacao";
 import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface";
@@ -384,7 +382,7 @@ export class NucleoExecucao
 
         const retornoImportador = this.importador.importar(
             caminhoRelativoArquivo,
-            true
+            -1
         );
 
         if (this.afericaoErrosLexador(retornoImportador.retornoLexador)) {

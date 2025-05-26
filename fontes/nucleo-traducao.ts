@@ -129,7 +129,7 @@ export class NucleoTraducao
 
         const retornoImportador = this.importador.importar(
             caminhoRelativoArquivo,
-            true
+            -1
         );
 
         let resultado = null;

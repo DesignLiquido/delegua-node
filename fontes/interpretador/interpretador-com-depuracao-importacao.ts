@@ -7,6 +7,7 @@ import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador
 import { ImportarBiblioteca } from '../construtos';
 
 import * as comum from './comum';
+import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 
 export class InterpretadorComDepuracaoImportacao 
     extends InterpretadorComDepuracao 
@@ -26,6 +27,10 @@ export class InterpretadorComDepuracaoImportacao
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    override async visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
+        return comum.visitarDeclaracaoDefinicaoFuncao(this, funcaoDeclaracao);
     }
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {

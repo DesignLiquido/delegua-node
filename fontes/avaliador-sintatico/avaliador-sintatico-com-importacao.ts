@@ -1,11 +1,16 @@
 import {
     AcessoMetodo,
     AcessoMetodoOuPropriedade,
+    AcessoPropriedade,
     AvaliadorSintatico,
+    Chamada,
     Classe,
     Construto,
     Declaracao,
+    ErroAvaliadorSintatico,
+    Importar,
     Literal,
+    ReferenciaFuncao,
     RetornoAvaliadorSintatico,
     RetornoLexador,
     SimboloInterface,
@@ -59,7 +64,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         const resultadoImportacao = this.importador.importar(
             literalCaminho.valor,
-            false
+            caminho.hashArquivo
         );
 
         // Havendo erros no lexador, levantamos um erro de avaliação sintática na
@@ -212,6 +217,40 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         tipo: string
     ): string {
         switch (inicializador.constructor.name) {
+            case 'Chamada':
+                const entidadeChamadaChamada = (inicializador as Chamada).entidadeChamada;
+                switch (entidadeChamadaChamada.constructor.name) {
+                    case 'AcessoMetodo':
+                        const entidadeChamadaAcessoMetodo = entidadeChamadaChamada as AcessoMetodo;
+                        return entidadeChamadaAcessoMetodo.tipoRetornoMetodo;
+                    case 'AcessoMetodoOuPropriedade':
+                        // Este caso ocorre quando a variável/constante é do tipo 'qualquer', 
+                        // e a chamada normalmente é feita para uma primitiva. 
+                        // A inferência, portanto, ocorre pelo uso da primitiva.
+                        const entidadeChamadaAcessoMetodoOuPropriedade = entidadeChamadaChamada as AcessoMetodoOuPropriedade;
+                        if (this.primitivasConhecidas.hasOwnProperty(entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema)) {
+                            return this.primitivasConhecidas[entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema];
+                        }
+
+                        throw new ErroAvaliadorSintatico(
+                            entidadeChamadaAcessoMetodoOuPropriedade.simbolo, 
+                            `Primitiva '${entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema}' não existe.`
+                        );
+                    case 'AcessoPropriedade':
+                        const entidadeChamadaAcessoPropriedade = entidadeChamadaChamada as AcessoPropriedade;
+                        return entidadeChamadaAcessoPropriedade.tipoRetornoPropriedade;
+                    case 'ArgumentoReferenciaFuncao':
+                        // TODO: Voltar aqui se necessário.
+                        return 'qualquer';
+                    case 'ReferenciaFuncao':
+                        const entidadeChamadaReferenciaFuncao = entidadeChamadaChamada as ReferenciaFuncao;
+                        return entidadeChamadaReferenciaFuncao.tipo;
+                    case 'Variavel':
+                        const entidadeChamadaVariavel = entidadeChamadaChamada as Variavel;
+                        return entidadeChamadaVariavel.tipo;
+                }
+
+                break;
             case "ImportarBiblioteca":
             case "ModuloDeclaracoes":
                 return "módulo";

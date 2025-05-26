@@ -1,3 +1,6 @@
+import { DeleguaFuncao, DeleguaModulo } from "@designliquido/delegua/interpretador/estruturas";
+import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
+
 import { ImportarBiblioteca } from "../construtos";
 import { ModuloDeclaracoes } from "../declaracoes";
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
@@ -16,11 +19,37 @@ export async function visitarConstrutoImportarBiblioteca(
     }
 }
 
+export async function visitarDeclaracaoDefinicaoFuncao(
+    interpretador: InterpretadorComImportacaoInterface,
+    funcaoDeclaracao: FuncaoDeclaracao
+) {
+    const funcao = new DeleguaFuncao(funcaoDeclaracao.simbolo.lexema, funcaoDeclaracao.funcao);
+    // TODO: Depreciar essa abordagem a favor do uso por referências.
+    interpretador.pilhaEscoposExecucao.definirVariavel(funcaoDeclaracao.simbolo.lexema, funcao);
+    interpretador.pilhaEscoposExecucao.registrarReferenciaFuncao(funcaoDeclaracao.id, funcao);
+    return funcao;
+}
+
 export async function visitarDeclaracaoModuloDeclaracoes(
     interpretador: InterpretadorComImportacaoInterface,
     declaracao: ModuloDeclaracoes
 ) {
+    // TODO: Colocar nome em `ModuloDeclaracoes`.
+    const modulo = new DeleguaModulo();
     for (const subdeclaracao of declaracao.declaracoes) {
-        await interpretador.avaliar(subdeclaracao);
+        const componente = await interpretador.avaliar(subdeclaracao);
+        if (componente) {
+            switch (componente.constructor.name) {
+                case 'DeleguaFuncao':
+                    const componenteDeleguaFuncao = componente as DeleguaFuncao;
+                    modulo.componentes[componenteDeleguaFuncao.nome] = componente;
+                    break;
+                default:
+                    console.warn("Tratar: ", componente.constructor.name);
+                    break;
+            }           
+        }
     }
+
+    return modulo;
 }

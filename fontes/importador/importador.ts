@@ -36,12 +36,15 @@ export class Importador implements ImportadorInterface<SimboloInterface> {
 
     importar(
         caminhoRelativoArquivo: string,
-        importacaoInicial: boolean = false
+        hashArquivoAnterior: number
     ): RetornoImportador<SimboloInterface> {
         const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
-        let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
-        if (importacaoInicial) {
+        let caminhoAbsolutoArquivo: string;
+        if (hashArquivoAnterior < 0) {
             caminhoAbsolutoArquivo = caminho.resolve(caminhoRelativoArquivo);
+        } else {
+            const diretorioFonte = caminho.dirname(this.arquivosAbertos[hashArquivoAnterior]);
+            caminhoAbsolutoArquivo = caminho.resolve(diretorioFonte, caminhoRelativoArquivo);
         }
 
         const hashArquivo = cyrb53(caminhoAbsolutoArquivo.toLowerCase());
@@ -61,7 +64,7 @@ export class Importador implements ImportadorInterface<SimboloInterface> {
             .map(linha => linha + '\0');
 
         const retornoLexador = this.lexador.mapear(conteudoDoArquivo, hashArquivo);
-        this.arquivosAbertos[hashArquivo] = caminho.resolve(caminhoRelativoArquivo);
+        this.arquivosAbertos[hashArquivo] = caminho.resolve(caminhoAbsolutoArquivo);
 
         if (this.depuracao) {
             this.conteudoArquivosAbertos[hashArquivo] = conteudoDoArquivo;

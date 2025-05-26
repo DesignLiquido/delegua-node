@@ -6,6 +6,6 @@ export interface ImportadorInterface<TSimbolo> {
 
     importar(
         caminhoRelativoArquivo: string,
-        importacaoInicial: boolean
+        hashArquivoAnterior: number
     ): RetornoImportador<TSimbolo>;
 }
