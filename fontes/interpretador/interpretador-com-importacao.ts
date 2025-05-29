@@ -1,14 +1,15 @@
-import { ImportadorInterface } from '../interfaces/importador-interface';
-
+import { Declaracao, FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
+
+import tipoDeDadosPrimitivos from '@designliquido/delegua/tipos-de-dados/primitivos';
+
 import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
+import { ImportadorInterface } from '../interfaces/importador-interface';
 import { ModuloDeclaracoes } from '../declaracoes';
+import { ImportarBiblioteca } from '../construtos';
 
 import * as comum from './comum';
-import { ImportarBiblioteca } from '../construtos';
-import { FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
-
 
 /**
  * O Interpretador visita todos os elementos complexos gerados pelo avaliador sintático (_parser_),
@@ -29,6 +30,20 @@ export class InterpretadorComImportacao
     ) {
         super(diretorioBase, performance, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
         this.importador = importador;
+    }
+
+    override async executar(declaracao: Declaracao, mostrarResultado = false): Promise<any> {
+        const resultado = super.executar(declaracao);
+
+        if (mostrarResultado) {
+            this.funcaoDeRetorno(this.paraTexto(resultado));
+        }
+
+        if (resultado || typeof resultado === tipoDeDadosPrimitivos.BOOLEANO) {
+            this.resultadoInterpretador.push(this.paraTexto(resultado));
+        }
+
+        return resultado;
     }
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
