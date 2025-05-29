@@ -33,7 +33,7 @@ export class InterpretadorComImportacao
     }
 
     override async executar(declaracao: Declaracao, mostrarResultado = false): Promise<any> {
-        const resultado = super.executar(declaracao);
+        const resultado = await super.executar(declaracao);
 
         if (mostrarResultado) {
             this.funcaoDeRetorno(this.paraTexto(resultado));

@@ -1,5 +1,6 @@
-import { Delegua } from './delegua';
 import { Command } from 'commander';
+
+import { Delegua } from './delegua';
 
 const principal = async () => {
     const analisadorArgumentos = new Command();

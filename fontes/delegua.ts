@@ -11,7 +11,7 @@ import { NucleoExecucao } from './nucleo-execucao';
 import { NucleoTraducao } from './nucleo-traducao';
 
 /**
- * O núcleo da linguagem.
+ * O núcleo de execução e tradução de Delégua para Node.js.
  *
  * Responsável por avaliar a entrada fornecida, chamar o núcleo 
  * correspondente à operação solicitada e observar a execução.
