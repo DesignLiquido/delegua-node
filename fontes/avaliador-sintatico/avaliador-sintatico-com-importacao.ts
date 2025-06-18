@@ -8,7 +8,6 @@ import {
     Construto,
     Declaracao,
     ErroAvaliadorSintatico,
-    Importar,
     Literal,
     ReferenciaFuncao,
     RetornoAvaliadorSintatico,
@@ -212,6 +211,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         return entidadeChamadaResolvida;
     }
 
+    // TODO: Preterir completamente este método na próxima versão do núcleo.
     override logicaComumInferenciaTiposVariaveisEConstantes(
         inicializador: Construto,
         tipo: string
@@ -227,9 +227,10 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                         // Este caso ocorre quando a variável/constante é do tipo 'qualquer', 
                         // e a chamada normalmente é feita para uma primitiva. 
                         // A inferência, portanto, ocorre pelo uso da primitiva.
+                        // TODO: Mover esta lógica para o núcleo na próxima versão.
                         const entidadeChamadaAcessoMetodoOuPropriedade = entidadeChamadaChamada as AcessoMetodoOuPropriedade;
                         if (this.primitivasConhecidas.hasOwnProperty(entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema)) {
-                            return this.primitivasConhecidas[entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema];
+                            return this.primitivasConhecidas[entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema].tipo;
                         }
 
                         throw new ErroAvaliadorSintatico(
