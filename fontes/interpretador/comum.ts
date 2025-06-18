@@ -40,12 +40,13 @@ export async function visitarDeclaracaoModuloDeclaracoes(
         const componente = await interpretador.avaliar(subdeclaracao);
         if (componente) {
             switch (componente.constructor.name) {
+                case '_DeleguaFuncao':
                 case 'DeleguaFuncao':
                     const componenteDeleguaFuncao = componente as DeleguaFuncao;
                     modulo.componentes[componenteDeleguaFuncao.nome] = componente;
                     break;
                 default:
-                    console.warn("Tratar: ", componente.constructor.name);
+                    console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", componente.constructor.name);
                     break;
             }           
         }

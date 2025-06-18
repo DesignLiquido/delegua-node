@@ -60,7 +60,7 @@ Isso cadastra o repositório como um link simbólico. Para considerar este link 
 yarn link "@designliquido/nome-do-pacote"
 ```
 
-Por exemplo, se formos linkar o núcleo de Delégua, usamos:
+Por exemplo, se formos _linkar_ o núcleo de Delégua, usamos:
 
 ```sh
 yarn link "@designliquido/delegua"
