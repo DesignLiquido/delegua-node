@@ -12,12 +12,12 @@
         "testes:servidor-depuracao": "yarn ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/birl": "^0.1.21",
-        "@designliquido/delegua": "^0.42.1",
-        "@designliquido/mapler": "^0.1.22",
-        "@designliquido/portugol-studio": "^0.4.20",
-        "@designliquido/potigol": "^0.1.25",
-        "@designliquido/visualg": "^0.3.20",
+        "@designliquido/birl": "^0.1.22",
+        "@designliquido/delegua": "^0.43.0",
+        "@designliquido/mapler": "^0.1.23",
+        "@designliquido/portugol-studio": "^0.4.21",
+        "@designliquido/potigol": "^0.1.26",
+        "@designliquido/visualg": "^0.3.22",
         "chalk": "4.1.2",
         "commander": "^14.0.0",
         "json-colorizer": "^3.0.1"
