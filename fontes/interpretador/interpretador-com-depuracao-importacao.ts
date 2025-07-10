@@ -1,5 +1,6 @@
-import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador";
+import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador/depuracao";
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
+import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 
 import { ImportadorInterface } from "../interfaces";
 import { ModuloDeclaracoes } from '../declaracoes';
@@ -7,7 +8,6 @@ import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador
 import { ImportarBiblioteca } from '../construtos';
 
 import * as comum from './comum';
-import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 
 export class InterpretadorComDepuracaoImportacao 
     extends InterpretadorComDepuracao 
