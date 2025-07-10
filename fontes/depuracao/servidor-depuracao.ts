@@ -107,7 +107,10 @@ export class ServidorDepuracao {
         linhasResposta += '--- avaliar-variavel-resposta ---\n';
 
         try {
-            linhasResposta += JSON.stringify(this.interpretador.obterVariavel(nomeVariavel)) + '\n';
+            // TODO: Há uma condição de corrida aqui, mas `obterVariavel` deixou de ser um método de
+            // `InterpretadorComDepuracaoInterface`. 
+            // Voltar nessa questão quando for relevante.
+            linhasResposta += JSON.stringify((this.interpretador as any).obterVariavel(nomeVariavel)) + '\n';
         } catch (erro: any) {
             linhasResposta += String(erro) + '\n';
         }
