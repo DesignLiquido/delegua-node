@@ -68,6 +68,7 @@ import { NucleoExecucaoInterface } from "./interfaces/nucleo-execucao-interface"
 import { NucleoComum } from "./nucleo-comum";
 import { AvaliadorSintaticoComImportacao } from "./avaliador-sintatico/avaliador-sintatico-com-importacao";
 import { MaquinaEstadosLairBase, MaquinaEstadosLairDelegua, MaquinaEstadosLairPitugues } from "./maquinas-estados-lair";
+import { AvaliadorSintaticoPituguesComImportacao } from "./avaliador-sintatico/dialetos/avaliador-sintatico-pitugues-com-importacao";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -200,13 +201,13 @@ export class NucleoExecucao
             case "pitugues":
             case "pituguês":
                 this.lexador = new LexadorPitugues();
-                this.avaliadorSintatico = new AvaliadorSintaticoPitugues();
                 this.importador = new Importador(
                     this.lexador,
                     this.arquivosAbertos,
                     this.conteudoArquivosAbertos,
                     depurador
                 );
+                this.avaliadorSintatico = new AvaliadorSintaticoPituguesComImportacao(this.importador);
 
                 this.interpretador = depurador
                     ? new InterpretadorComDepuracaoImportacao(

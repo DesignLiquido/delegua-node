@@ -1,5 +1,5 @@
 import {
-    AvaliadorSintatico,
+    AvaliadorSintaticoPitugues,
     Classe,
     Declaracao,
     Literal,
@@ -10,12 +10,12 @@ import {
 
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 
-import { ImportadorInterface } from "../interfaces";
-import { ModuloDeclaracoes } from "../declaracoes";
-import { ImportarBiblioteca } from "../construtos";
+import { ImportadorInterface } from "../../interfaces";
+import { ModuloDeclaracoes } from "../../declaracoes";
+import { ImportarBiblioteca } from "../../construtos";
 
 
-export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
+export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoPitugues {
     importador: ImportadorInterface<SimboloInterface>;
     arquivosImportados: string[];
     modoLair: boolean;
@@ -67,7 +67,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             );
         }
 
-        const avaliadorSintaticoModulo = new AvaliadorSintaticoComImportacao(
+        const avaliadorSintaticoModulo = new AvaliadorSintaticoPituguesComImportacao(
             this.importador
         );
         const resultadoAvaliacaoSintaticaModulo =
@@ -115,6 +115,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         arquivosImportados?: string[]
     ): RetornoAvaliadorSintatico<Declaracao> {
         this.arquivosImportados = arquivosImportados || [];
+        
         return super.analisar(retornoLexador, hashArquivo);
     }
 }
