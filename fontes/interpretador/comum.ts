@@ -35,18 +35,20 @@ export async function visitarDeclaracaoModuloDeclaracoes(
     declaracao: ModuloDeclaracoes
 ) {
     // TODO: Colocar nome em `ModuloDeclaracoes`.
+    // O problema é como definir o nome do módulo.
+    // Talvez o prefixo do arquivo?
     const modulo = new DeleguaModulo();
     for (const subdeclaracao of declaracao.declaracoes) {
         const componente = await interpretador.avaliar(subdeclaracao);
         if (componente) {
-            switch (componente.constructor.name) {
-                case '_DeleguaFuncao':
+            const classeComponenteResolvida = componente.constructor.name.replaceAll('_', '');
+            switch (classeComponenteResolvida) {
                 case 'DeleguaFuncao':
                     const componenteDeleguaFuncao = componente as DeleguaFuncao;
                     modulo.componentes[componenteDeleguaFuncao.nome] = componente;
                     break;
                 default:
-                    console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", componente.constructor.name);
+                    console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", classeComponenteResolvida);
                     break;
             }           
         }

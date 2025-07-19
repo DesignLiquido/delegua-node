@@ -6,6 +6,7 @@ import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador
  * Declaração devolvida ao importar um módulo.
  */
 export class ModuloDeclaracoes extends Declaracao {
+    nomeModulo?: string;
     declaracoes: Declaracao[];
 
     constructor(linha: number, hashArquivo: number, decoradores: Decorador[], declaracoes: Declaracao[]) {

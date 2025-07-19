@@ -74,14 +74,15 @@ const modularizarBiblioteca = (dadosDoModulo: any, nome: string) => {
 const importarPacoteCaminhoBase = async (caminhoRelativo: string) => {
     let resultado = null;
     const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-    const global = processoFilho.spawnSync(npm, ['root', '--location=global']);
+    const comandoDescobertaDiretorioGlobal = processoFilho.spawnSync(npm, ['root', '--location=global']);
+    const diretorioGlobal = comandoDescobertaDiretorioGlobal.output[1].toString().trim();
 
-    const caminhoAbsoluto = caminho.join(global.output[1].toString().trim()) + `\\${caminhoRelativo}\\package.json`;
+    const caminhoAbsolutoPacote = caminho.join(diretorioGlobal) + `\\${caminhoRelativo}\\package.json`;
 
-    let arquivoInicio = JSON.parse(sistemaArquivos.readFileSync(caminhoAbsoluto, 'utf-8')).main || 'index.js';
+    let arquivoInicio = JSON.parse(sistemaArquivos.readFileSync(caminhoAbsolutoPacote, 'utf-8')).main || 'index.js';
 
     await import(
-        caminho.join('file:///' + global.output[1].toString().trim()) +
+        caminho.join('file:///' + diretorioGlobal) +
             `\\${caminhoRelativo}\\${arquivoInicio.replace('./', '')}`
     ).then((resposta) => {
         resultado = resposta;
