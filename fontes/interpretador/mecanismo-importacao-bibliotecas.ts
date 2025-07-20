@@ -6,20 +6,19 @@ import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
 const carregarBibliotecaDelegua = (nome: string) => {
-    let dadosDoModulo: any;
-
     try {
-        dadosDoModulo = require(nome);
+        const dadosDoManifesto = require(nome + '/delegua-modulo');
+        const primeiroManifesto = Object.entries(dadosDoManifesto)[0];
+        return modularizarBibliotecaPorManifesto(primeiroManifesto[1] as any, nome);
     } catch (erro: any) {
-        // Biblioteca não existe localmente. Tentar importação global
+        // Biblioteca não existe localmente. Tentar importação global.
         try {
-            dadosDoModulo = importarPacoteDeleguaCompleto(nome);
+            const dadosDoModulo = importarPacoteDeleguaCompleto(nome);
+            return modularizarBibliotecaNpmPadrao(dadosDoModulo, nome);
         } catch (erro2: any) {
-            throw new ErroEmTempoDeExecucao(null, `Biblioteca ${nome} não encontrada para importação.`);
+            throw new ErroEmTempoDeExecucao(null, `Biblioteca ${nome} não encontrada para importação, nem por referência local, nem por instalação global.`);
         }
     }
-
-    return modularizarBiblioteca(dadosDoModulo, nome);
 };
 
 const carregarBiblioteca = async (nomeDaBiblioteca: string, caminhoDaBiblioteca: any) => {
@@ -33,17 +32,40 @@ const carregarBiblioteca = async (nomeDaBiblioteca: string, caminhoDaBiblioteca:
         } catch (erro2: any) {
             throw new ErroEmTempoDeExecucao(
                 null,
-                `Biblioteca ${nomeDaBiblioteca} não encontrada para importação. Informações adicionais: ${
-                    erro2?.message || '(nenhuma)'
+                `Biblioteca ${nomeDaBiblioteca} não encontrada para importação. Informações adicionais: ${erro2?.message || '(nenhuma)'
                 }`
             );
         }
     }
 
-    return modularizarBiblioteca(dadosDoModulo, nomeDaBiblioteca);
+    return modularizarBibliotecaNpmPadrao(dadosDoModulo, nomeDaBiblioteca);
 };
 
-const modularizarBiblioteca = (dadosDoModulo: any, nome: string) => {
+const modularizarBibliotecaPorManifesto = (
+    manifestoModulo: { [nomeMetodo: string]: { 
+        documentacao?: string,
+        tipoRetorno: string, 
+        funcao: Function, 
+        argumentos: { nome: string, tipo: string }[] 
+    } }, 
+    nome: string
+) => {
+    const novoModulo = new DeleguaModulo(nome);
+
+    for (const [metodo, dadosMetodo] of Object.entries(manifestoModulo)) {
+        const funcaoPadrao = new FuncaoPadrao(dadosMetodo.argumentos.length, dadosMetodo.funcao);
+        // TODO: Remover cast para any pós lançamento de versão do núcleo.
+        (funcaoPadrao as any).descartarPrimeiroArgumento = false;
+        (funcaoPadrao as any).argumentos = dadosMetodo.argumentos;
+        (funcaoPadrao as any).tipoRetorno = dadosMetodo.tipoRetorno;
+        // (funcaoPadrao as any).documentacao = dadosMetodo.documentacao;
+        novoModulo.componentes[metodo] = funcaoPadrao;
+    }
+
+    return novoModulo;
+}
+
+const modularizarBibliotecaNpmPadrao = (dadosDoModulo: any, nome: string) => {
     const novoModulo = new DeleguaModulo(nome);
 
     const chaves = Object.keys(dadosDoModulo);
@@ -77,17 +99,17 @@ const importarPacoteCaminhoBase = async (caminhoRelativo: string) => {
     const comandoDescobertaDiretorioGlobal = processoFilho.spawnSync(npm, ['root', '--location=global']);
     const diretorioGlobal = comandoDescobertaDiretorioGlobal.output[1].toString().trim();
 
-    const caminhoAbsolutoPacote = caminho.join(diretorioGlobal) + `\\${caminhoRelativo}\\package.json`;
+    const caminhoAbsolutoPacote = caminho.join(diretorioGlobal, caminhoRelativo);
+    const caminhoAbsolutoPackageJson = caminho.join(caminhoAbsolutoPacote, 'package.json');
 
-    let arquivoInicio = JSON.parse(sistemaArquivos.readFileSync(caminhoAbsolutoPacote, 'utf-8')).main || 'index.js';
+    let arquivoInicio = JSON.parse(sistemaArquivos.readFileSync(caminhoAbsolutoPackageJson, 'utf-8')).main || 'index.js';
 
-    await import(
+    const resposta = await import(
         caminho.join('file:///' + diretorioGlobal) +
-            `\\${caminhoRelativo}\\${arquivoInicio.replace('./', '')}`
-    ).then((resposta) => {
-        resultado = resposta;
-    });
+        `\\${caminhoRelativo}\\${arquivoInicio.replace('./', '')}`
+    );
 
+    resultado = resposta;
     return resultado;
 };
 
