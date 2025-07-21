@@ -1,6 +1,9 @@
 import {
+    AcessoMetodo,
     AvaliadorSintatico,
+    Chamada,
     Classe,
+    Construto,
     Declaracao,
     Literal,
     RetornoAvaliadorSintatico,
@@ -13,6 +16,8 @@ import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 import { ImportadorInterface } from "../interfaces";
 import { ModuloDeclaracoes } from "../declaracoes";
 import { ImportarBiblioteca } from "../construtos";
+import { carregarBibliotecaDelegua, verificarModulosDelegua } from "fontes/mecanismo-importacao-bibliotecas";
+import { InformacaoVariavelOuConstante } from "@designliquido/delegua/informacao-variavel-ou-constante";
 
 
 export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
@@ -24,6 +29,53 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         super();
         this.arquivosImportados = [];
         this.importador = importador;
+    }
+
+    override finalizarChamada(entidadeChamada: Construto, tipoPrimitiva?: string | undefined): Chamada {
+        const chamadaResolvida = super.finalizarChamada(entidadeChamada, tipoPrimitiva);
+        if (chamadaResolvida.entidadeChamada instanceof AcessoMetodo && chamadaResolvida.entidadeChamada.objeto.tipo === 'módulo') {
+            // Espera-se que o módulo esteja devidamente registrado.
+            const entidadeChamadaResolvida = chamadaResolvida.entidadeChamada as AcessoMetodo;
+            const objetoEntidadeChamada = (entidadeChamadaResolvida.objeto as any);
+            if (objetoEntidadeChamada && objetoEntidadeChamada.simbolo.lexema in this.primitivasConhecidas) {
+                const moduloCorrespondente = this.primitivasConhecidas[objetoEntidadeChamada.simbolo.lexema];
+                if (entidadeChamadaResolvida.nomeMetodo in moduloCorrespondente) {
+                    chamadaResolvida.tipo = moduloCorrespondente[entidadeChamadaResolvida.nomeMetodo].tipo;
+                }
+            }
+        }
+
+        return chamadaResolvida;
+    }
+
+    protected importarBibliotecaNode(literalCaminho: Literal): ImportarBiblioteca {
+        const bibliotecaResolvida = verificarModulosDelegua(literalCaminho.valor);
+        if (bibliotecaResolvida) {
+            const moduloResolvido = carregarBibliotecaDelegua(bibliotecaResolvida as string);
+
+            this.primitivasConhecidas[literalCaminho.valor] = {};
+            for (const [nomeComponente, dadosComponente] of Object.entries(moduloResolvido.componentes)) {
+                // TODO: Tipar isso corretamente na próxima versão do núcleo.
+                const dadosComponenteResolvido = dadosComponente as any;
+                const componente = new InformacaoVariavelOuConstante(
+                    nomeComponente, 
+                    dadosComponenteResolvido.tipoRetorno, 
+                    []
+                );
+
+                for (const argumento of dadosComponenteResolvido.argumentos) {
+                    componente.argumentos.push(new InformacaoVariavelOuConstante(argumento.nome, argumento.tipo));
+                }
+
+                this.primitivasConhecidas[literalCaminho.valor][nomeComponente] = componente;
+            }
+        }
+
+        return new ImportarBiblioteca(
+            literalCaminho.hashArquivo,
+            literalCaminho.linha,
+            literalCaminho.valor
+        );
     }
 
     override declaracaoImportar(): any {
@@ -40,11 +92,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         // Chegando aqui sem erros, a importação é sintaticamente válida.
         const literalCaminho = caminho as Literal;
         if (!literalCaminho.valor.endsWith('.delegua')) {
-            return new ImportarBiblioteca(
-                literalCaminho.hashArquivo,
-                literalCaminho.linha,
-                literalCaminho.valor
-            );
+            return this.importarBibliotecaNode(literalCaminho);
         }
 
         const resultadoImportacao = this.importador.importar(

@@ -5,7 +5,7 @@ import * as sistemaArquivos from 'fs';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
-const carregarBibliotecaDelegua = (nome: string) => {
+export const carregarBibliotecaDelegua = (nome: string) => {
     try {
         const dadosDoManifesto = require(nome + '/delegua-modulo');
         const primeiroManifesto = Object.entries(dadosDoManifesto)[0];
@@ -121,7 +121,7 @@ const importarPacoteExternoCompleto = async (nome: string) => {
     return await importarPacoteCaminhoBase(nome);
 };
 
-const verificarModulosDelegua = (nome: string): string | boolean => {
+export const verificarModulosDelegua = (nome: string): string | boolean => {
     const modulos = {
         estatistica: '@designliquido/delegua-estatistica',
         estatística: '@designliquido/delegua-estatistica',

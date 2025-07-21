@@ -5,7 +5,7 @@ import { ImportarBiblioteca } from "../construtos";
 import { ModuloDeclaracoes } from "../declaracoes";
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
 
-import carregarBibliotecaNode from './mecanismo-importacao-bibliotecas';
+import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
 
 export async function visitarConstrutoImportarBiblioteca(
     _: InterpretadorComImportacaoInterface,
