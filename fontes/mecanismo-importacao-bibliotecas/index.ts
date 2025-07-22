@@ -54,11 +54,10 @@ const modularizarBibliotecaPorManifesto = (
 
     for (const [metodo, dadosMetodo] of Object.entries(manifestoModulo)) {
         const funcaoPadrao = new FuncaoPadrao(dadosMetodo.argumentos.length, dadosMetodo.funcao);
-        // TODO: Remover cast para any pós lançamento de versão do núcleo.
-        (funcaoPadrao as any).descartarPrimeiroArgumento = false;
-        (funcaoPadrao as any).argumentos = dadosMetodo.argumentos;
-        (funcaoPadrao as any).tipoRetorno = dadosMetodo.tipoRetorno;
-        // (funcaoPadrao as any).documentacao = dadosMetodo.documentacao;
+        funcaoPadrao.descartarPrimeiroArgumento = false;
+        funcaoPadrao.argumentos = dadosMetodo.argumentos;
+        funcaoPadrao.tipoRetorno = dadosMetodo.tipoRetorno;
+        // funcaoPadrao.documentacao = dadosMetodo.documentacao;
         novoModulo.componentes[metodo] = funcaoPadrao;
     }
 

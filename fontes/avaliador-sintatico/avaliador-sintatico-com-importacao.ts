@@ -11,13 +11,15 @@ import {
     SimboloInterface
 } from "@designliquido/delegua";
 
+import { InformacaoVariavelOuConstante } from "@designliquido/delegua/informacao-variavel-ou-constante";
+
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 
 import { ImportadorInterface } from "../interfaces";
 import { ModuloDeclaracoes } from "../declaracoes";
 import { ImportarBiblioteca } from "../construtos";
-import { carregarBibliotecaDelegua, verificarModulosDelegua } from "fontes/mecanismo-importacao-bibliotecas";
-import { InformacaoVariavelOuConstante } from "@designliquido/delegua/informacao-variavel-ou-constante";
+import { carregarBibliotecaDelegua, verificarModulosDelegua } from "../mecanismo-importacao-bibliotecas";
+import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 
 
 export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
@@ -55,8 +57,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
             this.primitivasConhecidas[literalCaminho.valor] = {};
             for (const [nomeComponente, dadosComponente] of Object.entries(moduloResolvido.componentes)) {
-                // TODO: Tipar isso corretamente na próxima versão do núcleo.
-                const dadosComponenteResolvido = dadosComponente as any;
+                // TODO: Verificar se sempre é o caso de ser função padrão.
+                const dadosComponenteResolvido = dadosComponente as FuncaoPadrao;
                 const componente = new InformacaoVariavelOuConstante(
                     nomeComponente, 
                     dadosComponenteResolvido.tipoRetorno, 
