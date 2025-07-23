@@ -12,6 +12,7 @@ import {
 } from "@designliquido/delegua";
 
 import { InformacaoVariavelOuConstante } from "@designliquido/delegua/informacao-variavel-ou-constante";
+import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 
@@ -19,8 +20,6 @@ import { ImportadorInterface } from "../interfaces";
 import { ModuloDeclaracoes } from "../declaracoes";
 import { ImportarBiblioteca } from "../construtos";
 import { carregarBibliotecaDelegua, verificarModulosDelegua } from "../mecanismo-importacao-bibliotecas";
-import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
-
 
 export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     importador: ImportadorInterface<SimboloInterface>;
@@ -61,7 +60,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 const dadosComponenteResolvido = dadosComponente as FuncaoPadrao;
                 const componente = new InformacaoVariavelOuConstante(
                     nomeComponente, 
-                    dadosComponenteResolvido.tipoRetorno, 
+                    dadosComponenteResolvido.tipoRetorno,
+                    true, 
                     []
                 );
 
