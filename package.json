@@ -26,7 +26,7 @@
         "@designliquido/delegua-estatistica": "^0.1.0",
         "@designliquido/delegua-fisica": "^0.1.0",
         "@designliquido/delegua-http": "^0.1.2",
-        "@designliquido/delegua-json": "^0.2.0",
+        "@designliquido/delegua-json": "^0.2.1",
         "@designliquido/delegua-matematica": "^0.3.0",
         "@designliquido/delegua-tempo": "^1.0.1",
         "@types/estree": "^1.0.7",
