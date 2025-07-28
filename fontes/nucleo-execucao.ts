@@ -13,7 +13,6 @@ import {
 
 import {
     AvaliadorSintaticoEguaClassico,
-    AvaliadorSintaticoPitugues,
     AvaliadorSintaticoPortugolIpt,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
 import {
