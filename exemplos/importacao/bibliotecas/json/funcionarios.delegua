@@ -1,6 +1,38 @@
 const json = importar('json')
-const jsonFuncionarios = json.importarArquivoJson("funcionarios.json")
+const jsonFuncionarios = json.importarArquivoJson('./funcionarios.json')
+
+var analiticosAreas = {}
+
+para cada area em jsonFuncionarios.areas {
+    analiticosAreas[area['codigo']] = {
+        'codigo': area['codigo'],
+        'nome': area['nome'],
+        'pessoaSalarioMaximo': nulo,
+        'pessoaSalarioMinimo': nulo,
+        'mediaSalarial': 0,
+        'totalSalarios': 0,
+        'numeroFuncionarios': 0
+    }
+}
 
 para cada funcionario em jsonFuncionarios.funcionarios {
-    escreva(funcionario["nome"])
+    var area = analiticosAreas[funcionario['area']]
+    area.totalSalarios += funcionario.salario
+    area.numeroFuncionarios += 1
+    se area.pessoaSalarioMaximo == nulo ou funcionario.salario > area.pessoaSalarioMaximo.salario {
+        area.pessoaSalarioMaximo = funcionario
+    }
+
+    se area.pessoaSalarioMinimo == nulo ou funcionario.salario < area.pessoaSalarioMinimo.salario {
+        area.pessoaSalarioMinimo = funcionario
+    }
 }
+
+escreva("Resultado total por área: ")
+para cada { siglaArea, valoresArea } em analiticosAreas {
+    valoresArea['mediaSalarial'] = valoresArea['totalSalarios'] / valoresArea['numeroFuncionarios']
+    escreva(siglaArea)
+    escreva(valoresArea)
+    escreva("----")
+}
+escreva(analiticosAreas)
