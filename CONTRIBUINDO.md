@@ -26,7 +26,7 @@ Delégua Node funciona em qualquer sistema operacional que tenha uma versão de 
 
 Para os fontes, usamos [TypeScript](https://www.typescriptlang.org/) (versão mais recente). Normalmente desenvolvemos em Visual Studio Code, e, ao abrir o projeto nele, já temos as configurações para depurar (debugar) Delégua Node. Outros editores podem ser usados, mas não temos arquivos de suporte a todos eles.
 
-Nós usamos testes unitários para testar todos os componentes de Delégua Node. Nossa biblioteca de testes é a Jest: https://jestjs.io/. Não é preciso escrever testes unitários para contribuir com o pacote.
+Usamos testes unitários para testar todos os componentes de Delégua Node. Nossa biblioteca de testes é a Jest: https://jestjs.io/. Não é preciso escrever testes unitários para contribuir com o pacote.
 
 ## Trabalhando na sua modificação
 
@@ -54,7 +54,7 @@ Para isso, você precisará clonar este repositório e os repositórios dependen
 yarn link
 ```
 
-Isso cadastra o repositório como um link simbólico. Para considerar este link simbólico neste repositório, utilize o comando:
+Isso cadastra o repositório como um _link_ (vínculo) simbólico. Para considerar este _link_ simbólico neste repositório, utilize o comando:
 
 ```sh
 yarn link "@designliquido/nome-do-pacote"
@@ -66,7 +66,37 @@ Por exemplo, se formos _linkar_ o núcleo de Delégua, usamos:
 yarn link "@designliquido/delegua"
 ```
 
-## Testando o servidor do depurador
+Por fim, comente as linhas que apontam para o diretório `dist` no arquivo `tsconfig.json` para cada pacote _linkado_. No nosso exemplo, as linhas abaixo devem ser descomentadas:
+
+```jsonc
+{
+    // ...
+    paths: {
+        // ...
+        // "@designliquido/delegua": ["node_modules/@designliquido/delegua/dist"],
+        // "@designliquido/delegua/*": ["node_modules/@designliquido/delegua/dist/*"],
+        // ...
+    }
+    // ...
+}
+```
+
+E descomente as linhas que apontam para o diretório `fontes`:
+
+```jsonc
+{
+    // ...
+    paths: {
+        // ...
+        "@designliquido/delegua": ["node_modules/@designliquido/delegua/fontes"],
+        "@designliquido/delegua/*": ["node_modules/@designliquido/delegua/fontes/*"],
+        // ...
+    }
+    // ...
+}
+```
+
+## Testando o servidor do depurador (depuração remota)
 
 Para testar o servidor do depurador, para depuração remota, execute:
 
@@ -74,7 +104,7 @@ Para testar o servidor do depurador, para depuração remota, execute:
 yarn testes:servidor-depuracao
 ```
 
-Abra outra shell (PowerShell, bash, etc.) e execute:
+Abra outra _shell_ (PowerShell, bash, etc.) e execute:
 
 ```bash
 nc localhost 7777
