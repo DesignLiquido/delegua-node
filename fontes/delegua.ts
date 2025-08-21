@@ -40,7 +40,7 @@ export class Delegua implements DeleguaInterface {
 
             return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.41';
         } catch (error: any) {
-            return '0.45 (núcleo, desenvolvimento)';
+            return '0.50 (núcleo, desenvolvimento)';
         }
     }
 
