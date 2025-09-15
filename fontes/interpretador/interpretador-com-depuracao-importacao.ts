@@ -1,6 +1,8 @@
 import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador/depuracao";
-import { SimboloInterface } from '@designliquido/delegua/interfaces';
-import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
+import { ResultadoParcialInterpretadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
+import { Declaracao, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
+import { DescritorTipoClasse } from "@designliquido/delegua/interpretador/estruturas";
+import { inferirTipoVariavel } from "@designliquido/delegua/inferenciador";
 
 import { ImportadorInterface } from "../interfaces";
 import { ModuloDeclaracoes } from '../declaracoes';
@@ -23,6 +25,50 @@ export class InterpretadorComDepuracaoImportacao
     {
         super(diretorioBase, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
         this.importador = importador;
+    }
+
+    /**
+     * Efetivamente executa uma declaração.
+     * Reintroduzido aqui porque o método `executar()` não está obedecendo à herança como deveria.
+     * 
+     * TODO: Remover após resolver o problema com a herança. 
+     *
+     * @param declaracao A declaração a ser executada.
+     * @returns O resultado parcial da execução, normalmente usado por
+     *          ferramentas externas.
+     */
+    override async executar(declaracao: Declaracao): Promise<ResultadoParcialInterpretadorInterface> {
+        const resultado: any = await declaracao.aceitar(this);
+
+        // Alguns casos não possuem retorno, como declarações `se`, `enquanto`, etc.,
+        // que não satisfazem suas respectivas condições.
+        if (resultado === null || resultado === undefined) {
+            return null;
+        }
+
+        // Se o retorno já possui um `valorRetornado`, apenas retorna o resultado.
+        if (resultado.hasOwnProperty('valorRetornado')) {
+            return resultado;
+        }
+
+        let tipoResultado = resultado.tipo;
+        switch (resultado.constructor) {
+            case DescritorTipoClasse:
+                tipoResultado = resultado.simboloOriginal.lexema;
+                break;
+            default:
+                if (!tipoResultado) {
+                    tipoResultado = inferirTipoVariavel(resultado);
+                }
+                break;
+        }
+
+        return {
+            hashArquivo: declaracao.hashArquivo,
+            linha: declaracao.linha,
+            valorRetornado: resultado,
+            tipo: tipoResultado,
+        } as ResultadoParcialInterpretadorInterface;
     }
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
