@@ -20,4 +20,8 @@ export class ImportarBiblioteca implements Construto {
     async aceitar(visitante: InterpretadorComImportacaoInterface): Promise<any> {
         return visitante.visitarConstrutoImportarBiblioteca(this);
     }
+
+    paraTexto(): string {
+        return `<importar-biblioteca />`;
+    }
 }

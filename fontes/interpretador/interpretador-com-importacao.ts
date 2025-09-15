@@ -40,7 +40,7 @@ export class InterpretadorComImportacao
         }
 
         if (resultado || typeof resultado === tipoDeDadosPrimitivos.BOOLEANO) {
-            this.resultadoInterpretador.push(this.paraTexto(resultado));
+            this.resultadoInterpretador.push(resultado);
         }
 
         return resultado;
@@ -50,7 +50,7 @@ export class InterpretadorComImportacao
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
     }
 
-    override async visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
+    override visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
         return comum.visitarDeclaracaoDefinicaoFuncao(this, funcaoDeclaracao);
     }
 

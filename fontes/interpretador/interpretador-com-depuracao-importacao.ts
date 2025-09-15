@@ -29,7 +29,7 @@ export class InterpretadorComDepuracaoImportacao
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
     }
 
-    override async visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
+    override visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
         return comum.visitarDeclaracaoDefinicaoFuncao(this, funcaoDeclaracao);
     }
 

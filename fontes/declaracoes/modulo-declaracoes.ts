@@ -17,4 +17,8 @@ export class ModuloDeclaracoes extends Declaracao {
     async aceitar(visitante: InterpretadorComImportacaoInterface): Promise<any> {
         return visitante.visitarDeclaracaoModuloDeclaracoes(this);
     }
+
+    paraTexto(): string {
+        return `<módulo-declarações />`;
+    }
 }

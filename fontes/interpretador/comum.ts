@@ -19,7 +19,7 @@ export async function visitarConstrutoImportarBiblioteca(
     }
 }
 
-export async function visitarDeclaracaoDefinicaoFuncao(
+export function visitarDeclaracaoDefinicaoFuncao(
     interpretador: InterpretadorComImportacaoInterface,
     funcaoDeclaracao: FuncaoDeclaracao
 ) {
@@ -27,7 +27,10 @@ export async function visitarDeclaracaoDefinicaoFuncao(
     // TODO: Depreciar essa abordagem a favor do uso por referências.
     interpretador.pilhaEscoposExecucao.definirVariavel(funcaoDeclaracao.simbolo.lexema, funcao);
     interpretador.pilhaEscoposExecucao.registrarReferenciaFuncao(funcaoDeclaracao.id, funcao);
-    return funcao;
+    return {
+        tipo: `função<${funcao.declaracao.tipo || 'qualquer'}>`,
+        tipoExplicito: funcao.declaracao.tipoExplicito,
+    };
 }
 
 export async function visitarDeclaracaoModuloDeclaracoes(
