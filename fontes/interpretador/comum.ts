@@ -28,6 +28,9 @@ export function visitarDeclaracaoDefinicaoFuncao(
     interpretador.pilhaEscoposExecucao.definirVariavel(funcaoDeclaracao.simbolo.lexema, funcao);
     interpretador.pilhaEscoposExecucao.registrarReferenciaFuncao(funcaoDeclaracao.id, funcao);
     return {
+        id: funcaoDeclaracao.id,
+        nome: funcaoDeclaracao.simbolo.lexema,
+        operacao: 'DefinicaoFuncao',
         tipo: `função<${funcao.declaracao.tipo || 'qualquer'}>`,
         tipoExplicito: funcao.declaracao.tipoExplicito,
     };
@@ -44,16 +47,19 @@ export async function visitarDeclaracaoModuloDeclaracoes(
     for (const subdeclaracao of declaracao.declaracoes) {
         const componente = await interpretador.avaliar(subdeclaracao);
         if (componente) {
-            const classeComponenteResolvida = componente.constructor.name.replaceAll('_', '');
-            switch (classeComponenteResolvida) {
-                case 'DeleguaFuncao':
-                    const componenteDeleguaFuncao = componente as DeleguaFuncao;
-                    modulo.componentes[componenteDeleguaFuncao.nome] = componente;
-                    break;
-                default:
-                    console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", classeComponenteResolvida);
-                    break;
-            }           
+            if (componente.hasOwnProperty('operacao')) {
+                switch (componente.operacao) {
+                    case 'DefinicaoFuncao':
+                        const definicaoFuncaoCorrespondente: DeleguaFuncao = interpretador.pilhaEscoposExecucao.obterReferenciaFuncao(componente.id);
+                        modulo.componentes[componente.nome] = definicaoFuncaoCorrespondente;
+                        break;
+                    default:
+                        console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", componente);
+                        break;
+                }
+            }
+
+            // TODO: Casos em que não tenha `operacao` definida na resolução do componente.
         }
     }
 
