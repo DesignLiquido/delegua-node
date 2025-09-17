@@ -3,9 +3,8 @@ import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 import { Statement, Directive, ModuleDeclaration } from 'estree';
 
-import cyrb53 from '@designliquido/delegua/depuracao/cyrb53';
-
 import { LexadorJavaScript } from "@designliquido/delegua/lexador/traducao/lexador-javascript";
+import { cyrb53 } from '@designliquido/delegua/geracao-identificadores';
 
 import { ImportadorInterface } from "../interfaces";
 import { RetornoImportador } from "./retorno-importador";

@@ -11,7 +11,7 @@ import {
     SimboloInterface
 } from "@designliquido/delegua";
 
-import { InformacaoVariavelOuConstante } from "@designliquido/delegua/informacao-variavel-ou-constante";
+import { InformacaoElementoSintatico } from "@designliquido/delegua/informacao-elemento-sintatico";
 import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
@@ -58,7 +58,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             for (const [nomeComponente, dadosComponente] of Object.entries(moduloResolvido.componentes)) {
                 // TODO: Verificar se sempre é o caso de ser função padrão.
                 const dadosComponenteResolvido = dadosComponente as FuncaoPadrao;
-                const componente = new InformacaoVariavelOuConstante(
+                const componente = new InformacaoElementoSintatico(
                     nomeComponente, 
                     dadosComponenteResolvido.tipoRetorno,
                     true, 
@@ -66,7 +66,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 );
 
                 for (const argumento of dadosComponenteResolvido.argumentos) {
-                    componente.argumentos.push(new InformacaoVariavelOuConstante(argumento.nome, argumento.tipo));
+                    const elemento = new InformacaoElementoSintatico(argumento.nome, argumento.tipo);
+                    componente.subElementos.push(elemento as any);
                 }
 
                 this.primitivasConhecidas[literalCaminho.valor][nomeComponente] = componente;

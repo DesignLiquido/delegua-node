@@ -2,8 +2,8 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 import * as sistemaOperacional from 'os';
 
-import { cyrb53 } from '@designliquido/delegua/depuracao';
 import { LexadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
+import { cyrb53 } from '@designliquido/delegua/geracao-identificadores';
 
 import { RetornoImportador } from './retorno-importador';
 import { ImportadorInterface } from '../interfaces';
