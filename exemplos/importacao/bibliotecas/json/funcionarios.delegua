@@ -6,10 +6,10 @@ var numeroFuncionarios = 0
 var pessoaSalarioMaximo = jsonFuncionarios.funcionarios[0]
 var pessoaSalarioMinimo = jsonFuncionarios.funcionarios[0]
 
-var sobrenomes = {}
-
 var pessoasMaioresSalarios = []
 var pessoasMenoresSalarios = []
+
+var sobrenomes = {}
 para cada funcionario em jsonFuncionarios.funcionarios {
     totalSalarios += funcionario.salario
     numeroFuncionarios += 1
@@ -28,7 +28,7 @@ para cada funcionario em jsonFuncionarios.funcionarios {
             'nomeCompleto': funcionario.nome + ' ' + funcionario.sobrenome,
             'maiorSalario': funcionario.salario,
             'numeroFuncionarios': 1,
-            'listaFuncionarios': []
+            'listaFuncionarios': [funcionario]
         }
         continua
     }
@@ -135,9 +135,9 @@ para cada area em areasMenosFuncionarios {
 }
 
 para cada {sobrenome, dados} em sobrenomes {
-    escreva(dados)
     para cada funcionario em dados.listaFuncionarios {
-        escreva("last_name_max|${sobrenome}|${funcionario.nome} ${funcionario.sobrenome}|${funcionario.salario}")
+        se dados.maiorSalario == funcionario.salario {
+            escreva("last_name_max|${sobrenome}|${funcionario.nome} ${funcionario.sobrenome}|${funcionario.salario}")
+        }
     }
-    // escreva("last_name_max|${sobrenome}|${dados.nomeCompleto}|${dados.maiorSalario}")
 }
