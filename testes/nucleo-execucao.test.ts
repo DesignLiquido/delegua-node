@@ -86,4 +86,28 @@ describe('Núcleo de execução', () => {
             });
         });
     });
+
+    it('Dialeto Égua executa bloco `pegue` quando comparação inválida ocorre', async () => {
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+        try {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('egua');
+
+            await nucleoExecucao.executarCodigoComoArgumento(`
+tente {
+    1 > "1";
+    escreva("Tente - Pegue: ERRO!");
+} pegue {
+    escreva("Tente - Pegue: OK!");
+}`);
+
+            const saidas = consoleSpy.mock.calls.map(([mensagem]) =>
+                typeof mensagem === 'string' ? mensagem.trim() : ''
+            );
+            expect(saidas).toContain('Tente - Pegue: OK!');
+            expect(saidas).not.toContain('Tente - Pegue: ERRO!');
+        } finally {
+            consoleSpy.mockRestore();
+        }
+    });
 });
