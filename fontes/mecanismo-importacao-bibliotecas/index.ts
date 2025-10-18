@@ -5,6 +5,8 @@ import * as sistemaArquivos from 'fs';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
+import { ClasseDeModulo } from '../interpretador/estruturas';
+
 export const carregarBibliotecaDelegua = (nome: string) => {
     try {
         const dadosDoManifesto = require(nome + '/delegua-modulo');
@@ -21,7 +23,74 @@ export const carregarBibliotecaDelegua = (nome: string) => {
     }
 };
 
-const carregarBiblioteca = async (nomeDaBiblioteca: string, caminhoDaBiblioteca: any) => {
+const montarFuncaoPadraoDeManifesto = (dadosMetodo: {
+    documentacao?: string,
+    tipoRetorno: string,
+    funcao: Function,
+    argumentos: { nome: string, tipo: string }[]
+}): FuncaoPadrao => {
+    const funcaoPadrao = new FuncaoPadrao(dadosMetodo.argumentos.length, dadosMetodo.funcao);
+    funcaoPadrao.descartarPrimeiroArgumento = false;
+    funcaoPadrao.argumentos = dadosMetodo.argumentos;
+    funcaoPadrao.tipoRetorno = dadosMetodo.tipoRetorno;
+    // funcaoPadrao.documentacao = dadosMetodo.documentacao;
+    return funcaoPadrao;
+}
+
+const modularizarBibliotecaPorManifesto = (
+    manifestoModulo: {
+        [nomeMetodo: string]: {
+            documentacao?: string,
+            tipoRetorno: string,
+            funcao: Function,
+            argumentos: { nome: string, tipo: string }[]
+        } | {
+            implementacao: any,
+            propriedades?: {
+                [nomePropriedade: string]: any,
+                metodos?: { [nomeMetodo: string]: any }
+            }
+        }
+    },
+    nome: string
+) => {
+    const novoModulo = new DeleguaModulo(nome);
+
+    for (const [metodoOuClasse, dadosMetodoOuClasse] of Object.entries(manifestoModulo)) {
+        if ('funcao' in dadosMetodoOuClasse && typeof (dadosMetodoOuClasse as any).funcao === 'function') {
+            const funcaoPadrao = montarFuncaoPadraoDeManifesto(dadosMetodoOuClasse as any);
+            novoModulo.componentes[metodoOuClasse] = funcaoPadrao;
+            continue;
+        }
+
+        if ('implementacao' in dadosMetodoOuClasse) {
+            const implementacao = (dadosMetodoOuClasse as any).implementacao;
+            if (typeof implementacao === 'function' &&
+                String(implementacao).startsWith('class')
+            ) {
+                const metadados: {implementacao: any, propriedades: {[nome: string]: any}, metodos: {[nome: string]: any}} = dadosMetodoOuClasse as any;
+                // TODO: Deixar isso melhor.
+                const nomeCurtoModulo = novoModulo.nome.replace(/@designliquido\/delegua-/, '');
+                const classeDeModulo = new ClasseDeModulo(
+                    metodoOuClasse, 
+                    nomeCurtoModulo,
+                    metadados.implementacao, 
+                    metadados.metodos, 
+                    metadados.propriedades
+                );
+                
+                novoModulo.componentes[metodoOuClasse] = classeDeModulo;
+                continue;
+            }
+        }
+
+        // TODO: Levantar erro aqui?
+    }
+
+    return novoModulo;
+}
+
+const carregarBiblioteca = async (nomeDaBiblioteca: string, caminhoDaBiblioteca: string) => {
     let dadosDoModulo: any;
 
     try {
@@ -41,29 +110,6 @@ const carregarBiblioteca = async (nomeDaBiblioteca: string, caminhoDaBiblioteca:
     return modularizarBibliotecaNpmPadrao(dadosDoModulo, nomeDaBiblioteca);
 };
 
-const modularizarBibliotecaPorManifesto = (
-    manifestoModulo: { [nomeMetodo: string]: { 
-        documentacao?: string,
-        tipoRetorno: string, 
-        funcao: Function, 
-        argumentos: { nome: string, tipo: string }[] 
-    } }, 
-    nome: string
-) => {
-    const novoModulo = new DeleguaModulo(nome);
-
-    for (const [metodo, dadosMetodo] of Object.entries(manifestoModulo)) {
-        const funcaoPadrao = new FuncaoPadrao(dadosMetodo.argumentos.length, dadosMetodo.funcao);
-        funcaoPadrao.descartarPrimeiroArgumento = false;
-        funcaoPadrao.argumentos = dadosMetodo.argumentos;
-        funcaoPadrao.tipoRetorno = dadosMetodo.tipoRetorno;
-        // funcaoPadrao.documentacao = dadosMetodo.documentacao;
-        novoModulo.componentes[metodo] = funcaoPadrao;
-    }
-
-    return novoModulo;
-}
-
 const modularizarBibliotecaNpmPadrao = (dadosDoModulo: any, nome: string) => {
     const novoModulo = new DeleguaModulo(nome);
 
@@ -74,9 +120,9 @@ const modularizarBibliotecaNpmPadrao = (dadosDoModulo: any, nome: string) => {
         if (typeof moduloAtual === 'function') {
             // Por definição, funções tradicionais e classes são identificadas em JavaScript como "functions".
             // A primeira heurística era verificando a propriedade `prototype`, mas isso não funciona bem
-            // porque classes e funções avulsas todas possuem prototype.
+            // porque classes e funções avulsas todas possuem `prototype`.
             // Uma heurística nova é converter `moduloAtual` para `string` e verificar se a declaração começa com `class`.
-            // Se sim, podemos dizer que a "function" é uma classe padrão.
+            // Se sim, podemos dizer que a `function` é uma classe padrão.
             // Caso contrário, é uma função (`FuncaoPadrao`).
             if (String(moduloAtual).startsWith('class')) {
                 const classePadrao = new ClassePadrao(chaves[i], moduloAtual);
@@ -122,6 +168,7 @@ const importarPacoteExternoCompleto = async (nome: string) => {
 
 export const verificarModulosDelegua = (nome: string): string | boolean => {
     const modulos = {
+        arquivos: '@designliquido/delegua-arquivos',
         estatistica: '@designliquido/delegua-estatistica',
         estatística: '@designliquido/delegua-estatistica',
         fisica: '@designliquido/delegua-fisica',

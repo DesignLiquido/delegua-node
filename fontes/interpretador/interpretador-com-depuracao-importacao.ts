@@ -10,6 +10,7 @@ import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador
 import { ImportarBiblioteca } from '../construtos';
 
 import * as comum from './comum';
+import { AcessoMetodoOuPropriedade } from "@designliquido/delegua/construtos";
 
 export class InterpretadorComDepuracaoImportacao 
     extends InterpretadorComDepuracao 
@@ -81,5 +82,10 @@ export class InterpretadorComDepuracaoImportacao
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
         return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+    }
+
+    // TODO: Passar lógica para o núcleo e apagar.
+    override async visitarExpressaoAcessoMetodoOuPropriedade(expressao: AcessoMetodoOuPropriedade) {
+        return comum.visitarExpressaoAcessoMetodoOuPropriedade(this, expressao);
     }
 }

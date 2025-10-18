@@ -10,6 +10,7 @@ import { ModuloDeclaracoes } from '../declaracoes';
 import { ImportarBiblioteca } from '../construtos';
 
 import * as comum from './comum';
+import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
 
 /**
  * O Interpretador visita todos os elementos complexos gerados pelo avaliador sintático (_parser_),
@@ -56,5 +57,10 @@ export class InterpretadorComImportacao
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
         return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+    }
+
+    // TODO: Passar lógica para o núcleo e apagar.
+    override async visitarExpressaoAcessoMetodoOuPropriedade(expressao: AcessoMetodoOuPropriedade) {
+        return comum.visitarExpressaoAcessoMetodoOuPropriedade(this, expressao);
     }
 }
