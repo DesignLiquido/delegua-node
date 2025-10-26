@@ -29,8 +29,8 @@
             // "@designliquido/visualg/*": ["node_modules/@designliquido/visualg/fontes/*"]
         },
         "outDir": "dist",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
+        // "module": "CommonJS",
+        // "moduleResolution": "Node",
         "target": "es2017",
         "rootDir": "fontes",
         "strict": false,
@@ -40,10 +40,14 @@
         "declarationMap": true,
         "esModuleInterop": true,
         "preserveSymlinks": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true
     },
     "ts-node": {
-        "esm": true
+        "esm": true,
+        "experimentalSpecifierResolution": "node"
     },
     "exclude": [
         "babel.config.js", 

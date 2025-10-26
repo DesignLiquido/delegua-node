@@ -1,1 +1,1 @@
-ts-node.cmd fontes/execucao.ts %*
+node.exe --import tsx/esm fontes/execucao.ts %*
