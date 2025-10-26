@@ -417,7 +417,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     protected override construtoImportar(): any {
         const simboloAbertura = this.consumir(
             tiposDeSimbolos.PARENTESE_ESQUERDO,
-            "Esperado '(' após declaração."
+            `Esperado '(' após declaração. Atual: ${this.simbolos[this.atual].lexema}`
         );
         const caminho = this.expressao();
         this.consumir(

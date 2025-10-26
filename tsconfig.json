@@ -45,10 +45,6 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true
     },
-    "ts-node": {
-        "esm": true,
-        "experimentalSpecifierResolution": "node"
-    },
     "exclude": [
         "babel.config.js", 
         "coverage",

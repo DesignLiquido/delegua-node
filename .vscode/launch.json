@@ -45,12 +45,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -71,12 +67,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -97,12 +89,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -123,12 +111,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -149,12 +133,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -175,12 +155,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -201,12 +177,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -227,12 +199,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -253,12 +221,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -279,12 +243,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -306,12 +266,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -332,12 +288,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -358,12 +310,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -384,12 +332,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -411,12 +355,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -437,12 +377,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -463,12 +399,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -489,12 +421,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -511,16 +439,12 @@
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
-        "./exemplos/fizzbuzz.egua"
+        "./exemplos/fizzbuzz.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -542,12 +466,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -569,12 +489,8 @@
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -594,6 +510,9 @@
         // "--depurador",
         "./exemplos/importacao/dinamica/animais.delegua"
       ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.ts-node.json"
+      },
       "runtimeExecutable": "node",
       "runtimeArgs": [
         "--nolazy",
@@ -621,14 +540,14 @@
         // "--depurador",
         "./exemplos/importacao/dinamica/brincando-com-texto/inicio.delegua"
       ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.ts-node.json"
+      },
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--loader",
+        "ts-node/esm",
+        "--no-warnings"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [
@@ -1064,16 +983,14 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "-p",
-        "./exemplos/testes.egua"
+        "./exemplos/testes.egua",
+        "-d",
+        "egua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
+        "--import",
+        "tsx/esm"
       ],
       "sourceMaps": true,
       "resolveSourceMapLocations": [

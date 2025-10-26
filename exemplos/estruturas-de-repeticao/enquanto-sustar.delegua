@@ -2,10 +2,10 @@ var n1 = 1;
 var n2 = 4; 
 var resultado = 0
 
-var n1 = leia("teste 1");
+var n1 = leia("Digite um número: ");
 
-enquanto (verdadeiro){
-    var menu = leia("Digite a opção: 1 - Multiplicacao / 2 - Divisao / 3 - Soma / 4 - Subtração");
+enquanto verdadeiro {
+    var menu = leia("Digite a opção: 1 - Multiplicacao / 2 - Divisao / 3 - Soma / 4 - Subtração: ");
     se (menu == "1"){
         resultado = n1 * n2;        
         sustar;
