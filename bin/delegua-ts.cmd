@@ -1,1 +1,1 @@
-ts-node.cmd execucao.ts %*
+ts-node.cmd fontes/execucao.ts %*
