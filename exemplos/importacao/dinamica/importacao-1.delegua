@@ -1,0 +1,2 @@
+var importacao = importar("./exemplos/importacao/dinamica/importacao-2.delegua")
+importacao.escreverAlgumaCoisa()

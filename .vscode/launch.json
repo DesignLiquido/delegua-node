@@ -565,7 +565,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/inicial.delegua"
+        "./exemplos/importacao/dinamica/inicial.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -592,7 +592,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/animais.delegua"
+        "./exemplos/importacao/dinamica/animais.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -619,7 +619,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/brincando-com-texto/inicio.delegua"
+        "./exemplos/importacao/dinamica/brincando-com-texto/inicio.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -646,7 +646,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/bibliotecas/arquivos/ler-arquivo-texto.delegua"
+        "./exemplos/importacao/dinamica/bibliotecas/arquivos/ler-arquivo-texto.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -673,7 +673,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/bibliotecas/importacao-matematica.delegua"
+        "./exemplos/importacao/dinamica/bibliotecas/importacao-matematica.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -700,7 +700,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/bibliotecas/importacao-http.delegua"
+        "./exemplos/importacao/dinamica/bibliotecas/importacao-http.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -727,7 +727,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/bibliotecas/json/importacao-json.delegua"
+        "./exemplos/importacao/dinamica/bibliotecas/json/importacao-json.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -754,7 +754,7 @@
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         // "--depurador",
-        "./exemplos/importacao/bibliotecas/json/funcionarios.delegua"
+        "./exemplos/importacao/dinamica/bibliotecas/json/funcionarios.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [

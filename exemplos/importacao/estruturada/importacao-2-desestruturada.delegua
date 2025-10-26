@@ -1,0 +1,8 @@
+// Este caminho é para o teste unitário.
+// Testes iniciados pela execução pelo VSCode devem usar o caminho: "./exemplos/importacao/estruturada/importacao-3.delegua"
+importar { escreverMaisAlgumaCoisa } de "./importacao-3.delegua"
+
+funcao escreverAlgumaCoisa() {
+    escreva("Importação funcionou.")
+    escreverMaisAlgumaCoisa()
+}

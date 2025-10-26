@@ -1,4 +1,4 @@
-import { Declaracao, FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
+import { Const, Declaracao, FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
 
@@ -49,6 +49,10 @@ export class InterpretadorComImportacao
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    override visitarDeclaracaoConst(declaracao: Const): Promise<any> {
+        return comum.visitarDeclaracaoConst(this, declaracao);
     }
 
     override visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {

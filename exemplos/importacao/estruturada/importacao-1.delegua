@@ -1,0 +1,5 @@
+// Este caminho é para o teste unitário.
+// Testes iniciados pela execução pelo VSCode devem usar o caminho: "./exemplos/importacao/estruturada/importacao-2.delegua"
+importar tudo como importacao de "./importacao-2.delegua"
+
+importacao.escreverAlgumaCoisa()

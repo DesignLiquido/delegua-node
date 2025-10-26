@@ -1,8 +1,9 @@
+// Usado por inicial.delegua neste diretório.
 função testeRetornoNulo(){
     retorna nulo
 }
 
-função testeSoma(valor1, valor2){
+função testeSoma(valor1, valor2): qualquer {
     retorna valor1 + valor2;
 }
 

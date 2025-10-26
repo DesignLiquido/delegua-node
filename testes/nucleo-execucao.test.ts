@@ -43,15 +43,47 @@ describe('Núcleo de execução', () => {
         expect(retornoSaida.length).toBeGreaterThan(0);
     });
 
-    it('Importação de classes', async () => {
-        let retornoSaida: string = '';
-        const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
-        const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
-        nucleoExecucao.configurarDialeto();
-        
-        await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/animais.delegua');
+    describe('Importação', () => {
+        describe('Importação dinâmica', () => {
+            it('Importação de classes', async () => {
+                let retornoSaida: string = '';
+                const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
+                const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+                nucleoExecucao.configurarDialeto();
+                
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/dinamica/animais.delegua');
 
-        expect(retornoSaida.length).toBeGreaterThan(0);
-        expect(retornoSaida).toBe('correndo');
+                expect(retornoSaida.length).toBeGreaterThan(0);
+                expect(retornoSaida).toBe('correndo');
+            });
+        });
+
+        describe('Importação estruturada', () => {
+            it('Importação de fontes aninhados com tudo', async () => {
+                let retornoSaida: string[] = [];
+                const funcaoDeRetorno = (saida: string) => retornoSaida.push(saida);
+                const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+                nucleoExecucao.configurarDialeto();
+                
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/estruturada/importacao-1.delegua');
+
+                expect(retornoSaida.length).toBe(2);
+                expect(retornoSaida[0]).toBe('Importação funcionou.');
+                expect(retornoSaida[1]).toBe('Essa outra importação também funcionou.');
+            });
+
+            it('Importação de fontes aninhados com desestruturacao', async () => {
+                let retornoSaida: string[] = [];
+                const funcaoDeRetorno = (saida: string) => retornoSaida.push(saida);
+                const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+                nucleoExecucao.configurarDialeto();
+                
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/estruturada/importacao-1-desestruturada.delegua');
+
+                expect(retornoSaida.length).toBe(2);
+                expect(retornoSaida[0]).toBe('Importação funcionou.');
+                expect(retornoSaida[1]).toBe('Essa outra importação também funcionou.');
+            });
+        });
     });
 });

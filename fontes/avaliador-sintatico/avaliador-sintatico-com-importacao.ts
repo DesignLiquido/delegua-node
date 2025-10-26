@@ -7,12 +7,17 @@ import {
     AvaliadorSintatico,
     Chamada,
     Classe,
+    Comentario,
+    Const,
+    ConstMultiplo,
     Construto,
     Deceto,
     Declaracao,
     Dupla,
     ErroAvaliadorSintatico,
     FuncaoConstruto,
+    FuncaoDeclaracao,
+    ImportarComoConstruto,
     Leia,
     Literal,
     Noneto,
@@ -26,7 +31,9 @@ import {
     Sexteto,
     SimboloInterface,
     Trio,
-    Variavel
+    Var,
+    Variavel,
+    VariavelInterface
 } from "@designliquido/delegua";
 
 import { InformacaoElementoSintatico } from "@designliquido/delegua/informacao-elemento-sintatico";
@@ -191,7 +198,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         );
     }
 
-    // TODO: Passar lógica para o núcleo e apagar.
+    // TODO: Apagar na próxima versão do núcleo.
     override logicaComumInferenciaTiposVariaveisEConstantes(
         inicializador: Construto,
         tipo: string
@@ -323,33 +330,17 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         }
     }
 
-    override declaracaoImportar(): any {
-        this.consumir(
-            tiposDeSimbolos.PARENTESE_ESQUERDO,
-            "Esperado '(' após declaração."
-        );
-        const caminho = this.expressao();
-        const simboloFechamento = this.consumir(
-            tiposDeSimbolos.PARENTESE_DIREITO,
-            "Esperado ')' após declaração."
-        );
-
-        // Chegando aqui sem erros, a importação é sintaticamente válida.
-        const literalCaminho = caminho as Literal;
-        if (!literalCaminho.valor.endsWith('.delegua')) {
-            return this.importarBibliotecaNode(literalCaminho);
-        }
-
+    protected logicaComumImportacaoModulo(literalCaminho: Literal, simboloReferencia: SimboloInterface): ModuloDeclaracoes {
         const resultadoImportacao = this.importador.importar(
             literalCaminho.valor,
-            caminho.hashArquivo
+            literalCaminho.hashArquivo
         );
 
         // Havendo erros no lexador, levantamos um erro de avaliação sintática na
         // importação.
         if (resultadoImportacao.retornoLexador.erros.length > 0) {
             throw this.erro(
-                simboloFechamento,
+                simboloReferencia,
                 `Erros encontrados ao importar o arquivo ${
                     literalCaminho.valor
                 }: ${resultadoImportacao.retornoLexador.erros.reduce(
@@ -382,12 +373,198 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 definicaoClasse;
         }
 
+    // Referências de funções registradas no avaliador sintático do módulo importado
+    // precisam ser registradas também no avaliador sintático atual.
+    for (const elementoPilha of avaliadorSintaticoModulo.pilhaEscopos.pilha) {
+        for (const referenciaFuncao of Object.entries(elementoPilha.referenciasFuncoes)) {
+            this.pilhaEscopos.registrarReferenciaFuncao(
+                referenciaFuncao[0],
+                referenciaFuncao[1]
+            );
+
+            const variavelCorrespondente = elementoPilha.elementosSintaticos[referenciaFuncao[0]];
+            if (!variavelCorrespondente) {
+                throw this.erro(
+                    simboloReferencia,
+                    `Erro interno na importação do módulo '${literalCaminho.valor}': a função '${referenciaFuncao[0]}' não foi encontrada entre as variáveis do escopo.`
+                );
+            }
+
+            this.pilhaEscopos.definirInformacoesVariavel(
+                referenciaFuncao[0],
+                new InformacaoElementoSintatico(
+                    referenciaFuncao[0],
+                    variavelCorrespondente.tipo,
+                    true,
+                    []
+                )
+            );
+        }
+    }
+
         return new ModuloDeclaracoes(
-            simboloFechamento.linha,
-            simboloFechamento.hashArquivo,
+            simboloReferencia.linha,
+            simboloReferencia.hashArquivo,
             [],
             resultadoAvaliacaoSintaticaModulo.declaracoes
         );
+    }
+
+    /**
+     * Quando válida, devolve a resolução do módulo como construto. 
+     * Normalmente usada na importação dinâmica, ou seja, `var algumaCoisa = importar('caminho')`.
+     */
+    protected override construtoImportar(): any {
+        const simboloAbertura = this.consumir(
+            tiposDeSimbolos.PARENTESE_ESQUERDO,
+            "Esperado '(' após declaração."
+        );
+        const caminho = this.expressao();
+        this.consumir(
+            tiposDeSimbolos.PARENTESE_DIREITO,
+            "Esperado ')' após declaração."
+        );
+
+        // Chegando aqui sem erros, a importação é sintaticamente válida.
+        const literalCaminho = caminho as Literal;
+        if (!literalCaminho.valor.endsWith('.delegua')) {
+            return this.importarBibliotecaNode(literalCaminho);
+        }
+
+        return this.logicaComumImportacaoModulo(literalCaminho, simboloAbertura);
+    }
+
+    protected localizarDeclaracaoPorNomeEmModulo(
+        moduloDeclaracoes: ModuloDeclaracoes, 
+        nome: string, 
+        simboloReferencia: 
+        SimboloInterface
+    ): [string, Declaracao] {
+        for (const declaracao of moduloDeclaracoes.declaracoes) {
+            switch (declaracao.constructor) {
+                case Classe:
+                    const declaracaoClasse = declaracao as Classe;
+                    if (declaracaoClasse.simbolo.lexema === nome) {
+                        return [declaracaoClasse.simbolo.lexema, declaracaoClasse];
+                    }
+                    break;
+                case Comentario:
+                    continue;
+                case Const:
+                    const declaracaoConst = declaracao as Const;
+                    if (declaracaoConst.simbolo.lexema === nome) {
+                        return [declaracaoConst.tipo, declaracaoConst];
+                    }
+                    break;
+                case FuncaoDeclaracao:
+                    const declaracaoFuncao = declaracao as FuncaoDeclaracao;
+                    if (declaracaoFuncao.simbolo.lexema === nome) {
+                        return [declaracaoFuncao.tipo, declaracaoFuncao];
+                    }
+                    break;
+                case Var:
+                    const declaracaoVar = declaracao as Var;
+                    if (declaracaoVar.simbolo.lexema === nome) {
+                        return [declaracaoVar.tipo, declaracaoVar];
+                    }
+                    break;
+                default:
+                    console.warn(`Declaração de tipo desconhecido na importação estruturada: ${declaracao.constructor.name}.`);
+                    break;
+            }
+        }
+
+        throw this.erro(
+            simboloReferencia,
+            `O elemento '${nome}' não foi encontrado no módulo importado.`
+        );
+    }
+
+    /**
+     * Quando válida, devolve a resolução do módulo como declaração de constante. 
+     * Normalmente usada na importação estruturada, ou seja, `importar tudo de 'caminho'`, 
+     * ou então `importar { algo, outro } de 'caminho'`.
+     * @returns 
+     */
+    override declaracaoImportar(): any {
+        const declaracaoResolvida = super.declaracaoImportar();
+        
+        const literalCaminho = declaracaoResolvida.caminho as Literal;
+        if (declaracaoResolvida.simboloTudo !== null && declaracaoResolvida.simboloTudo !== undefined) {
+            if (!literalCaminho.valor.endsWith('.delegua')) {
+                return this.importarBibliotecaNode(literalCaminho);
+            }
+
+            const moduloDeclaracoes = this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
+            this.pilhaEscopos.definirInformacoesVariavel(
+                declaracaoResolvida.simboloTudo.lexema, 
+                new InformacaoElementoSintatico(declaracaoResolvida.simboloTudo.lexema, 'módulo')
+            );
+            
+            return new Const(
+                declaracaoResolvida.simboloTudo,
+                moduloDeclaracoes,
+                'módulo',
+                true,
+                declaracaoResolvida.decoradores
+            );
+        }
+
+        if (declaracaoResolvida.elementosImportacao.length === 0) {
+            throw this.erro(
+                { hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface,
+                "Erro interno na importação estruturada: nenhum elemento para importar."
+            );
+        }
+
+        // No caso da desestruturação de valores de módulo, criamos um nome provisório para o módulo
+        // e uma declaração de constante para cada nome mencionado na desestruturação.
+        const moduloDeclaracoes = this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
+        const constantesImportadas: Const[] = [];
+        const nomeReservadoModulo = `${literalCaminho.hashArquivo}_${literalCaminho.linha}_modulo`;
+        const simboloReservadoModulo = { lexema: nomeReservadoModulo, hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface;
+        constantesImportadas.push(
+            new Const(
+                simboloReservadoModulo,
+                moduloDeclaracoes,
+                'módulo',
+                true,
+                declaracaoResolvida.decoradores
+            )
+        );
+
+        for (const simboloImportacao of declaracaoResolvida.elementosImportacao) {
+            const declaracaoCorrespondente = this.localizarDeclaracaoPorNomeEmModulo(
+                moduloDeclaracoes,
+                simboloImportacao.lexema,
+                simboloImportacao
+            );
+
+            this.pilhaEscopos.definirInformacoesVariavel(
+                simboloImportacao.lexema, 
+                new InformacaoElementoSintatico(simboloImportacao.lexema, declaracaoCorrespondente[0])
+            );
+
+            constantesImportadas.push(
+                new Const(
+                    simboloImportacao,
+                    new AcessoMetodo(
+                        simboloImportacao.hashArquivo,
+                        new Variavel(
+                            simboloImportacao.hashArquivo,
+                            simboloReservadoModulo,
+                            'módulo'
+                        ), 
+                        simboloImportacao.lexema
+                    ),
+                    declaracaoCorrespondente[0],
+                    true,
+                    []
+                )
+            );
+        }
+
+        return constantesImportadas;
     }
 
     /**

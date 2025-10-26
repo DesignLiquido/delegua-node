@@ -1,5 +1,5 @@
 import { DeleguaFuncao, DeleguaModulo, MetodoPrimitiva, ObjetoDeleguaClasse } from "@designliquido/delegua/interpretador/estruturas";
-import { FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
+import { Const, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 import { AcessoMetodoOuPropriedade } from "@designliquido/delegua/construtos";
 import { VariavelInterface } from "@designliquido/delegua/interfaces";
 import { RetornoQuebra } from "@designliquido/delegua/quebras";
@@ -31,6 +31,36 @@ export async function visitarConstrutoImportarBiblioteca(
     }
 }
 
+/**
+ * Executa expressão de definição de constante.
+ * @param declaracao A declaração `Const`.
+ * @returns Um descritor de informações importantes para o retorno externo.
+ */
+export async function visitarDeclaracaoConst(
+    interpretador: InterpretadorComImportacaoInterface,
+    declaracao: Const
+): Promise<any> {
+    const valorFinal = await (interpretador as any).avaliacaoDeclaracaoVarOuConst(declaracao);
+    if (valorFinal && valorFinal.hasOwnProperty('operacao') && valorFinal.operacao === 'DefinicaoFuncao') {
+        interpretador.pilhaEscoposExecucao.definirConstante(
+            declaracao.simbolo.lexema,
+            valorFinal.declaracao,
+            declaracao.tipo
+        );
+    } else {
+        interpretador.pilhaEscoposExecucao.definirConstante(
+            declaracao.simbolo.lexema,
+            valorFinal,
+            declaracao.tipo
+        );
+    }
+
+    return {
+        tipo: declaracao.tipo,
+        tipoExplicito: declaracao.tipoExplicito,
+    };
+}
+
 export async function visitarDeclaracaoDefinicaoFuncao(
     interpretador: InterpretadorComImportacaoInterface,
     funcaoDeclaracao: FuncaoDeclaracao
@@ -46,6 +76,7 @@ export async function visitarDeclaracaoDefinicaoFuncao(
         operacao: 'DefinicaoFuncao',
         tipo: `função<${funcao.declaracao.tipo || 'qualquer'}>`,
         tipoExplicito: funcao.declaracao.tipoExplicito,
+        declaracao: funcao
     });
 }
 

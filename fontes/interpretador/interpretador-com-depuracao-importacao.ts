@@ -1,6 +1,6 @@
 import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador/depuracao";
 import { ResultadoParcialInterpretadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
-import { Declaracao, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
+import { Const, Declaracao, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 import { DescritorTipoClasse } from "@designliquido/delegua/interpretador/estruturas";
 import { inferirTipoVariavel } from "@designliquido/delegua/inferenciador";
 
@@ -74,6 +74,10 @@ export class InterpretadorComDepuracaoImportacao
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    override visitarDeclaracaoConst(declaracao: Const): Promise<any> {
+        return comum.visitarDeclaracaoConst(this, declaracao);
     }
 
     override visitarDeclaracaoDefinicaoFuncao(funcaoDeclaracao: FuncaoDeclaracao) {
