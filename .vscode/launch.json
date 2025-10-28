@@ -453,6 +453,32 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Delégua > Estruturas de Repetição > Para Cada",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "./exemplos/estruturas-de-repeticao/para-cada.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Delégua > Fibonacci",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
@@ -906,6 +932,32 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Delégua > Primitivas > Lista > Inclui",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "./exemplos/primitivas/lista/inclui.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Delégua > Primitivas > Texto > Minúsculo",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
@@ -932,13 +984,13 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Delégua > Primitivas > Lista > Inclui",
+      "name": "Delégua > Primitivas > Texto > Tudo Minúsculo",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
-        "./exemplos/primitivas/lista/inclui.delegua"
+        "./exemplos/primitivas/texto/tudo-minusculo.delegua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [

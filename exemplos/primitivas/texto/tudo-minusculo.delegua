@@ -1,0 +1,12 @@
+funcao acharAnimal(letras) {
+  var textoFinal = ""
+  para cada letra em texto(letras) {
+    se letra.tudoMinusculo() {
+      textoFinal += letra
+    }
+  }
+
+  retorna textoFinal
+}
+
+escreva(acharAnimal("UgUNFYGaFYFYGtNUoH"))
