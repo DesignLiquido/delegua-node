@@ -1,3 +1,18 @@
 #! /usr/bin/env ts-node
 
-require('../fontes/execucao');
+try {
+    require('../fontes/execucao');
+} catch (erro) {
+    if (erro && erro.code === 'MODULE_NOT_FOUND') {
+        try {
+            require('../dist/execucao');
+        } catch (fallbackErro) {
+            if (fallbackErro && fallbackErro.code === 'MODULE_NOT_FOUND') {
+                throw erro;
+            }
+            throw fallbackErro;
+        }
+    } else {
+        throw erro;
+    }
+}
