@@ -1,0 +1,15 @@
+classe Teste {
+  a: número
+
+  testeFuncao() {
+    isto.a = 100
+    funcao minhaFuncao() {
+      escreva(isto)
+    }
+
+    minhaFuncao()
+  }
+}
+
+var teste = Teste()
+teste.testeFuncao()
