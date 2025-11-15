@@ -1,4 +1,4 @@
-import { InterpretadorComDepuracao } from "@designliquido/delegua/interpretador/depuracao";
+import { InterpretadorPituguesComDepuracao } from "@designliquido/delegua/interpretador/dialetos/pitugues";
 import { ResultadoParcialInterpretadorInterface, SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Const, Declaracao, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 import { DescritorTipoClasse } from "@designliquido/delegua/interpretador/estruturas";
@@ -13,7 +13,7 @@ import { ImportarBiblioteca } from '../../construtos';
 import * as comum from '../comum';
 
 export class InterpretadorPituguesComDepuracaoImportacao 
-    extends InterpretadorComDepuracao 
+    extends InterpretadorPituguesComDepuracao 
     implements InterpretadorComImportacaoInterface
 {
     importador: ImportadorInterface<SimboloInterface>;

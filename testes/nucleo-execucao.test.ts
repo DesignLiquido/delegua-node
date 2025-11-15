@@ -38,7 +38,7 @@ describe('Núcleo de execução', () => {
                 callback(respostas.shift());
             }
         };
-        await nucleoExecucao.carregarEExecutarArquivo('./exemplos/condicionais/escolha-com-enquanto.delegua');
+        await nucleoExecucao.carregarEExecutarArquivo('./exemplos/delegua/condicionais/escolha-com-enquanto.delegua');
 
         expect(retornoSaida.length).toBeGreaterThan(0);
     });
@@ -51,7 +51,7 @@ describe('Núcleo de execução', () => {
                 const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
                 nucleoExecucao.configurarDialeto();
                 
-                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/dinamica/animais.delegua');
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/delegua/importacao/dinamica/animais.delegua');
 
                 expect(retornoSaida.length).toBeGreaterThan(0);
                 expect(retornoSaida).toBe('correndo');
@@ -65,7 +65,7 @@ describe('Núcleo de execução', () => {
                 const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
                 nucleoExecucao.configurarDialeto();
                 
-                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/estruturada/importacao-1.delegua');
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/delegua/importacao/estruturada/importacao-1.delegua');
 
                 expect(retornoSaida.length).toBe(2);
                 expect(retornoSaida[0]).toBe('Importação funcionou.');
@@ -78,7 +78,7 @@ describe('Núcleo de execução', () => {
                 const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
                 nucleoExecucao.configurarDialeto();
                 
-                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/importacao/estruturada/importacao-1-desestruturada.delegua');
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/delegua/importacao/estruturada/importacao-1-desestruturada.delegua');
 
                 expect(retornoSaida.length).toBe(2);
                 expect(retornoSaida[0]).toBe('Importação funcionou.');
