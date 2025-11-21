@@ -1,6 +1,7 @@
 import { Const, Declaracao, FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
+import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
 
 import tipoDeDadosPrimitivos from '@designliquido/delegua/tipos-de-dados/primitivos';
 
@@ -9,7 +10,6 @@ import { ImportadorInterface } from '../interfaces/importador-interface';
 import { ImportarBiblioteca, ModuloDeclaracoes } from '../construtos';
 
 import * as comum from './comum';
-import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
 
 /**
  * O Interpretador visita todos os elementos complexos gerados pelo avaliador sintático (_parser_),
