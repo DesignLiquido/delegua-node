@@ -11,8 +11,7 @@ import {
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 
 import { ImportadorInterface } from "../../interfaces";
-import { ModuloDeclaracoes } from "../../declaracoes";
-import { ImportarBiblioteca } from "../../construtos";
+import { ImportarBiblioteca, ModuloDeclaracoes } from "../../construtos";
 
 
 export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoPitugues {
@@ -81,7 +80,7 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
 
         const definicoesClasse =
             resultadoAvaliacaoSintaticaModulo.declaracoes.filter(
-                (d) => d.constructor.name === "Classe"
+                (d) => d.constructor === Classe
             ) as Classe[];
 
         for (const definicaoClasse of definicoesClasse) {
@@ -92,7 +91,6 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
         return new ModuloDeclaracoes(
             simboloFechamento.linha,
             simboloFechamento.hashArquivo,
-            [],
             resultadoAvaliacaoSintaticaModulo.declaracoes
         );
     }

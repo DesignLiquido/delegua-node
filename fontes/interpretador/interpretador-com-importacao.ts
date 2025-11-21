@@ -6,8 +6,7 @@ import tipoDeDadosPrimitivos from '@designliquido/delegua/tipos-de-dados/primiti
 
 import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
 import { ImportadorInterface } from '../interfaces/importador-interface';
-import { ModuloDeclaracoes } from '../declaracoes';
-import { ImportarBiblioteca } from '../construtos';
+import { ImportarBiblioteca, ModuloDeclaracoes } from '../construtos';
 
 import * as comum from './comum';
 import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
@@ -60,7 +59,7 @@ export class InterpretadorComImportacao
     }
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
-        return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+        return comum.visitarExpressaoModuloDeclaracoes(this, declaracao);
     }
 
     // TODO: Passar lógica para o núcleo e apagar.

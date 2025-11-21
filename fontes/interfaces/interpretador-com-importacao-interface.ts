@@ -1,7 +1,6 @@
 import { InterpretadorInterface } from "@designliquido/delegua";
 
-import { ModuloDeclaracoes } from "../declaracoes";
-import { ImportarBiblioteca } from "../construtos";
+import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 
 export interface InterpretadorComImportacaoInterface extends InterpretadorInterface {
     visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca): Promise<any> | void;

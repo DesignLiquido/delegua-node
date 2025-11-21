@@ -13,8 +13,7 @@ import primitivasVetor from '@designliquido/delegua/bibliotecas/primitivas-vetor
 
 import tipoDeDadosDelegua from '@designliquido/delegua/tipos-de-dados/delegua';
 
-import { ImportarBiblioteca } from "../construtos";
-import { ModuloDeclaracoes } from "../declaracoes";
+import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
 
 import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
@@ -80,7 +79,7 @@ export async function visitarDeclaracaoDefinicaoFuncao(
     });
 }
 
-export async function visitarDeclaracaoModuloDeclaracoes(
+export async function visitarExpressaoModuloDeclaracoes(
     interpretador: InterpretadorComImportacaoInterface,
     declaracao: ModuloDeclaracoes
 ) {

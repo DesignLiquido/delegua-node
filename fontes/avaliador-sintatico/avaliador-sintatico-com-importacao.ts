@@ -9,7 +9,6 @@ import {
     Classe,
     Comentario,
     Const,
-    ConstMultiplo,
     Construto,
     Deceto,
     Declaracao,
@@ -17,7 +16,6 @@ import {
     ErroAvaliadorSintatico,
     FuncaoConstruto,
     FuncaoDeclaracao,
-    ImportarComoConstruto,
     Leia,
     Literal,
     Noneto,
@@ -32,8 +30,7 @@ import {
     SimboloInterface,
     Trio,
     Var,
-    Variavel,
-    VariavelInterface
+    Variavel
 } from "@designliquido/delegua";
 
 import { InformacaoElementoSintatico } from "@designliquido/delegua/informacao-elemento-sintatico";
@@ -43,8 +40,7 @@ import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 import tipoDeDadosDelegua from '@designliquido/delegua/tipos-de-dados/delegua';
 
 import { ImportadorInterface } from "../interfaces";
-import { ModuloDeclaracoes } from "../declaracoes";
-import { ImportarBiblioteca } from "../construtos";
+import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 import { carregarBibliotecaDelegua, verificarModulosDelegua } from "../mecanismo-importacao-bibliotecas";
 import { ClasseDeModulo } from "../interpretador/estruturas";
 
@@ -85,9 +81,9 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     protected importarFuncaoPadraoComoComponente(dadosComponente: any, nomeComponente: string) {
         const dadosComponenteResolvido = dadosComponente as FuncaoPadrao;
         const componente = new InformacaoElementoSintatico(
-            nomeComponente, 
+            nomeComponente,
             dadosComponenteResolvido.tipoRetorno,
-            true, 
+            true,
             []
         );
 
@@ -179,10 +175,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                     this.primitivasConhecidas[literalCaminho.valor] = this.primitivasConhecidas[literalCaminho.valor] || {};
                     this.primitivasConhecidas[literalCaminho.valor][nomeComponente] = componente;
                     this.tiposDefinidosPorBibliotecas[nomeComponente] = classeModulo;
-                    
+
                 } else {
-                    throw this.erro({ 
-                        hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface, 
+                    throw this.erro({
+                        hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha
+                    } as SimboloInterface,
                         `Tipo de importação inválida: ${JSON.stringify(dadosComponente)}.`
                     );
                 }
@@ -250,7 +247,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                                 );
                             }
 
-                            if (!(entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in tipoCorrespondente.metodos) && 
+                            if (!(entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in tipoCorrespondente.metodos) &&
                                 !(entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in tipoCorrespondente.propriedades)) {
                                 throw new ErroAvaliadorSintatico(
                                     entidadeChamadaAcessoMetodoOuPropriedade.simbolo,
@@ -317,7 +314,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             case Noneto:
             case Deceto:
                 return tipoDeDadosDelegua.TUPLA;
-            
+
             default:
                 // Construtos mapeados em `delegua-node`.
                 switch (inicializador.constructor.name) {
@@ -341,8 +338,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         if (resultadoImportacao.retornoLexador.erros.length > 0) {
             throw this.erro(
                 simboloReferencia,
-                `Erros encontrados ao importar o arquivo ${
-                    literalCaminho.valor
+                `Erros encontrados ao importar o arquivo ${literalCaminho.valor
                 }: ${resultadoImportacao.retornoLexador.erros.reduce(
                     (acumulado, proximo) =>
                         (acumulado += proximo.mensagem + "; "),
@@ -365,7 +361,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         const definicoesClasse =
             resultadoAvaliacaoSintaticaModulo.declaracoes.filter(
-                (d) => d.constructor.name === "Classe"
+                (d) => d.constructor === Classe
             ) as Classe[];
 
         for (const definicaoClasse of definicoesClasse) {
@@ -373,39 +369,38 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 definicaoClasse;
         }
 
-    // Referências de funções registradas no avaliador sintático do módulo importado
-    // precisam ser registradas também no avaliador sintático atual.
-    for (const elementoPilha of avaliadorSintaticoModulo.pilhaEscopos.pilha) {
-        for (const referenciaFuncao of Object.entries(elementoPilha.referenciasFuncoes)) {
-            this.pilhaEscopos.registrarReferenciaFuncao(
-                referenciaFuncao[0],
-                referenciaFuncao[1]
-            );
+        // Referências de funções registradas no avaliador sintático do módulo importado
+        // precisam ser registradas também no avaliador sintático atual.
+        for (const elementoPilha of avaliadorSintaticoModulo.pilhaEscopos.pilha) {
+            for (const referenciaFuncao of Object.entries(elementoPilha.referenciasFuncoes)) {
+                this.pilhaEscopos.registrarReferenciaFuncao(
+                    referenciaFuncao[0],
+                    referenciaFuncao[1]
+                );
 
-            const variavelCorrespondente = elementoPilha.elementosSintaticos[referenciaFuncao[0]];
-            if (!variavelCorrespondente) {
-                throw this.erro(
-                    simboloReferencia,
-                    `Erro interno na importação do módulo '${literalCaminho.valor}': a função '${referenciaFuncao[0]}' não foi encontrada entre as variáveis do escopo.`
+                const variavelCorrespondente = elementoPilha.elementosSintaticos[referenciaFuncao[0]];
+                if (!variavelCorrespondente) {
+                    throw this.erro(
+                        simboloReferencia,
+                        `Erro interno na importação do módulo '${literalCaminho.valor}': a função '${referenciaFuncao[0]}' não foi encontrada entre as variáveis do escopo.`
+                    );
+                }
+
+                this.pilhaEscopos.definirInformacoesVariavel(
+                    referenciaFuncao[0],
+                    new InformacaoElementoSintatico(
+                        referenciaFuncao[0],
+                        variavelCorrespondente.tipo,
+                        true,
+                        []
+                    )
                 );
             }
-
-            this.pilhaEscopos.definirInformacoesVariavel(
-                referenciaFuncao[0],
-                new InformacaoElementoSintatico(
-                    referenciaFuncao[0],
-                    variavelCorrespondente.tipo,
-                    true,
-                    []
-                )
-            );
         }
-    }
 
         return new ModuloDeclaracoes(
             simboloReferencia.linha,
             simboloReferencia.hashArquivo,
-            [],
             resultadoAvaliacaoSintaticaModulo.declaracoes
         );
     }
@@ -435,10 +430,10 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     }
 
     protected localizarDeclaracaoPorNomeEmModulo(
-        moduloDeclaracoes: ModuloDeclaracoes, 
-        nome: string, 
-        simboloReferencia: 
-        SimboloInterface
+        moduloDeclaracoes: ModuloDeclaracoes,
+        nome: string,
+        simboloReferencia:
+            SimboloInterface
     ): [string, Declaracao] {
         for (const declaracao of moduloDeclaracoes.declaracoes) {
             switch (declaracao.constructor) {
@@ -488,7 +483,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
      */
     override declaracaoImportar(): any {
         const declaracaoResolvida = super.declaracaoImportar();
-        
+
         const literalCaminho = declaracaoResolvida.caminho as Literal;
         if (declaracaoResolvida.simboloTudo !== null && declaracaoResolvida.simboloTudo !== undefined) {
             if (!literalCaminho.valor.endsWith('.delegua')) {
@@ -497,10 +492,10 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
             const moduloDeclaracoes = this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
             this.pilhaEscopos.definirInformacoesVariavel(
-                declaracaoResolvida.simboloTudo.lexema, 
+                declaracaoResolvida.simboloTudo.lexema,
                 new InformacaoElementoSintatico(declaracaoResolvida.simboloTudo.lexema, 'módulo')
             );
-            
+
             return new Const(
                 declaracaoResolvida.simboloTudo,
                 moduloDeclaracoes,
@@ -541,7 +536,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             );
 
             this.pilhaEscopos.definirInformacoesVariavel(
-                simboloImportacao.lexema, 
+                simboloImportacao.lexema,
                 new InformacaoElementoSintatico(simboloImportacao.lexema, declaracaoCorrespondente[0])
             );
 
@@ -554,7 +549,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                             simboloImportacao.hashArquivo,
                             simboloReservadoModulo,
                             'módulo'
-                        ), 
+                        ),
                         simboloImportacao.lexema
                     ),
                     declaracaoCorrespondente[0],

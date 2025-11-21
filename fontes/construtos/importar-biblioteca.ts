@@ -24,4 +24,8 @@ export class ImportarBiblioteca implements Construto {
     paraTexto(): string {
         return `<importar-biblioteca />`;
     }
+
+    paraTextoSaida(): string {
+        throw new Error("Método não implementado.");
+    }
 }

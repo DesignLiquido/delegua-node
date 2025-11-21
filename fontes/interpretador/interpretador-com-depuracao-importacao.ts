@@ -5,9 +5,8 @@ import { DescritorTipoClasse } from "@designliquido/delegua/interpretador/estrut
 import { inferirTipoVariavel } from "@designliquido/delegua/inferenciador";
 
 import { ImportadorInterface } from "../interfaces";
-import { ModuloDeclaracoes } from '../declaracoes';
 import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
-import { ImportarBiblioteca } from '../construtos';
+import { ImportarBiblioteca, ModuloDeclaracoes } from '../construtos';
 
 import * as comum from './comum';
 import { AcessoMetodoOuPropriedade } from "@designliquido/delegua/construtos";
@@ -85,7 +84,7 @@ export class InterpretadorComDepuracaoImportacao
     }
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
-        return comum.visitarDeclaracaoModuloDeclaracoes(this, declaracao);
+        return comum.visitarExpressaoModuloDeclaracoes(this, declaracao);
     }
 
     // TODO: Passar lógica para o núcleo e apagar.
