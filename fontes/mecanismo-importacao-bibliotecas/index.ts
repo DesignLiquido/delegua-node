@@ -1,11 +1,18 @@
 import * as processoFilho from 'child_process';
 import * as caminho from 'path';
 import * as sistemaArquivos from 'fs';
+import { pathToFileURL } from 'url';
 
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
 import { ClasseDeModulo } from '../interpretador/estruturas';
+
+// Cache de pacotes em memória
+const cachePacotes = {
+    diretorioGlobal: '' as string,
+    modulos: new Map<string, any>()
+};
 
 export const carregarBibliotecaDelegua = (nome: string) => {
     try {
@@ -138,24 +145,61 @@ const modularizarBibliotecaNpmPadrao = (dadosDoModulo: any, nome: string) => {
     return novoModulo;
 };
 
-const importarPacoteCaminhoBase = async (caminhoRelativo: string) => {
-    let resultado = null;
-    const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-    const comandoDescobertaDiretorioGlobal = processoFilho.spawnSync(npm, ['root', '--location=global']);
-    const diretorioGlobal = comandoDescobertaDiretorioGlobal.output[1].toString().trim();
+async function importarModulo(caminhoModulo: string) {
+    try {
+        // tenta como ESM
+        const resposta = await import(pathToFileURL(caminhoModulo).href);
+        return resposta.default ?? resposta;
+    } catch (err: any) {
+        if (err.code === 'MODULE_NOT_FOUND' || err instanceof SyntaxError) {
+            // fallback para CommonJS
+            return require(caminhoModulo);
+        }
+        throw err;
+    }
+}
 
-    const caminhoAbsolutoPacote = caminho.join(diretorioGlobal, caminhoRelativo);
+const importarPacoteCaminhoBase = async (caminhoRelativo: string) => {
+    // Se já temos o módulo em cache, retorna direto
+    if (cachePacotes.modulos.has(caminhoRelativo)) {
+        return cachePacotes.modulos.get(caminhoRelativo);
+    }
+
+    // Descobre diretório global do npm apenas uma vez
+    if (!cachePacotes.diretorioGlobal) {
+        const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+        cachePacotes.diretorioGlobal = processoFilho.execSync(`${npm} root -g`, { encoding: 'utf-8' }).trim();
+    }
+
+    const diretorioGlobal = cachePacotes.diretorioGlobal;
+
+    // Primeiro tenta direto no global
+    let caminhoAbsolutoPacote = caminho.resolve(diretorioGlobal, caminhoRelativo);
+
+    // Se não existir, tenta dentro do pacote 'delegua'
+    if (!sistemaArquivos.existsSync(caminhoAbsolutoPacote)) {
+        caminhoAbsolutoPacote = caminho.resolve(diretorioGlobal, 'delegua', 'node_modules', caminhoRelativo);
+    }
+
     const caminhoAbsolutoPackageJson = caminho.join(caminhoAbsolutoPacote, 'package.json');
 
-    let arquivoInicio = JSON.parse(sistemaArquivos.readFileSync(caminhoAbsolutoPackageJson, 'utf-8')).main || 'index.js';
-
-    const resposta = await import(
-        caminho.join('file:///' + diretorioGlobal) +
-        `\\${caminhoRelativo}\\${arquivoInicio.replace('./', '')}`
+    const packageJson = JSON.parse(
+        sistemaArquivos.readFileSync(caminhoAbsolutoPackageJson, 'utf-8')
     );
 
-    resultado = resposta;
-    return resultado;
+    const arquivoInicio = packageJson.main || 'index.js';
+    const caminhoModulo = caminho.resolve(caminhoAbsolutoPacote, arquivoInicio.replace('./', ''));
+
+    // Converte para URL válida (independente de sistema operacional)
+    const resposta = await importarModulo(caminhoModulo);
+
+    // Normaliza exportação (default ou nomeada)
+    const modulo = resposta.default ?? resposta;
+
+    // Armazena em cache
+    cachePacotes.modulos.set(caminhoRelativo, modulo);
+
+    return modulo;
 };
 
 const importarPacoteDeleguaCompleto = async (nome: string) => {
