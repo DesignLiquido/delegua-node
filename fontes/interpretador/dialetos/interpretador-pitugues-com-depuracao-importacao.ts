@@ -86,9 +86,4 @@ export class InterpretadorPituguesComDepuracaoImportacao
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
         return comum.visitarExpressaoModuloDeclaracoes(this, declaracao);
     }
-
-    // TODO: Passar lógica para o núcleo e apagar.
-    override async visitarExpressaoAcessoMetodoOuPropriedade(expressao: AcessoMetodoOuPropriedade) {
-        return comum.visitarExpressaoAcessoMetodoOuPropriedade(this, expressao);
-    }
 }
