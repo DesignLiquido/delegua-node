@@ -73,13 +73,14 @@ export class Delegua implements DeleguaInterface {
     traduzirArquivo(
         caminhoRelativoArquivo: string, 
         comandoTraducao: string,
+        alvo: string = '',
         gerarArquivoSaida: boolean = false
     ): void {
         const nucleoTraducao = new NucleoTraducao(
             this.funcaoDeRetorno, 
             this.funcaoDeRetornoMesmaLinha
         );
-        nucleoTraducao.iniciarTradutor(comandoTraducao);
+        nucleoTraducao.iniciarTradutor(comandoTraducao, alvo);
         nucleoTraducao.traduzirArquivo(caminhoRelativoArquivo, gerarArquivoSaida);
     }
 }

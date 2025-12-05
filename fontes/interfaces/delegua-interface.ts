@@ -13,6 +13,7 @@ export interface DeleguaInterface {
     traduzirArquivo(
         caminhoRelativoArquivo: string, 
         comandoTraducao: string,
+        alvo: string,
         gerarArquivoSaida: boolean
     ): void;
 }

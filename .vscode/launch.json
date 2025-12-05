@@ -2120,6 +2120,35 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Tradutor > Delégua para Assembly x64 > Teste",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "-t",
+        "delegua-para-x64",
+        "-s",
+        "./exemplos/tradutores/delegua-para-x64.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Tradutor > JavaScript para Delégua > Teste",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",

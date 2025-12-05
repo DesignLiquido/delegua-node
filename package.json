@@ -12,19 +12,19 @@
         "testes:servidor-depuracao": "yarn ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/birl": "^0.2.17",
-        "@designliquido/delegua": "^0.61.2",
-        "@designliquido/mapler": "^0.3.3",
-        "@designliquido/portugol-studio": "^0.6.3",
-        "@designliquido/potigol": "^0.5.3",
-        "@designliquido/visualg": "^0.5.3",
+        "@designliquido/birl": "^0.2.19",
+        "@designliquido/delegua": "^0.62.0",
+        "@designliquido/mapler": "^0.3.4",
+        "@designliquido/portugol-studio": "^0.6.4",
+        "@designliquido/potigol": "^0.5.4",
+        "@designliquido/visualg": "^0.5.4",
         "chalk": "4.1.2",
         "commander": "^14.0.0",
         "json-colorizer": "^3.0.1"
     },
     "devDependencies": {
         "@designliquido/delegua-arquivos": "^0.0.3",
-        "@designliquido/delegua-criptografia": "^0.0.1",
+        "@designliquido/delegua-criptografia": "^0.0.4",
         "@designliquido/delegua-estatistica": "^0.1.0",
         "@designliquido/delegua-fisica": "^0.1.0",
         "@designliquido/delegua-http": "^0.1.2",

@@ -10,6 +10,11 @@ const principal = async () => {
     analisadorArgumentos
         .helpOption('-h, --ajuda', 'Exibe a ajuda para o comando.')
         .option(
+            '-a, --alvo <alvo>',
+            'O alvo, para casos de tradução que são compilações.',
+            ''
+        )
+        .option(
             '-c, --codigo <código>',
             'Código a ser avaliado.',
             ''
@@ -36,7 +41,7 @@ const principal = async () => {
         )
         .option(
             '-t, --traduzir <linguagem-para-linguagem>',
-            'Traduz o código do arquivo passado como parâmetro de arquivo. O argumento deve ser no formato linguagem-para-linguagem, como por exemplo `delegua-para-js`.',
+            'Traduz o código do arquivo passado como parâmetro de arquivo. Valores válidos: delegua-para-assemblyscript, delegua-para-as, delegua-para-js, delegua-para-javascript, delegua-para-py, delegua-para-python, delegua-para-x64, js-para-delegua, javascript-para-delegua, alg-para-delegua, visualg-para-delegua. Exemplo: `delegua-para-js`.',
         )
         .option(
             '-v, --versao',
@@ -68,7 +73,7 @@ const principal = async () => {
     } else {
         if (codigoOuNomeArquivo) {
             if (opcoes.traduzir) {
-                delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.saida);
+                delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
             } else {
                 await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
             }

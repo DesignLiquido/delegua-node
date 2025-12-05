@@ -9,7 +9,7 @@ import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
-import { Declaracao } from '@designliquido/delegua/declaracoes';
+import { TradutorAssemblyX64 } from '@designliquido/delegua/tradutores/tradutor-assembly-x64';
 import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
 
 import { ImportadorInterface } from './interfaces';
@@ -56,7 +56,7 @@ export class NucleoTraducao
         this.funcaoDeRetornoMesmaLinha = funcaoDeRetornoMesmaLinha || process.stdout.write.bind(process.stdout);
     }
 
-    iniciarTradutor(comandoTraducao: string) {
+    iniciarTradutor(comandoTraducao: string, alvo: string = '') {
         switch (comandoTraducao) {
             case 'delegua-para-assemblyscript':
             case 'delegua-para-as':
@@ -92,6 +92,15 @@ export class NucleoTraducao
                 this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorPython();
                 break;
+            case 'delegua-para-x64':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
+                this.avaliadorSintatico = new AvaliadorSintatico();
+                this.tradutor = new TradutorAssemblyX64() // TODO: Colocar `alvo` aqui na próxima versão.
             case 'js-para-delegua':
             case 'javascript-para-delegua':
                 this.importador = new ImportadorJavaScript();
