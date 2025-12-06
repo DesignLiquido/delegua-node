@@ -35,6 +35,33 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Delégua via stdin",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "-d",
+        "visualg",
+        "-"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Delégua > Bhaskara",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
