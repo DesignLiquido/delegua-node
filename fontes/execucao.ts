@@ -79,17 +79,9 @@ const principal = async () => {
         }
 
         await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
-    } /* else {
-        if (!process.stdin.isTTY) {
-            let codigo = '';
-            for await (const chunk of process.stdin) {
-                codigo += chunk;
-            }
-            return await delegua.executarCodigoComoArgumento(codigo, opcoes.dialeto);
-        } else {
-            delegua.iniciarLair(opcoes.dialeto || 'delegua');
-        }
-    } */
+    } else {
+        delegua.iniciarLair(opcoes.dialeto || 'delegua');
+    }
 };
 
 principal();
