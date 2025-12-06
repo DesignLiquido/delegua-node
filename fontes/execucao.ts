@@ -67,20 +67,21 @@ const principal = async () => {
     if (opcoes.codigo) {
         return await delegua.executarCodigoComoArgumento(
             opcoes.codigo || codigoOuNomeArquivo,
-            opcoes.dialeto,
-            Boolean(opcoes.performance)
+            opcoes.dialeto
         );
-    } else {
-        if (codigoOuNomeArquivo) {
-            if (opcoes.traduzir) {
-                delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
-            } else {
-                await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
+    } else if (codigoOuNomeArquivo) {
+        if (codigoOuNomeArquivo === '-') {
+            let codigo = '';
+            for await (const chunk of process.stdin) {
+                codigo += chunk;
             }
-        } else {
-            delegua.iniciarLair(opcoes.dialeto || 'delegua');
+            return await delegua.executarCodigoComoArgumento(codigo, opcoes.dialeto);
         }
-    }   
+
+        await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
+    } else {
+        delegua.iniciarLair(opcoes.dialeto || 'delegua');
+    }
 };
 
 principal();
