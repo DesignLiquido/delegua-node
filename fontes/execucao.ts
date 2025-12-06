@@ -70,15 +70,19 @@ const principal = async () => {
             opcoes.dialeto
         );
     } else if (codigoOuNomeArquivo) {
-        if (codigoOuNomeArquivo === '-') {
-            let codigo = '';
-            for await (const chunk of process.stdin) {
-                codigo += chunk;
+        if (opcoes.traduzir) {
+            delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
+        } else {
+            if (codigoOuNomeArquivo === '-') {
+                let codigo = '';
+                for await (const chunk of process.stdin) {
+                    codigo += chunk;
+                }
+                return await delegua.executarCodigoComoArgumento(codigo, opcoes.dialeto);
             }
-            return await delegua.executarCodigoComoArgumento(codigo, opcoes.dialeto);
-        }
 
-        await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
+            await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
+        }
     } else {
         delegua.iniciarLair(opcoes.dialeto || 'delegua');
     }

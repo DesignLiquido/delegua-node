@@ -32,6 +32,7 @@ export class NucleoTraducao
     comandoTraducao: string = '';
 
     extensoes = {
+        arm: '.s',
         assemblyscript: '.as',
         delegua: '.delegua',
         javascript: '.js',
@@ -40,6 +41,7 @@ export class NucleoTraducao
         visualg: '.alg',
         python: '.py',
         py: '.py',
+        x64: '.nasm'
     }
 
     constructor(
@@ -57,8 +59,9 @@ export class NucleoTraducao
     }
 
     iniciarTradutor(comandoTraducao: string, alvo: string = '') {
+        this.comandoTraducao = comandoTraducao;
         switch (comandoTraducao) {
-            case 'delegua-para-x64':
+            case 'delegua-para-arm':
                 this.importador = new Importador(
                     new Lexador(false),
                     this.arquivosAbertos,
@@ -176,16 +179,13 @@ export class NucleoTraducao
 
         if (gerarArquivoSaida) {
             const linguagem = this.comandoTraducao?.split('-')[2] || '';
-            const extensaoAlvo = this.extensoes[linguagem]
+            const extensaoAlvo = this.extensoes[linguagem];
             if (extensaoAlvo) {
-                ['.delegua', '.js', '.alg'].map((extensao) => {
-                    if (caminhoAbsolutoPrimeiroArquivo.includes(extensao)) {
-                        sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensao, `${extensaoAlvo}`), resultado, (erro) => {
-                            if (erro) throw erro;
-                        });
-                        return;
-                    }
+                const extensaoArquivo = caminho.extname(caminhoAbsolutoPrimeiroArquivo)
+                sistemaArquivos.writeFile(caminhoAbsolutoPrimeiroArquivo.replace(extensaoArquivo, `${extensaoAlvo}`), resultado, (erro) => {
+                    if (erro) throw erro;
                 });
+                return;
             }
         }
 
