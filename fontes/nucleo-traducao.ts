@@ -2,14 +2,14 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
 import { AvaliadorSintaticoInterface, SimboloInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
-import { TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
+import { PlataformaAlvoARM, TradutorAssemblyARM, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
-import { TradutorAssemblyX64 } from '@designliquido/delegua/tradutores/tradutor-assembly-x64';
+import { PlataformaAlvo, TradutorAssemblyX64 } from '@designliquido/delegua/tradutores/tradutor-assembly-x64';
 import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
 
 import { ImportadorInterface } from './interfaces';
@@ -58,6 +58,21 @@ export class NucleoTraducao
 
     iniciarTradutor(comandoTraducao: string, alvo: string = '') {
         switch (comandoTraducao) {
+            case 'delegua-para-x64':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
+                this.avaliadorSintatico = new AvaliadorSintatico();
+                let alvoResolvidoARM: PlataformaAlvoARM = 'linux-arm';
+                if (alvo === 'android') {
+                    alvoResolvidoARM = 'android';
+                }
+
+                this.tradutor = new TradutorAssemblyARM(alvoResolvidoARM);
+                break;
             case 'delegua-para-assemblyscript':
             case 'delegua-para-as':
                 this.importador = new Importador(
@@ -100,7 +115,13 @@ export class NucleoTraducao
                     false
                 );
                 this.avaliadorSintatico = new AvaliadorSintatico();
-                this.tradutor = new TradutorAssemblyX64() // TODO: Colocar `alvo` aqui na próxima versão.
+                let alvoResolvido: PlataformaAlvo = 'linux';
+                if (alvo === 'windows') {
+                    alvoResolvido = 'windows';
+                }
+
+                this.tradutor = new TradutorAssemblyX64(alvoResolvido);
+                break;
             case 'js-para-delegua':
             case 'javascript-para-delegua':
                 this.importador = new ImportadorJavaScript();
