@@ -293,10 +293,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-arquivos/-/delegua-arquivos-0.0.3.tgz#5853f67f99cf7cf74540255f9494e451106a06a5"
   integrity sha512-qnumk3xidgxzINFEbWISsp5qJQHrnS+azDXhCZrURHbxJsygI+sJL4ZuHGvOMvk6e2whuopyKi9ifPN5dsCw5w==
 
-"@designliquido/delegua-criptografia@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-criptografia/-/delegua-criptografia-0.0.4.tgz#ee937c586aa5094b0c2d8794228c5719943a9b02"
-  integrity sha512-CWOIo3jhBCCCQ/SfUH79N/u05oMq14FvmSZdefVL3vnK19+xSLKWHf2JxH7r9bFt1P4I3I9jSTM3nvqOsDlcxQ==
+"@designliquido/delegua-criptografia@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-criptografia/-/delegua-criptografia-0.3.3.tgz#42d39ee27b4c7abb05656829ef6526655464a117"
+  integrity sha512-eIOZT+/MRJFDWru/yJHmxXyjNfMQ2tff6ioapb5YR/LmYdoa5ELtueVhFzpXEgPLksCLLjrntNPFFhXe5g2KXQ==
 
 "@designliquido/delegua-estatistica@^0.1.0":
   version "0.1.0"

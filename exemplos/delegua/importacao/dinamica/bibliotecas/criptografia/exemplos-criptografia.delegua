@@ -23,3 +23,22 @@ var textoOriginal = criptografia.descriptografarAes256(
     resultado.iv
 )
 escreva(textoOriginal)
+
+escreva(criptografia.gerarBytesAleatorios(16))
+
+// Par de chaves para CRIPTOGRAFIA
+var parCripto = criptografia.gerarParChavesRsa(2048)
+
+var meuTexto = "Mensagem confidencial"
+var criptografado = criptografia.criptografarRsa(meuTexto, parCripto.chavePublica)
+escreva(criptografado)
+
+// Par de chaves SEPARADO para ASSINATURA (navegador)
+var parAssinatura = criptografia.gerarParChavesRsaAssinatura(2048)
+
+var documento = "Documento importante"
+var assinatura = criptografia.assinarRsa(documento, parAssinatura.chavePrivada)
+escreva(assinatura)
+
+var assinaturaValida = criptografia.verificarAssinaturaRsa(documento, assinatura, parAssinatura.chavePublica)
+escreva(assinaturaValida)
