@@ -1,4 +1,3 @@
-import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
 import {
@@ -35,13 +34,23 @@ export class Delegua implements DeleguaInterface {
     }
 
     versao(): string {
-        try {
-            const manifesto = caminho.resolve(process.cwd(), 'package.json');
+        // Tenta carregar o package.json de múltiplos locais:
+        // - Durante desenvolvimento: ../package.json (relativo ao dist/)
+        // - Após publicação: ./package.json (mesmo diretório)
+        const caminhosPossiveis = [
+            caminho.join(__dirname, '..', 'package.json'),  // Desenvolvimento (dist/ -> raiz)
+            caminho.join(__dirname, 'package.json'),         // Publicado (raiz do pacote)
+        ];
 
-            return JSON.parse(sistemaArquivos.readFileSync(manifesto, { encoding: 'utf8' })).version || '0.61';
-        } catch (error: any) {
-            return '0.61 (núcleo, desenvolvimento)';
+        for (const caminhoManifesto of caminhosPossiveis) {
+            try {
+                return require(caminhoManifesto).version;
+            } catch {
+                continue;
+            }
         }
+
+        return 'desconhecida';
     }
 
     async executarCodigoComoArgumento(
