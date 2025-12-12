@@ -1,34 +1,17 @@
 import {
-    AcessoIndiceVariavel,
     AcessoMetodo,
-    AcessoMetodoOuPropriedade,
-    AcessoPropriedade,
-    ArgumentoReferenciaFuncao,
     AvaliadorSintatico,
     Chamada,
     Classe,
     Comentario,
     Const,
     Construto,
-    Deceto,
     Declaracao,
-    Dupla,
-    ErroAvaliadorSintatico,
-    FuncaoConstruto,
     FuncaoDeclaracao,
-    Leia,
     Literal,
-    Noneto,
-    Octeto,
-    Quarteto,
-    Quinteto,
-    ReferenciaFuncao,
     RetornoAvaliadorSintatico,
     RetornoLexador,
-    Septeto,
-    Sexteto,
     SimboloInterface,
-    Trio,
     Var,
     Variavel
 } from "@designliquido/delegua";
@@ -37,7 +20,6 @@ import { InformacaoElementoSintatico } from "@designliquido/delegua/informacao-e
 import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
-import tipoDeDadosDelegua from '@designliquido/delegua/tipos-de-dados/delegua';
 
 import { ImportadorInterface } from "../interfaces";
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";

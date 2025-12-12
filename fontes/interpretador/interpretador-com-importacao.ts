@@ -1,7 +1,6 @@
 import { Const, Declaracao, FuncaoDeclaracao, Var } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
-import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
 
 import tipoDeDadosPrimitivos from '@designliquido/delegua/tipos-de-dados/primitivos';
 
