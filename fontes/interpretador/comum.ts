@@ -42,10 +42,8 @@ export async function visitarDeclaracaoConst(
         );
     }
 
-    return {
-        tipo: declaracao.tipo,
-        tipoExplicito: declaracao.tipoExplicito,
-    };
+    // Retorna o valor da constante para o modo LAIR
+    return interpretador.pilhaEscoposExecucao.obterValorVariavel(declaracao.simbolo);
 }
 
 export async function visitarDeclaracaoDefinicaoFuncao(

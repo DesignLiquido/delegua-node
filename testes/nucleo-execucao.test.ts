@@ -348,4 +348,157 @@ tente {
             expect(nucleoExecucao.dialetos['pitugues']).toBe('Pituguês');
         });
     });
+
+    describe('Modo LAIR - Declaração de variáveis', () => {
+        it('Deve retornar valor ao declarar variável numérica', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado = await nucleoExecucao.executarLinhas(['var a = 1']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            const valorResultado = resultado.resultado[0] as any;
+            expect(valorResultado).toHaveProperty('valorRetornado');
+            expect(valorResultado.valorRetornado).toHaveProperty('valor', 1);
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'número');
+        });
+
+        it('Deve retornar valor ao declarar variável textual', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado = await nucleoExecucao.executarLinhas(['var nome = "João"']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            const valorResultado = resultado.resultado[0] as any;
+            expect(valorResultado).toHaveProperty('valorRetornado');
+            expect(valorResultado.valorRetornado).toHaveProperty('valor', 'João');
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'texto');
+        });
+
+        it('Deve retornar valor ao declarar variável lógica', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado = await nucleoExecucao.executarLinhas(['var ativo = verdadeiro']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            const valorResultado = resultado.resultado[0] as any;
+            expect(valorResultado).toHaveProperty('valorRetornado');
+            expect(valorResultado.valorRetornado).toHaveProperty('valor', true);
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'lógico');
+        });
+
+        it('Deve retornar valor ao declarar variável com dicionário', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado = await nucleoExecucao.executarLinhas(['var dados = {"nome": "João", "idade": 30}']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            const valorResultado = resultado.resultado[0] as any;
+            expect(valorResultado).toHaveProperty('valorRetornado');
+            expect(valorResultado.valorRetornado).toHaveProperty('valor');
+            expect(valorResultado.valorRetornado.valor).toHaveProperty('nome', 'João');
+            expect(valorResultado.valorRetornado.valor).toHaveProperty('idade', 30);
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'dicionário');
+        });
+
+        it('Deve retornar valor ao declarar constante numérica', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado = await nucleoExecucao.executarLinhas(['const PI = 3.14']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            const valorResultado = resultado.resultado[0] as any;
+            expect(valorResultado).toHaveProperty('valorRetornado');
+            expect(valorResultado.valorRetornado).toHaveProperty('valor', 3.14);
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'número');
+        });
+    });
+
+    describe('Modo LAIR - Inspeção de variáveis', () => {
+        it('Deve retornar estrutura completa ao inspecionar variável numérica', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+            // Ativa modo LAIR para manter contexto entre chamadas
+            (nucleoExecucao.avaliadorSintatico as any).modoLair = true;
+
+            await nucleoExecucao.executarLinhas(['var a = 42']);
+            const resultado = await nucleoExecucao.executarLinhas(['a']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            expect(resultado.resultado[0]).toHaveProperty('valorRetornado');
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('valor', 42);
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('tipo', 'número');
+        });
+
+        it('Deve retornar estrutura completa ao inspecionar variável textual', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+            // Ativa modo LAIR para manter contexto entre chamadas
+            (nucleoExecucao.avaliadorSintatico as any).modoLair = true;
+
+            await nucleoExecucao.executarLinhas(['var mensagem = "Olá mundo"']);
+            const resultado = await nucleoExecucao.executarLinhas(['mensagem']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            expect(resultado.resultado[0]).toHaveProperty('valorRetornado');
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('valor', 'Olá mundo');
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('tipo', 'texto');
+        });
+
+        it('Deve retornar estrutura completa ao inspecionar variável lógica', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+            // Ativa modo LAIR para manter contexto entre chamadas
+            (nucleoExecucao.avaliadorSintatico as any).modoLair = true;
+
+            await nucleoExecucao.executarLinhas(['var ativo = falso']);
+            const resultado = await nucleoExecucao.executarLinhas(['ativo']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            expect(resultado.resultado[0]).toHaveProperty('valorRetornado');
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('valor', false);
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('tipo', 'lógico');
+        });
+
+        it('Deve retornar estrutura completa ao inspecionar dicionário', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+            // Ativa modo LAIR para manter contexto entre chamadas
+            (nucleoExecucao.avaliadorSintatico as any).modoLair = true;
+
+            await nucleoExecucao.executarLinhas(['var pessoa = {"nome": "Maria", "idade": 25}']);
+            const resultado = await nucleoExecucao.executarLinhas(['pessoa']);
+
+            expect(resultado.resultado).toBeDefined();
+            expect(resultado.resultado.length).toBeGreaterThan(0);
+            expect(resultado.resultado[0]).toHaveProperty('valorRetornado');
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('valor');
+            expect(resultado.resultado[0].valorRetornado.valor).toHaveProperty('nome', 'Maria');
+            expect(resultado.resultado[0].valorRetornado.valor).toHaveProperty('idade', 25);
+            expect(resultado.resultado[0].valorRetornado).toHaveProperty('tipo', 'dicionário');
+        });
+
+        it('Deve retornar declarações junto com resultado', async () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+
+            const resultado: any = await nucleoExecucao.executarLinhas(['var x = 10']);
+
+            expect(resultado).toHaveProperty('declaracoes');
+            expect(resultado.declaracoes).toBeDefined();
+            expect(resultado.declaracoes.length).toBeGreaterThan(0);
+        });
+    });
 });

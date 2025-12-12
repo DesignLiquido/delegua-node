@@ -1,4 +1,4 @@
-import { Const, Declaracao, FuncaoDeclaracao } from '@designliquido/delegua/declaracoes';
+import { Const, Declaracao, FuncaoDeclaracao, Var } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
 import { AcessoMetodoOuPropriedade } from '@designliquido/delegua/construtos';
@@ -48,6 +48,14 @@ export class InterpretadorComImportacao
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
         return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+    }
+
+    override async visitarDeclaracaoVar(declaracao: Var): Promise<any> {
+        // Chama o método da classe base para fazer a declaração
+        await super.visitarDeclaracaoVar(declaracao);
+
+        // Retorna o valor da variável para o modo LAIR
+        return this.pilhaEscoposExecucao.obterValorVariavel(declaracao.simbolo);
     }
 
     override visitarDeclaracaoConst(declaracao: Const): Promise<any> {

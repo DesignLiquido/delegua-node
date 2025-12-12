@@ -555,9 +555,14 @@ export class NucleoExecucao
             return { resultado: [] } as RetornoExecucaoInterface;
         }
 
-        return await this.executar(retornoAvaliadorSintatico.declaracoes,
+        const retorno = await this.executar(retornoAvaliadorSintatico.declaracoes,
             true
         );
+
+        // Adicionamos as declarações ao retorno para que a máquina de estados LAIR possa usá-las
+        (retorno as any).declaracoes = retornoAvaliadorSintatico.declaracoes;
+
+        return retorno;
     }
 
     /**
