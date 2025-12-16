@@ -1301,6 +1301,8 @@
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "pitugues",
         "./exemplos/dialetos/pitugues/ola-mundo.pitugues"
       ],
       "runtimeExecutable": "node",
@@ -1327,6 +1329,8 @@
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "pitugues",
         "./exemplos/dialetos/pitugues/atribuicao-multipla.pitugues"
       ],
       "runtimeExecutable": "node",
@@ -1353,7 +1357,37 @@
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "pitugues",
         "./exemplos/dialetos/pitugues/fibonacci.pitugues"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Pituguês > Beecrowd > 1001",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "--dialeto",
+        "pitugues",
+        "./exemplos/dialetos/pitugues/beecrowd/1001.pitugues"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [

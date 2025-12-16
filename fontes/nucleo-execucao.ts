@@ -68,6 +68,8 @@ import { NucleoComum } from "./nucleo-comum";
 import { AvaliadorSintaticoComImportacao } from "./avaliador-sintatico/avaliador-sintatico-com-importacao";
 import { MaquinaEstadosLairBase, MaquinaEstadosLairDelegua, MaquinaEstadosLairPitugues } from "./maquinas-estados-lair";
 import { AvaliadorSintaticoPituguesComImportacao } from "./avaliador-sintatico/dialetos/avaliador-sintatico-pitugues-com-importacao";
+import { InterpretadorPituguesComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-depuracao-importacao";
+import { InterpretadorPituguesComImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-importacao";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -209,13 +211,13 @@ export class NucleoExecucao
                 this.avaliadorSintatico = new AvaliadorSintaticoPituguesComImportacao(this.importador);
 
                 this.interpretador = depurador
-                    ? new InterpretadorComDepuracaoImportacao(
+                    ? new InterpretadorPituguesComDepuracaoImportacao(
                           this.importador,
                           process.cwd(),
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha
                       )
-                    : new InterpretadorComImportacao(
+                    : new InterpretadorPituguesComImportacao(
                           this.importador,
                           process.cwd(),
                           performance,

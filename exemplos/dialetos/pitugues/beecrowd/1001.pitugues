@@ -1,0 +1,4 @@
+a = leia("Número 1: ")
+b = leia("Número 2: ")
+c = inteiro(a) + inteiro(b)
+imprima("X = ", c)
