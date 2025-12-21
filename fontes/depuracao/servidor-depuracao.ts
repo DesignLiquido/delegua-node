@@ -192,7 +192,7 @@ export class ServidorDepuracao {
         let linhasResposta = '';
         linhasResposta += "Recebido comando 'remover-ponto-parada'\n";
         if (comando.length < 3) {
-            linhasResposta += `[adicionar-ponto-parada]: Formato: adicionar-ponto-parada /caminho/do/arquivo.egua 1\n`;
+            linhasResposta += `[remover-ponto-parada]: Formato: remover-ponto-parada /caminho/do/arquivo.egua 1\n`;
             conexao.write(linhasResposta);
             return;
         }
@@ -201,9 +201,12 @@ export class ServidorDepuracao {
         if (validacaoPontoParada.sucesso) {
             this.interpretador.pontosParada = this.interpretador.pontosParada.filter(
                 (p: PontoParada) =>
-                    p.hashArquivo !== validacaoPontoParada.hashArquivo && p.linha !== validacaoPontoParada.linha
+                    !(p.hashArquivo === validacaoPontoParada.hashArquivo && p.linha === validacaoPontoParada.linha)
             );
+            linhasResposta += `Ponto de parada removido com sucesso\n`;
         }
+
+        conexao.write(linhasResposta);
     };
 
     comandoSairEscopo = async (conexao: net.Socket): Promise<any> => {
