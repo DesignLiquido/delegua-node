@@ -36,7 +36,7 @@ describe('Analisador Semântico + Avaliador Sintático com Importação de Pitug
             `distancia = mate.raizQuadrada((x2 - x1) ^ 2 + (y2 - y1) ^ 2)`,
             `escreva("A distância entre os pontos é: " + distancia)`,
         ], -1);
-        const retornoAvaliadorSintatico = avaliadorSintatico.analisar(retornoLexador, -1);
+        const retornoAvaliadorSintatico = await avaliadorSintatico.analisar(retornoLexador, -1);
         const retornoAnalisadorSemantico = await analisadorSemantico.analisar(retornoAvaliadorSintatico.declaracoes);
 
         expect(retornoAnalisadorSemantico).toBeTruthy();

@@ -154,7 +154,7 @@ export class NucleoTraducao
      *                          Se verdadeiro, os arquivos de saída são escritos no mesmo diretório
      *                          do arquivo passado no primeiro parâmetro.
      */
-    traduzirArquivo(caminhoRelativoArquivo: string, gerarArquivoSaida: boolean): void {
+    async traduzirArquivo(caminhoRelativoArquivo: string, gerarArquivoSaida: boolean): Promise<void> {
         const caminhoAbsolutoPrimeiroArquivo = caminho.resolve(caminhoRelativoArquivo);
         const novoDiretorioBase = caminho.dirname(caminhoAbsolutoPrimeiroArquivo);
 
@@ -170,7 +170,7 @@ export class NucleoTraducao
             process.exit(65); // Código para erro de avaliação antes da tradução
         }
 
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+        const retornoAvaliadorSintatico = await this.avaliadorSintatico.analisar(
             retornoImportador.retornoLexador, 
             retornoImportador.hashArquivo
         );

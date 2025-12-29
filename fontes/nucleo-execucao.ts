@@ -356,7 +356,7 @@ export class NucleoExecucao
 
     async executarCodigoComoArgumento(codigo: string): Promise<void> {
         const retornoLexador = this.lexador.mapear([codigo], -1);
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+        const retornoAvaliadorSintatico = await this.avaliadorSintatico.analisar(
             retornoLexador,
             -1
         );
@@ -391,7 +391,7 @@ export class NucleoExecucao
             process.exit(65); // Código para erro de avaliação antes da execução
         }
 
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+        const retornoAvaliadorSintatico = await this.avaliadorSintatico.analisar(
             retornoImportador.retornoLexador, 
             retornoImportador.hashArquivo
         );
@@ -547,7 +547,7 @@ export class NucleoExecucao
      */
     async executarLinhas(linhas: string[]): Promise<RetornoExecucaoInterface> {
         const retornoLexador = this.lexador.mapear(linhas, -1);
-        const retornoAvaliadorSintatico = this.avaliadorSintatico.analisar(
+        const retornoAvaliadorSintatico = await this.avaliadorSintatico.analisar(
             retornoLexador,
             -1
         );

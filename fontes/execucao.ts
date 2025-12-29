@@ -71,7 +71,7 @@ const principal = async () => {
         );
     } else if (codigoOuNomeArquivo) {
         if (opcoes.traduzir) {
-            delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
+            await delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
         } else {
             if (codigoOuNomeArquivo === '-') {
                 let codigo = '';

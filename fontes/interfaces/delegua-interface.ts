@@ -15,5 +15,5 @@ export interface DeleguaInterface {
         comandoTraducao: string,
         alvo: string,
         gerarArquivoSaida: boolean
-    ): void;
+    ): Promise<void>;
 }

@@ -25,12 +25,12 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
         this.importador = importador;
     }
 
-    override declaracaoImportar(): any {
+    override async declaracaoImportar(): Promise<any> {
         this.consumir(
             tiposDeSimbolos.PARENTESE_ESQUERDO,
             "Esperado '(' após declaração."
         );
-        const caminho = this.expressao();
+        const caminho = await this.expressao();
         const simboloFechamento = this.consumir(
             tiposDeSimbolos.PARENTESE_DIREITO,
             "Esperado ')' após declaração."
@@ -38,16 +38,17 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
 
         // Chegando aqui sem erros, a importação é sintaticamente válida.
         const literalCaminho = caminho as Literal;
-        if (!literalCaminho.valor.endsWith('.delegua')) {
+        const caminhoTexto = String(literalCaminho.valor);
+        if (!caminhoTexto.endsWith('.delegua')) {
             return new ImportarBiblioteca(
                 literalCaminho.hashArquivo,
                 literalCaminho.linha,
-                literalCaminho.valor
+                caminhoTexto
             );
         }
 
         const resultadoImportacao = this.importador.importar(
-            literalCaminho.valor,
+            caminhoTexto,
             caminho.hashArquivo
         );
 
@@ -70,13 +71,13 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
             this.importador
         );
         const resultadoAvaliacaoSintaticaModulo =
-            avaliadorSintaticoModulo.analisar(
+            await avaliadorSintaticoModulo.analisar(
                 resultadoImportacao.retornoLexador,
                 resultadoImportacao.hashArquivo,
                 this.arquivosImportados
             );
 
-        this.arquivosImportados.push(literalCaminho.valor);
+        this.arquivosImportados.push(caminhoTexto);
 
         const definicoesClasse =
             resultadoAvaliacaoSintaticaModulo.declaracoes.filter(
@@ -107,11 +108,11 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
         super.inicializarPilhaEscopos();
     }
 
-    override analisar(
+    override async analisar(
         retornoLexador: RetornoLexador<SimboloInterface>,
         hashArquivo: number,
         arquivosImportados?: string[]
-    ): RetornoAvaliadorSintatico<Declaracao> {
+    ): Promise<RetornoAvaliadorSintatico<Declaracao>> {
         this.arquivosImportados = arquivosImportados || [];
         
         return super.analisar(retornoLexador, hashArquivo);

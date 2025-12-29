@@ -79,17 +79,17 @@ export class Delegua implements DeleguaInterface {
         return await nucleoExecucao.iniciarLairDelegua();
     }
 
-    traduzirArquivo(
+    async traduzirArquivo(
         caminhoRelativoArquivo: string, 
         comandoTraducao: string,
         alvo: string = '',
         gerarArquivoSaida: boolean = false
-    ): void {
+    ): Promise<void> {
         const nucleoTraducao = new NucleoTraducao(
             this.funcaoDeRetorno, 
             this.funcaoDeRetornoMesmaLinha
         );
         nucleoTraducao.iniciarTradutor(comandoTraducao, alvo);
-        nucleoTraducao.traduzirArquivo(caminhoRelativoArquivo, gerarArquivoSaida);
+        await nucleoTraducao.traduzirArquivo(caminhoRelativoArquivo, gerarArquivoSaida);
     }
 }

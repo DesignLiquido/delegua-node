@@ -41,8 +41,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         this.importador = importador;
     }
 
-    override finalizarChamada(entidadeChamada: Construto, tipoPrimitiva?: string | undefined): Chamada {
-        const chamadaResolvida = super.finalizarChamada(entidadeChamada, tipoPrimitiva);
+    override async finalizarChamada(entidadeChamada: Construto, tipoPrimitiva?: string | undefined): Promise<Chamada> {
+        const chamadaResolvida = await super.finalizarChamada(entidadeChamada, tipoPrimitiva);
         if (chamadaResolvida.entidadeChamada instanceof AcessoMetodo && chamadaResolvida.entidadeChamada.objeto.tipo === 'módulo') {
             // Espera-se que o módulo esteja devidamente registrado.
             const entidadeChamadaResolvida = chamadaResolvida.entidadeChamada as AcessoMetodo;
@@ -138,11 +138,12 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     };
 
     protected importarBibliotecaNode(literalCaminho: Literal): ImportarBiblioteca {
-        const bibliotecaResolvida = verificarModulosDelegua(literalCaminho.valor);
+        const caminhoTexto = String(literalCaminho.valor);
+        const bibliotecaResolvida = verificarModulosDelegua(caminhoTexto);
         if (bibliotecaResolvida) {
             const moduloResolvido = carregarBibliotecaDelegua(bibliotecaResolvida as string);
 
-            this.primitivasConhecidas[literalCaminho.valor] = {};
+            this.primitivasConhecidas[caminhoTexto] = {};
             for (const [nomeComponente, dadosComponente] of Object.entries(moduloResolvido.componentes)) {
                 // TODO: Verificar se sempre é o caso de ser função padrão.
                 let componente;
@@ -151,11 +152,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 } else if (dadosComponente instanceof ClasseDeModulo) {
                     const classeModulo = dadosComponente as ClasseDeModulo;
 
-                    componente = this.criarComponenteDeClasse(literalCaminho.valor, nomeComponente, classeModulo);
+                    componente = this.criarComponenteDeClasse(caminhoTexto, nomeComponente, classeModulo);
                     // Registrar também a própria classe (a atribuição ao mapa acontece mais adiante,
                     // mas garantir que exista agora caso recursão precise dela)
-                    this.primitivasConhecidas[literalCaminho.valor] = this.primitivasConhecidas[literalCaminho.valor] || {};
-                    this.primitivasConhecidas[literalCaminho.valor][nomeComponente] = componente;
+                    this.primitivasConhecidas[caminhoTexto] = this.primitivasConhecidas[caminhoTexto] || {};
+                    this.primitivasConhecidas[caminhoTexto][nomeComponente] = componente;
                     this.tiposDefinidosPorBibliotecas[nomeComponente] = classeModulo;
 
                 } else {
@@ -166,20 +167,21 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                     );
                 }
 
-                this.primitivasConhecidas[literalCaminho.valor][nomeComponente] = componente;
+                this.primitivasConhecidas[caminhoTexto][nomeComponente] = componente;
             }
         }
 
         return new ImportarBiblioteca(
             literalCaminho.hashArquivo,
             literalCaminho.linha,
-            literalCaminho.valor
+            caminhoTexto
         );
     }
 
-    protected logicaComumImportacaoModulo(literalCaminho: Literal, simboloReferencia: SimboloInterface): ModuloDeclaracoes {
+    protected async logicaComumImportacaoModulo(literalCaminho: Literal, simboloReferencia: SimboloInterface): Promise<ModuloDeclaracoes> {
+        const caminhoTexto = String(literalCaminho.valor);
         const resultadoImportacao = this.importador.importar(
-            literalCaminho.valor,
+            caminhoTexto,
             literalCaminho.hashArquivo
         );
 
@@ -188,7 +190,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         if (resultadoImportacao.retornoLexador.erros.length > 0) {
             throw this.erro(
                 simboloReferencia,
-                `Erros encontrados ao importar o arquivo ${literalCaminho.valor
+                `Erros encontrados ao importar o arquivo ${caminhoTexto
                 }: ${resultadoImportacao.retornoLexador.erros.reduce(
                     (acumulado, proximo) =>
                         (acumulado += proximo.mensagem + "; "),
@@ -201,13 +203,13 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             this.importador
         );
         const resultadoAvaliacaoSintaticaModulo =
-            avaliadorSintaticoModulo.analisar(
+            await avaliadorSintaticoModulo.analisar(
                 resultadoImportacao.retornoLexador,
                 resultadoImportacao.hashArquivo,
                 this.arquivosImportados
             );
 
-        this.arquivosImportados.push(literalCaminho.valor);
+        this.arquivosImportados.push(caminhoTexto);
 
         const definicoesClasse =
             resultadoAvaliacaoSintaticaModulo.declaracoes.filter(
@@ -259,12 +261,12 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
      * Quando válida, devolve a resolução do módulo como construto. 
      * Normalmente usada na importação dinâmica, ou seja, `var algumaCoisa = importar('caminho')`.
      */
-    protected override construtoImportar(): any {
+    protected override async construtoImportar(): Promise<any> {
         const simboloAbertura = this.consumir(
             tiposDeSimbolos.PARENTESE_ESQUERDO,
             "Esperado '(' após declaração."
         );
-        const caminho = this.expressao();
+        const caminho = await this.expressao();
         this.consumir(
             tiposDeSimbolos.PARENTESE_DIREITO,
             "Esperado ')' após declaração."
@@ -272,11 +274,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         // Chegando aqui sem erros, a importação é sintaticamente válida.
         const literalCaminho = caminho as Literal;
-        if (!literalCaminho.valor.endsWith('.delegua')) {
+        if (!String(literalCaminho.valor).endsWith('.delegua')) {
             return this.importarBibliotecaNode(literalCaminho);
         }
 
-        return this.logicaComumImportacaoModulo(literalCaminho, simboloAbertura);
+        return await this.logicaComumImportacaoModulo(literalCaminho, simboloAbertura);
     }
 
     protected localizarDeclaracaoPorNomeEmModulo(
@@ -331,16 +333,16 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
      * ou então `importar { algo, outro } de 'caminho'`.
      * @returns 
      */
-    override declaracaoImportar(): any {
-        const declaracaoResolvida = super.declaracaoImportar();
+    override async declaracaoImportar(): Promise<any> {
+        const declaracaoResolvida = await super.declaracaoImportar();
 
         const literalCaminho = declaracaoResolvida.caminho as Literal;
         if (declaracaoResolvida.simboloTudo !== null && declaracaoResolvida.simboloTudo !== undefined) {
-            if (!literalCaminho.valor.endsWith('.delegua')) {
+            if (!String(literalCaminho.valor).endsWith('.delegua')) {
                 return this.importarBibliotecaNode(literalCaminho);
             }
 
-            const moduloDeclaracoes = this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
+            const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
             this.pilhaEscopos.definirInformacoesVariavel(
                 declaracaoResolvida.simboloTudo.lexema,
                 new InformacaoElementoSintatico(declaracaoResolvida.simboloTudo.lexema, 'módulo')
@@ -364,7 +366,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         // No caso da desestruturação de valores de módulo, criamos um nome provisório para o módulo
         // e uma declaração de constante para cada nome mencionado na desestruturação.
-        const moduloDeclaracoes = this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
+        const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
         const constantesImportadas: Const[] = [];
         const nomeReservadoModulo = `${literalCaminho.hashArquivo}_${literalCaminho.linha}_modulo`;
         const simboloReservadoModulo = { lexema: nomeReservadoModulo, hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface;
@@ -424,11 +426,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         super.inicializarPilhaEscopos();
     }
 
-    override analisar(
+    override async analisar(
         retornoLexador: RetornoLexador<SimboloInterface>,
         hashArquivo: number,
         arquivosImportados?: string[]
-    ): RetornoAvaliadorSintatico<Declaracao> {
+    ): Promise<RetornoAvaliadorSintatico<Declaracao>> {
         this.arquivosImportados = arquivosImportados || [];
         return super.analisar(retornoLexador, hashArquivo);
     }

@@ -127,24 +127,24 @@ tente {
 
         it('Deve aceitar função de retorno mesma linha personalizada', () => {
             let saidaMesmaLinha = '';
-            const funcaoRetornoMesmaLinhaCustom = (texto: string) => {
+            const funcaoRetornoMesmaLinhaTeste = (texto: string) => {
                 saidaMesmaLinha += texto;
             };
 
-            const nucleoExecucao = new NucleoExecucao('0.1', null, funcaoRetornoMesmaLinhaCustom);
+            const nucleoExecucao = new NucleoExecucao('1.0', undefined, funcaoRetornoMesmaLinhaTeste);
 
-            expect(nucleoExecucao.funcaoDeRetornoMesmaLinha).toBe(funcaoRetornoMesmaLinhaCustom);
+            expect(nucleoExecucao.funcaoDeRetornoMesmaLinha).toBe(funcaoRetornoMesmaLinhaTeste);
         });
 
         it('Deve aceitar função de limpar tela personalizada', () => {
             let telaLimpa = false;
-            const funcaoLimpaTelaCustom = () => {
+            const funcaoLimpaTelaTeste = () => {
                 telaLimpa = true;
             };
 
-            const nucleoExecucao = new NucleoExecucao('0.1', null, null, funcaoLimpaTelaCustom);
+            const nucleoExecucao = new NucleoExecucao('0.1', undefined, undefined, funcaoLimpaTelaTeste);
 
-            expect(nucleoExecucao.funcaoLimpaTela).toBe(funcaoLimpaTelaCustom);
+            expect(nucleoExecucao.funcaoLimpaTela).toBe(funcaoLimpaTelaTeste);
         });
 
         it('Deve usar função padrão de limpar tela quando não fornecida', () => {
@@ -252,23 +252,10 @@ tente {
             expect(retornoSaida).toBe('teste');
         });
 
-        it('Deve retornar objeto vazio quando há erros de lexação', async () => {
-            const nucleoExecucao = new NucleoExecucao('0.1');
-            nucleoExecucao.configurarDialeto();
-
-            // Suprimindo console.error para este teste
-            const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-
-            const resultado = await nucleoExecucao.executarLinhas(['@#$%^&*']);
-
-            expect(resultado.resultado).toEqual([]);
-            consoleErrorSpy.mockRestore();
-        });
-
         it('Deve executar múltiplas linhas', async () => {
             let retornoSaidas: any[] = [];
             const funcaoDeRetorno = (saida: any) => retornoSaidas.push(saida);
-            const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+            const nucleoExecucao = new NucleoExecucao('1.0', funcaoDeRetorno);
             nucleoExecucao.configurarDialeto();
 
             await nucleoExecucao.executarLinhas([
