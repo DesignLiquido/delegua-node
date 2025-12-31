@@ -25,7 +25,7 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
         this.importador = importador;
     }
 
-    override async declaracaoImportar(): Promise<any> {
+    async declaracaoImportar(): Promise<any> {
         this.consumir(
             tiposDeSimbolos.PARENTESE_ESQUERDO,
             "Esperado '(' após declaração."
