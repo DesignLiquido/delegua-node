@@ -39,6 +39,13 @@ describe('Máquina de Estados LAIR Base', () => {
         );
     });
 
+    afterEach(() => {
+        // Fechar a interface de leitura para liberar os event listeners de stdin/stdout
+        if (maquina && maquina.interfaceLeitura) {
+            maquina.interfaceLeitura.close();
+        }
+    });
+
     describe('Construtor', () => {
         it('Deve inicializar com dialeto correto', () => {
             expect(maquina).toBeDefined();

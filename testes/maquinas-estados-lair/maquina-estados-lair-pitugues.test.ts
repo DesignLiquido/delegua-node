@@ -32,6 +32,10 @@ describe('Máquina de Estados LAIR Pitugues', () => {
     afterEach(() => {
         promptSpy.mockRestore();
         setPromptSpy.mockRestore();
+        // Fechar a interface de leitura para liberar os event listeners de stdin/stdout
+        if (maquina && maquina.interfaceLeitura) {
+            maquina.interfaceLeitura.close();
+        }
     });
 
     describe('Construtor', () => {

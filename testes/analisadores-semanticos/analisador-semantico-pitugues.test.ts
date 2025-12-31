@@ -25,7 +25,8 @@ describe('Analisador Semântico + Avaliador Sintático com Importação de Pitug
         analisadorSemantico = new AnalisadorSemanticoPitugues();
     });
 
-    it('Sucesso - variável de importação usada em método matemático', async () => {
+    // TODO: Reativar após próxima versão do núcleo de Delégua.
+    it.skip('Sucesso - variável de importação usada em método matemático', async () => {
         const retornoLexador = lexador.mapear([
             `mate = importar("matematica")`,
             `x1 = inteiro(leia("Digite a coordenada x do ponto 1: "))`,
