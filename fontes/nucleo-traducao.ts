@@ -1,7 +1,7 @@
 import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
-import { AvaliadorSintaticoInterface, SimboloInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
+import { AvaliadorSintaticoInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
 import { PlataformaAlvoARM, TradutorAssemblyARM, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
