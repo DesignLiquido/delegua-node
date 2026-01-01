@@ -41,7 +41,7 @@ const principal = async () => {
         )
         .option(
             '-t, --traduzir <linguagem-para-linguagem>',
-            'Traduz o código do arquivo passado como parâmetro de arquivo. Valores válidos: delegua-para-arm, delegua-para-assemblyscript, delegua-para-as, delegua-para-js, delegua-para-javascript, delegua-para-py, delegua-para-python, delegua-para-x64, js-para-delegua, javascript-para-delegua, alg-para-delegua, visualg-para-delegua. Exemplo: `delegua-para-js`.',
+            'Traduz o código do arquivo passado como parâmetro de arquivo. Valores válidos: delegua-para-arm, delegua-para-assemblyscript, delegua-para-as, delegua-para-elixir, delegua-para-js, delegua-para-javascript, delegua-para-py, delegua-para-python, delegua-para-ruby, delegua-para-x64, js-para-delegua, javascript-para-delegua, alg-para-delegua, visualg-para-delegua. Exemplo: `delegua-para-js`.',
         )
         .option(
             '-v, --versao',

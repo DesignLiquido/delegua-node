@@ -2,7 +2,7 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
 import { AvaliadorSintaticoInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
-import { PlataformaAlvoARM, TradutorAssemblyARM, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript } from '@designliquido/delegua/tradutores';
+import { PlataformaAlvoARM, TradutorAssemblyARM, TradutorElixir, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorRuby } from '@designliquido/delegua/tradutores';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
@@ -87,6 +87,17 @@ export class NucleoTraducao
                 this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorAssemblyScript();
                 break;
+            case 'delegua-para-elixir':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
+
+                this.avaliadorSintatico = new AvaliadorSintatico();
+                this.tradutor = new TradutorElixir();
+                break;
             case 'delegua-para-js':
             case 'delegua-para-javascript':
                 this.importador = new Importador(
@@ -109,6 +120,17 @@ export class NucleoTraducao
                 );
                 this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorPython();
+                break;
+            case 'delegua-para-ruby':
+                this.importador = new Importador(
+                    new Lexador(false),
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos, 
+                    false
+                );
+
+                this.avaliadorSintatico = new AvaliadorSintatico();
+                this.tradutor = new TradutorRuby();
                 break;
             case 'delegua-para-x64':
                 this.importador = new Importador(
