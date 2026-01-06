@@ -9,7 +9,6 @@ import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador
 import { ImportarBiblioteca, ModuloDeclaracoes } from '../construtos';
 
 import * as comum from './comum';
-import { AcessoMetodoOuPropriedade } from "@designliquido/delegua/construtos";
 
 export class InterpretadorComDepuracaoImportacao 
     extends InterpretadorComDepuracao 

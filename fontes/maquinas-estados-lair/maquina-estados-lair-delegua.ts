@@ -1,3 +1,4 @@
+import * as readline from "readline";
 import chalk from "chalk";
 import { colorize } from "json-colorizer";
 import { Const, RetornoExecucaoInterface, Var } from "@designliquido/delegua";
@@ -5,16 +6,24 @@ import { Const, RetornoExecucaoInterface, Var } from "@designliquido/delegua";
 import { FormatadorJson } from "../formatadores";
 import { LexadorJson } from "../lexador/lexador-json";
 import { MaquinaEstadosLairBase } from "./maquina-estados-lair-base";
+import { MaquinaEstadosAjuda } from "./maquina-estados-ajuda";
+import { obterAjudaPorNome } from "../interpretador/comum";
+import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
 
 export class MaquinaEstadosLairDelegua extends MaquinaEstadosLairBase {
     escoposAbertos: number;
+    interpretador: InterpretadorComImportacaoInterface | null;
+    maquinaAjudaAtiva: MaquinaEstadosAjuda | null;
 
     constructor(
         executarLinhas: (linhas: string[]) => Promise<RetornoExecucaoInterface>,
-        funcaoDeRetorno: Function
+        funcaoDeRetorno: Function,
+        interpretador?: InterpretadorComImportacaoInterface
     ) {
         super('delegua', executarLinhas, funcaoDeRetorno);
         this.escoposAbertos = 0;
+        this.interpretador = interpretador || null;
+        this.maquinaAjudaAtiva = null;
     }
 
     /**
@@ -96,6 +105,45 @@ export class MaquinaEstadosLairDelegua extends MaquinaEstadosLairBase {
         return { ehDeclaracao: false };
     }
 
+    /**
+     * Ativa o modo de ajuda interativo.
+     * Compartilha a mesma interfaceLeitura, apenas mudando o prompt e os handlers.
+     */
+    ativarModoAjuda(): void {
+        if (!this.interpretador) {
+            this.funcaoDeRetorno(
+                chalk.red('Modo de ajuda não disponível: interpretador não configurado.')
+            );
+            this.interfaceLeitura.prompt();
+            return;
+        }
+
+        // Cria a máquina de estados de ajuda passando a interface existente
+        this.maquinaAjudaAtiva = new MaquinaEstadosAjuda(
+            this.interfaceLeitura,
+            this.funcaoDeRetorno,
+            (topico: string) => obterAjudaPorNome(this.interpretador!, topico),
+            () => {
+                // Callback quando sair do modo de ajuda
+                this.maquinaAjudaAtiva = null;
+
+                // Restaura o prompt do REPL
+                this.interfaceLeitura.setPrompt('\ndelegua> ');
+
+                // Restaura o listener de linha do REPL
+                this.interfaceLeitura.on('line', async (linha: string) => {
+                    await this.executarOuAcumular(linha);
+                });
+
+                // Exibe o prompt do REPL
+                this.interfaceLeitura.prompt();
+            }
+        );
+
+        // Inicia o modo de ajuda
+        this.maquinaAjudaAtiva.iniciar();
+    }
+
     async executarOuAcumular(linha: string): Promise<any> {
         // Algoritmo: detectar chave aberta na linha sem fechamento.
         this.linhas.push(linha);
@@ -115,6 +163,28 @@ export class MaquinaEstadosLairDelegua extends MaquinaEstadosLairBase {
         } else {
             const retornoExecucao: any = await this.executarLinhas(this.linhas);
             const { resultado, declaracoes } = retornoExecucao;
+
+            // Verifica se deve ativar o modo de ajuda ou exibir conteúdo de ajuda
+            if (resultado && resultado.length > 0) {
+                const primeiroResultado = resultado[0];
+                const valorRetornado = primeiroResultado?.valorRetornado || primeiroResultado;
+
+                // Detecta se é uma solicitação para entrar no modo de ajuda
+                if (valorRetornado && valorRetornado.__modoAjuda === true) {
+                    this.ativarModoAjuda();
+                    this.linhas = [];
+                    return;
+                }
+
+                // Detecta se é um conteúdo de ajuda para exibir diretamente
+                if (valorRetornado && valorRetornado.__conteudoAjuda === true) {
+                    this.funcaoDeRetorno(valorRetornado.conteudo);
+                    this.linhas = [];
+                    this.interfaceLeitura.setPrompt("\ndelegua> ");
+                    this.interfaceLeitura.prompt();
+                    return;
+                }
+            }
 
             // Detecta se é uma declaração de variável
             const infoDeclaracao = this.detectarDeclaracaoVariavel(declaracoes);

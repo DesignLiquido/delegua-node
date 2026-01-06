@@ -1,4 +1,4 @@
-import { Const, Declaracao, FuncaoDeclaracao, Var } from '@designliquido/delegua/declaracoes';
+import { Ajuda, Const, Declaracao, FuncaoDeclaracao, Var } from '@designliquido/delegua/declaracoes';
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Interpretador } from '@designliquido/delegua/interpretador';
 
@@ -67,5 +67,14 @@ export class InterpretadorComImportacao
 
     async visitarDeclaracaoModuloDeclaracoes(declaracao: ModuloDeclaracoes) {
         return comum.visitarExpressaoModuloDeclaracoes(this, declaracao);
+    }
+
+    /**
+     * Override do método visitarDeclaracaoAjuda para suportar modo de ajuda interativo.
+     * - Se chamado como função com argumentos: ajuda(topico) -> retorna ajuda sobre o tópico
+     * - Se chamado sem argumentos: ajuda() -> entra no modo de ajuda interativo
+     */
+    override async visitarDeclaracaoAjuda(declaracao: Ajuda): Promise<any> {
+        return comum.visitarDeclaracaoAjuda(this, declaracao);
     }
 }

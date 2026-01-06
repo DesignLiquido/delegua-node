@@ -1,5 +1,6 @@
 import {
     AcessoMetodo,
+    Ajuda,
     AvaliadorSintatico,
     Chamada,
     Classe,
@@ -25,6 +26,7 @@ import { ImportadorInterface } from "../interfaces";
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 import { carregarBibliotecaDelegua, verificarModulosDelegua } from "../mecanismo-importacao-bibliotecas";
 import { ClasseDeModulo } from "../interpretador/estruturas";
+import { MicroAvaliadorAjuda } from "./micro-avaliador-ajuda";
 
 export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     tiposDefinidosPorBibliotecas: {
@@ -424,6 +426,80 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         }
 
         super.inicializarPilhaEscopos();
+    }
+
+    /**
+     * Override para permitir que palavras-chave sejam usadas como argumentos
+     * em ajuda(). Por exemplo: ajuda(para), ajuda(se), ajuda(enquanto).
+     */
+    override async declaracaoAjuda(): Promise<Ajuda> {
+        // Primeiro, consome o token AJUDA
+        const simboloAjuda = this.avancarEDevolverAnterior();
+
+        // Se não há '(' ou estamos no final, é apenas uma declaração simples
+        if (this.estaNoFinal() ||
+            this.simbolos[this.atual].tipo !== tiposDeSimbolos.PARENTESE_ESQUERDO) {
+            return new Ajuda(
+                simboloAjuda.hashArquivo,
+                simboloAjuda.linha,
+                undefined,
+                false
+            );
+        }
+
+        // Consome '('
+        this.avancarEDevolverAnterior();
+
+        // Se há ')' imediatamente, é ajuda() sem argumentos
+        if (this.simbolos[this.atual].tipo === tiposDeSimbolos.PARENTESE_DIREITO) {
+            this.avancarEDevolverAnterior(); // Consome ')'
+            return new Ajuda(
+                simboloAjuda.hashArquivo,
+                simboloAjuda.linha,
+                undefined,
+                true
+            );
+        }
+
+        // Pega o símbolo atual (pode ser palavra-chave ou identificador)
+        const simboloTopico = this.simbolos[this.atual];
+
+        // Verifica se é um tópico válido (palavra-chave ou identificador)
+        if (simboloTopico && MicroAvaliadorAjuda.ehTopicoValido(simboloTopico)) {
+            // Converte o símbolo para um construto de tópico
+            const construtoTopico = MicroAvaliadorAjuda.converterSimboloParaTopico(simboloTopico);
+
+            // Avança para consumir o símbolo
+            this.avancarEDevolverAnterior();
+
+            // Consome ')'
+            this.consumir(
+                tiposDeSimbolos.PARENTESE_DIREITO,
+                "Esperado ')' após argumento de ajuda."
+            );
+
+            return new Ajuda(
+                simboloAjuda.hashArquivo,
+                simboloAjuda.linha,
+                construtoTopico,
+                true
+            );
+        }
+
+        // Se não é um tópico simples, delega para o parser padrão
+        // (pode ser uma expressão complexa)
+        const expressaoAjuda = await this.expressao();
+        this.consumir(
+            tiposDeSimbolos.PARENTESE_DIREITO,
+            `Esperado parêntese direito após expressão usada como argumento em ajuda(). Atual: ${this.simbolos[this.atual].lexema}.`
+        );
+
+        return new Ajuda(
+            simboloAjuda.hashArquivo,
+            simboloAjuda.linha,
+            expressaoAjuda,
+            true
+        );
     }
 
     override async analisar(

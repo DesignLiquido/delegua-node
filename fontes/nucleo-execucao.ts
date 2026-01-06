@@ -471,7 +471,8 @@ export class NucleoExecucao
             case 'delegua':
                 maquinaEstadosLair = new MaquinaEstadosLairDelegua(
                     this.executarLinhas.bind(this),
-                    this.funcaoDeRetorno.bind(this)
+                    this.funcaoDeRetorno.bind(this),
+                    this.interpretador as any
                 );
                 break;
             case 'pitugues':
