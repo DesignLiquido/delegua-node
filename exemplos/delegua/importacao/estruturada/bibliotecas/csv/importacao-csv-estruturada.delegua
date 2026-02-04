@@ -1,0 +1,18 @@
+importar tudo como csv de 'csv'
+
+var registros = [{
+    'nome': 'Ana',
+    'idade': 28,
+    'cidade': 'Rio de Janeiro'
+}, {
+    'nome': 'Bruno',
+    'idade': 34,
+    'cidade': 'São Paulo'
+}, {
+    'nome': 'Carla',
+    'idade': 23,
+    'cidade': 'Belo Horizonte'
+}]
+
+var objetoCsv = csv.vetorDicionariosParaCsv(registros)
+escreva(objetoCsv)

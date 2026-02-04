@@ -1,6 +1,5 @@
 import { DeleguaFuncao, DeleguaModulo, FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 import { Const, FuncaoDeclaracao, Ajuda } from "@designliquido/delegua/declaracoes";
-import { Leia, Variavel } from "@designliquido/delegua/construtos";
 import { pontoEntradaAjuda } from "@designliquido/delegua/interpretador/comum";
 
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
@@ -15,7 +14,8 @@ export async function visitarConstrutoImportarBiblioteca(
     importarBiblioteca: ImportarBiblioteca
 ) {
     try {
-        return await carregarBibliotecaNode(importarBiblioteca.nomeBiblioteca);
+        const retornoCargaBiblioteca = await carregarBibliotecaNode(importarBiblioteca.nomeBiblioteca);
+        return retornoCargaBiblioteca;
     } catch (erro: any) {
         interpretador.erros.push(erro);
         return null;

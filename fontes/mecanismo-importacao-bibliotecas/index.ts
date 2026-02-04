@@ -214,6 +214,7 @@ export const verificarModulosDelegua = (nome: string): string | boolean => {
     const modulos = {
         arquivos: '@designliquido/delegua-arquivos',
         criptografia: '@designliquido/delegua-criptografia',
+        csv: '@designliquido/delegua-csv',
         estatistica: '@designliquido/delegua-estatistica',
         estatística: '@designliquido/delegua-estatistica',
         fisica: '@designliquido/delegua-fisica',

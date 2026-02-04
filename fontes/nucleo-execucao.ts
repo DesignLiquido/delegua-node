@@ -26,7 +26,7 @@ import {
     LexadorPitugues,
     LexadorPortugolIpt,
 } from "@designliquido/delegua/lexador/dialetos";
-import { ErroInterpretador } from "@designliquido/delegua/interfaces/erros/erro-interpretador";
+import { ErroInterpretadorInterface } from "@designliquido/delegua/interfaces/erros/erro-interpretador-interface";
 import { LexadorBirl } from "@designliquido/birl/lexador";
 import { AvaliadorSintaticoBirl } from "@designliquido/birl/avaliador-sintatico";
 import { InterpretadorBirl } from "@designliquido/birl/interpretador";
@@ -56,7 +56,6 @@ import { LexadorVisuAlg } from "@designliquido/visualg/lexador";
 import { AvaliadorSintaticoVisuAlg } from "@designliquido/visualg/avaliador-sintatico";
 import { InterpretadorVisuAlg, InterpretadorVisuAlgComDepuracao } from "@designliquido/visualg/interpretador";
 import { Declaracao } from "@designliquido/delegua/declaracoes";
-import { InterpretadorVisuAlgInterface } from "@designliquido/visualg/interfaces";
 
 import { Importador } from "./importador";
 import { ImportadorInterface } from "./interfaces";
@@ -312,7 +311,7 @@ export class NucleoExecucao
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha,
                           this.funcaoLimpaTela
-                      )
+                      ) as any
                     : new InterpretadorVisuAlg(
                           process.cwd(),
                           false,
@@ -320,7 +319,7 @@ export class NucleoExecucao
                           this.funcaoDeRetornoMesmaLinha,
                           this.funcaoLimpaTela
                       );
-                (this.interpretador as InterpretadorVisuAlgInterface).deveEscreverPrompt = true;
+                (this.interpretador as any).deveEscreverPrompt = true;
                 break;
             default:
                 this.lexador = new Lexador(performance);
@@ -515,7 +514,7 @@ export class NucleoExecucao
                 } else {
                     if (erroInterpretador.hasOwnProperty("erroInterno")) {
                         const erroEmJavaScript: any =
-                            erroInterpretador as ErroInterpretador;
+                            erroInterpretador as ErroInterpretadorInterface;
                         console.error(
                             chalk.red(
                                 `[Linha: ${erroEmJavaScript.linha}] Erro em JavaScript: `

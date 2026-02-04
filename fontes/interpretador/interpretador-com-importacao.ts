@@ -46,7 +46,13 @@ export class InterpretadorComImportacao
     }
 
     async visitarConstrutoImportarBiblioteca(importarBiblioteca: ImportarBiblioteca) {
-        return comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+        const retornoCargaBiblioteca = await comum.visitarConstrutoImportarBiblioteca(this, importarBiblioteca);
+        this.pilhaEscoposExecucao.definirConstante(
+            importarBiblioteca.nomeBiblioteca,
+            retornoCargaBiblioteca,
+            'módulo'
+        );
+        return retornoCargaBiblioteca;
     }
 
     override async visitarDeclaracaoVar(declaracao: Var): Promise<any> {
