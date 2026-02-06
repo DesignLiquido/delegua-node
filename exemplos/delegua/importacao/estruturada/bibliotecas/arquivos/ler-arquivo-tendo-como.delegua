@@ -1,0 +1,6 @@
+importar tudo como arquivos de 'arquivos'
+
+tendo arquivos.abrir('./arquivo.txt') como conteudoArquivoTexto {
+    const linhas = conteudoArquivoTexto.paraTexto()
+    escreva(linhas.dividir("\n"))
+}
