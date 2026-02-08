@@ -32,6 +32,11 @@ export class MaquinaEstadosLairDelegua extends MaquinaEstadosLairBase {
     private ehTipoSimples(valorRetornado: any): boolean {
         if (!valorRetornado) return false;
 
+        // Valores primitivos diretos (ex: retorno de "tipo de")
+        if (typeof valorRetornado === 'string' || typeof valorRetornado === 'number' || typeof valorRetornado === 'boolean') {
+            return true;
+        }
+
         const tipo = valorRetornado.tipo;
         const valorReal = valorRetornado.valor;
 
@@ -51,21 +56,32 @@ export class MaquinaEstadosLairDelegua extends MaquinaEstadosLairBase {
      * Formata um valor simples para exibição amigável no LAIR
      */
     private formatarValorSimples(valorRetornado: any): string {
+        // Valores primitivos diretos (ex: retorno de "tipo de")
+        if (typeof valorRetornado === 'string') {
+            return chalk.green(`"${valorRetornado}"`);
+        }
+        if (typeof valorRetornado === 'number') {
+            return chalk.cyan(String(valorRetornado));
+        }
+        if (typeof valorRetornado === 'boolean') {
+            return chalk.yellow(String(valorRetornado));
+        }
+
         const tipo = valorRetornado?.tipo || 'desconhecido';
         const valorReal = valorRetornado?.valor;
 
         if (tipo === 'texto') {
             return chalk.green(`"${valorReal}"`);
-        } 
-        
+        }
+
         if (tipo === 'número') {
             return chalk.cyan(String(valorReal));
-        } 
-        
+        }
+
         if (tipo === 'lógico') {
             return chalk.yellow(String(valorReal));
-        } 
-        
+        }
+
         if (valorReal === null || valorReal === undefined) {
             return chalk.gray('nulo');
         }

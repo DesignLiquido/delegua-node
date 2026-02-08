@@ -299,6 +299,13 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-csv/-/delegua-csv-0.0.2.tgz#40ffd4db445f12b56c90d4df87661b7b8470f146"
   integrity sha512-4ndNhqFwkIe7LtVQ0aYurqq6ejOHrMfNZeKCnjvxZAuDDT8j9swTXbHbC87Qbex1a9dMnK5IZdU9VxThOq0TrA==
 
+"@designliquido/delegua-dados@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-dados/-/delegua-dados-0.0.0.tgz#6e4b044afaed2839ccc1f4c75616fdfbc5ac5ebe"
+  integrity sha512-0h+P3SwbiF95BHZHN9Sd0pmoO/xcNIpYC9n6dWLutrDIVYfrDbeOu0DMUrLRgUbIW38onxIS+vE1XCbMuzZXug==
+  dependencies:
+    "@designliquido/delegua-csv" "^0.0.2"
+
 "@designliquido/delegua-estatistica@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.1.0.tgz#e24301179db062cb46ac3210a0fbcdfa6b5207f8"
