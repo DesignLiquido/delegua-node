@@ -1,0 +1,23 @@
+importar tudo como dados de "dados"
+
+// Criar um recorte de dados, que é uma estrutura tabular para manipulação de dados
+var rd = dados.RecorteDados({
+    'nome': ['Alice', 'Bob', 'Charlie'],
+    'idade': [25, 30, 35],
+    'salario': [3000, 3500, 4000]
+});
+
+// Visualizar
+escreva(rd.cabeca());           // Primeiras 5 linhas
+escreva(rd.descrever());        // Estatísticas
+
+// Selecionar coluna
+var nomes = rd.selecionarColuna('nome');
+
+// Filtrar
+var maiores30 = rd.filtrar([false, true, true]);
+
+// Agrupar
+var porDept = rd.agruparPor('departamento').soma();
+
+escreva(nomes, maiores30, porDept);
