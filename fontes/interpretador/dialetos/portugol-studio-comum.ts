@@ -7,6 +7,7 @@ import comumAncestral from "@designliquido/portugol-studio/interpretador/comum";
 import * as arquivos from '../../bibliotecas/dialetos/portugol-studio/arquivos';
 import * as internet from '../../bibliotecas/dialetos/portugol-studio/internet';
 import * as util from '../../bibliotecas/dialetos/portugol-studio/util';
+import * as servicosWeb from '../../bibliotecas/dialetos/portugol-studio/servicos-web';
 
 export async function visitarDeclaracaoImportarComum(declaracao: Importar): Promise<DeleguaModulo> {
     return Promise.resolve(logicaComumImportacao(declaracao.caminho.valor));
@@ -25,6 +26,8 @@ function logicaComumImportacao(caminho: string): DeleguaModulo {
             return carregarBibliotecaInternet();
         case 'Util':
             return carregarBibliotecaUtil();
+        case 'ServicosWeb':
+            return carregarBibliotecaServicosWeb();
         default:
             return comumAncestral.logicaComumImportacao(caminho);
     }
@@ -78,4 +81,22 @@ function carregarBibliotecaUtil(): DeleguaModulo {
     const objetoUtil = new DeleguaModulo('Util');
     objetoUtil.componentes = metodos;
     return objetoUtil;
+}
+
+function carregarBibliotecaServicosWeb(): DeleguaModulo {
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        obterConexaoEmCache: new FuncaoPadrao(0, servicosWeb.obterConexaoEmCache),
+        abrirConexao: new FuncaoPadrao(1, servicosWeb.abrirConexao),
+        adicionarCabecalho: new FuncaoPadrao(2, servicosWeb.adicionarCabecalho),
+        adicionarParametros: new FuncaoPadrao(1, servicosWeb.adicionarParametros),
+        fazerRequisicao: new FuncaoPadrao(1, servicosWeb.fazerRequisicao),
+        obterDados: new FuncaoPadrao(1, servicosWeb.obterDados),
+        excluirDados: new FuncaoPadrao(1, servicosWeb.excluirDados),
+        publicarDados: new FuncaoPadrao(2, servicosWeb.publicarDados),
+        atualizarDados: new FuncaoPadrao(2, servicosWeb.atualizarDados),
+    };
+
+    const objetoServicosWeb = new DeleguaModulo('ServicosWeb');
+    objetoServicosWeb.componentes = metodos;
+    return objetoServicosWeb;
 }

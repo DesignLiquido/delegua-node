@@ -1,10 +1,7 @@
-import { ServicosWeb } from '../../fontes/bibliotecas/servicos-web';
+import * as servicosWeb from '../../../../fontes/bibliotecas/dialetos/portugol-studio/servicos-web';
 
 describe('Biblioteca Serviços Web', () => {
-    let servicosWeb: ServicosWeb;
-
     beforeEach(() => {
-        servicosWeb = new ServicosWeb();
         global.fetch = jest.fn();
     });
 
