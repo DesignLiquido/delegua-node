@@ -40,10 +40,6 @@ import { InterpretadorMapler, InterpretadorMaplerComDepuracao } from "@designliq
 
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
-import {
-    InterpretadorPortugolStudio,
-    InterpretadorPortugolStudioComDepuracao,
-} from "@designliquido/portugol-studio/interpretador";
 
 import { AvaliadorSintaticoPotigol } from "@designliquido/potigol/avaliador-sintatico";
 import {
@@ -69,6 +65,7 @@ import { MaquinaEstadosLairBase, MaquinaEstadosLairDelegua, MaquinaEstadosLairPi
 import { AvaliadorSintaticoPituguesComImportacao } from "./avaliador-sintatico/dialetos/avaliador-sintatico-pitugues-com-importacao";
 import { InterpretadorPituguesComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-depuracao-importacao";
 import { InterpretadorPituguesComImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-importacao";
+import { InterpretadorPortugolStudioComDepuracaoImportacao, InterpretadorPortugolStudioComImportacao } from "./interpretador/dialetos";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -259,13 +256,13 @@ export class NucleoExecucao
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorPortugolStudioComDepuracao(
+                    ? new InterpretadorPortugolStudioComDepuracaoImportacao(
                           process.cwd(),
                           this.funcaoDeRetorno,
                           this.funcaoDeRetornoMesmaLinha,
                           this.funcaoLimpaTela
                       )
-                    : new InterpretadorPortugolStudio(
+                    : new InterpretadorPortugolStudioComImportacao(
                           process.cwd(),
                           performance,
                           this.funcaoDeRetorno,

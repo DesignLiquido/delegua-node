@@ -3,7 +3,6 @@ import { ResultadoParcialInterpretadorInterface, SimboloInterface } from '@desig
 import { Const, Declaracao, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
 import { DescritorTipoClasse } from "@designliquido/delegua/interpretador/estruturas";
 import { inferirTipoVariavel } from "@designliquido/delegua/inferenciador";
-import { AcessoMetodoOuPropriedade } from "@designliquido/delegua/construtos";
 
 import { ImportadorInterface } from "../../interfaces";
 import { InterpretadorComImportacaoInterface } from '../../interfaces/interpretador-com-importacao-interface';
