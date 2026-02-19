@@ -277,10 +277,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@designliquido/birl@^0.5.11":
-  version "0.5.11"
-  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.5.11.tgz#318e82e860ec9ef50effacb8d869c6d7747bbff8"
-  integrity sha512-YgnzqamFzv4LeTDOUB6AOHu7BZix8xSGASKr4SfvLbQh5sMDc17fF9TYqn5sRXe3tsEm+q34kCsJFiOfZIdBlw==
+"@designliquido/birl@^0.5.13":
+  version "0.5.13"
+  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.5.13.tgz#157e3aa8a373b281b5d01496bd85948254d30372"
+  integrity sha512-pDsGyNj59kFMblLDxIfPH/McGkaDZczmi/3eJX18zeBgRCYuRppOKLHUss9ksFIDET727FyJETE8ev0P/Is+7A==
   dependencies:
     lodash "^4.17.21"
 
@@ -342,44 +342,44 @@
   dependencies:
     dayjs "^1.11.13"
 
-"@designliquido/delegua@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.7.2.tgz#648d370576a11ceb5bb581a023b42eb5471a5ca7"
-  integrity sha512-ji/YyLyagrCc0Fz4jv7S9h0aGd24knWyEs9WgL4OVzwnwGRQb+tRK+IMc1/MGuS891+c4Ob+aPUYYhMwPAwJLw==
+"@designliquido/delegua@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.8.0.tgz#dd6e88a8a1f7b2f8c1dc15d0f8cc496815d0dc92"
+  integrity sha512-W1dgENWhb/o4qKBiY70zvkhTZX40hXSSV+VvL0ellY7dgjaOzQFL8RT+yW932MmedgZpLKlvX9JAmF74xhSVfA==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/mapler@^0.6.11":
-  version "0.6.11"
-  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.6.11.tgz#35471d47ae34a153e45af5224b61d52afa3bc7b5"
-  integrity sha512-rEm0AuKBr6UneS5Z48QsCRUOqho0sY6xby25W6wPG31Fh261fLKL6VuHiPoJeIQveD5dpusVkidDVU5BZ8eV9A==
+"@designliquido/mapler@^0.6.13":
+  version "0.6.13"
+  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.6.13.tgz#2a5cf3f6fd1d930ff16d3263ad890cd739df498c"
+  integrity sha512-6fw+arxYNGJg6MiicDcuojQaVbKc7yu6a/Je1RzX6jUXiC9rJODXRW420fsxg77WSUEFENd7QP/5NOJRuRD58A==
   dependencies:
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.9.11":
-  version "0.9.11"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.9.11.tgz#2904a484f919cb3b7acd6b9df65c9822917d6365"
-  integrity sha512-mjRRHxgyiBwLRNWZP0nNmpg9IO8p8qJ5DTWk1ihL+VMBLTTeMfDQdduHtdaHS5uxEGSnM7LvAAFO+FD/9A7rxw==
+"@designliquido/portugol-studio@^0.9.13":
+  version "0.9.13"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.9.13.tgz#0a82bfa55e50a0efe372440fc6a9e392d06830b2"
+  integrity sha512-TzzKGdsC2u/gAlkSYrW4t7ETVCqlp0KmVu8Wni2AJPJ4nNjDyuBKY1rShSL9FcFrAm83aB6zY/7pDzRbmYOoww==
   dependencies:
     lodash "^4.17.21"
     node-fetch "2"
     xml2js "^0.6.2"
 
-"@designliquido/potigol@^0.8.11":
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.8.11.tgz#f5eaa57085db6ba3271d6b70328f44b693d1fb78"
-  integrity sha512-/i3V86REe+2oPsh7ipFRu061wTdhTpqUajKyDsU7TkBfCyqZWLiZXRuyz0MkiDvVT93sQdmEJuer+zro0lP6Tg==
+"@designliquido/potigol@^0.8.13":
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.8.13.tgz#5f02f65a13a7fbbc58f385a9c1d806956af979c1"
+  integrity sha512-MB8umhySk3/jYuRWcCkRKLPspxw05xDku4SVgQrcFhqiAXn2jtDuQEvvoThrmTa3Vt3TOV6wJskMU+wM7/+HuQ==
   dependencies:
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.8.11":
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.8.11.tgz#c31c47377ffcdc9392377f091d6d401d60830eaa"
-  integrity sha512-BAlKFIbZ/yoyVJLhd4hK8Pg1wpC70uzNCVD/EzrCoq3+yX1ZnLhmS59AvbXF1VMl2m5yZDFJMy70alehYu4qBA==
+"@designliquido/visualg@^0.8.13":
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.8.13.tgz#4f477433873684336d65ce1f32ddfa3c886e7270"
+  integrity sha512-iSDqYI3DlvvGWkJi47/7IYjI8Cfci1sqy+RGLWwUqngz+ach9asYx9CrNbCyd3Z0z+eLlpxvJ0ynlZ9ynI8hOA==
   dependencies:
     lodash "^4.17.21"
 
@@ -3370,9 +3370,9 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sax@>=0.6.0:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.3.tgz#fcebae3b756cdc8428321805f4b70f16ec0ab5db"
-  integrity sha512-yqYn1JhPczigF94DMS+shiDMjDowYO6y9+wB/4WgO0Y19jWYk0lQ4tuG5KI7kj4FTp1wxPj5IFfcrz/s1c3jjQ==
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.4.tgz#f29c2bba80ce5b86f4343b4c2be9f2b96627cf8b"
+  integrity sha512-1n3r/tGXO6b6VXMdFT54SHzT9ytu9yr7TaELowdYpMqY/Ao7EnlQGmAQ1+RatX7Tkkdm6hONI2owqNx2aZj5Sw==
 
 semver@7.7.2:
   version "7.7.2"

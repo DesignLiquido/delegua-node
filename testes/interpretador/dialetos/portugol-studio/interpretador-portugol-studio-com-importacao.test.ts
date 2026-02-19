@@ -1,11 +1,12 @@
-import { InterpretadorPortugolStudioComDepuracao } from "@designliquido/portugol-studio";
 import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
 import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
+
+import { InterpretadorPortugolStudioComImportacao } from "../../../../fontes/interpretador/dialetos/interpretador-portugol-studio-com-importacao";
 
 describe('Interpretador do Portugol Studio com suporte a importação de arquivos', () => {
     let lexador: LexadorPortugolStudio;
     let avaliadorSintatico: AvaliadorSintaticoPortugolStudio;
-    let interpretador: InterpretadorPortugolStudioComDepuracao;
+    let interpretador: InterpretadorPortugolStudioComImportacao;
 
     let _saidas: string[] = [];
     const funcaoSaida = (texto: string) => {
@@ -16,7 +17,7 @@ describe('Interpretador do Portugol Studio com suporte a importação de arquivo
         _saidas = [];
         lexador = new LexadorPortugolStudio();
         avaliadorSintatico = new AvaliadorSintaticoPortugolStudio();
-        interpretador = new InterpretadorPortugolStudioComDepuracao(process.cwd(), funcaoSaida, funcaoSaida);
+        interpretador = new InterpretadorPortugolStudioComImportacao(process.cwd(), false, funcaoSaida, funcaoSaida);
     });
 
     describe('Uso com Bibliotecas', () => {
