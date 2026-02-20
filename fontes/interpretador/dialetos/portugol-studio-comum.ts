@@ -6,6 +6,7 @@ import comumAncestral from "@designliquido/portugol-studio/interpretador/comum";
 
 import * as arquivos from '../../bibliotecas/dialetos/portugol-studio/arquivos';
 import * as internet from '../../bibliotecas/dialetos/portugol-studio/internet';
+import * as teclado from '../../bibliotecas/dialetos/portugol-studio/teclado';
 import * as util from '../../bibliotecas/dialetos/portugol-studio/util';
 import * as servicosWeb from '../../bibliotecas/dialetos/portugol-studio/servicos-web';
 
@@ -24,6 +25,8 @@ function logicaComumImportacao(caminho: string): DeleguaModulo {
             return carregarBibliotecaArquivos();
         case 'Internet':
             return carregarBibliotecaInternet();
+        case 'Teclado':
+            return carregarBibliotecaTeclado();
         case 'Util':
             return carregarBibliotecaUtil();
         case 'ServicosWeb':
@@ -65,6 +68,18 @@ function carregarBibliotecaInternet(): DeleguaModulo {
     const objetoInternet = new DeleguaModulo('Internet');
     objetoInternet.componentes = metodos;
     return objetoInternet;
+}
+
+function carregarBibliotecaTeclado(): DeleguaModulo {
+    const objetoClasseTeclado = new teclado.Teclado();
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        tecla_pressionada: new FuncaoPadrao(1, objetoClasseTeclado.tecla_pressionada.bind(objetoClasseTeclado)),
+        ler_tecla: new FuncaoPadrao(0, objetoClasseTeclado.ler_tecla.bind(objetoClasseTeclado)),
+    };
+
+    const objetoTeclado = new DeleguaModulo('Teclado');
+    objetoTeclado.componentes = metodos;
+    return objetoTeclado;
 }
 
 function carregarBibliotecaUtil(): DeleguaModulo {
