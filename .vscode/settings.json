@@ -1,0 +1,14 @@
+{
+  "jestrunner.debugOptions": {
+    "skipFiles": [
+      "<node_internals>/**",
+      "**/node_modules/@jest/**",
+      "**/node_modules/jest*/**"
+    ],
+    "sourceMaps": true,
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "**/node_modules/@designliquido/**"
+    ]
+  }
+}

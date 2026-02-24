@@ -1,4 +1,4 @@
-import { Teclado } from '../../fontes/bibliotecas/teclado';
+import { Teclado } from '../../../../fontes/bibliotecas/dialetos/portugol-studio/teclado';
 
 describe('Biblioteca Teclado', () => {
     let teclado: Teclado;

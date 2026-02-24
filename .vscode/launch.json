@@ -2194,7 +2194,11 @@
         // "nucleo-execucao",
         "--runInBand"
       ],
-      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/@jest/**",
+        "**/node_modules/jest*/**"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
