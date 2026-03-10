@@ -1,3 +1,6 @@
+import { Sons } from "../../../../fontes/bibliotecas/dialetos/portugol-studio/sons";
+import { ErroExecucaoBiblioteca } from '../../../../fontes/excecoes';
+
 const makeMockAudioParam = () => ({
     value: 1,
     setValueAtTime: jest.fn(),
@@ -57,8 +60,6 @@ const mockFetch = jest.fn().mockResolvedValue({
 
 (global as any).AudioContext = MockAudioContext;
 (global as any).fetch = mockFetch;
-
-import { Sons, ErroExecucaoBiblioteca } from "../../../../fontes/bibliotecas/dialetos/portugol-studio/sons";
 
 async function criarSonsComSomCarregado(url = "som/teste.mp3") {
     const sons = new Sons();

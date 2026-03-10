@@ -1,3 +1,5 @@
+import { ErroExecucaoBiblioteca } from "../../../excecoes";
+
 function linearParaExponencial(linear: number): number {
     return Math.pow(linear, 3);
 }
@@ -6,13 +8,6 @@ function limitaValorDoVolume(volume: number): number {
     if (volume < 0) return 0;
     if (volume > 1) return 1;
     return volume;
-}
-
-export class ErroExecucaoBiblioteca extends Error {
-    constructor(mensagem: string) {
-        super(mensagem);
-        this.name = "ErroExecucaoBiblioteca";
-    }
 }
 
 class Reproducao {
