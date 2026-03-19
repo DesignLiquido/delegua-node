@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/delegua-node",
-    "version": "1.16.0",
+    "version": "1.16.1",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "scripts": {
         "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && yarn copyfiles -V ./package.json ./dist/bin && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
@@ -12,12 +12,12 @@
         "testes:servidor-depuracao": "yarn ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/birl": "^0.5.16",
-        "@designliquido/delegua": "^1.11.0",
-        "@designliquido/mapler": "^0.6.16",
-        "@designliquido/portugol-studio": "^0.9.16",
-        "@designliquido/potigol": "^0.8.16",
-        "@designliquido/visualg": "^0.8.16",
+        "@designliquido/birl": "^0.5.18",
+        "@designliquido/delegua": "^1.15.0",
+        "@designliquido/mapler": "^0.6.18",
+        "@designliquido/portugol-studio": "^0.9.18",
+        "@designliquido/potigol": "^0.8.18",
+        "@designliquido/visualg": "^0.8.18",
         "canvas": "^3.2.1",
         "chalk": "4.1.2",
         "commander": "^14.0.0",
