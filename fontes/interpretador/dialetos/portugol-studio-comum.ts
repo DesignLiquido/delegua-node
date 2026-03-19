@@ -5,6 +5,7 @@ import { DeleguaModulo, FuncaoPadrao } from "@designliquido/delegua/interpretado
 import comumAncestral from "@designliquido/portugol-studio/interpretador/comum";
 
 import * as arquivos from '../../bibliotecas/dialetos/portugol-studio/arquivos';
+import * as graficos from '../../bibliotecas/dialetos/portugol-studio/graficos';
 import * as internet from '../../bibliotecas/dialetos/portugol-studio/internet';
 import * as teclado from '../../bibliotecas/dialetos/portugol-studio/teclado';
 import * as util from '../../bibliotecas/dialetos/portugol-studio/util';
@@ -23,6 +24,8 @@ function logicaComumImportacao(caminho: string): DeleguaModulo {
     switch (caminho) {
         case 'Arquivos':
             return carregarBibliotecaArquivos();
+        case 'Graficos':
+            return carregarBibliotecaGraficos();
         case 'Internet':
             return carregarBibliotecaInternet();
         case 'Teclado':
@@ -55,6 +58,189 @@ function carregarBibliotecaArquivos(): DeleguaModulo {
     const objetoArquivos = new DeleguaModulo('Arquivos');
     objetoArquivos.componentes = metodos;
     return objetoArquivos;
+}
+
+function carregarBibliotecaGraficos(): DeleguaModulo {
+    const objetoClasseGraficos = new graficos.Graficos();
+
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        iniciar_modo_grafico: new FuncaoPadrao(
+            0,
+            objetoClasseGraficos.iniciar_modo_grafico.bind(objetoClasseGraficos)
+        ),
+        definir_dimensoes_janela: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.definir_dimensoes_janela.bind(objetoClasseGraficos)
+        ),
+        limpar: new FuncaoPadrao(
+            0,
+            objetoClasseGraficos.limpar.bind(objetoClasseGraficos)
+        ),
+        renderizar: new FuncaoPadrao(
+            0,
+            objetoClasseGraficos.renderizar.bind(objetoClasseGraficos)
+        ),
+        renderizar_imagem: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.renderizar_imagem.bind(objetoClasseGraficos)
+        ),
+        desenhar_retangulo: new FuncaoPadrao(
+            6,
+            objetoClasseGraficos.desenhar_retangulo.bind(objetoClasseGraficos)
+        ),
+        desenhar_poligono: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.desenhar_poligono.bind(objetoClasseGraficos)
+        ),
+        desenhar_elipse: new FuncaoPadrao(
+            5,
+            objetoClasseGraficos.desenhar_elipse.bind(objetoClasseGraficos)
+        ),
+        desenhar_ponto: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.desenhar_ponto.bind(objetoClasseGraficos)
+        ),
+        desenhar_linha: new FuncaoPadrao(
+            4,
+            objetoClasseGraficos.desenhar_linha.bind(objetoClasseGraficos)
+        ),
+        carregar_imagem: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.carregar_imagem.bind(objetoClasseGraficos)
+        ),
+        proximo_frame_gif: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.proximo_frame_gif.bind(objetoClasseGraficos)
+        ),
+        transformar_imagem: new FuncaoPadrao(
+            5,
+            objetoClasseGraficos.transformar_imagem.bind(objetoClasseGraficos)
+        ),
+        redimensionar_imagem: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.redimensionar_imagem.bind(objetoClasseGraficos)
+        ),
+        obter_cor_pixel: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.obter_cor_pixel.bind(objetoClasseGraficos)
+        ),
+        obter_RGB: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.obter_RGB.bind(objetoClasseGraficos)
+        ),
+        transformar_porcao_imagem: new FuncaoPadrao(
+            9,
+            objetoClasseGraficos.transformar_porcao_imagem.bind(objetoClasseGraficos)
+        ),
+        desenhar_imagem: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.desenhar_imagem.bind(objetoClasseGraficos)
+        ),
+        salvar_imagem: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.salvar_imagem.bind(objetoClasseGraficos)
+        ),
+        desenhar_quadro_atual_gif: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.desenhar_quadro_atual_gif.bind(objetoClasseGraficos)
+        ),
+        desenhar_porcao_imagem: new FuncaoPadrao(
+            7,
+            objetoClasseGraficos.desenhar_porcao_imagem.bind(objetoClasseGraficos)
+        ),
+        obter_intervalo_gif: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.obter_intervalo_gif.bind(objetoClasseGraficos)
+        ),
+        obter_numero_quadros_gif: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.obter_numero_quadros_gif.bind(objetoClasseGraficos)
+        ),
+        obter_numero_quadro_atual_gif: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.obter_numero_quadro_atual_gif.bind(objetoClasseGraficos)
+        ),
+        obter_quadro_gif: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.obter_quadro_gif.bind(objetoClasseGraficos)
+        ),
+        definir_quadro_gif: new FuncaoPadrao(
+            2,
+            objetoClasseGraficos.definir_quadro_gif.bind(objetoClasseGraficos)
+        ),
+        liberar_imagem: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.liberar_imagem.bind(objetoClasseGraficos)
+        ),
+        desenhar_texto: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.desenhar_texto.bind(objetoClasseGraficos)
+        ),
+        definir_cor: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.definir_cor.bind(objetoClasseGraficos)
+        ),
+        definir_gradiente: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.definir_gradiente.bind(objetoClasseGraficos)
+        ),
+        definir_fonte_texto: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.definir_fonte_texto.bind(objetoClasseGraficos)
+        ),
+        definir_tamanho_texto: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.definir_tamanho_texto.bind(objetoClasseGraficos)
+        ),
+        definir_estilo_texto: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.definir_estilo_texto.bind(objetoClasseGraficos)
+        ),
+        largura_texto: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.largura_texto.bind(objetoClasseGraficos)
+        ),
+        altura_texto: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.altura_texto.bind(objetoClasseGraficos)
+        ),
+        largura_imagem: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.largura_imagem.bind(objetoClasseGraficos)
+        ),
+        altura_imagem: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.altura_imagem.bind(objetoClasseGraficos)
+        ),
+        criar_cor: new FuncaoPadrao(
+            3,
+            objetoClasseGraficos.criar_cor.bind(objetoClasseGraficos)
+        ),
+        carregar_fonte: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.carregar_fonte.bind(objetoClasseGraficos)
+        ),
+        definir_opacidade: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.definir_opacidade.bind(objetoClasseGraficos)
+        ),
+        definir_rotacao: new FuncaoPadrao(
+            1,
+            objetoClasseGraficos.definir_rotacao.bind(objetoClasseGraficos)
+        ),
+        largura_janela: new FuncaoPadrao(
+            0,
+            objetoClasseGraficos.largura_janela.bind(objetoClasseGraficos)
+        ),
+        altura_janela: new FuncaoPadrao(
+            0,
+            objetoClasseGraficos.altura_janela.bind(objetoClasseGraficos)
+        ),
+    }
+
+    const objetoGraficos = new DeleguaModulo('Graficos');
+    objetoGraficos.componentes = metodos;
+    return objetoGraficos;
 }
 
 function carregarBibliotecaInternet(): DeleguaModulo {
