@@ -29,7 +29,7 @@ export async function sorteia(interpretador: InterpretadorInterface, minimo: num
     }
 
     if (minimo === maximo) {
-        throw new Error(`Os valores mínimo e máximo são iguais: ${minimo}`);
+        return minimo;
     }
 
     return Math.floor(Math.random() * (maximo + 1 - minimo)) + minimo;

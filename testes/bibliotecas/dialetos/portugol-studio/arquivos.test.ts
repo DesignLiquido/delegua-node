@@ -78,9 +78,16 @@ describe('Biblioteca Arquivos', () => {
         });
 
         it('Fim não alcançado', async () => {
-            const arquivoIndex = await abrir_arquivo({} as InterpretadorInterface, 'testDir/test.txt', 0); 
+            const arquivoIndex = await abrir_arquivo({} as InterpretadorInterface, 'testDir/test.txt', 0);
             await ler_linha({} as InterpretadorInterface, arquivoIndex);
             expect(fim_arquivo({} as InterpretadorInterface, arquivoIndex)).toBe(false);
+        });
+
+        it('Fim alcançado após leitura completa', async () => {
+            const arquivoIndex = await abrir_arquivo({} as InterpretadorInterface, 'testDir/test.txt', 0);
+            await ler_linha({} as InterpretadorInterface, arquivoIndex);
+            await ler_linha({} as InterpretadorInterface, arquivoIndex);
+            expect(fim_arquivo({} as InterpretadorInterface, arquivoIndex)).toBe(true);
         });
     });
 
@@ -89,6 +96,14 @@ describe('Biblioteca Arquivos', () => {
             const arquivoIndex = await abrir_arquivo({} as InterpretadorInterface, 'testDir/test.txt', 0);
             const linha = await ler_linha({} as InterpretadorInterface, arquivoIndex);
             expect(linha).toBe('Linha 1');
+        });
+
+        it('Lê linhas sequencialmente', async () => {
+            const arquivoIndex = await abrir_arquivo({} as InterpretadorInterface, 'testDir/test.txt', 0);
+            const linha1 = await ler_linha({} as InterpretadorInterface, arquivoIndex);
+            const linha2 = await ler_linha({} as InterpretadorInterface, arquivoIndex);
+            expect(linha1).toBe('Linha 1');
+            expect(linha2).toBe('Linha 2');
         });
 
         it('Erro caso em modo de escrita', async () => {

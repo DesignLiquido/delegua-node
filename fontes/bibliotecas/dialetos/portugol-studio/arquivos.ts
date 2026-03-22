@@ -18,41 +18,40 @@ export async function abrir_arquivo(interpretador: InterpretadorInterface, camin
         throw new Error(`Modo de acesso inválido: ${modoAcesso}`);
     }
 
-    if (!arquivoAberto(caminhoArquivo)) {
-        const indice = obterProximoIndiceLivre();
+    if (arquivoAberto(caminhoArquivo)) {
+        throw new Error(`O arquivo '${caminhoArquivo}' já está aberto`);
+    }
+
+    const indice = obterProximoIndiceLivre();
+
+    if (modoAcesso === ModoAcesso.LEITURA) {
+        const conteudo = await fs.promises.readFile(caminhoArquivo, 'utf-8');
         arquivos[indice] = {
             caminho: caminhoArquivo,
             modoAcesso,
-            stream:
-                modoAcesso === ModoAcesso.LEITURA
-                    ? fs.createReadStream(caminhoArquivo, 'utf-8')
-                    : fs.createWriteStream(caminhoArquivo, {
-                          flags: modoAcesso === ModoAcesso.ACRESCENTAR ? 'a' : 'w',
-                          encoding: 'utf-8',
-                      }),
-            leitor: modoAcesso === ModoAcesso.LEITURA ? fs.promises.readFile(caminhoArquivo, 'utf-8') : null,
-            escritor:
-                modoAcesso !== ModoAcesso.LEITURA
-                    ? fs.promises.writeFile(caminhoArquivo, '', {
-                          flag: modoAcesso === ModoAcesso.ACRESCENTAR ? 'a' : 'w',
-                      })
-                    : null,
+            linhas: conteudo.split('\n'),
+            linhaAtual: 0,
             fim: false,
         };
-        return indice;
     } else {
-        throw new Error(`O arquivo '${caminhoArquivo}' já está aberto`);
+        if (modoAcesso === ModoAcesso.ESCRITA) {
+            await fs.promises.writeFile(caminhoArquivo, '', 'utf-8');
+        }
+        arquivos[indice] = {
+            caminho: caminhoArquivo,
+            modoAcesso,
+            linhas: null,
+            linhaAtual: 0,
+            fim: false,
+        };
     }
+
+    return indice;
 }
 
 export async function fechar_arquivo(interpretador: InterpretadorInterface, endereco) {
-    const arquivo = obterArquivo(endereco);
-    if (arquivo) {
-        arquivo.stream.close();
-        arquivos[endereco] = null;
-    } else {
-        throw new Error(`O endereço de memória especificado não aponta para um arquivo`);
-    }
+    obterArquivo(endereco); // valida que o endereço é válido
+    arquivos[endereco] = null;
 }
 
 export function fim_arquivo(interpretador: InterpretadorInterface, endereco) {
@@ -65,8 +64,14 @@ export async function ler_linha(interpretador: InterpretadorInterface, endereco)
     if (arquivo.modoAcesso !== ModoAcesso.LEITURA) {
         throw new Error(`O arquivo '${arquivo.caminho}' está aberto em modo de escrita`);
     }
-    const data = await arquivo.leitor;
-    return data.split('\n')[0];
+    if (arquivo.fim) {
+        return '';
+    }
+    const linha = arquivo.linhas[arquivo.linhaAtual++];
+    if (arquivo.linhaAtual >= arquivo.linhas.length) {
+        arquivo.fim = true;
+    }
+    return linha ?? '';
 }
 
 export async function escrever_linha(interpretador: InterpretadorInterface, linha, endereco) {

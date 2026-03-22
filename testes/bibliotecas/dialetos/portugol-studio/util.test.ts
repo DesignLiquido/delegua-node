@@ -75,10 +75,11 @@ describe('Biblioteca Util', () => {
             );
         });
 
-        it('Falha - Minimo é igual a Maximo', async () => {
+        it('Minimo igual a Maximo retorna o proprio valor', async () => {
             const minimo = 5;
             const maximo = 5;
-            await expect(sorteia({} as InterpretadorInterface, minimo, maximo)).rejects.toThrow(`Os valores mínimo e máximo são iguais: ${minimo}`);
+            const resultado = await sorteia({} as InterpretadorInterface, minimo, maximo);
+            expect(resultado).toBe(5);
         });
     });
 
