@@ -6,6 +6,10 @@ import { pathToFileURL } from 'url';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
+import { InfraestruturaElectron, InfraestruturaVazia, InfraestruturaWebView, InfraestruturaWindows, InterfaceGrafica } from '@designliquido/delegua-interface-grafica';
+import { InfraestruturaInvocacaoElectron, localizarElectron } from '../infraestruturas/invocacao-electron/infraestrutura-invocacao-electron';
+import { criarHostWindows, podeUsarHostWindows } from '../infraestruturas/host-windows/infraestrutura-host-windows';
+
 import { ClasseDeModulo } from '../interpretador/estruturas';
 
 // Cache de pacotes em memória
@@ -226,14 +230,88 @@ export const verificarModulosDelegua = (nome: string): string | boolean => {
         tempo: '@designliquido/delegua-tempo',
     };
 
-    if (Object.keys(modulos).includes(nome)) {
-        return modulos[nome].toString();
+    if (Object.keys(modulos).includes(nome.toLowerCase())) {
+        return modulos[nome.toLowerCase()].toString();
     }
 
     return false;
 };
 
+let _fabricaPainelWebView: (() => any) | null = null;
+
+/**
+ * Registra uma fábrica de WebviewPanel do VS Code.
+ * Deve ser chamada pela extensão VS Code antes de executar programas Delégua
+ * que utilizem a biblioteca InterfaceGrafica.
+ *
+ * @example
+ * // No arquivo de ativação da extensão:
+ * import { definirFabricaPainelWebView } from '@designliquido/delegua-node';
+ *
+ * definirFabricaPainelWebView(() =>
+ *     vscode.window.createWebviewPanel(
+ *         'delegua-interface-grafica',
+ *         'Interface Gráfica – Delégua',
+ *         vscode.ViewColumn.One,
+ *         { enableScripts: true }
+ *     )
+ * );
+ */
+export const definirFabricaPainelWebView = (fabrica: () => any): void => {
+    _fabricaPainelWebView = fabrica;
+};
+
+function carregarBibliotecaInterfaceGrafica(): DeleguaModulo {
+    let infraestrutura: InfraestruturaInvocacaoElectron | InfraestruturaWindows | InfraestruturaWebView | InfraestruturaElectron | InfraestruturaVazia;
+    const infraEstruturaForcada = process.env.DELEGUA_GUI_INFRAESTRUTURA?.toLowerCase();
+    if (infraEstruturaForcada === 'host-windows') {
+        infraestrutura = criarHostWindows();
+    } else if (_fabricaPainelWebView) {
+        infraestrutura = new InfraestruturaWebView(_fabricaPainelWebView());
+    } else if (typeof document !== 'undefined') {
+        infraestrutura = new InfraestruturaElectron();
+    } else {
+        const caminhoBinario = localizarElectron();
+        if (caminhoBinario) {
+            infraestrutura = new InfraestruturaInvocacaoElectron(caminhoBinario);
+        } else if (podeUsarHostWindows()) {
+            infraestrutura = criarHostWindows();
+        } else {
+            console.warn(
+                '[InterfaceGrafica] Nenhuma infraestrutura visual disponível. Usando infraestrutura vazia. ' +
+                'Instale o Electron (npm install -g electron) para exibir janelas pela linha de comando.'
+            );
+            infraestrutura = new InfraestruturaVazia();
+        }
+    }
+
+    const ig = new InterfaceGrafica(infraestrutura);
+
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        janela:          new FuncaoPadrao(3, ig.janela.bind(ig)),
+        botao:           new FuncaoPadrao(2, ig.botao.bind(ig)),
+        rotulo:          new FuncaoPadrao(2, ig.rotulo.bind(ig)),
+        caixaTexto:      new FuncaoPadrao(2, ig.caixaTexto.bind(ig)),
+        caixaVertical:   new FuncaoPadrao(1, ig.caixaVertical.bind(ig)),
+        caixaHorizontal: new FuncaoPadrao(1, ig.caixaHorizontal.bind(ig)),
+        definirTexto:    new FuncaoPadrao(2, ig.definirTexto.bind(ig)),
+        obterTexto:      new FuncaoPadrao(1, ig.obterTexto.bind(ig)),
+        aoClicar:        new FuncaoPadrao(2, ig.aoClicar.bind(ig)),
+        aoAlterar:       new FuncaoPadrao(2, ig.aoAlterar.bind(ig)),
+        iniciar:         new FuncaoPadrao(0, ig.iniciar.bind(ig)),
+        encerrar:        new FuncaoPadrao(0, ig.encerrar.bind(ig)),
+    };
+
+    const modulo = new DeleguaModulo('InterfaceGrafica');
+    modulo.componentes = metodos;
+    return modulo;
+}
+
 export default async function (nome: string) {
+    if (nome.toLowerCase() === 'interfacegrafica') {
+        return carregarBibliotecaInterfaceGrafica();
+    }
+
     const nomeBibliotecaResolvido: string | boolean = verificarModulosDelegua(nome);
     return nomeBibliotecaResolvido
         ? carregarBibliotecaDelegua(String(nomeBibliotecaResolvido))

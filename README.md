@@ -51,3 +51,57 @@ npm install -g delegua
 ```
 
 A implementação do [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console) fica neste pacote, mas o recomendado é a utilização da solução completa, ao invés deste pacote puro.
+
+## Programas com interface gráfica (`interfaceGrafica`)
+
+A biblioteca `interfaceGrafica` cria janelas, botões, rótulos e caixas de texto. O ambiente onde o programa é executado determina qual infraestrutura visual é usada:
+
+| Ambiente | Infraestrutura selecionada | Resultado |
+|----------|---------------------------|-----------|
+| Linha de comando + Electron instalado | `InfraestruturaElectronSpawn` | Janela nativa exibida em um processo Electron filho. |
+| Linha de comando (sem Electron) | `InfraestruturaVazia` | Programa executa sem erros, mas **nenhuma janela é exibida**. O aviso abaixo é emitido no console. |
+| Extensão Delégua no VS Code | `InfraestruturaWebView` | Janela exibida como painel nativo dentro do VS Code. |
+| Processo renderer do Electron | `InfraestruturaElectron` | Janela exibida como overlay DOM na janela Electron. |
+
+### Usando pela linha de comando com Electron
+
+Se o pacote `electron` estiver instalado (local ou globalmente), `delegua-node` o detecta automaticamente e spawna um processo Electron filho para exibir a janela:
+
+```bash
+npm install -g electron   # instalar uma vez
+delegua meu-programa.delegua
+```
+
+A janela abre, os eventos funcionam normalmente e o processo Node.js aguarda até ela ser fechada.
+
+### Aviso ao rodar pela linha de comando sem Electron
+
+```
+[InterfaceGrafica] Electron não encontrado. Usando infraestrutura vazia.
+Instale o Electron (npm install -g electron) para exibir janelas pela linha de comando.
+```
+
+Este aviso aparece quando o Electron não está instalado. O programa executa sem erros, mas nenhuma janela é exibida.
+
+### Integrando a interface gráfica em uma extensão VS Code
+
+Antes de executar qualquer programa Delégua que use `interfaceGrafica`, chame `definirFabricaPainelWebView()` no método `activate()` da extensão:
+
+```typescript
+import { definirFabricaPainelWebView } from '@designliquido/delegua-node';
+
+export function activate(context: vscode.ExtensionContext) {
+    definirFabricaPainelWebView(() =>
+        vscode.window.createWebviewPanel(
+            'delegua-interface-grafica',
+            'Interface Gráfica – Delégua',
+            vscode.ViewColumn.One,
+            { enableScripts: true }
+        )
+    );
+
+    // ... restante da ativação
+}
+```
+
+A partir daí, toda chamada a `ig.iniciar()` em código Delégua abrirá automaticamente um painel WebView dentro do VS Code.

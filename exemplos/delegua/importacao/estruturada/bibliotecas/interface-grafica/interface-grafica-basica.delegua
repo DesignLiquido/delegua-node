@@ -1,0 +1,15 @@
+importar tudo como ig de 'interfaceGrafica'
+
+var contagem = 0
+
+var janela = ig.janela(800, 200, "Contador de Cliques")
+var rotulo = ig.rotulo(janela, "Vezes clicado: 0")
+var botao  = ig.botao(janela, "Clique aqui")
+
+funcao aoClicar() {
+    contagem = contagem + 1
+    ig.definirTexto(rotulo, "Vezes clicado: " + contagem)
+}
+
+ig.aoClicar(botao, aoClicar)
+ig.iniciar()

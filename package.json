@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "@designliquido/birl": "^0.5.18",
-        "@designliquido/delegua": "^1.15.0",
+        "@designliquido/delegua": "^1.15.2",
         "@designliquido/mapler": "^0.6.18",
         "@designliquido/portugol-studio": "^0.9.18",
         "@designliquido/potigol": "^0.8.18",
@@ -32,6 +32,7 @@
         "@designliquido/delegua-estatistica": "^0.1.0",
         "@designliquido/delegua-fisica": "^0.1.0",
         "@designliquido/delegua-http": "^0.1.2",
+        "@designliquido/delegua-interface-grafica": "^0.0.1",
         "@designliquido/delegua-json": "^0.2.1",
         "@designliquido/delegua-matematica": "^0.3.0",
         "@designliquido/delegua-tempo": "^1.0.1",

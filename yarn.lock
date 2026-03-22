@@ -325,6 +325,11 @@
   dependencies:
     axios "^1.8.4"
 
+"@designliquido/delegua-interface-grafica@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-interface-grafica/-/delegua-interface-grafica-0.0.1.tgz#ac52a6e540e6ff8aab878f04709970c91ab4a337"
+  integrity sha512-mxJIyyoPu+Uow9+YzUiztFRL7Lcn+FqGtQbyMBHt+Kk8lWLTvTmrl/AI1e1a76dr1l38HRa4vRYaKZMpxhWFsA==
+
 "@designliquido/delegua-json@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-json/-/delegua-json-0.2.1.tgz#57c2e9dc45525ebdf1b4ee6038b11b6a18d3181c"
@@ -342,10 +347,10 @@
   dependencies:
     dayjs "^1.11.13"
 
-"@designliquido/delegua@^1.15.0":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.15.0.tgz#f174394dfda0daec83a60a3bb82311aabf56d49c"
-  integrity sha512-lvVuujz3CESMouPupiZ73/1wsmx+sb41X8mEehlJS0nT5zpxsknRILHg90yTwqKmhPpgf/NNRtYkmOCPb3G07g==
+"@designliquido/delegua@^1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.15.2.tgz#edfc0cf4f62f79ccdc518b19b8656e1053d6b11c"
+  integrity sha512-XBAP2PCXGoGslMQSZVcl0RIKeAX+9AMFmx8u18UwERQCgM6c6Fc/YrnfQM5Y9ua2kb3CBaFeVuRj5uUuU9Te7g==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
