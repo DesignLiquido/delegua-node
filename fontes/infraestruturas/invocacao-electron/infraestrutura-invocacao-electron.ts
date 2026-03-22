@@ -254,7 +254,7 @@ const RENDERER_HTML = `<!DOCTYPE html>
 </html>`;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// InfraestruturaElectronSpawn
+// InfraestruturaInvocacaoElectron
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**

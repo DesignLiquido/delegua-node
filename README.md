@@ -58,7 +58,7 @@ A biblioteca `interfaceGrafica` cria janelas, botões, rótulos e caixas de text
 
 | Ambiente | Infraestrutura selecionada | Resultado |
 |----------|---------------------------|-----------|
-| Linha de comando + Electron instalado | `InfraestruturaElectronSpawn` | Janela nativa exibida em um processo Electron filho. |
+| Linha de comando + Electron instalado | `InfraestruturaInvocacaoElectron` | Janela nativa exibida em um processo Electron filho. |
 | Linha de comando (sem Electron) | `InfraestruturaVazia` | Programa executa sem erros, mas **nenhuma janela é exibida**. O aviso abaixo é emitido no console. |
 | Extensão Delégua no VS Code | `InfraestruturaWebView` | Janela exibida como painel nativo dentro do VS Code. |
 | Processo renderer do Electron | `InfraestruturaElectron` | Janela exibida como overlay DOM na janela Electron. |

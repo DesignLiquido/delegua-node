@@ -24,7 +24,7 @@ O construtor recebe o caminho absoluto do binário Electron e, ao ser instanciad
    - `preload.js` — script de preload com `contextBridge` (`PRELOAD_JS`)
    - `renderer.html` — página HTML do renderer (`RENDERER_HTML`)
 3. Cria um servidor TCP local em `127.0.0.1` com porta aleatória (`servidor.listen(0, ...)`).
-4. Spawna o binário Electron com `stdio: ['ignore', 'ignore', 'pipe']`, passando o número da porta como `process.argv[3]`.
+4. Invoca o binário Electron com `stdio: ['ignore', 'ignore', 'pipe']`, passando o número da porta como `process.argv[3]`.
 5. Aguarda que o Electron se conecte de volta ao servidor TCP.
 6. Ao receber a conexão, cria um `readline.Interface` sobre o socket para receber mensagens JSON.
 
