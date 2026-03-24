@@ -366,7 +366,13 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             );
 
             if (!String(literalCaminho.valor).endsWith('.delegua')) {
-                return this.importarBibliotecaNode(literalCaminho);
+                return new Const(
+                    declaracaoResolvida.simboloTudo,
+                    this.importarBibliotecaNode(literalCaminho),
+                    'módulo',
+                    true,
+                    declaracaoResolvida.decoradores
+                );
             }
 
             const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
