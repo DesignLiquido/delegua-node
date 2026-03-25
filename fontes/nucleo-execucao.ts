@@ -14,17 +14,26 @@ import {
 import {
     AvaliadorSintaticoEguaClassico,
     AvaliadorSintaticoPortugolIpt,
+    AvaliadorSintaticoPrisma,
+    AvaliadorSintaticoTenda,
 } from "@designliquido/delegua/avaliador-sintatico/dialetos";
+import { AvaliadorSintaticoCalango } from "@designliquido/delegua/avaliador-sintatico/dialetos/avaliador-sintatico-calango";
 import {
     InterpretadorEguaClassico,
     InterpretadorPortugolIpt,
 } from "@designliquido/delegua/interpretador/dialetos";
+import { InterpretadorCalango } from "@designliquido/delegua/interpretador/dialetos/calango";
+import { InterpretadorPrisma } from "@designliquido/delegua/interpretador/dialetos/prisma";
+import { InterpretadorTenda } from "@designliquido/delegua/interpretador/dialetos/tenda";
 
 import { Lexador } from "@designliquido/delegua/lexador";
 import {
+    LexadorCalango,
     LexadorEguaClassico,
     LexadorPitugues,
     LexadorPortugolIpt,
+    LexadorPrisma,
+    LexadorTenda,
 } from "@designliquido/delegua/lexador/dialetos";
 import { ErroInterpretadorInterface } from "@designliquido/delegua/interfaces/erros/erro-interpretador-interface";
 import { LexadorBirl } from "@designliquido/birl/lexador";
@@ -88,6 +97,7 @@ export class NucleoExecucao
 
     dialetos: { [identificador: string]: string } = {
         birl: "BIRL",
+        calango: "Calango",
         delegua: "padrão",
         delégua: "padrão",
         egua: "Égua",
@@ -97,6 +107,8 @@ export class NucleoExecucao
         pituguês: "Pituguês",
         potigol: "Potigol",
         "portugol-studio": "Portugol Studio",
+        prisma: "Prisma",
+        tenda: "Tenda",
         visualg: "VisuAlg",
     };
 
@@ -317,6 +329,54 @@ export class NucleoExecucao
                           this.funcaoLimpaTela
                       );
                 (this.interpretador as any).deveEscreverPrompt = true;
+                break;
+            case "calango":
+                this.lexador = new LexadorCalango();
+                this.avaliadorSintatico = new AvaliadorSintaticoCalango();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+                this.interpretador = new InterpretadorCalango(
+                    process.cwd(),
+                    performance,
+                    this.funcaoDeRetorno,
+                    this.funcaoDeRetornoMesmaLinha
+                );
+                break;
+            case "prisma":
+                this.lexador = new LexadorPrisma();
+                this.avaliadorSintatico = new AvaliadorSintaticoPrisma();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+                this.interpretador = new InterpretadorPrisma(
+                    process.cwd(),
+                    performance,
+                    this.funcaoDeRetorno,
+                    this.funcaoDeRetornoMesmaLinha
+                );
+                break;
+            case "tenda":
+                this.lexador = new LexadorTenda();
+                this.avaliadorSintatico = new AvaliadorSintaticoTenda();
+                this.importador = new Importador(
+                    this.lexador,
+                    this.arquivosAbertos,
+                    this.conteudoArquivosAbertos,
+                    depurador
+                );
+                this.interpretador = new InterpretadorTenda(
+                    process.cwd(),
+                    performance,
+                    this.funcaoDeRetorno,
+                    this.funcaoDeRetornoMesmaLinha
+                );
                 break;
             default:
                 this.lexador = new Lexador(performance);
