@@ -29,7 +29,11 @@ export const carregarBibliotecaDelegua = (nome: string) => {
             const dadosDoModulo = importarPacoteDeleguaCompleto(nome);
             return modularizarBibliotecaNpmPadrao(dadosDoModulo, nome);
         } catch (erro2: any) {
-            throw new ErroEmTempoDeExecucao(null, `Biblioteca ${nome} não encontrada para importação, nem por referência local, nem por instalação global.`);
+            throw new ErroEmTempoDeExecucao(
+                null,
+                `Biblioteca "${nome}" não encontrada para importação, nem por referência local, nem por instalação global. ` +
+                `Para instalá-la, execute: npm install -g ${nome}`
+            );
         }
     }
 };
@@ -219,15 +223,18 @@ export const verificarModulosDelegua = (nome: string): string | boolean => {
         arquivos: '@designliquido/delegua-arquivos',
         criptografia: '@designliquido/delegua-criptografia',
         csv: '@designliquido/delegua-csv',
+        dados: '@designliquido/delegua-dados',
         estatistica: '@designliquido/delegua-estatistica',
         estatística: '@designliquido/delegua-estatistica',
         fisica: '@designliquido/delegua-fisica',
         física: '@designliquido/delegua-fisica',
         http: '@designliquido/delegua-http',
+        imagens: '@designliquido/delegua-imagens',
         json: '@designliquido/delegua-json',
         matematica: '@designliquido/delegua-matematica',
         matemática: '@designliquido/delegua-matematica',
         tempo: '@designliquido/delegua-tempo',
+        yaml: '@designliquido/delegua-yaml',
     };
 
     if (Object.keys(modulos).includes(nome.toLowerCase())) {
@@ -308,7 +315,8 @@ function carregarBibliotecaInterfaceGrafica(): DeleguaModulo {
 }
 
 export default async function (nome: string) {
-    if (nome.toLowerCase() === 'interfacegrafica') {
+    const nomeLower = nome.toLowerCase();
+    if (nomeLower === 'interfacegrafica' || nomeLower === 'interface-grafica') {
         return carregarBibliotecaInterfaceGrafica();
     }
 

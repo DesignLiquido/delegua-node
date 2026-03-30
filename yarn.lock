@@ -284,32 +284,37 @@
   dependencies:
     lodash "^4.17.21"
 
-"@designliquido/delegua-arquivos@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-arquivos/-/delegua-arquivos-0.0.3.tgz#5853f67f99cf7cf74540255f9494e451106a06a5"
-  integrity sha512-qnumk3xidgxzINFEbWISsp5qJQHrnS+azDXhCZrURHbxJsygI+sJL4ZuHGvOMvk6e2whuopyKi9ifPN5dsCw5w==
+"@designliquido/delegua-arquivos@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-arquivos/-/delegua-arquivos-0.0.4.tgz#fd98c0a829d6e882e93aa9e73223e50e04263540"
+  integrity sha512-d6ae8ywckt9x381YW44fgN9KSxn+UrGSDMD+mNDg28Z0EleyfV+wfd1lYUPSsDknY8hD6+mk1uuushgpG7sUoA==
 
-"@designliquido/delegua-criptografia@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-criptografia/-/delegua-criptografia-0.3.3.tgz#42d39ee27b4c7abb05656829ef6526655464a117"
-  integrity sha512-eIOZT+/MRJFDWru/yJHmxXyjNfMQ2tff6ioapb5YR/LmYdoa5ELtueVhFzpXEgPLksCLLjrntNPFFhXe5g2KXQ==
+"@designliquido/delegua-criptografia@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-criptografia/-/delegua-criptografia-0.3.4.tgz#d111c3506abdf4db8e5da9d6ed8036a05bd784b2"
+  integrity sha512-pSfRMHtn/Py/zF0LtTqpr3b4T1Js0pALsmHSKySe4SWyfFbKjm0cRmWdcNXB2yszZDmbEsnXDddYoGHZDXNrbw==
 
 "@designliquido/delegua-csv@^0.0.2":
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-csv/-/delegua-csv-0.0.2.tgz#40ffd4db445f12b56c90d4df87661b7b8470f146"
   integrity sha512-4ndNhqFwkIe7LtVQ0aYurqq6ejOHrMfNZeKCnjvxZAuDDT8j9swTXbHbC87Qbex1a9dMnK5IZdU9VxThOq0TrA==
 
-"@designliquido/delegua-dados@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-dados/-/delegua-dados-0.0.0.tgz#6e4b044afaed2839ccc1f4c75616fdfbc5ac5ebe"
-  integrity sha512-0h+P3SwbiF95BHZHN9Sd0pmoO/xcNIpYC9n6dWLutrDIVYfrDbeOu0DMUrLRgUbIW38onxIS+vE1XCbMuzZXug==
+"@designliquido/delegua-csv@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-csv/-/delegua-csv-0.0.3.tgz#0291b3636effbf5d3c3f27fde10f0702a89465aa"
+  integrity sha512-iWgxojKFxJY3JyuK+1NAqltMITJrlil4rKutvf8Xd7LWs4fGQBdFyCoxRZyw2MdGdeMQhSEk0Whh90E3ZUORAg==
+
+"@designliquido/delegua-dados@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-dados/-/delegua-dados-0.0.1.tgz#a35c035cc99de80f3c861bd90c2d5b9e724ebc4a"
+  integrity sha512-uvablMBhNezD0xoXDBpijOWKTp8ofTV+ewR+fdQC1iBMiA2m1DNw4b2SgHARUjoPskRXymWPzCNq9hV5Q4Mp7A==
   dependencies:
     "@designliquido/delegua-csv" "^0.0.2"
 
-"@designliquido/delegua-estatistica@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.1.0.tgz#e24301179db062cb46ac3210a0fbcdfa6b5207f8"
-  integrity sha512-49xbDV9PQFFkiQOGhMGC2n4iNZG/qeCfMsN+HC+RFOnrZhzvthKVnhRFKs2SNg1f8lyRDI0eXLk5az+UigNMcw==
+"@designliquido/delegua-estatistica@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.1.1.tgz#2b99f3185835521da9465b7f8c013bf1cad585f0"
+  integrity sha512-/D7cw6Mi++BuL1cA3CoePMDLnBtYN/Dr6sREaVjHm8sidXtFTzQpy91R9z9RMs/9pbIbzcPFYZeWifdZR5luCg==
   dependencies:
     "@designliquido/delegua-matematica" "^0.3.0"
 
@@ -318,39 +323,57 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-fisica/-/delegua-fisica-0.1.0.tgz#c009e8007fab6b005d62e5fcdc75090562cbbb9f"
   integrity sha512-7wMUG2JK/V0SQz7Vo3dYxohH30vPwOJXA+NoN9tYU5ECdjv2mIJc72ELjcI+OJtwczHOXyfhTmHIFOgDJ9DZGw==
 
-"@designliquido/delegua-http@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-http/-/delegua-http-0.1.2.tgz#2cfa1a62dbfdd279011e8302c2361e46ca368c7b"
-  integrity sha512-keShXHd4/AgtapTiKO1zks877oFUWz/pJ3VgbUv7pnPXNSNak0hvyu6dm25BRAJVS1uAaTCJ7xOhRa+QtIPU0Q==
+"@designliquido/delegua-http@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-http/-/delegua-http-0.1.3.tgz#05ba5e2600d07d8595c3d307d63798d1d21f0244"
+  integrity sha512-Q2qY4upqK7PIB7PphjvWtQvK8uUY9cIKfzT2RwSFafLDbGEBw0UrXqtBBX+Ojl/MAJz4fdp5oqUvQ1tVLEP57g==
   dependencies:
     axios "^1.8.4"
+
+"@designliquido/delegua-imagens@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-imagens/-/delegua-imagens-0.0.0.tgz#26c008ec3a2beaafa32980338d9b303238d17f61"
+  integrity sha512-LnOEcOcDDIqqj+/Q/WAO1z7oWeQl3qwoAVhJf4YX/TXzEq3bewHIjF7z5WKOcQgs6Di+Yz/RfsJoV8CejeDJ0A==
 
 "@designliquido/delegua-interface-grafica@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-interface-grafica/-/delegua-interface-grafica-0.0.1.tgz#ac52a6e540e6ff8aab878f04709970c91ab4a337"
   integrity sha512-mxJIyyoPu+Uow9+YzUiztFRL7Lcn+FqGtQbyMBHt+Kk8lWLTvTmrl/AI1e1a76dr1l38HRa4vRYaKZMpxhWFsA==
 
-"@designliquido/delegua-json@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-json/-/delegua-json-0.2.1.tgz#57c2e9dc45525ebdf1b4ee6038b11b6a18d3181c"
-  integrity sha512-Ym+Tw98Pll84TNSrEnQrFZC0PcKos66qnrEqwUDDxP/6cdnbu2bvTW05wVLXWBZPVUutCld8Qt1RhzJWLr1kVQ==
+"@designliquido/delegua-json@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-json/-/delegua-json-0.3.0.tgz#a3e7b16df650d9bb442c8c7233815940f3b4a872"
+  integrity sha512-NLymuiB6V+ZZ8ZQC92qxxAcIPYTdyWSu0vExFC6cDfi8vkpH98GMAFraLWjy1bHsQxYh++sA5aev3w9BPjvCGg==
 
 "@designliquido/delegua-matematica@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-matematica/-/delegua-matematica-0.3.0.tgz#fbd1048bc0efbadcecf96c3486f8c376b6516846"
   integrity sha512-UD276/tKuWuqky0FfwuI+QJ5M+nUpnGq9QWjqmqPJikXfhUjePpTR5bBz/Ni+6WfBtgW9FShJ4T9GH96jKYuGw==
 
-"@designliquido/delegua-tempo@^1.0.1":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-1.1.0.tgz#dfe1c1e487dcdebe1df59113e91891322c6867a8"
-  integrity sha512-oEVYE1DpSD6lbEXwGhkPSgsqoOhayMx7WmFnr8armWlOvOjbEixqGWAN9ZISJp2MP3/HrMCrYQclnI08t55lDg==
+"@designliquido/delegua-matematica@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-matematica/-/delegua-matematica-0.4.0.tgz#b1b9e06f6bb20040c056503a258275533485b135"
+  integrity sha512-h8KdfnSKG98otwzjLvwwFatMGcUQdaKVvS4DUAeIyrmmxQYjkwt1B6TfAvSn79TTXJznYD62qrnVLLNfzX/VOg==
+
+"@designliquido/delegua-tempo@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-1.1.1.tgz#19be0f5ead261e3fcc8e85f0a743bb1810919f4d"
+  integrity sha512-h+/EnVylox9QEWVTwxnFukjCIdk9a9x5pMuMidFGY7QimpmO9jBDx1bY48AUt3997zOR16z1dMPoycbrH23R8w==
   dependencies:
     dayjs "^1.11.13"
 
-"@designliquido/delegua@^1.15.3":
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.15.3.tgz#aa2d07c2a7d1ddd6db61e63956ceea5ab319afce"
-  integrity sha512-I3mUqFGTlRTks7bcQyaAB7hO5Ai6+fI17jPIPS5HOaz00d8XuZArbznOwcp7MsqrhRQRR87aazneYXVuNHASEg==
+"@designliquido/delegua-yaml@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-yaml/-/delegua-yaml-0.0.0.tgz#baa099923c65ece711a3989dc12512b2f0dd5f0f"
+  integrity sha512-xD4h5FsHPHhmOSeUt90wKe34b2YPaKoZwkUdxteEx4mQXskWAzIMta4kvOXJTWUaPl4gNO3nUFkfXSSY6Bx+rw==
+  dependencies:
+    "@designliquido/delegua" "^1.15.4"
+    yaml "^2.6.1"
+
+"@designliquido/delegua@^1.15.4":
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.15.4.tgz#ebe9e9102d2aefca78005d2954dd0871f51a4198"
+  integrity sha512-Su/jUVbwHod/9V7MaKfFdTjFdZI0Akyv9QnYtEhIKpFmWOEpnx3JCIG7Nn4IGbNPx5a7jfJ+TA4YsaaOv8zjdg==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
@@ -4084,6 +4107,11 @@ yallist@^3.0.2:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.1.1.tgz#dbb7daf9bfd8bac9ab45ebf602b8cbad0d5d08fd"
   integrity sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
+
+yaml@^2.6.1:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.8.3.tgz#a0d6bd2efb3dd03c59370223701834e60409bd7d"
+  integrity sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==
 
 yargs-parser@21.1.1, yargs-parser@^21.1.1:
   version "21.1.1"

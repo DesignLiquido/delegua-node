@@ -88,32 +88,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Delégua > Bhaskara",
-      "skipFiles": ["<node_internals>/**", "node_modules/**"],
-      "cwd": "${workspaceRoot}",
-      "console": "integratedTerminal",
-      "args": [
-        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
-        "./exemplos/dialetos/egua-classico/bhaskara.egua"
-      ],
-      "runtimeExecutable": "node",
-      "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register/transpile-only",
-        "-r",
-        "tsconfig-paths/register",
-        // "--preserve-symlinks"
-      ],
-      "sourceMaps": true,
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "**/node_modules/@designliquido/**"
-      ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "Delégua > Bloco Enquanto",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
@@ -1326,14 +1300,15 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Delégua > Todos os Testes de Égua",
+      "name": "Égua > Bhaskara",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
-        "-p",
-        "./exemplos/testes.egua"
+        "-d",
+        "egua",
+        "./exemplos/dialetos/egua-classico/bhaskara.egua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -1359,7 +1334,38 @@
       "console": "integratedTerminal",
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
-        "./exemplos/dialetos/egua-classico/tente-pegue.egua"
+        "-d",
+        "egua",
+        "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}dialetos${pathSeparator}egua-classico${pathSeparator}tente-pegue.egua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Égua > Todos os Testes de Égua",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        "-d",
+        "egua",
+        "-p",
+        "./exemplos${pathSeparator}dialetos${pathSeparator}egua-classico${pathSeparator}testes.egua"
       ],
       "runtimeExecutable": "node",
       "runtimeArgs": [

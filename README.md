@@ -41,16 +41,17 @@ Se quiser instalar no seu computador,
 Com o Node.js instalado, execute o seguinte comando em um _prompt_ de comando (Terminal, PowerShell ou `cmd` no Windows, Terminal ou `sh` em Mac e Linux):
 
 ```
-npm install -g @designliquido/delegua-node
-```
-
-No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras. Para instalar [a solução completa, com todas essas bibliotecas](https://github.com/DesignLiquido/delegua-completo), utilize o comando:
-
-```
 npm install -g delegua
 ```
 
-A implementação do [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console) fica neste pacote, mas o recomendado é a utilização da solução completa, ao invés deste pacote puro.
+Isso instala [a solução completa, com todas essas bibliotecas](https://github.com/DesignLiquido/delegua-completo), que utiliza este pacote como base. Se quiser instalar apenas este pacote, utilize o comando:
+
+```
+npm install -g @designliquido/delegua-node
+```
+
+No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras, bem como comandos executáveis por prompt de comando, como uso de arquivos ou código como argumento, ou o [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console). Por isso, a instalação da solução completa é recomendada para a maioria dos casos.
+
 
 ## Programas com interface gráfica (`interfaceGrafica`)
 
