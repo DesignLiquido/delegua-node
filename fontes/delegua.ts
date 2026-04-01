@@ -56,20 +56,22 @@ export class Delegua implements DeleguaInterface {
     async executarCodigoComoArgumento(
         codigo: string,
         dialeto: string = 'delegua',
-        performance: boolean = false
+        performance: boolean = false,
+        depurador: boolean = false
     ): Promise<void> {
         const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
-        nucleoExecucao.configurarDialeto(dialeto, performance);
+        nucleoExecucao.configurarDialeto(dialeto, performance, depurador);
         return await nucleoExecucao.executarCodigoComoArgumento(codigo);
     }
 
     async executarCodigoPorArquivo(
         caminhoRelativoArquivo: string,
         dialeto: string = 'delegua',
-        performance: boolean = false
+        performance: boolean = false,
+        depurador: boolean = false
     ): Promise<any> {
         const nucleoExecucao = new NucleoExecucao(this.versao(), this.funcaoDeRetorno, this.funcaoDeRetornoMesmaLinha);
-        nucleoExecucao.configurarDialeto(dialeto, performance);
+        nucleoExecucao.configurarDialeto(dialeto, performance, depurador);
         return await nucleoExecucao.carregarEExecutarArquivo(caminhoRelativoArquivo);
     }
 
