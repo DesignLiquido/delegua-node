@@ -1,6 +1,25 @@
 import { PassThrough } from 'stream';
 
-import { SessaoDepuracaoDapPadrao, TransporteDapStdio } from '../../../fontes/depuracao/dap';
+import { ParadaDepuracao, SessaoDepuracaoDapPadrao, TransporteDapStdio } from '../../../fontes/depuracao/dap';
+
+class RuntimeBridgeDepuracaoFalso {
+    argumentosLancamentoRecebidos: Record<string, unknown> | undefined;
+    pontosParadaPorArquivo = new Map<string, number[]>();
+    paradaSimulada: ParadaDepuracao | null = null;
+
+    async prepararLancamento(argumentos?: Record<string, unknown>): Promise<void> {
+        this.argumentosLancamentoRecebidos = argumentos;
+    }
+
+    async definirPontosParada(caminhoArquivo: string, linhas: number[]): Promise<number[]> {
+        this.pontosParadaPorArquivo.set(caminhoArquivo, linhas.filter((linha) => linha > 0));
+        return this.pontosParadaPorArquivo.get(caminhoArquivo) ?? [];
+    }
+
+    async executarAtePrimeiroPontoParada(): Promise<ParadaDepuracao | null> {
+        return this.paradaSimulada;
+    }
+}
 
 const enveloparMensagemDap = (mensagem: Record<string, unknown>): string => {
     const corpo = JSON.stringify(mensagem);
@@ -36,11 +55,12 @@ const extrairMensagensDap = (dados: string): Array<Record<string, unknown>> => {
 };
 
 describe('Sessao DAP', () => {
-    it('deve responder initialize e emitir initialized', () => {
+    it('deve responder initialize e emitir initialized', async () => {
         const entrada = new PassThrough();
         const saida = new PassThrough();
         const transporte = new TransporteDapStdio(entrada, saida);
-        const sessao = new SessaoDepuracaoDapPadrao(transporte);
+        const runtimeBridgeFalso = new RuntimeBridgeDepuracaoFalso();
+        const sessao = new SessaoDepuracaoDapPadrao(transporte, runtimeBridgeFalso as any);
 
         let bufferSaida = '';
         saida.on('data', (dado) => {
@@ -59,6 +79,8 @@ describe('Sessao DAP', () => {
             })
         );
 
+        await new Promise((resolve) => setImmediate(resolve));
+
         const mensagens = extrairMensagensDap(bufferSaida);
         expect(mensagens).toHaveLength(2);
 
@@ -72,5 +94,61 @@ describe('Sessao DAP', () => {
 
         expect(evento.type).toBe('event');
         expect(evento.event).toBe('initialized');
+    });
+
+    it('deve executar fluxo launch, setBreakpoints e configurationDone com stopped', async () => {
+        const entrada = new PassThrough();
+        const saida = new PassThrough();
+        const transporte = new TransporteDapStdio(entrada, saida);
+        const runtimeBridgeFalso = new RuntimeBridgeDepuracaoFalso();
+        runtimeBridgeFalso.paradaSimulada = {
+            caminhoArquivo: 'D:/Delegua/codeblocks/exemplo.delegua',
+            linha: 3,
+        };
+        const sessao = new SessaoDepuracaoDapPadrao(transporte, runtimeBridgeFalso as any);
+
+        let bufferSaida = '';
+        saida.on('data', (dado) => {
+            bufferSaida += dado.toString('utf8');
+        });
+
+        sessao.iniciar();
+        entrada.write(enveloparMensagemDap({ seq: 1, type: 'request', command: 'initialize' }));
+        entrada.write(
+            enveloparMensagemDap({
+                seq: 2,
+                type: 'request',
+                command: 'launch',
+                arguments: {
+                    program: 'D:/Delegua/codeblocks/exemplo.delegua',
+                    dialeto: 'delegua',
+                },
+            })
+        );
+        entrada.write(
+            enveloparMensagemDap({
+                seq: 3,
+                type: 'request',
+                command: 'setBreakpoints',
+                arguments: {
+                    source: {
+                        path: 'D:/Delegua/codeblocks/exemplo.delegua',
+                    },
+                    breakpoints: [{ line: 3 }],
+                },
+            })
+        );
+        entrada.write(enveloparMensagemDap({ seq: 4, type: 'request', command: 'configurationDone' }));
+
+        await new Promise((resolve) => setImmediate(resolve));
+
+        const mensagens = extrairMensagensDap(bufferSaida);
+        expect(mensagens.find((m) => m.type === 'response' && m.command === 'launch')).toBeTruthy();
+        expect(mensagens.find((m) => m.type === 'response' && m.command === 'setBreakpoints')).toBeTruthy();
+        expect(mensagens.find((m) => m.type === 'response' && m.command === 'configurationDone')).toBeTruthy();
+
+        const eventoParada = mensagens.find((m) => m.type === 'event' && m.event === 'stopped');
+        expect(eventoParada).toBeTruthy();
+        expect((eventoParada as any).body.reason).toBe('breakpoint');
     });
 });

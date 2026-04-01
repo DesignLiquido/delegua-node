@@ -39,7 +39,14 @@ export interface TransporteDap {
 }
 
 export interface RuntimeBridgeDepuracao {
-    iniciarPrograma(argumentos?: Record<string, unknown>): Promise<void>;
+    prepararLancamento(argumentos?: Record<string, unknown>): Promise<void>;
+    definirPontosParada(caminhoArquivo: string, linhas: number[]): Promise<number[]>;
+    executarAtePrimeiroPontoParada(): Promise<ParadaDepuracao | null>;
+}
+
+export interface ParadaDepuracao {
+    caminhoArquivo: string;
+    linha: number;
 }
 
 export interface SessaoDepuracaoDap {
