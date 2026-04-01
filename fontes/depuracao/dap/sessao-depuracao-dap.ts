@@ -57,6 +57,30 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
             case 'configurationDone':
                 await this.tratarConfigurationDone(requisicao);
                 return;
+            case 'threads':
+                await this.tratarThreads(requisicao);
+                return;
+            case 'stackTrace':
+                await this.tratarStackTrace(requisicao);
+                return;
+            case 'scopes':
+                await this.tratarScopes(requisicao);
+                return;
+            case 'variables':
+                await this.tratarVariables(requisicao);
+                return;
+            case 'continue':
+                await this.tratarContinue(requisicao);
+                return;
+            case 'next':
+                await this.tratarNext(requisicao);
+                return;
+            case 'stepIn':
+                await this.tratarStepIn(requisicao);
+                return;
+            case 'stepOut':
+                await this.tratarStepOut(requisicao);
+                return;
             default:
                 this.transporteDap.enviarResposta(
                     requisicao,
@@ -140,6 +164,115 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
                 category: 'stderr',
                 output: `[DAP] ${String(erro?.message ?? erro)}\n`,
             });
+        }
+    }
+
+    private async tratarThreads(requisicao: RequisicaoDap): Promise<void> {
+        try {
+            const threads = await this.runtimeBridgeDepuracao.obterThreads();
+            this.transporteDap.enviarResposta(requisicao, true, { threads });
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+        }
+    }
+
+    private async tratarStackTrace(requisicao: RequisicaoDap): Promise<void> {
+        try {
+            const threadId = Number(requisicao.arguments?.threadId ?? 1);
+            const stackFrames = await this.runtimeBridgeDepuracao.obterPilhaExecucao(threadId);
+            this.transporteDap.enviarResposta(requisicao, true, {
+                stackFrames: stackFrames.map((quadro) => ({
+                    id: quadro.id,
+                    name: quadro.nome,
+                    line: quadro.linha,
+                    column: quadro.coluna,
+                    source: {
+                        name: quadro.caminhoArquivo.split(/[/\\]/).pop(),
+                        path: quadro.caminhoArquivo,
+                    },
+                })),
+                totalFrames: stackFrames.length,
+            });
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+        }
+    }
+
+    private async tratarScopes(requisicao: RequisicaoDap): Promise<void> {
+        try {
+            const frameId = Number(requisicao.arguments?.frameId ?? 0);
+            const scopes = await this.runtimeBridgeDepuracao.obterEscopos(frameId);
+            this.transporteDap.enviarResposta(requisicao, true, { scopes });
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+        }
+    }
+
+    private async tratarVariables(requisicao: RequisicaoDap): Promise<void> {
+        try {
+            const variablesReference = Number(requisicao.arguments?.variablesReference ?? 0);
+            const variables = await this.runtimeBridgeDepuracao.obterVariaveis(variablesReference);
+            this.transporteDap.enviarResposta(requisicao, true, { variables });
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+        }
+    }
+
+    private async tratarContinue(requisicao: RequisicaoDap): Promise<void> {
+        await this.tratarComandoFluxoExecucao(
+            requisicao,
+            () => this.runtimeBridgeDepuracao.continuar(Number(requisicao.arguments?.threadId ?? 1)),
+            'breakpoint'
+        );
+    }
+
+    private async tratarNext(requisicao: RequisicaoDap): Promise<void> {
+        await this.tratarComandoFluxoExecucao(
+            requisicao,
+            () => this.runtimeBridgeDepuracao.proximo(Number(requisicao.arguments?.threadId ?? 1)),
+            'step'
+        );
+    }
+
+    private async tratarStepIn(requisicao: RequisicaoDap): Promise<void> {
+        await this.tratarComandoFluxoExecucao(
+            requisicao,
+            () => this.runtimeBridgeDepuracao.adentrarEscopo(Number(requisicao.arguments?.threadId ?? 1)),
+            'step'
+        );
+    }
+
+    private async tratarStepOut(requisicao: RequisicaoDap): Promise<void> {
+        await this.tratarComandoFluxoExecucao(
+            requisicao,
+            () => this.runtimeBridgeDepuracao.sairEscopo(Number(requisicao.arguments?.threadId ?? 1)),
+            'step'
+        );
+    }
+
+    private async tratarComandoFluxoExecucao(
+        requisicao: RequisicaoDap,
+        executador: () => Promise<{ caminhoArquivo: string; linha: number; motivo?: 'breakpoint' | 'step' } | null>,
+        motivoPadrao: 'breakpoint' | 'step'
+    ): Promise<void> {
+        try {
+            this.transporteDap.enviarResposta(requisicao, true, { allThreadsContinued: true });
+            this.transporteDap.enviarEvento('continued', {
+                threadId: 1,
+                allThreadsContinued: true,
+            });
+
+            const parada = await executador();
+            if (parada) {
+                this.transporteDap.enviarEvento('stopped', {
+                    reason: parada.motivo ?? motivoPadrao,
+                    threadId: 1,
+                    allThreadsStopped: true,
+                    description: `${parada.caminhoArquivo}:${parada.linha}`,
+                });
+            }
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
         }
     }
 }
