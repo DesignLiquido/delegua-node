@@ -184,7 +184,11 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
 
     private async tratarThreads(requisicao: RequisicaoDap): Promise<void> {
         try {
-            const threads = await this.runtimeBridgeDepuracao.obterThreads();
+            const threadsRuntime = await this.runtimeBridgeDepuracao.obterThreads();
+            const threads = threadsRuntime.map((thread) => ({
+                id: thread.id,
+                name: thread.nome,
+            }));
             this.transporteDap.enviarResposta(requisicao, true, { threads });
         } catch (erro: any) {
             this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
@@ -216,7 +220,12 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     private async tratarScopes(requisicao: RequisicaoDap): Promise<void> {
         try {
             const frameId = Number(requisicao.arguments?.frameId ?? 0);
-            const scopes = await this.runtimeBridgeDepuracao.obterEscopos(frameId);
+            const escopos = await this.runtimeBridgeDepuracao.obterEscopos(frameId);
+            const scopes = escopos.map((escopo) => ({
+                name: escopo.nome,
+                variablesReference: escopo.variablesReference,
+                expensive: escopo.expensive,
+            }));
             this.transporteDap.enviarResposta(requisicao, true, { scopes });
         } catch (erro: any) {
             this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
@@ -226,7 +235,13 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     private async tratarVariables(requisicao: RequisicaoDap): Promise<void> {
         try {
             const variablesReference = Number(requisicao.arguments?.variablesReference ?? 0);
-            const variables = await this.runtimeBridgeDepuracao.obterVariaveis(variablesReference);
+            const variaveis = await this.runtimeBridgeDepuracao.obterVariaveis(variablesReference);
+            const variables = variaveis.map((variavel) => ({
+                name: variavel.nome,
+                value: variavel.valor,
+                type: variavel.tipo,
+                variablesReference: variavel.variablesReference,
+            }));
             this.transporteDap.enviarResposta(requisicao, true, { variables });
         } catch (erro: any) {
             this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
@@ -270,26 +285,29 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
         executador: () => Promise<{ caminhoArquivo: string; linha: number; motivo?: 'breakpoint' | 'step' } | null>,
         motivoPadrao: 'breakpoint' | 'step'
     ): Promise<void> {
+        let parada: { caminhoArquivo: string; linha: number; motivo?: 'breakpoint' | 'step' } | null = null;
         try {
-            this.transporteDap.enviarResposta(requisicao, true, { allThreadsContinued: true });
-            this.transporteDap.enviarEvento('continued', {
-                threadId: 1,
-                allThreadsContinued: true,
-            });
-
-            const parada = await executador();
-            if (parada) {
-                this.transporteDap.enviarEvento('stopped', {
-                    reason: parada.motivo ?? motivoPadrao,
-                    threadId: 1,
-                    allThreadsStopped: true,
-                    description: `${parada.caminhoArquivo}:${parada.linha}`,
-                });
-            } else {
-                this.emitirEventosEncerramento(0);
-            }
+            parada = await executador();
         } catch (erro: any) {
             this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+            return;
+        }
+
+        this.transporteDap.enviarResposta(requisicao, true, { allThreadsContinued: true });
+        this.transporteDap.enviarEvento('continued', {
+            threadId: 1,
+            allThreadsContinued: true,
+        });
+
+        if (parada) {
+            this.transporteDap.enviarEvento('stopped', {
+                reason: parada.motivo ?? motivoPadrao,
+                threadId: 1,
+                allThreadsStopped: true,
+                description: `${parada.caminhoArquivo}:${parada.linha}`,
+            });
+        } else {
+            this.emitirEventosEncerramento(0);
         }
     }
 

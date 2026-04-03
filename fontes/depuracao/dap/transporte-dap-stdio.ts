@@ -9,6 +9,7 @@ export class TransporteDapStdio extends EventEmitter implements TransporteDap {
     private bufferEntrada: Buffer = Buffer.alloc(0);
     private contadorSequenciaSaida = 1;
     private iniciado = false;
+    private listenerDados: ((dados: Buffer | string) => void) | null = null;
 
     constructor(
         entrada: NodeJS.ReadableStream = process.stdin,
@@ -25,11 +26,15 @@ export class TransporteDapStdio extends EventEmitter implements TransporteDap {
         }
 
         this.iniciado = true;
-        this.entrada.on('data', this.aoReceberDados.bind(this));
+        this.listenerDados = this.aoReceberDados.bind(this);
+        this.entrada.on('data', this.listenerDados);
     }
 
     encerrar(): void {
-        this.entrada.removeAllListeners('data');
+        if (this.listenerDados) {
+            this.entrada.removeListener('data', this.listenerDados);
+            this.listenerDados = null;
+        }
         this.removeAllListeners();
         this.iniciado = false;
     }
