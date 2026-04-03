@@ -40,7 +40,8 @@
         "declarationMap": true,
         "esModuleInterop": true,
         "preserveSymlinks": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "ignoreDeprecations": "6.0"
     },
     "ts-node": {
         "esm": true

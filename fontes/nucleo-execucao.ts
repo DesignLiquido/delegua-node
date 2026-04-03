@@ -144,7 +144,8 @@ export class NucleoExecucao
     configurarDialeto(
         dialeto: string = "delegua",
         performance: boolean = false,
-        depurador: boolean = false
+        depurador: boolean = false,
+        iniciarServidorDepuracaoLegado: boolean = true
     ) {
         this.dialeto = dialeto;
         this.modoDepuracao = depurador;
@@ -405,7 +406,7 @@ export class NucleoExecucao
                 break;
         }
 
-        if (depurador) {
+        if (depurador && iniciarServidorDepuracaoLegado) {
             this.iniciarDepuracao();
         }
     }

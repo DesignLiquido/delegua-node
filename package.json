@@ -2,8 +2,12 @@
     "name": "@designliquido/delegua-node",
     "version": "1.17.0",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
+    "bin": {
+        "delegua": "bin/delegua",
+        "delegua-dap": "bin/delegua-dap"
+    },
     "scripts": {
-        "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./dist && yarn copyfiles -V ./package.json ./dist/bin && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
+        "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./bin/delegua-dap ./bin/delegua-dap.cmd ./dist && yarn copyfiles -V ./package.json ./README.md ./LICENSE ./dist",
         "testes-unitarios": "yarn jest --coverage",
         "testes:egua": "./bin/delegua-ts --dialeto egua exemplos/dialetos/egua-classico/testes.egua",
         "testes:delegua:bhaskara": "./bin/delegua-ts exemplos/dialetos/egua-classico/bhaskara.egua",
@@ -12,12 +16,12 @@
         "testes:servidor-depuracao": "yarn ts-node ./fontes/depuracao/servidor-depuracao.ts"
     },
     "dependencies": {
-        "@designliquido/birl": "^0.5.20",
-        "@designliquido/delegua": "^1.15.5",
-        "@designliquido/mapler": "^0.6.20",
-        "@designliquido/portugol-studio": "^0.10.2",
-        "@designliquido/potigol": "^0.9.1",
-        "@designliquido/visualg": "^0.8.20",
+        "@designliquido/birl": "^0.5.21",
+        "@designliquido/delegua": "^1.15.6",
+        "@designliquido/mapler": "^0.6.21",
+        "@designliquido/portugol-studio": "^0.10.3",
+        "@designliquido/potigol": "^0.9.2",
+        "@designliquido/visualg": "^0.8.21",
         "canvas": "^3.2.1",
         "chalk": "4.1.2",
         "commander": "^14.0.0",

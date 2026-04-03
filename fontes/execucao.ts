@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 
 import { Delegua } from './delegua';
+import { AdaptadorDapDelegua } from './depuracao';
 
 const principal = async () => {
     const analisadorArgumentos = new Command();
@@ -27,6 +28,16 @@ const principal = async () => {
         .option(
             '-D, --depurador',
             'Habilita o depurador, permitindo depuração em um ambiente como o VSCode. Sempre desabilitada em modo LAIR.',
+            false
+        )
+        .option(
+            '--depurador-padrao',
+            'Habilita o depurador padrão por socket.',
+            false
+        )
+        .option(
+            '--dap',
+            'Inicia o processo como adaptador DAP por stdio.',
             false
         )
         .option(
@@ -58,7 +69,14 @@ const principal = async () => {
     analisadorArgumentos.parse();
     const opcoes = analisadorArgumentos.opts();
 
+    if (opcoes.dap) {
+        const adaptadorDap = new AdaptadorDapDelegua();
+        adaptadorDap.iniciar();
+        return;
+    }
+
     const delegua = new Delegua();
+    const usarDepuradorPadrao = opcoes.depuradorPadrao || opcoes.depurador;
     if (opcoes.versao) {
         console.log(delegua.versao());
         return;
@@ -67,7 +85,9 @@ const principal = async () => {
     if (opcoes.codigo) {
         return await delegua.executarCodigoComoArgumento(
             opcoes.codigo || codigoOuNomeArquivo,
-            opcoes.dialeto
+            opcoes.dialeto,
+            opcoes.performance,
+            usarDepuradorPadrao
         );
     } else if (codigoOuNomeArquivo) {
         if (opcoes.traduzir) {
@@ -78,10 +98,20 @@ const principal = async () => {
                 for await (const chunk of process.stdin) {
                     codigo += chunk;
                 }
-                return await delegua.executarCodigoComoArgumento(codigo, opcoes.dialeto);
+                return await delegua.executarCodigoComoArgumento(
+                    codigo,
+                    opcoes.dialeto,
+                    opcoes.performance,
+                    usarDepuradorPadrao
+                );
             }
 
-            await delegua.executarCodigoPorArquivo(codigoOuNomeArquivo, opcoes.dialeto);
+            await delegua.executarCodigoPorArquivo(
+                codigoOuNomeArquivo,
+                opcoes.dialeto,
+                opcoes.performance,
+                usarDepuradorPadrao
+            );
         }
     } else {
         delegua.iniciarLair(opcoes.dialeto || 'delegua');

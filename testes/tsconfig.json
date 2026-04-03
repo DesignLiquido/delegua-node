@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "baseUrl": "..",
+        "paths": {
+            "@designliquido/delegua": ["node_modules/@designliquido/delegua/fontes"],
+            "@designliquido/delegua/*": ["node_modules/@designliquido/delegua/fontes/*"]
+        },
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "es2017",
+        "strict": false,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "preserveSymlinks": true,
+        "types": ["jest", "node"],
+        "ignoreDeprecations": "6.0"
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}
