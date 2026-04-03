@@ -31,8 +31,8 @@ const principal = async () => {
             false
         )
         .option(
-            '--depurador-legado',
-            'Habilita explicitamente o depurador legado por socket.',
+            '--depurador-padrao',
+            'Habilita o depurador padrão por socket.',
             false
         )
         .option(
@@ -76,7 +76,7 @@ const principal = async () => {
     }
 
     const delegua = new Delegua();
-    const usarDepuradorLegado = opcoes.depuradorLegado || opcoes.depurador;
+    const usarDepuradorPadrao = opcoes.depuradorPadrao || opcoes.depurador;
     if (opcoes.versao) {
         console.log(delegua.versao());
         return;
@@ -87,7 +87,7 @@ const principal = async () => {
             opcoes.codigo || codigoOuNomeArquivo,
             opcoes.dialeto,
             opcoes.performance,
-            usarDepuradorLegado
+            usarDepuradorPadrao
         );
     } else if (codigoOuNomeArquivo) {
         if (opcoes.traduzir) {
@@ -102,7 +102,7 @@ const principal = async () => {
                     codigo,
                     opcoes.dialeto,
                     opcoes.performance,
-                    usarDepuradorLegado
+                    usarDepuradorPadrao
                 );
             }
 
@@ -110,7 +110,7 @@ const principal = async () => {
                 codigoOuNomeArquivo,
                 opcoes.dialeto,
                 opcoes.performance,
-                usarDepuradorLegado
+                usarDepuradorPadrao
             );
         }
     } else {

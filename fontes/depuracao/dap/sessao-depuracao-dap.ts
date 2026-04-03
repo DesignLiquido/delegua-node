@@ -7,6 +7,7 @@ import {
 
 export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     private lancamentoConfigurado = false;
+    private sessaoEncerrada = false;
     private filaRequisicoes = Promise.resolve();
 
     constructor(
@@ -44,6 +45,16 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     }
 
     private async processarRequisicao(requisicao: RequisicaoDap): Promise<void> {
+        if (this.sessaoEncerrada && requisicao.command !== 'disconnect') {
+            this.transporteDap.enviarResposta(
+                requisicao,
+                false,
+                undefined,
+                'Sessao DAP encerrada.'
+            );
+            return;
+        }
+
         switch (requisicao.command) {
             case 'initialize':
                 this.tratarInitialize(requisicao);
@@ -81,6 +92,9 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
             case 'stepOut':
                 await this.tratarStepOut(requisicao);
                 return;
+            case 'disconnect':
+                await this.tratarDisconnect(requisicao);
+                return;
             default:
                 this.transporteDap.enviarResposta(
                     requisicao,
@@ -94,6 +108,7 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     private tratarInitialize(requisicao: RequisicaoDap): void {
         this.transporteDap.enviarResposta(requisicao, true, {
             supportsConfigurationDoneRequest: true,
+            supportTerminateDebuggee: true,
             supportsTerminateRequest: false,
             supportsSetVariable: false,
             supportsStepBack: false,
@@ -270,9 +285,28 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
                     allThreadsStopped: true,
                     description: `${parada.caminhoArquivo}:${parada.linha}`,
                 });
+            } else {
+                this.emitirEventosEncerramento(0);
             }
         } catch (erro: any) {
             this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
         }
+    }
+
+    private async tratarDisconnect(requisicao: RequisicaoDap): Promise<void> {
+        try {
+            await this.runtimeBridgeDepuracao.encerrarSessao();
+            this.sessaoEncerrada = true;
+            this.transporteDap.enviarResposta(requisicao, true, {});
+            this.emitirEventosEncerramento(0);
+            this.encerrar();
+        } catch (erro: any) {
+            this.transporteDap.enviarResposta(requisicao, false, undefined, String(erro?.message ?? erro));
+        }
+    }
+
+    private emitirEventosEncerramento(codigoSaida: number): void {
+        this.transporteDap.enviarEvento('terminated', {});
+        this.transporteDap.enviarEvento('exited', { exitCode: codigoSaida });
     }
 }

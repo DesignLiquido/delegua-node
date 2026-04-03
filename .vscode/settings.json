@@ -10,5 +10,9 @@
       "${workspaceFolder}/**",
       "**/node_modules/@designliquido/**"
     ]
+  },
+  "chat.tools.terminal.autoApprove": {
+    "yarn tsc": true,
+    "yarn jest": true
   }
 }

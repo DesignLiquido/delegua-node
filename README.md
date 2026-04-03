@@ -53,6 +53,45 @@ npm install -g @designliquido/delegua-node
 No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras, bem como comandos executáveis por prompt de comando, como uso de arquivos ou código como argumento, ou o [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console). Por isso, a instalação da solução completa é recomendada para a maioria dos casos.
 
 
+## Depuração
+
+`delegua-node` oferece dois modos de depuração independentes.
+
+### Adaptador DAP (recomendado)
+
+Implementa o [Debug Adapter Protocol](https://microsoft.github.io/debug-adapter-protocol/) da Microsoft. Qualquer editor ou IDE que suporte DAP pode depurar programas Delégua sem cliente customizado.
+
+```sh
+delegua --dap
+```
+
+O processo lê requisições de `stdin` e escreve respostas em `stdout` no formato JSON-RPC com cabeçalho `Content-Length`. Clientes compatíveis: VS Code, Code::Blocks (via plugin LinguagensDL) e qualquer outro cliente DAP.
+
+Comandos suportados: `initialize`, `launch`, `setBreakpoints`, `configurationDone`, `threads`, `stackTrace`, `scopes`, `variables`, `continue`, `next`, `stepIn`, `stepOut`, `disconnect`.
+
+O argumento `launch` aceita:
+
+| Argumento | Tipo     | Obrigatório | Descrição                                     |
+|-----------|----------|-------------|-----------------------------------------------|
+| `program` | `string` | Sim         | Caminho do arquivo fonte a depurar            |
+| `dialeto` | `string` | Não         | Dialeto a usar. Padrão: `delegua`             |
+
+### Depurador padrão (socket TCP)
+
+Abre um servidor TCP na porta 7777. O cliente envia comandos em texto simples (`continuar`, `proximo`, `variaveis`, etc.) e recebe respostas delimitadas por marcadores.
+
+```sh
+delegua --depurador-padrao arquivo.delegua
+```
+
+Conecte com qualquer cliente TCP, por exemplo o Netcat:
+
+```sh
+nc localhost 7777
+```
+
+Consulte [`fontes/depuracao/README.md`](fontes/depuracao/README.md) para a lista completa de comandos e formato das respostas.
+
 ## Programas com interface gráfica (`interfaceGrafica`)
 
 A biblioteca `interfaceGrafica` cria janelas, botões, rótulos e caixas de texto. O ambiente onde o programa é executado determina qual infraestrutura visual é usada:

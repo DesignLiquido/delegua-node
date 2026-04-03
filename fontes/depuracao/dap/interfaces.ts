@@ -50,6 +50,7 @@ export interface RuntimeBridgeDepuracao {
     proximo(threadId: number): Promise<ParadaDepuracao | null>;
     adentrarEscopo(threadId: number): Promise<ParadaDepuracao | null>;
     sairEscopo(threadId: number): Promise<ParadaDepuracao | null>;
+    encerrarSessao(): Promise<void>;
 }
 
 export interface ParadaDepuracao {

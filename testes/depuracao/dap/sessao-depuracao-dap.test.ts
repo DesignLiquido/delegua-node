@@ -43,6 +43,7 @@ class RuntimeBridgeDepuracaoFalso {
     paradaNextSimulada: ParadaDepuracao | null = null;
     paradaStepInSimulada: ParadaDepuracao | null = null;
     paradaStepOutSimulada: ParadaDepuracao | null = null;
+    encerramentoChamado = false;
 
     async prepararLancamento(argumentos?: Record<string, unknown>): Promise<void> {
         this.argumentosLancamentoRecebidos = argumentos;
@@ -87,6 +88,10 @@ class RuntimeBridgeDepuracaoFalso {
 
     async sairEscopo(): Promise<ParadaDepuracao | null> {
         return this.paradaStepOutSimulada;
+    }
+
+    async encerrarSessao(): Promise<void> {
+        this.encerramentoChamado = true;
     }
 }
 
@@ -325,5 +330,29 @@ describe('Sessao DAP', () => {
         const eventosStopped = mensagens.filter((m) => m.type === 'event' && m.event === 'stopped');
         expect(eventosContinued.length).toBe(4);
         expect(eventosStopped.length).toBe(4);
+    });
+
+    it('deve tratar disconnect com cleanup e eventos de termino', async () => {
+        const entrada = new PassThrough();
+        const saida = new PassThrough();
+        const transporte = new TransporteDapStdio(entrada, saida);
+        const runtimeBridgeFalso = new RuntimeBridgeDepuracaoFalso();
+        const sessao = new SessaoDepuracaoDapPadrao(transporte, runtimeBridgeFalso as any);
+
+        let bufferSaida = '';
+        saida.on('data', (dado) => {
+            bufferSaida += dado.toString('utf8');
+        });
+
+        sessao.iniciar();
+        entrada.write(enveloparMensagemDap({ seq: 9, type: 'request', command: 'disconnect' }));
+
+        await new Promise((resolve) => setImmediate(resolve));
+
+        const mensagens = extrairMensagensDap(bufferSaida);
+        expect(runtimeBridgeFalso.encerramentoChamado).toBe(true);
+        expect(mensagens.find((m) => m.type === 'response' && m.command === 'disconnect')).toBeTruthy();
+        expect(mensagens.find((m) => m.type === 'event' && m.event === 'terminated')).toBeTruthy();
+        expect(mensagens.find((m) => m.type === 'event' && m.event === 'exited')).toBeTruthy();
     });
 });

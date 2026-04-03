@@ -55,6 +55,9 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
             programa: caminhoPrograma,
             dialeto,
         };
+        this.contadorReferencias = 1;
+        this.mapeamentoFrames.clear();
+        this.mapeamentoVariaveis.clear();
     }
 
     async definirPontosParada(caminhoArquivo: string, linhas: number[]): Promise<number[]> {
@@ -107,14 +110,13 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async obterThreads(): Promise<ThreadDepuracao[]> {
-        if (!this.interpretador) {
-            return [];
-        }
+        this.garantirSessaoInicializada();
 
         return [{ id: this.threadPrincipalId, nome: 'thread-principal' }];
     }
 
     async obterPilhaExecucao(threadId: number): Promise<QuadroPilhaDepuracao[]> {
+        this.garantirSessaoInicializada();
         if (threadId !== this.threadPrincipalId || !this.nucleoExecucao || !this.interpretador) {
             return [];
         }
@@ -151,6 +153,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async obterEscopos(frameId: number): Promise<EscopoDepuracao[]> {
+        this.garantirSessaoInicializada();
         const indiceEscopo = this.mapeamentoFrames.get(frameId);
         if (indiceEscopo === undefined || !this.interpretador) {
             return [];
@@ -173,6 +176,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async obterVariaveis(variablesReference: number): Promise<VariavelDepuracao[]> {
+        this.garantirSessaoInicializada();
         const variaveis = this.mapeamentoVariaveis.get(variablesReference);
         if (!variaveis) {
             return [];
@@ -187,6 +191,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async continuar(threadId: number): Promise<ParadaDepuracao | null> {
+        this.garantirSessaoInicializada();
         if (!this.interpretador || threadId !== this.threadPrincipalId) {
             return null;
         }
@@ -199,6 +204,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async proximo(threadId: number): Promise<ParadaDepuracao | null> {
+        this.garantirSessaoInicializada();
         if (!this.interpretador || threadId !== this.threadPrincipalId) {
             return null;
         }
@@ -211,6 +217,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async adentrarEscopo(threadId: number): Promise<ParadaDepuracao | null> {
+        this.garantirSessaoInicializada();
         if (!this.interpretador || threadId !== this.threadPrincipalId) {
             return null;
         }
@@ -223,6 +230,7 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
     }
 
     async sairEscopo(threadId: number): Promise<ParadaDepuracao | null> {
+        this.garantirSessaoInicializada();
         if (!this.interpretador || threadId !== this.threadPrincipalId) {
             return null;
         }
@@ -231,6 +239,22 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
             this.interpretador.pontoDeParadaAtivo = false;
             await this.interpretador.instrucaoProximoESair();
         }, 'step');
+    }
+
+    async encerrarSessao(): Promise<void> {
+        try {
+            if (this.nucleoExecucao) {
+                this.nucleoExecucao.finalizarDepuracao();
+            }
+        } catch {
+            // limpeza defensiva: erros aqui nao devem impedir encerramento da sessao DAP
+        }
+
+        this.interpretador = null;
+        this.nucleoExecucao = null;
+        this.contadorReferencias = 1;
+        this.mapeamentoFrames.clear();
+        this.mapeamentoVariaveis.clear();
     }
 
     private aplicarPontosParadaNoInterpretador(): void {
@@ -371,5 +395,11 @@ export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
             ...paradaAtual,
             motivo: paradaAtual.motivo ?? motivoPadrao,
         };
+    }
+
+    private garantirSessaoInicializada(): void {
+        if (!this.interpretador || !this.nucleoExecucao) {
+            throw new Error('Sessao de depuracao ainda nao foi iniciada com configurationDone.');
+        }
     }
 }
