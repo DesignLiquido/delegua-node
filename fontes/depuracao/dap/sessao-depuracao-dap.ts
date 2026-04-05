@@ -1,9 +1,9 @@
 import {
     RequisicaoDap,
-    RuntimeBridgeDepuracao,
+    PonteTempoExecucaoDepuracaoInterface,
     SessaoDepuracaoDap,
     TransporteDap,
-} from './interfaces';
+} from '../../interfaces/depuracao';
 
 export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
     private lancamentoConfigurado = false;
@@ -12,7 +12,7 @@ export class SessaoDepuracaoDapPadrao implements SessaoDepuracaoDap {
 
     constructor(
         private readonly transporteDap: TransporteDap,
-        private readonly runtimeBridgeDepuracao: RuntimeBridgeDepuracao
+        private readonly runtimeBridgeDepuracao: PonteTempoExecucaoDepuracaoInterface
     ) {}
 
     iniciar(): void {

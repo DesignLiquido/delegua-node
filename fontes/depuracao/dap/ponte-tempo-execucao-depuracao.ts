@@ -8,20 +8,16 @@ import { VariavelInterface } from '@designliquido/delegua/interfaces/variavel-in
 
 import { NucleoExecucao } from '../../nucleo-execucao';
 import {
+    ConfiguracaoLancamento,
     EscopoDepuracao,
     ParadaDepuracao,
     QuadroPilhaDepuracao,
-    RuntimeBridgeDepuracao,
+    PonteTempoExecucaoDepuracaoInterface,
     ThreadDepuracao,
     VariavelDepuracao,
-} from './interfaces';
+} from '../../interfaces/depuracao';
 
-interface ConfiguracaoLancamento {
-    programa: string;
-    dialeto: string;
-}
-
-export class RuntimeBridgeDepuracaoDelegua implements RuntimeBridgeDepuracao {
+export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDepuracaoInterface {
     private readonly versaoDelegua: string;
     private readonly threadPrincipalId = 1;
 

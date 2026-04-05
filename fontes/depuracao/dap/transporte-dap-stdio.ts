@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import { RequisicaoDap, TransporteDap } from './interfaces';
+import { RequisicaoDap, TransporteDap } from '../../interfaces/depuracao';
 
 export class TransporteDapStdio extends EventEmitter implements TransporteDap {
     private readonly entrada: NodeJS.ReadableStream;
