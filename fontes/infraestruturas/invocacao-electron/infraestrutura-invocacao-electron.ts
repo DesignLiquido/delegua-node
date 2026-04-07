@@ -161,6 +161,12 @@ const RENDERER_HTML = `<!DOCTYPE html>
         }
         .delegua-caixa-vertical   { display: flex; flex-direction: column;  gap: 8px; }
         .delegua-caixa-horizontal { display: flex; flex-direction: row; gap: 8px; align-items: center; }
+        .delegua-caixa-livre {
+            position: relative;
+            width: 100%;
+            min-height: 100%;
+            flex: 1 1 auto;
+        }
         .delegua-botao {
             padding: 6px 16px; font-size: 13px; cursor: pointer;
             border: 1px solid #999; border-radius: 3px; background: #e8e8e8;
@@ -234,11 +240,39 @@ const RENDERER_HTML = `<!DOCTYPE html>
                     elementos[msg.id] = div;
                     break;
                 }
+                case 'criar-caixa-livre': {
+                    const div = document.createElement('div');
+                    div.className = 'delegua-caixa-livre';
+                    elementos[msg.paiId].appendChild(div);
+                    elementos[msg.id] = div;
+                    break;
+                }
                 case 'definir-texto': {
                     const el = elementos[msg.id];
                     if (el) {
                         if (el.tagName === 'INPUT') el.value = msg.texto;
                         else el.textContent = msg.texto;
+                    }
+                    break;
+                }
+                case 'definir-geometria': {
+                    const el = elementos[msg.id];
+                    if (el) {
+                        if (msg.x !== undefined || msg.y !== undefined) {
+                            el.style.position = 'absolute';
+                        }
+                        if (msg.x !== undefined) {
+                            el.style.left = msg.x + 'px';
+                        }
+                        if (msg.y !== undefined) {
+                            el.style.top = msg.y + 'px';
+                        }
+                        if (msg.largura !== undefined) {
+                            el.style.width = msg.largura + 'px';
+                        }
+                        if (msg.altura !== undefined) {
+                            el.style.height = msg.altura + 'px';
+                        }
                     }
                     break;
                 }
@@ -425,6 +459,12 @@ export class InfraestruturaInvocacaoElectron implements InfraestruturaGraficaInt
         return { idComponente };
     }
 
+    criarCaixaLivre(pai: ComponenteInterfaceGraficaInterface): ComponenteInterfaceGraficaInterface {
+        const idComponente = this.proximoId();
+        this._enviar({ tipo: 'criar-caixa-livre', id: idComponente, paiId: pai.idComponente });
+        return { idComponente };
+    }
+
     // ─────────────────────────────────────────────────────────────────────────
     // Leitura e escrita de propriedades
     // ─────────────────────────────────────────────────────────────────────────
@@ -436,6 +476,14 @@ export class InfraestruturaInvocacaoElectron implements InfraestruturaGraficaInt
 
     obterTexto(componente: ComponenteInterfaceGraficaInterface): string {
         return this.textosComponentes.get(componente.idComponente) ?? '';
+    }
+
+    definirPosicao(componente: ComponenteInterfaceGraficaInterface, x: number, y: number): void {
+        this._enviar({ tipo: 'definir-geometria', id: componente.idComponente, x, y });
+    }
+
+    definirTamanho(componente: ComponenteInterfaceGraficaInterface, largura: number, altura: number): void {
+        this._enviar({ tipo: 'definir-geometria', id: componente.idComponente, largura, altura });
     }
 
     // ─────────────────────────────────────────────────────────────────────────

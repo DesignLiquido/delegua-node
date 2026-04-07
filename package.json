@@ -7,7 +7,7 @@
         "delegua-dap": "bin/delegua-dap"
     },
     "scripts": {
-        "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./bin/delegua-dap ./bin/delegua-dap.cmd ./dist && yarn copyfiles -V ./package.json ./README.md ./LICENSE ./dist",
+        "empacotar": "yarn rimraf ./dist && yarn tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./bin/delegua-dap ./bin/delegua-dap.cmd ./dist && yarn copyfiles -V ./package.json ./README.md ./LICENSE ./dist",
         "testes-unitarios": "yarn jest --coverage",
         "testes:egua": "./bin/delegua-ts --dialeto egua exemplos/dialetos/egua-classico/testes.egua",
         "testes:delegua:bhaskara": "./bin/delegua-ts exemplos/dialetos/egua-classico/bhaskara.egua",
@@ -54,6 +54,6 @@
         "ts-jest": "^29.3.4",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
-        "typescript": "^6.0.0"
+        "typescript": "^5.9.3"
     }
 }
