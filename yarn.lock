@@ -335,10 +335,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-imagens/-/delegua-imagens-0.0.0.tgz#26c008ec3a2beaafa32980338d9b303238d17f61"
   integrity sha512-LnOEcOcDDIqqj+/Q/WAO1z7oWeQl3qwoAVhJf4YX/TXzEq3bewHIjF7z5WKOcQgs6Di+Yz/RfsJoV8CejeDJ0A==
 
-"@designliquido/delegua-interface-grafica@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-interface-grafica/-/delegua-interface-grafica-0.0.1.tgz#ac52a6e540e6ff8aab878f04709970c91ab4a337"
-  integrity sha512-mxJIyyoPu+Uow9+YzUiztFRL7Lcn+FqGtQbyMBHt+Kk8lWLTvTmrl/AI1e1a76dr1l38HRa4vRYaKZMpxhWFsA==
+"@designliquido/delegua-interface-grafica@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-interface-grafica/-/delegua-interface-grafica-0.1.0.tgz#c52b3b1f31b049fcb4fabc0a8a24c6b33c27ac74"
+  integrity sha512-AFtLTjLv/Ts4yT6YO5L/1pbgryw7Bnkg9psyJyU/cyd5qTpQK/paP4W3GIU/2wycY7Hn8EXJwux8vDssf1O8dg==
 
 "@designliquido/delegua-json@^0.3.0":
   version "0.3.0"

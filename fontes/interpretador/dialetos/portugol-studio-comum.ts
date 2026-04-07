@@ -5,7 +5,6 @@ import { DeleguaModulo, FuncaoPadrao } from "@designliquido/delegua/interpretado
 import comumAncestral from "@designliquido/portugol-studio/interpretador/comum";
 
 import * as arquivos from '../../bibliotecas/dialetos/portugol-studio/arquivos';
-import * as graficos from '../../bibliotecas/dialetos/portugol-studio/graficos';
 import * as internet from '../../bibliotecas/dialetos/portugol-studio/internet';
 import * as teclado from '../../bibliotecas/dialetos/portugol-studio/teclado';
 import * as util from '../../bibliotecas/dialetos/portugol-studio/util';
@@ -61,6 +60,7 @@ function carregarBibliotecaArquivos(): DeleguaModulo {
 }
 
 function carregarBibliotecaGraficos(): DeleguaModulo {
+    const graficos = require('../../bibliotecas/dialetos/portugol-studio/graficos');
     const objetoClasseGraficos = new graficos.Graficos();
 
     const metodos: { [nome: string]: FuncaoPadrao } = {
