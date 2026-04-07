@@ -183,6 +183,50 @@ function ehLinhaDeCodigo(linha: string): boolean {
 }
 
 /**
+ * Aplica realce para estruturas Markdown (títulos, listas, ênfases e código inline).
+ */
+function realcarMarkdownLinha(linha: string): string {
+    if (linha.trim() === '') {
+        return linha;
+    }
+
+    if (/^\s*---\s*$/.test(linha)) {
+        return chalk.gray(linha);
+    }
+
+    const tituloMatch = linha.match(/^(#{1,6})\s+(.*)$/);
+    if (tituloMatch) {
+        return `${chalk.cyan.bold(tituloMatch[1])} ${chalk.cyan.bold(tituloMatch[2])}`;
+    }
+
+    const listaMatch = linha.match(/^\s*([-*])\s+(.*)$/);
+    if (listaMatch) {
+        const textoLista = realcarInlineMarkdown(listaMatch[2]);
+        return `${chalk.yellow(listaMatch[1])} ${textoLista}`;
+    }
+
+    const quoteMatch = linha.match(/^\s*>\s?(.*)$/);
+    if (quoteMatch) {
+        return `${chalk.gray('>')} ${chalk.italic.gray(realcarInlineMarkdown(quoteMatch[1]))}`;
+    }
+
+    return realcarInlineMarkdown(linha);
+}
+
+/**
+ * Aplica realce em marcações inline de Markdown.
+ */
+function realcarInlineMarkdown(texto: string): string {
+    let resultado = texto;
+
+    resultado = resultado.replace(/`([^`]+)`/g, (_match, grupo) => chalk.yellow(grupo));
+    resultado = resultado.replace(/\*\*([^*]+)\*\*/g, (_match, grupo) => chalk.bold.white(grupo));
+    resultado = resultado.replace(/\*([^*]+)\*/g, (_match, grupo) => chalk.italic(grupo));
+
+    return resultado;
+}
+
+/**
  * Aplica realce de sintaxe ao conteúdo de ajuda.
  * Detecta blocos de código e aplica cores apropriadas.
  */
@@ -190,9 +234,16 @@ export function aplicarRealceSintaxe(conteudo: string): string {
     const linhas = conteudo.split('\n');
     const resultado: string[] = [];
     let emBlocoExemplo = false;
+    let emBlocoCodigoMarkdown = false;
 
     for (let i = 0; i < linhas.length; i++) {
         const linha = linhas[i];
+
+        if (linha.trim().startsWith('```')) {
+            emBlocoCodigoMarkdown = !emBlocoCodigoMarkdown;
+            resultado.push(chalk.gray(linha));
+            continue;
+        }
 
         // Detecta início de seção de exemplos
         if (linha.includes('**Exemplos:**') || linha.includes('**Exemplo:**')) {
@@ -207,13 +258,13 @@ export function aplicarRealceSintaxe(conteudo: string): string {
         }
 
         // Aplica realce se for linha de código
-        if (emBlocoExemplo && ehLinhaDeCodigo(linha)) {
+        if ((emBlocoExemplo || emBlocoCodigoMarkdown) && ehLinhaDeCodigo(linha)) {
             // Remove a indentação, aplica realce, recoloca indentação
             const indentacao = linha.match(/^(\s*)/)?.[1] || '';
             const codigo = linha.trimStart();
             resultado.push(indentacao + realcarLinha(codigo));
         } else {
-            resultado.push(linha);
+            resultado.push(realcarMarkdownLinha(linha));
         }
     }
 

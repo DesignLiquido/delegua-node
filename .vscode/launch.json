@@ -1205,6 +1205,10 @@
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
+      "env": {
+        "FORCE_COLOR": "3",
+        "CHALK_LEVEL": "3"
+      },
       "args": ["${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts"],
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -1228,6 +1232,10 @@
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
+      "env": {
+        "FORCE_COLOR": "3",
+        "CHALK_LEVEL": "3"
+      },
       "args": [
         "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
         "--dialeto",

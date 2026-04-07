@@ -133,7 +133,7 @@ ${chalk.dim('Exemplo: digite "escreva" para ver a ajuda sobre a função escreva
             if (ajuda) {
                 // Aplica realce de sintaxe aos exemplos de código
                 const ajudaComRealce = aplicarRealceSintaxe(ajuda);
-                this.funcaoDeRetorno(chalk.white(ajudaComRealce));
+                this.funcaoDeRetorno(ajudaComRealce);
             } else {
                 this.funcaoDeRetorno(
                     chalk.red(`Nenhuma ajuda disponível para "${entrada}".`) + '\n' +

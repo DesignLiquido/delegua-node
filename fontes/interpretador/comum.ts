@@ -9,6 +9,79 @@ import { aplicarRealceSintaxe } from "./realcador-sintaxe-ajuda";
 
 import carregarBibliotecaNode from '../mecanismo-importacao-bibliotecas';
 
+const PALAVRAS_RESERVADAS_DELEGUA = new Set([
+    'constante',
+    'variavel',
+    'variável',
+    'se',
+    'senao',
+    'senão',
+    'para',
+    'enquanto',
+    'fazer',
+    'funcao',
+    'função',
+    'retorna',
+    'classe',
+    'herda',
+    'construtor',
+    'isto',
+    'super',
+    'tente',
+    'pegue',
+    'finalmente',
+    'sustar',
+    'continua',
+    'escolha',
+    'caso',
+    'padrao',
+    'padrão',
+    'importar',
+    'de',
+    'como',
+    'verdadeiro',
+    'falso',
+    'nulo',
+    'escreva',
+    'leia',
+]);
+
+function normalizarTopicoBusca(topico: string): string {
+    return topico
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
+function gerarAjudaGenericaPalavraReservada(nomeTopico: string, tipoSimbolo?: string): string {
+    const complementoTipo = tipoSimbolo ? `\n**Tipo de símbolo:** ${tipoSimbolo}` : '';
+
+    return `
+# ${nomeTopico}
+
+'${nomeTopico}' é uma palavra reservada da linguagem Delégua.
+
+Ainda não há documentação detalhada específica para esse tópico no catálogo local.${complementoTipo}
+
+Você pode usar ajuda() sem argumentos para entrar no modo interativo e digitar 'topicos' para ver os tópicos já documentados.
+`;
+}
+
+function ehPalavraReservadaPorNome(nomeTopico: string): boolean {
+    const nomeTopicoNormalizado = normalizarTopicoBusca(nomeTopico);
+    return PALAVRAS_RESERVADAS_DELEGUA.has(nomeTopicoNormalizado);
+}
+
+function buscarAjudaNoNucleoDeleguaPorNome(nomeTopico: string): string | null {
+    const ajudaNucleoDelegua = pontoEntradaAjuda(true, nomeTopico);
+    if (!ajudaNucleoDelegua || ajudaNucleoDelegua.includes('Desculpe, não há documentação disponível para o tópico solicitado no momento.')) {
+        return null;
+    }
+
+    return ajudaNucleoDelegua;
+}
+
 export async function visitarConstrutoImportarBiblioteca(
     interpretador: InterpretadorComImportacaoInterface,
     importarBiblioteca: ImportarBiblioteca
@@ -187,9 +260,23 @@ ${metodosDisponiveis}
         }
 
         // Se chegou aqui, não conseguiu identificar o tipo
-        return null;
+        const ajudaLegacy = buscarAjudaNoNucleoDeleguaPorNome(nomeTopico);
+        if (ajudaLegacy) {
+            return ajudaLegacy;
+        }
+
+        return ehPalavraReservadaPorNome(nomeTopico)
+            ? gerarAjudaGenericaPalavraReservada(nomeTopico)
+            : null;
     } catch (erro) {
-        return null;
+        const ajudaLegacy = buscarAjudaNoNucleoDeleguaPorNome(nomeTopico);
+        if (ajudaLegacy) {
+            return ajudaLegacy;
+        }
+
+        return ehPalavraReservadaPorNome(nomeTopico)
+            ? gerarAjudaGenericaPalavraReservada(nomeTopico)
+            : null;
     }
 }
 
@@ -325,7 +412,8 @@ export async function visitarDeclaracaoAjuda(
         }
 
         // Fallback para o sistema de ajuda padrão
-        const ajudaPadrao = pontoEntradaAjuda(declaracao.funcao, declaracao.elemento);
+        const topicoFallback = nomeTopico ?? declaracao.elemento;
+        const ajudaPadrao = pontoEntradaAjuda(declaracao.funcao, topicoFallback);
         return Promise.resolve({
             __conteudoAjuda: true,
             conteudo: ajudaPadrao
