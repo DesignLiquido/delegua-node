@@ -1,0 +1,19 @@
+importar tudo como entidades de "entidades"
+
+classe Artigo {
+    id: número
+    titulo: texto
+    autor: texto
+    ano: número
+
+    construtor(titulo: texto, autor: texto, ano: número) {
+        isto.titulo = titulo
+        isto.autor = autor
+        isto.ano = ano
+    }
+}
+
+const contexto = entidades.Contexto()
+const colecaoArtigos = contexto.colecao(Artigo)
+const artigos = colecaoArtigos.todos()
+escreva(artigos) // Imprime a lista de todos os artigos encontrados.

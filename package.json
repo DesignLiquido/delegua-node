@@ -33,6 +33,7 @@
         "@designliquido/delegua-criptografia": "^0.3.4",
         "@designliquido/delegua-csv": "^0.0.3",
         "@designliquido/delegua-dados": "^0.0.1",
+        "@designliquido/delegua-entidades": "^0.0.0",
         "@designliquido/delegua-estatistica": "^0.1.1",
         "@designliquido/delegua-fisica": "^0.1.0",
         "@designliquido/delegua-http": "^0.1.3",

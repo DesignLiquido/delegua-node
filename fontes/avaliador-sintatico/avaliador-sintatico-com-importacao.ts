@@ -100,7 +100,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     }
 
     protected criarComponenteDeClasse(nomeModulo: string, nome: string, classe: any): InformacaoElementoSintatico {
-        const componente = new InformacaoElementoSintatico(nome, 'classe', false, []);
+        const componente = new InformacaoElementoSintatico(nome, nome, false, []);
 
         // Processar métodos
         if (classe.metodos) {

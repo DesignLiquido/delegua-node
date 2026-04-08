@@ -25,4 +25,9 @@ export class ClasseDeModulo extends Chamavel {
         this.metodos = metodos;
         this.propriedades = propriedades;
     }
+
+    chamar(visitante: any, argumentos: any[], simbolo?: any): any {
+        const valoresResolvidos = (argumentos || []).map((a: any) => a && a.valor !== undefined ? a.valor : a);
+        return new this.implementacao(...valoresResolvidos);
+    }
 }
