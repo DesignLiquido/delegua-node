@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/delegua-node",
-    "version": "1.18.1",
+    "version": "1.18.2",
     "description": "Linguagem Delégua com capacidades para ecossistema Node.js.",
     "bin": {
         "delegua": "bin/delegua",
