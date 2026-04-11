@@ -1,0 +1,11 @@
+importar tudo como yaml de "yaml"
+
+const textoYaml = "
+pessoa:
+  nome: \"João\"
+  idade: 30
+  cidade: \"São Paulo\"
+"
+
+const dados = yaml.yamlParaDicionario(textoYaml)
+escreva(dados)

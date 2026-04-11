@@ -182,11 +182,10 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                     this.tiposDefinidosPorBibliotecas[nomeComponente] = classeModulo;
 
                 } else {
-                    throw this.erro({
-                        hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha
-                    } as SimboloInterface,
-                        `Tipo de importação inválida: ${JSON.stringify(dadosComponente)}.`
-                    );
+                    // Objeto bruto registrado via chave `objeto` no manifesto da biblioteca
+                    // (ex.: `Base` em `delegua-entidades`). Não é FuncaoPadrao nem ClasseDeModulo,
+                    // então registramos como tipo genérico `qualquer` para não bloquear a análise.
+                    componente = new InformacaoElementoSintatico(nomeComponente, 'qualquer');
                 }
 
                 this.primitivasConhecidas[caminhoTexto][nomeComponente] = componente;

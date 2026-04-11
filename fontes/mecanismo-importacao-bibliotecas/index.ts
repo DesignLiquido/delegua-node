@@ -87,16 +87,23 @@ const modularizarBibliotecaPorManifesto = (
                 // TODO: Deixar isso melhor.
                 const nomeCurtoModulo = novoModulo.nome.replace(/@designliquido\/delegua-/, '');
                 const classeDeModulo = new ClasseDeModulo(
-                    metodoOuClasse, 
+                    metodoOuClasse,
                     nomeCurtoModulo,
-                    metadados.implementacao, 
-                    metadados.metodos, 
+                    metadados.implementacao,
+                    metadados.metodos,
                     metadados.propriedades
                 );
-                
+
                 novoModulo.componentes[metodoOuClasse] = classeDeModulo;
                 continue;
             }
+        }
+
+        // Objeto singleton ou namespace com métodos estáticos.
+        // Exposto diretamente para que acesso de propriedades e métodos estáticos funcione.
+        if ('objeto' in dadosMetodoOuClasse) {
+            novoModulo.componentes[metodoOuClasse] = (dadosMetodoOuClasse as any).objeto;
+            continue;
         }
 
         // TODO: Levantar erro aqui?

@@ -13,6 +13,13 @@ classe Artigo {
     }
 }
 
+var configuracoes = entidades.Configuracoes()
+configuracoes.caminho = "meu-banco.db"
+configuracoes.aplicar()
+
+entidades.Base.observar(Artigo)
+entidades.Base.inicializar()
+
 const contexto = entidades.Contexto()
 const colecaoArtigos = contexto.colecao(Artigo)
 const artigos = colecaoArtigos.todos()
