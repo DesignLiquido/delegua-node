@@ -6,6 +6,7 @@ import comumAncestral from "@designliquido/portugol-studio/interpretador/comum";
 
 import * as arquivos from '../../bibliotecas/dialetos/portugol-studio/arquivos';
 import * as internet from '../../bibliotecas/dialetos/portugol-studio/internet';
+import * as mouse from '../../bibliotecas/dialetos/portugol-studio/mouse';
 import * as teclado from '../../bibliotecas/dialetos/portugol-studio/teclado';
 import * as util from '../../bibliotecas/dialetos/portugol-studio/util';
 import * as servicosWeb from '../../bibliotecas/dialetos/portugol-studio/servicos-web';
@@ -27,6 +28,10 @@ function logicaComumImportacao(caminho: string): DeleguaModulo {
             return carregarBibliotecaGraficos();
         case 'Internet':
             return carregarBibliotecaInternet();
+        case 'Mouse':
+            return carregarBibliotecaMouse();
+        case 'Sons':
+            return carregarBibliotecaSons();
         case 'Teclado':
             return carregarBibliotecaTeclado();
         case 'Util':
@@ -254,6 +259,62 @@ function carregarBibliotecaInternet(): DeleguaModulo {
     const objetoInternet = new DeleguaModulo('Internet');
     objetoInternet.componentes = metodos;
     return objetoInternet;
+}
+
+function carregarBibliotecaMouse(): DeleguaModulo {
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        botao_pressionado: new FuncaoPadrao(1, mouse.botaoPressionado),
+        algum_botao_pressionado: new FuncaoPadrao(0, mouse.algumBotaoPressionado),
+        ler_botao: new FuncaoPadrao(0, mouse.lerBotao),
+        posicao_x: new FuncaoPadrao(0, mouse.posicaoX),
+        posicao_y: new FuncaoPadrao(0, mouse.posicaoY),
+        ocultar_cursor: new FuncaoPadrao(0, mouse.ocultarCursor),
+        exibir_cursor: new FuncaoPadrao(0, mouse.exibirCursor),
+    };
+
+    const objetoMouse = new DeleguaModulo('Mouse');
+    objetoMouse.componentes = metodos;
+
+    const componentesMouse = objetoMouse.componentes as Record<string, any>;
+    componentesMouse.BOTAO_ESQUERDO = mouse.BOTAO_ESQUERDO;
+    componentesMouse.BOTAO_DIREITO = mouse.BOTAO_DIREITO;
+    componentesMouse.BOTAO_MEIO = mouse.BOTAO_MEIO;
+
+    return objetoMouse;
+}
+
+function carregarBibliotecaSons(): DeleguaModulo {
+    let objetoClasseSons: any = null;
+
+    const obterInstanciaSons = () => {
+        if (objetoClasseSons) {
+            return objetoClasseSons;
+        }
+
+        const sons = require('../../bibliotecas/dialetos/portugol-studio/sons');
+        objetoClasseSons = new sons.Sons();
+        return objetoClasseSons;
+    };
+
+    const metodos: { [nome: string]: FuncaoPadrao } = {
+        carregar_som: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().carregarSom(...args)),
+        liberar_som: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().liberarSom(...args)),
+        reproduzir_som: new FuncaoPadrao(2, (...args: any[]) => obterInstanciaSons().reproduzirSom(...args)),
+        pausar_som: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().pausarSom(...args)),
+        interromper_som: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().interromperSom(...args)),
+        obter_tamanho_musica: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().obterTamanhoMusica(...args)),
+        obter_posicao_atual_musica: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().obterPosicaoAtualMusica(...args)),
+        definir_posicao_atual_musica: new FuncaoPadrao(2, (...args: any[]) => obterInstanciaSons().definirPosicaoAtualMusica(...args)),
+        definir_volume_reproducao: new FuncaoPadrao(2, (...args: any[]) => obterInstanciaSons().definirVolumeReproducao(...args)),
+        definir_volume: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().definirVolume(...args)),
+        obter_volume: new FuncaoPadrao(0, (...args: any[]) => obterInstanciaSons().obterVolume(...args)),
+        obter_volume_reproducao: new FuncaoPadrao(1, (...args: any[]) => obterInstanciaSons().obterVolumeReproducao(...args)),
+        finalizar: new FuncaoPadrao(0, (...args: any[]) => obterInstanciaSons().finalizar(...args)),
+    };
+
+    const objetoSons = new DeleguaModulo('Sons');
+    objetoSons.componentes = metodos;
+    return objetoSons;
 }
 
 function carregarBibliotecaTeclado(): DeleguaModulo {
