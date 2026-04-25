@@ -1,7 +1,27 @@
+import * as caminho from 'path';
+
 import { Command } from 'commander';
 
 import { Delegua } from './delegua';
 import { AdaptadorDapDelegua } from './depuracao';
+
+export const extensoesDialetos: { [extensao: string]: string } = {
+    '.alg': 'visualg',
+    '.birl': 'birl',
+    '.egua': 'egua',
+    '.mapler': 'mapler',
+    '.pitugues': 'pitugues',
+    '.por': 'portugol-studio',
+};
+
+/**
+ * Infere o dialeto a partir da extensão do arquivo.
+ * Retorna `undefined` se a extensão não for reconhecida.
+ */
+export function inferirDialetoPorExtensao(nomeArquivo: string): string | undefined {
+    const extensao = caminho.extname(nomeArquivo).toLowerCase();
+    return extensoesDialetos[extensao];
+}
 
 const principal = async () => {
     const analisadorArgumentos = new Command();
@@ -90,6 +110,12 @@ const principal = async () => {
             usarDepuradorPadrao
         );
     } else if (codigoOuNomeArquivo) {
+        // Se o dialeto não foi definido explicitamente pelo usuário, tenta inferir pela extensão do arquivo.
+        let dialeto = opcoes.dialeto;
+        if (analisadorArgumentos.getOptionValueSource('dialeto') === 'default') {
+            dialeto = inferirDialetoPorExtensao(codigoOuNomeArquivo) ?? opcoes.dialeto;
+        }
+
         if (opcoes.traduzir) {
             await delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
         } else {
@@ -100,7 +126,7 @@ const principal = async () => {
                 }
                 return await delegua.executarCodigoComoArgumento(
                     codigo,
-                    opcoes.dialeto,
+                    dialeto,
                     opcoes.performance,
                     usarDepuradorPadrao
                 );
@@ -108,7 +134,7 @@ const principal = async () => {
 
             await delegua.executarCodigoPorArquivo(
                 codigoOuNomeArquivo,
-                opcoes.dialeto,
+                dialeto,
                 opcoes.performance,
                 usarDepuradorPadrao
             );
@@ -118,4 +144,6 @@ const principal = async () => {
     }
 };
 
-principal();
+if (require.main === module) {
+    principal();
+}
