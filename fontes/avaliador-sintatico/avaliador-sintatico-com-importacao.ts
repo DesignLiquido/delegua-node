@@ -11,7 +11,7 @@ import {
     Classe,
     Comentario,
     Const,
-    Construto,
+    ConstrutoInterface,
     Deceto,
     Declaracao,
     Dupla,
@@ -25,8 +25,8 @@ import {
     Quarteto,
     Quinteto,
     ReferenciaFuncao,
-    RetornoAvaliadorSintatico,
-    RetornoLexador,
+    RetornoAvaliadorSintaticoInterface,
+    RetornoLexadorInterface,
     Septeto,
     Sexteto,
     SimboloInterface,
@@ -63,7 +63,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         this.importador = importador;
     }
 
-    override async finalizarChamada(entidadeChamada: Construto, tipoPrimitiva?: string | undefined): Promise<Chamada> {
+    override async finalizarChamada(entidadeChamada: ConstrutoInterface, tipoPrimitiva?: string | undefined): Promise<Chamada> {
         const chamadaResolvida = await super.finalizarChamada(entidadeChamada, tipoPrimitiva);
         if (chamadaResolvida.entidadeChamada instanceof AcessoMetodo && chamadaResolvida.entidadeChamada.objeto.tipo === 'módulo') {
             // Espera-se que o módulo esteja devidamente registrado.
@@ -501,164 +501,6 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         );
     }
 
-    // TODO: Excluir pós atualização de versão do núcleo de Delégua.
-    protected logicaComumInferenciaTiposVariaveisEConstantes(
-        inicializador: Construto,
-        tipo: string
-    ): string {
-        if (tipo !== 'qualquer') {
-            return tipo;
-        }
-
-        switch (inicializador.constructor) {
-            case AcessoIndiceVariavel:
-                const entidadeChamadaAcessoIndiceVariavel = (inicializador as AcessoIndiceVariavel)
-                    .entidadeChamada;
-
-                // Este condicional ocorre com chamadas aninhadas. Por exemplo, `vetor[1][2]`.
-                if (entidadeChamadaAcessoIndiceVariavel.constructor === AcessoIndiceVariavel) {
-                    return this.logicaComumInferenciaTiposVariaveisEConstantes(
-                        entidadeChamadaAcessoIndiceVariavel,
-                        tipo
-                    );
-                }
-
-                if (entidadeChamadaAcessoIndiceVariavel.tipo.endsWith('[]')) {
-                    return entidadeChamadaAcessoIndiceVariavel.tipo.slice(0, -2);
-                }
-
-                // Normalmente, `entidadeChamadaAcessoIndiceVariavel.tipo` aqui será 'vetor'.
-                return 'qualquer';
-            case Chamada:
-                const entidadeChamadaChamada = (inicializador as Chamada).entidadeChamada;
-                switch (entidadeChamadaChamada.constructor) {
-                    case AcessoMetodo:
-                        const entidadeChamadaAcessoMetodo = entidadeChamadaChamada as AcessoMetodo;
-                        const tipoRetornoAcessoMetodoResolvido =
-                            entidadeChamadaAcessoMetodo.tipoRetornoMetodo.replace(
-                                '<T>',
-                                entidadeChamadaAcessoMetodo.objeto.tipo
-                            );
-                        return tipoRetornoAcessoMetodoResolvido;
-                    case AcessoMetodoOuPropriedade:
-                        const entidadeChamadaAcessoMetodoOuPropriedade =
-                            entidadeChamadaChamada as AcessoMetodoOuPropriedade;
-
-                        // Algumas coisas podem acontecer aqui.
-                        // Uma delas é a variável/constante ser uma classe padrão.
-                        // Isso ocorre quando a importação é feita de uma biblioteca Node.js.
-                        // Nesse caso, o tipo de `entidadeChamadaAcessoMetodoOuPropriedade.objeto` começa com uma letra maiúscula.
-                        if (
-                            entidadeChamadaAcessoMetodoOuPropriedade.objeto.tipo &&
-                            entidadeChamadaAcessoMetodoOuPropriedade.objeto.tipo.match(/^[A-Z]/)
-                        ) {
-                            const tipoCorrespondente =
-                                this.tiposDefinidosPorBibliotecas[
-                                entidadeChamadaAcessoMetodoOuPropriedade.objeto.tipo
-                                ];
-                            if (!tipoCorrespondente) {
-                                throw new ErroAvaliadorSintatico(
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo,
-                                    `Tipo '${entidadeChamadaAcessoMetodoOuPropriedade.objeto.tipo}' não foi encontrado entre os tipos definidos por bibliotecas.`
-                                );
-                            }
-
-                            if (
-                                !(
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in
-                                    tipoCorrespondente.metodos
-                                ) &&
-                                !(
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in
-                                    tipoCorrespondente.propriedades
-                                )
-                            ) {
-                                throw new ErroAvaliadorSintatico(
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo,
-                                    `Membro '${entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema}' não existe no tipo '${entidadeChamadaAcessoMetodoOuPropriedade.objeto.tipo}'.`
-                                );
-                            }
-
-                            if (
-                                entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema in
-                                tipoCorrespondente.metodos
-                            ) {
-                                const metodoCorrespondente = tipoCorrespondente.metodos[
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema
-                                ];
-                                return metodoCorrespondente.tipoRetorno || metodoCorrespondente.tipo || 'qualquer';
-                            }
-
-                            const propriedadeCorrespondente = tipoCorrespondente.propriedades[
-                                entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema
-                            ];
-                            return propriedadeCorrespondente.tipo;
-                        }
-
-                        // Este caso ocorre quando a variável/constante é do tipo 'qualquer',
-                        // e a chamada normalmente é feita para uma primitiva.
-                        // A inferência, portanto, ocorre pelo uso da primitiva.
-                        for (const primitiva in this.primitivasConhecidas) {
-                            if (
-                                this.primitivasConhecidas[primitiva].hasOwnProperty(
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema
-                                )
-                            ) {
-                                return this.primitivasConhecidas[primitiva][
-                                    entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema
-                                ].tipo;
-                            }
-                        }
-
-                        throw new ErroAvaliadorSintatico(
-                            entidadeChamadaAcessoMetodoOuPropriedade.simbolo,
-                            `Primitiva '${entidadeChamadaAcessoMetodoOuPropriedade.simbolo.lexema}' não existe.`
-                        );
-                    case AcessoPropriedade:
-                        const entidadeChamadaAcessoPropriedade =
-                            entidadeChamadaChamada as AcessoPropriedade;
-                        return entidadeChamadaAcessoPropriedade.tipoRetornoPropriedade;
-                    case ArgumentoReferenciaFuncao:
-                        // TODO: Voltar aqui se necessário.
-                        return 'qualquer';
-                    case ReferenciaFuncao:
-                        const entidadeChamadaReferenciaFuncao =
-                            entidadeChamadaChamada as ReferenciaFuncao;
-                        return entidadeChamadaReferenciaFuncao.tipo;
-                    case Variavel:
-                        const entidadeChamadaVariavel = entidadeChamadaChamada as Variavel;
-                        return entidadeChamadaVariavel.tipo;
-                }
-
-                break;
-            case FuncaoConstruto:
-                const funcaoConstruto = inicializador as FuncaoConstruto;
-                return `função<${funcaoConstruto.tipo}>`;
-            case Leia:
-                return 'texto';
-            case Dupla:
-            case Trio:
-            case Quarteto:
-            case Quinteto:
-            case Sexteto:
-            case Septeto:
-            case Octeto:
-            case Noneto:
-            case Deceto:
-                return tipoDeDadosDelegua.TUPLA;
-
-            default:
-                // Construtos mapeados em `delegua-node`.
-                switch (inicializador.constructor.name) {
-                    case 'ImportarBiblioteca':
-                    case 'ModuloDeclaracoes':
-                        return 'módulo';
-                }
-
-                return inicializador.tipo;
-        }
-    }
-
     /**
      * No modo LAIR, a pilha de escopos não deve ser reinicializada a cada execução.
      * @returns Nada.
@@ -746,10 +588,10 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
     }
 
     override async analisar(
-        retornoLexador: RetornoLexador<SimboloInterface>,
+        retornoLexador: RetornoLexadorInterface<SimboloInterface>,
         hashArquivo: number,
         arquivosImportados?: string[]
-    ): Promise<RetornoAvaliadorSintatico<Declaracao>> {
+    ): Promise<RetornoAvaliadorSintaticoInterface<Declaracao>> {
         this.arquivosImportados = arquivosImportados || [];
         return super.analisar(retornoLexador, hashArquivo);
     }

@@ -1,11 +1,11 @@
-import { Construto, Declaracao } from "@designliquido/delegua";
+import { ConstrutoInterface, Declaracao } from "@designliquido/delegua";
 
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
 
 /**
  * Declaração devolvida ao importar um módulo.
  */
-export class ModuloDeclaracoes implements Construto {
+export class ModuloDeclaracoes implements ConstrutoInterface {
     linha: number;
     hashArquivo: number;
     nomeModulo?: string;

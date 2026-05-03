@@ -3,8 +3,8 @@ import {
     Classe,
     Declaracao,
     Literal,
-    RetornoAvaliadorSintatico,
-    RetornoLexador,
+    RetornoAvaliadorSintaticoInterface,
+    RetornoLexadorInterface,
     SimboloInterface
 } from "@designliquido/delegua";
 
@@ -109,10 +109,10 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
     }
 
     override async analisar(
-        retornoLexador: RetornoLexador<SimboloInterface>,
+        retornoLexador: RetornoLexadorInterface<SimboloInterface>,
         hashArquivo: number,
         arquivosImportados?: string[]
-    ): Promise<RetornoAvaliadorSintatico<Declaracao>> {
+    ): Promise<RetornoAvaliadorSintaticoInterface<Declaracao>> {
         this.arquivosImportados = arquivosImportados || [];
         
         return super.analisar(retornoLexador, hashArquivo);

@@ -1,9 +1,8 @@
 import * as caminho from 'path';
-import * as fs from 'fs';
+import * as sistemaArquivos from 'fs';
 
 import { cyrb53 } from '@designliquido/delegua/geracao-identificadores';
 import { InterpretadorComDepuracaoInterface } from '@designliquido/delegua/interfaces';
-import { EscopoExecucao } from '@designliquido/delegua/interfaces/escopo-execucao';
 import { VariavelInterface } from '@designliquido/delegua/interfaces/variavel-interface';
 
 import { NucleoExecucao } from '../../nucleo-execucao';
@@ -16,6 +15,7 @@ import {
     ThreadDepuracao,
     VariavelDepuracao,
 } from '../../interfaces/depuracao';
+import { EscopoExecucaoInterface } from '@designliquido/delegua/interfaces/escopo-execucao';
 
 export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDepuracaoInterface {
     private readonly versaoDelegua: string;
@@ -43,7 +43,7 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
         }
 
         const caminhoPrograma = caminho.resolve(programa);
-        if (!fs.existsSync(caminhoPrograma)) {
+        if (!sistemaArquivos.existsSync(caminhoPrograma)) {
             throw new Error(`Arquivo de programa nao encontrado: ${caminhoPrograma}`);
         }
 
@@ -58,12 +58,12 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
     async definirPontosParada(caminhoArquivo: string, linhas: number[]): Promise<number[]> {
         const caminhoAbsoluto = caminho.resolve(caminhoArquivo);
-        if (!fs.existsSync(caminhoAbsoluto)) {
+        if (!sistemaArquivos.existsSync(caminhoAbsoluto)) {
             this.pontosParadaPendentes.set(caminhoAbsoluto, []);
             return [];
         }
 
-        const quantidadeLinhasArquivo = fs.readFileSync(caminhoAbsoluto, 'utf8').split(/\r?\n/).length;
+        const quantidadeLinhasArquivo = sistemaArquivos.readFileSync(caminhoAbsoluto, 'utf8').split(/\r?\n/).length;
         const linhasValidadas = linhas
             .filter((linha) => Number.isInteger(linha) && linha > 0 && linha <= quantidadeLinhasArquivo)
             .sort((a, b) => a - b);
@@ -314,16 +314,16 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
         return null;
     }
 
-    private obterPilhaEscopos(): EscopoExecucao[] {
+    private obterPilhaEscopos(): EscopoExecucaoInterface[] {
         const pilhaEscopos = (this.interpretador as any)?.pilhaEscoposExecucao?.pilha;
         if (!Array.isArray(pilhaEscopos)) {
             return [];
         }
 
-        return pilhaEscopos as EscopoExecucao[];
+        return pilhaEscopos as EscopoExecucaoInterface[];
     }
 
-    private obterDeclaracaoAtual(escopo: EscopoExecucao): any {
+    private obterDeclaracaoAtual(escopo: EscopoExecucaoInterface): any {
         if (!escopo || !Array.isArray(escopo.declaracoes) || escopo.declaracoes.length <= 0) {
             return null;
         }

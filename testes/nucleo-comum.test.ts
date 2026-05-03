@@ -1,15 +1,15 @@
 import { NucleoComum } from "../fontes/nucleo-comum";
-import { RetornoLexador, RetornoAvaliadorSintatico, SimboloInterface } from "@designliquido/delegua/interfaces";
+import { RetornoLexadorInterface, RetornoAvaliadorSintaticoInterface, SimboloInterface } from "@designliquido/delegua/interfaces";
 import { Declaracao } from "@designliquido/delegua";
 import tiposDeSimbolos from '@designliquido/delegua/tipos-de-simbolos/delegua';
 
 // Classe concreta para testar a classe abstrata NucleoComum
 class NucleoComumTeste extends NucleoComum {
-    public chamarAfericaoErrosLexador(retornoLexador: RetornoLexador<SimboloInterface>): boolean {
+    public chamarAfericaoErrosLexador(retornoLexador: RetornoLexadorInterface<SimboloInterface>): boolean {
         return this.afericaoErrosLexador(retornoLexador);
     }
 
-    public chamarAfericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico: RetornoAvaliadorSintatico<Declaracao>): boolean {
+    public chamarAfericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico: RetornoAvaliadorSintaticoInterface<Declaracao>): boolean {
         return this.afericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico);
     }
 
@@ -37,7 +37,7 @@ describe('Núcleo Comum', () => {
 
     describe('afericaoErrosLexador', () => {
         it('Deve retornar verdadeiro quando há erros no lexador', () => {
-            const retornoLexador: RetornoLexador<SimboloInterface> = {
+            const retornoLexador: RetornoLexadorInterface<SimboloInterface> = {
                 simbolos: [],
                 erros: [
                     {
@@ -55,7 +55,7 @@ describe('Núcleo Comum', () => {
         });
 
         it('Deve retornar falso quando não há erros no lexador', () => {
-            const retornoLexador: RetornoLexador<SimboloInterface> = {
+            const retornoLexador: RetornoLexadorInterface<SimboloInterface> = {
                 simbolos: [],
                 erros: []
             };
@@ -67,7 +67,7 @@ describe('Núcleo Comum', () => {
         });
 
         it('Deve reportar múltiplos erros do lexador', () => {
-            const retornoLexador: RetornoLexador<SimboloInterface> = {
+            const retornoLexador: RetornoLexadorInterface<SimboloInterface> = {
                 simbolos: [],
                 erros: [
                     {
@@ -100,7 +100,7 @@ describe('Núcleo Comum', () => {
                 hashArquivo: -1
             };
 
-            const retornoAvaliadorSintatico: RetornoAvaliadorSintatico<Declaracao> = {
+            const retornoAvaliadorSintatico: RetornoAvaliadorSintaticoInterface<Declaracao> = {
                 declaracoes: [],
                 erros: [
                     {
@@ -108,7 +108,9 @@ describe('Núcleo Comum', () => {
                         message: 'Erro de sintaxe',
                         hashArquivo: -1,
                         linha: 1, 
-                        name: '123'
+                        name: '123',
+                        simboloRelacionado: simbolo,
+                        codigoDiagnostico: 'QUALQUER'
                     }
                 ]
             };
@@ -120,7 +122,7 @@ describe('Núcleo Comum', () => {
         });
 
         it('Deve retornar falso quando não há erros no avaliador sintático', () => {
-            const retornoAvaliadorSintatico: RetornoAvaliadorSintatico<Declaracao> = {
+            const retornoAvaliadorSintatico: RetornoAvaliadorSintaticoInterface<Declaracao> = {
                 declaracoes: [],
                 erros: []
             };
@@ -148,7 +150,7 @@ describe('Núcleo Comum', () => {
                 hashArquivo: -1
             };
 
-            const retornoAvaliadorSintatico: RetornoAvaliadorSintatico<Declaracao> = {
+            const retornoAvaliadorSintatico: RetornoAvaliadorSintaticoInterface<Declaracao> = {
                 declaracoes: [],
                 erros: [
                     {
@@ -156,14 +158,18 @@ describe('Núcleo Comum', () => {
                         message: 'Primeiro erro',
                         hashArquivo: -1,
                         linha: 1, 
-                        name: '123'
+                        name: '123',
+                        simboloRelacionado: simbolo1,
+                        codigoDiagnostico: 'QUALQUER'
                     },
                     {
                         simbolo: simbolo2,
                         message: 'Segundo erro',
                         hashArquivo: -1,
                         linha: 1, 
-                        name: '123'
+                        name: '123',
+                        simboloRelacionado: simbolo2,
+                        codigoDiagnostico: 'QUALQUER'
                     }
                 ]
             };

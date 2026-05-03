@@ -1,8 +1,8 @@
-import { RetornoLexador } from '@designliquido/delegua/interfaces/retornos/retorno-lexador';
+import { RetornoLexadorInterface } from '@designliquido/delegua/interfaces/retornos';
 
 export interface RetornoImportador<TSimbolo> {
     conteudoArquivo: string[];
     nomeArquivo: string;
     hashArquivo: number;
-    retornoLexador: RetornoLexador<TSimbolo>;
+    retornoLexador: RetornoLexadorInterface<TSimbolo>;
 }

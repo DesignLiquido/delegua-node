@@ -1,8 +1,8 @@
-import { Construto } from "@designliquido/delegua";
+import { ConstrutoInterface } from "@designliquido/delegua/interfaces";
 
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
 
-export class ImportarBiblioteca implements Construto {
+export class ImportarBiblioteca implements ConstrutoInterface {
     linha: number;
     hashArquivo: number;
     nomeBiblioteca: string;

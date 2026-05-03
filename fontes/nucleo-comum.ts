@@ -1,18 +1,17 @@
 import chalk from "chalk";
 
 import tiposDeSimbolos from '@designliquido/delegua/tipos-de-simbolos/delegua';
-import { RetornoAvaliadorSintatico, RetornoLexador, SimboloInterface } from "@designliquido/delegua/interfaces";
+import { RetornoAvaliadorSintaticoInterface, RetornoLexadorInterface, SimboloInterface } from "@designliquido/delegua/interfaces";
 
-import { RetornoImportador } from "./importador";
 import { Declaracao } from "@designliquido/delegua";
 
 export abstract class NucleoComum {
     /**
      * Verifica erros nas etapas de lexação e avaliação sintática.
-     * @param retornoLexador Um objeto que implementa a interface RetornoImportador.
+     * @param retornoLexador Um objeto que implementa a interface RetornoLexadorInterface.
      * @returns Verdadeiro se há erros. Falso caso contrário.
      */
-    protected afericaoErrosLexador(retornoLexador: RetornoLexador<SimboloInterface>): boolean {
+    protected afericaoErrosLexador(retornoLexador: RetornoLexadorInterface<SimboloInterface>): boolean {
         if (retornoLexador.erros.length > 0) {
             for (const erroLexador of retornoLexador.erros) {
                 this.reportar(erroLexador.linha, ` no '${erroLexador.caractere}'`, erroLexador.mensagem);
@@ -23,7 +22,7 @@ export abstract class NucleoComum {
         return false;
     }
 
-    protected afericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico: RetornoAvaliadorSintatico<Declaracao>): boolean {
+    protected afericaoErrosAvaliadorSintatico(retornoAvaliadorSintatico: RetornoAvaliadorSintaticoInterface<Declaracao>): boolean {
         if (retornoAvaliadorSintatico.erros.length > 0) {
             for (const erroAvaliadorSintatico of retornoAvaliadorSintatico.erros) {
                 this.erro(erroAvaliadorSintatico.simbolo, erroAvaliadorSintatico.message);
