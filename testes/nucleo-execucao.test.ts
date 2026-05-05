@@ -1,11 +1,4 @@
-// import * as sistemaArquivos from 'fs';
-// import * as caminho from 'path';
-// import {expect, jest, test} from '@jest/globals';
-
 import { NucleoExecucao } from '../fontes/nucleo-execucao';
-
-// jest.mock('fs');
-// jest.mock('path');
 
 describe('Núcleo de execução', () => {
     afterAll(() => {
