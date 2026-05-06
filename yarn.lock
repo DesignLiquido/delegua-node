@@ -390,10 +390,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/delegua@^1.21.0":
-  version "1.21.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.21.0.tgz#3dee053c7f0a84d0de5259a2a875975750089415"
-  integrity sha512-yMjK8Q1N2EsIy9cJ8fkBsRl36EpbwgogjVhKOhawg4kt6LiADmYmC1GsfAFmgK32GevOk6ofU5dLOWlEkgCwmA==
+"@designliquido/delegua@^1.22.0":
+  version "1.22.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.22.0.tgz#68000aafe7c7ca7b04fd7a82281d7cca3f1d65c1"
+  integrity sha512-4HhYkzyuioBa6Z/FcQ1DjYnQrwVDp7AObwYpcxV4ZTY9mx875dcS+0l1vCyxuEDg470eXmFUgqMyiLk+Oib66Q==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"

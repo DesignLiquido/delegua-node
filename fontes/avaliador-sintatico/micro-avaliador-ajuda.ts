@@ -1,5 +1,6 @@
 import { SimboloInterface } from '@designliquido/delegua/interfaces';
 import { Literal, Variavel } from '@designliquido/delegua/construtos';
+
 import tiposDeSimbolos from '@designliquido/delegua/tipos-de-simbolos/delegua';
 
 /**

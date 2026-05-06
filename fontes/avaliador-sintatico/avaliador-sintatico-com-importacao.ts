@@ -1,10 +1,6 @@
 import {
-    AcessoIndiceVariavel,
     AcessoMetodo,
-    AcessoMetodoOuPropriedade,
-    AcessoPropriedade,
     Ajuda,
-    ArgumentoReferenciaFuncao,
     AvaliadorSintatico,
     Bloco,
     Chamada,
@@ -12,26 +8,13 @@ import {
     Comentario,
     Const,
     ConstrutoInterface,
-    Deceto,
     Declaracao,
-    Dupla,
-    ErroAvaliadorSintatico,
-    FuncaoConstruto,
     FuncaoDeclaracao,
-    Leia,
     Literal,
-    Noneto,
-    Octeto,
-    Quarteto,
-    Quinteto,
-    ReferenciaFuncao,
     RetornoAvaliadorSintaticoInterface,
     RetornoLexadorInterface,
-    Septeto,
-    Sexteto,
     SimboloInterface,
     TendoComo,
-    Trio,
     Var,
     Variavel
 } from "@designliquido/delegua";
@@ -40,7 +23,6 @@ import { InformacaoElementoSintatico } from "@designliquido/delegua/informacao-e
 import { FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 
 import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
-import tipoDeDadosDelegua from "@designliquido/delegua/tipos-de-dados/delegua";
 
 import { ImportadorInterface } from "../interfaces";
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
@@ -394,10 +376,59 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         // No caso da desestruturação de valores de módulo, criamos um nome provisório para o módulo
         // e uma declaração de constante para cada nome mencionado na desestruturação.
-        const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
         const constantesImportadas: Const[] = [];
         const nomeReservadoModulo = `${literalCaminho.hashArquivo}_${literalCaminho.linha}_modulo`;
         const simboloReservadoModulo = { lexema: nomeReservadoModulo, hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface;
+
+        if (!String(literalCaminho.valor).endsWith('.delegua')) {
+            // Módulo nativo (ex.: "testes") ou biblioteca Node: não há arquivo .delegua a carregar.
+            const importacaoBiblioteca = this.importarBibliotecaNode(literalCaminho);
+            constantesImportadas.push(
+                new Const(
+                    simboloReservadoModulo,
+                    importacaoBiblioteca,
+                    'módulo',
+                    true,
+                    declaracaoResolvida.decoradores
+                )
+            );
+
+            const caminhoTexto = String(literalCaminho.valor);
+            for (const simboloImportacao of declaracaoResolvida.elementosImportacao) {
+                const tipoElemento =
+                    this.primitivasConhecidas[caminhoTexto] &&
+                    this.primitivasConhecidas[caminhoTexto][simboloImportacao.lexema]
+                        ? (this.primitivasConhecidas[caminhoTexto][simboloImportacao.lexema] as any).tipo || 'qualquer'
+                        : 'qualquer';
+
+                this.pilhaEscopos.definirInformacoesVariavel(
+                    simboloImportacao.lexema,
+                    new InformacaoElementoSintatico(simboloImportacao.lexema, tipoElemento)
+                );
+
+                constantesImportadas.push(
+                    new Const(
+                        simboloImportacao,
+                        new AcessoMetodo(
+                            simboloImportacao.hashArquivo,
+                            new Variavel(
+                                simboloImportacao.hashArquivo,
+                                simboloReservadoModulo,
+                                'módulo'
+                            ),
+                            simboloImportacao.lexema
+                        ),
+                        tipoElemento,
+                        true,
+                        []
+                    )
+                );
+            }
+
+            return constantesImportadas;
+        }
+
+        const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
         constantesImportadas.push(
             new Const(
                 simboloReservadoModulo,
