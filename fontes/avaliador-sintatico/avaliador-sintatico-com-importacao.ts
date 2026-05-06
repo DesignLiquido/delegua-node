@@ -347,6 +347,12 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             );
 
             if (!String(literalCaminho.valor).endsWith('.delegua')) {
+                const caminhoTexto = String(literalCaminho.valor);
+                if (!verificarModulosDelegua(caminhoTexto)) {
+                    // Módulo embutido do núcleo (ex.: "testes"): deixa o interpretador resolver.
+                    return declaracaoResolvida;
+                }
+
                 return new Const(
                     declaracaoResolvida.simboloTudo,
                     this.importarBibliotecaNode(literalCaminho),
@@ -381,7 +387,21 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         const simboloReservadoModulo = { lexema: nomeReservadoModulo, hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface;
 
         if (!String(literalCaminho.valor).endsWith('.delegua')) {
-            // Módulo nativo (ex.: "testes") ou biblioteca Node: não há arquivo .delegua a carregar.
+            const caminhoTexto = String(literalCaminho.valor);
+
+            if (!verificarModulosDelegua(caminhoTexto)) {
+                // Módulo embutido do núcleo (ex.: "testes"): registra os elementos como
+                // tipo 'qualquer' no escopo e deixa o interpretador resolver em runtime.
+                for (const simboloImportacao of declaracaoResolvida.elementosImportacao) {
+                    this.pilhaEscopos.definirInformacoesVariavel(
+                        simboloImportacao.lexema,
+                        new InformacaoElementoSintatico(simboloImportacao.lexema, 'qualquer')
+                    );
+                }
+                return declaracaoResolvida;
+            }
+
+            // Biblioteca Node conhecida: não há arquivo .delegua a carregar.
             const importacaoBiblioteca = this.importarBibliotecaNode(literalCaminho);
             constantesImportadas.push(
                 new Const(
@@ -393,7 +413,6 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 )
             );
 
-            const caminhoTexto = String(literalCaminho.valor);
             for (const simboloImportacao of declaracaoResolvida.elementosImportacao) {
                 const tipoElemento =
                     this.primitivasConhecidas[caminhoTexto] &&

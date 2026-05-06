@@ -1,0 +1,13 @@
+importar { grupo, teste, afirmar } de "testes"
+
+grupo("matemática", funcao() {
+    teste("soma dois números", funcao() {
+        afirmar.igual(4, 2 + 2)
+    })
+
+    teste("lança erro em divisão inválida", funcao() {
+        afirmar.erro(funcao() {
+            afirmar.falso(verdadeiro)
+        })
+    })
+})

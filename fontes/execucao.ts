@@ -27,6 +27,7 @@ const principal = async () => {
     const analisadorArgumentos = new Command();
     analisadorArgumentos;
     let codigoOuNomeArquivo: string | undefined = undefined;
+    let comandoTestar = false;
 
     analisadorArgumentos
         .helpOption('-h, --ajuda', 'Exibe a ajuda para o comando.')
@@ -86,8 +87,21 @@ const principal = async () => {
             }
         });
 
+    analisadorArgumentos
+        .command('testar')
+        .description('Descobre e executa recursivamente arquivos .teste.delegua no diretório atual.')
+        .action(() => {
+            comandoTestar = true;
+        });
+
     analisadorArgumentos.parse();
     const opcoes = analisadorArgumentos.opts();
+
+    if (comandoTestar) {
+        const { executarTestes } = require('./nucleo-testes');
+        await executarTestes(process.cwd());
+        return;
+    }
 
     if (opcoes.dap) {
         const adaptadorDap = new AdaptadorDapDelegua();
