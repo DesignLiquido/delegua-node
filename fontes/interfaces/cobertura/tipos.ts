@@ -1,0 +1,1 @@
+export type TipoRamo = 'verdadeiro' | 'falso' | 'senao' | 'caso-padrao' | 'iteracao';

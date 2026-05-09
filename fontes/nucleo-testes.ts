@@ -8,7 +8,11 @@ import { ResultadoTeste } from '@designliquido/delegua/bibliotecas/testes/regist
 
 import { Importador } from './importador';
 import { AvaliadorSintaticoComImportacao } from './avaliador-sintatico/avaliador-sintatico-com-importacao';
-import { InterpretadorComImportacao } from './interpretador';
+import { InterpretadorComCobertura } from './interpretador/interpretador-com-cobertura';
+import { DadosCobertura } from './interfaces/cobertura';
+import { ResultadoArquivo } from './interfaces';
+import { carregarConfiguracaoTestes } from './configuracao/configuracao-testes';
+import { resolverReportadores } from './cobertura/reportadores';
 
 const IGNORADOS = new Set(['node_modules', '.git', 'dist', 'coverage']);
 
@@ -37,25 +41,20 @@ function descobrirArquivosTeste(diretorio: string): string[] {
     return arquivos;
 }
 
-interface ResultadoArquivo {
-    caminhoRelativo: string;
+async function executarArquivoDeTeste(caminhoAbsoluto: string): Promise<{
     resultados: ResultadoTeste[];
     errosRuntime: string[];
-    erroCarga?: string;
-}
-
-async function executarArquivoDeTeste(caminhoAbsoluto: string): Promise<{ resultados: ResultadoTeste[]; errosRuntime: string[] }> {
+    cobertura: DadosCobertura;
+}> {
     const arquivosAbertos: { [id: string]: string } = {};
     const conteudoArquivos: { [id: string]: string[] } = {};
 
     const lexador = new Lexador(false);
     const importador = new Importador(lexador, arquivosAbertos, conteudoArquivos, false);
     const avaliador = new AvaliadorSintaticoComImportacao(importador);
-    // Suprimir saída do programa durante os testes
-    const interpretador = new InterpretadorComImportacao(
+    const interpretador = new InterpretadorComCobertura(
         importador,
         caminho.dirname(caminhoAbsoluto),
-        false,
         () => {},
         () => {}
     );
@@ -100,7 +99,7 @@ async function executarArquivoDeTeste(caminhoAbsoluto: string): Promise<{ result
 
     const resultados = (interpretador as any).registroTestes?.resultados as ResultadoTeste[] ?? [];
 
-    return { resultados, errosRuntime };
+    return { resultados, errosRuntime, cobertura: interpretador.cobertura };
 }
 
 const SEPARADOR = '='.repeat(70);
@@ -124,10 +123,11 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
 
         let resultados: ResultadoTeste[] = [];
         let errosRuntime: string[] = [];
+        let cobertura: DadosCobertura = { ramos: [], linhasExpressoes: new Set() };
         let erroCarga: string | undefined;
 
         try {
-            ({ resultados, errosRuntime } = await executarArquivoDeTeste(caminhoAbsoluto));
+            ({ resultados, errosRuntime, cobertura } = await executarArquivoDeTeste(caminhoAbsoluto));
         } catch (erro: any) {
             erroCarga = erro.message || String(erro);
         }
@@ -150,7 +150,7 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
         }
 
         process.stdout.write('\n');
-        resultadosPorArquivo.push({ caminhoRelativo: nomeRelativo, resultados, errosRuntime, erroCarga });
+        resultadosPorArquivo.push({ caminhoRelativo: nomeRelativo, resultados, errosRuntime, cobertura, erroCarga });
     }
 
     // Coletar falhas e erros
@@ -167,7 +167,7 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
                     falhos.push({ caminhoRelativo: r.caminhoRelativo, resultado });
                 }
             }
-            if (r.errosRuntime.length > 0) {
+            if (r.errosRuntime.length > 0 && r.resultados.length === 0) {
                 errosRuntime.push({ caminhoRelativo: r.caminhoRelativo, mensagens: r.errosRuntime });
             }
         }
@@ -196,7 +196,7 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
             const suite = resultado.nomeSuite ? `${resultado.nomeSuite} > ` : '';
             console.log(chalk.red(`\nFALHOU: ${caminhoRelativo} :: ${suite}${resultado.nomeTeste}`));
             if (resultado.mensagemErro) {
-                console.log(chalk.red(`  AssertionError: ${resultado.mensagemErro}`));
+                console.log(chalk.red(`  Erro de asserção: ${resultado.mensagemErro}`));
             }
             console.log(chalk.dim(`  Tempo: ${resultado.tempoMs ?? 0}ms`));
         }
@@ -213,15 +213,21 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
 
     console.log('\n' + SEPARADOR);
     const resumo =
-        `${totalTestes} teste(s) em ${arquivos.length} arquivo(s): ` +
-        chalk.green(`${totalPassou} passou(ram)`) +
+        `${totalTestes} ${totalTestes === 1 ? 'teste' : 'testes'} em ${arquivos.length} ${arquivos.length === 1 ? 'arquivo' : 'arquivos'}: ` +
+        chalk.green(`${totalPassou} ${totalPassou === 1 ? 'passou' : 'passaram'}`) +
         ', ' +
         (totalFalhou > 0
-            ? chalk.red(`${totalFalhou} falhou(aram)`)
+            ? chalk.red(`${totalFalhou} ${totalFalhou === 1 ? 'falhou' : 'falharam'}`)
             : chalk.green('0 falharam')) +
         chalk.dim(` em ${tempoTotal}ms`);
 
     console.log(temFalhas ? chalk.red.bold(resumo) : chalk.green.bold(resumo));
+
+    const configuracao = carregarConfiguracaoTestes(diretorioBase);
+    const reportadores = resolverReportadores(configuracao.cobertura.reportadores);
+    for (const reportador of reportadores) {
+        await reportador({ resultadosPorArquivo, diretorioBase });
+    }
 
     if (temFalhas) {
         process.exitCode = 1;

@@ -1,0 +1,15 @@
+importar { grupo, teste, afirmar } de "testes"
+
+grupo("dicionários", funcao() {
+    teste("acessar valor por chave", funcao() {
+        var pessoa = { "nome": "Alice", "idade": 30 }
+        afirmar.igual("Alice", pessoa["nome"])
+    })
+
+    teste("lança erro ao acessar chave inexistente", funcao() {
+        var carro = { "marca": "Toyota", "ano": 2020 }
+        afirmar.erro(funcao() {
+            afirmar.igual(2021, carro["anoFabricacao"])
+        })
+    })
+})

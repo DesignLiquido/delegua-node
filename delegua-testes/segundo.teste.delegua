@@ -1,0 +1,15 @@
+importar { grupo, teste, afirmar } de "testes"
+
+grupo("vetores", funcao() {
+    teste("acessar elemento por índice", funcao() {
+        var numeros = [10, 20, 30]
+        afirmar.igual(20, numeros[1])
+    })
+
+    teste("lança erro ao acessar índice fora do limite", funcao() {
+        var letras = ["a", "b", "c"]
+        afirmar.erro(funcao() {
+            afirmar.igual("d", letras[3])
+        })
+    })
+})
