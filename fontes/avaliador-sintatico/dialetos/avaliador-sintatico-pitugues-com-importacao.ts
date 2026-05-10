@@ -30,7 +30,7 @@ export class AvaliadorSintaticoPituguesComImportacao extends AvaliadorSintaticoP
             tiposDeSimbolos.PARENTESE_ESQUERDO,
             "Esperado '(' após declaração."
         );
-        const caminho = await this.expressao();
+        const caminho = await this.atribuir();
         const simboloFechamento = this.consumir(
             tiposDeSimbolos.PARENTESE_DIREITO,
             "Esperado ')' após declaração."

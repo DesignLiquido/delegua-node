@@ -269,7 +269,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             tiposDeSimbolos.PARENTESE_ESQUERDO,
             "Esperado '(' após declaração."
         );
-        const caminho = await this.expressao();
+        const caminho = await this.atribuir();
         this.consumir(
             tiposDeSimbolos.PARENTESE_DIREITO,
             "Esperado ')' após declaração."
@@ -494,7 +494,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
     protected async declaracaoTendoComo(): Promise<TendoComo> {
         const simboloTendo = this.simbolos[this.atual - 1];
-        const expressaoInicializacao = await this.expressao();
+        const expressaoInicializacao = await this.atribuir();
         this.consumir(
             tiposDeSimbolos.COMO,
             "Esperado palavra reservada 'como' após expressão de inicialização de variável, em declaração 'tendo'."
@@ -623,7 +623,7 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         // Se não é um tópico simples, delega para o parser padrão
         // (pode ser uma expressão complexa)
-        const expressaoAjuda = await this.expressao();
+        const expressaoAjuda = await this.atribuir();
         this.consumir(
             tiposDeSimbolos.PARENTESE_DIREITO,
             `Esperado parêntese direito após expressão usada como argumento em ajuda(). Atual: ${this.simbolos[this.atual].lexema}.`

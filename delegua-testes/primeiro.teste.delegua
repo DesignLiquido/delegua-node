@@ -10,4 +10,10 @@ grupo("matemática", funcao() {
             afirmar.falso(verdadeiro)
         })
     })
+
+    grupo("subtração", funcao() {
+        teste("subtrai dois números", funcao() {
+            afirmar.igual(0, 2 - 2)
+        })
+    })
 })
