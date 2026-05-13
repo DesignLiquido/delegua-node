@@ -8,6 +8,9 @@ export class InterpretadorComCobertura extends InterpretadorComImportacao {
     readonly cobertura: DadosCobertura = {
         ramos: [],
         linhasExpressoes: new Set(),
+        totalRamos: 0,
+        totalFuncoes: 0,
+        funcoesCobertas: 0,
     };
 
     constructor(

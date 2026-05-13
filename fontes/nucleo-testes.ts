@@ -13,6 +13,7 @@ import { DadosCobertura } from './interfaces/cobertura';
 import { ResultadoArquivo } from './interfaces';
 import { carregarConfiguracaoTestes } from './configuracao/configuracao-testes';
 import { resolverReportadores } from './cobertura/reportadores';
+import { contarTotaisAst } from './cobertura/visitante-cobertura';
 
 const IGNORADOS = new Set(['node_modules', '.git', 'dist', 'coverage']);
 
@@ -83,6 +84,8 @@ async function executarArquivoDeTeste(caminhoAbsoluto: string): Promise<{
         throw new Error(`Erros de sintaxe: ${msgs}`);
     }
 
+    const totaisAst = contarTotaisAst(retornoAS.declaracoes);
+
     const retornoInterpretador = await interpretador.interpretar(
         retornoAS.declaracoes,
         false
@@ -99,7 +102,14 @@ async function executarArquivoDeTeste(caminhoAbsoluto: string): Promise<{
 
     const resultados = (interpretador as any).registroTestes?.resultados as ResultadoTeste[] ?? [];
 
-    return { resultados, errosRuntime, cobertura: interpretador.cobertura };
+    const cobertura = interpretador.cobertura;
+    cobertura.totalRamos = totaisAst.totalRamos;
+    cobertura.totalFuncoes = totaisAst.totalFuncoes;
+    cobertura.funcoesCobertas = totaisAst.funcoesCorpoLinhas.filter(
+        (l) => cobertura.linhasExpressoes.has(l)
+    ).length;
+
+    return { resultados, errosRuntime, cobertura };
 }
 
 const SEPARADOR = '='.repeat(70);
@@ -123,7 +133,7 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
 
         let resultados: ResultadoTeste[] = [];
         let errosRuntime: string[] = [];
-        let cobertura: DadosCobertura = { ramos: [], linhasExpressoes: new Set() };
+        let cobertura: DadosCobertura = { ramos: [], linhasExpressoes: new Set(), totalRamos: 0, totalFuncoes: 0, funcoesCobertas: 0 };
         let erroCarga: string | undefined;
 
         try {
