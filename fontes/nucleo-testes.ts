@@ -139,6 +139,8 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
                 process.stdout.write(
                     resultado.status === 'passou'
                         ? chalk.green('.')
+                        : resultado.status === 'pulado'
+                        ? chalk.yellow('p')
                         : chalk.red('F')
                 );
             }
@@ -204,11 +206,12 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
 
     const todosResultados = resultadosPorArquivo.flatMap((r) => r.resultados);
     const totalPassou = todosResultados.filter((r) => r.status === 'passou').length;
+    const totalPulado = todosResultados.filter((r) => r.status === 'pulado').length;
     const totalFalhou =
         todosResultados.filter((r) => r.status === 'falhou').length +
         errosCarga.length +
         errosRuntime.length;
-    const totalTestes = totalPassou + totalFalhou;
+    const totalTestes = totalPassou + totalPulado + totalFalhou;
     const tempoTotal = todosResultados.reduce((acc, r) => acc + (r.tempoMs ?? 0), 0);
 
     console.log('\n' + SEPARADOR);
@@ -219,6 +222,7 @@ export async function executarTestes(diretorioBase: string = process.cwd()): Pro
         (totalFalhou > 0
             ? chalk.red(`${totalFalhou} ${totalFalhou === 1 ? 'falhou' : 'falharam'}`)
             : chalk.green('0 falharam')) +
+        (totalPulado > 0 ? ', ' + chalk.yellow(`${totalPulado} ${totalPulado === 1 ? 'pulado' : 'pulados'}`) : '') +
         chalk.dim(` em ${tempoTotal}ms`);
 
     console.log(temFalhas ? chalk.red.bold(resumo) : chalk.green.bold(resumo));
