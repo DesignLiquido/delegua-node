@@ -13,6 +13,7 @@
   },
   "chat.tools.terminal.autoApprove": {
     "yarn tsc": true,
-    "yarn jest": true
+    "yarn jest": true,
+    "tsc": true
   }
 }
