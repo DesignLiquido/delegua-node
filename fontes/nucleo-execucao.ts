@@ -51,11 +51,9 @@ import { LexadorPortugolStudio } from "@designliquido/portugol-studio/lexador";
 import { AvaliadorSintaticoPortugolStudio } from "@designliquido/portugol-studio/avaliador-sintatico";
 
 import { AvaliadorSintaticoPotigol } from "@designliquido/potigol/avaliador-sintatico";
-import {
-    InterpretadorPotigol,
-    InterpretadorPotigolComDepuracao,
-} from "@designliquido/potigol/interpretador";
 import { LexadorPotigol } from "@designliquido/potigol/lexador";
+import { InterpretadorPotigolComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-potigol-com-depuracao-importacao";
+import { InterpretadorPotigolComImportacao } from "./interpretador/dialetos/interpretador-potigol-com-importacao";
 
 import { LexadorVisuAlg } from "@designliquido/visualg/lexador";
 import { AvaliadorSintaticoVisuAlg } from "@designliquido/visualg/avaliador-sintatico";
@@ -294,12 +292,12 @@ export class NucleoExecucao
                 );
 
                 this.interpretador = depurador
-                    ? new InterpretadorPotigolComDepuracao(
+                    ? new InterpretadorPotigolComDepuracaoImportacao(
                           process.cwd(),
                           this.funcaoDeRetorno,
                           this.funcaoDeRetorno
                       )
-                    : new InterpretadorPotigol(
+                    : new InterpretadorPotigolComImportacao(
                           process.cwd(),
                           performance,
                           this.funcaoDeRetorno
