@@ -6,6 +6,10 @@
         "delegua": "bin/delegua",
         "delegua-dap": "bin/delegua-dap"
     },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
     "scripts": {
         "empacotar": "yarn rimraf ./dist && yarn tsc && yarn copyfiles -V ./bin/delegua ./bin/delegua.cmd ./bin/delegua-dap ./bin/delegua-dap.cmd ./dist && yarn copyfiles -V ./package.json ./README.md ./LICENSE ./dist",
         "testes-unitarios": "yarn jest --coverage",
