@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@designliquido/birl": "^0.6.9",
-        "@designliquido/delegua": "^1.24.0",
+        "@designliquido/delegua": "^1.24.1",
         "@designliquido/delegua-interface-grafica": "^0.1.0",
         "@designliquido/mapler": "^0.7.9",
         "@designliquido/portugol-studio": "^0.11.9",

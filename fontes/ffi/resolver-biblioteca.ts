@@ -18,7 +18,13 @@ export function resolverNomeBiblioteca(nome: string): string {
     }
 
     if (process.platform === 'win32') {
-        return `${nome}.dll`;
+        // No Windows, libm não existe como DLL separada.
+        // As funções matemáticas residem em ucrtbase.dll (ou msvcrt.dll em sistemas mais antigos).
+        const aliasesWindows: Record<string, string> = {
+            m: 'ucrtbase',
+        };
+        const nome_ = aliasesWindows[nome] ?? nome;
+        return `${nome_}.dll`;
     }
 
     if (process.platform === 'darwin') {
