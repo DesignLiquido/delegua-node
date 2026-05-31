@@ -1,4 +1,4 @@
-import * as caminho from "path";
+﻿import * as caminho from "path";
 import * as readline from "readline";
 
 import chalk from "chalk";
@@ -73,6 +73,7 @@ import { AvaliadorSintaticoPituguesComImportacao } from "./avaliador-sintatico/d
 import { InterpretadorPituguesComDepuracaoImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-depuracao-importacao";
 import { InterpretadorPituguesComImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-importacao";
 import { InterpretadorPortugolStudioComDepuracaoImportacao, InterpretadorPortugolStudioComImportacao } from "./interpretador/dialetos";
+import { DespachadorFFINodeJs } from "./ffi";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -650,3 +651,4 @@ export class NucleoExecucao
         console.error(chalk.red(`Erro: [Linha: ${linha}]`) + ` ${mensagem}`);
     }
 }
+

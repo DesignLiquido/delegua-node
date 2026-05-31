@@ -7,6 +7,7 @@ import tipoDeDadosPrimitivos from '@designliquido/delegua/tipos-de-dados/primiti
 import { InterpretadorComImportacaoInterface } from '../interfaces/interpretador-com-importacao-interface';
 import { ImportadorInterface } from '../interfaces/importador-interface';
 import { ImportarBiblioteca, ModuloDeclaracoes } from '../construtos';
+import { DespachadorFFINodeJs } from '../ffi';
 
 import * as comum from './comum';
 
@@ -29,6 +30,7 @@ export class InterpretadorComImportacao
     ) {
         super(diretorioBase, performance, funcaoDeRetorno, funcaoDeRetornoMesmaLinha);
         this.importador = importador;
+        this.despachadorFFI = new DespachadorFFINodeJs();
     }
 
     override async executar(declaracao: Declaracao, mostrarResultado = false): Promise<any> {
