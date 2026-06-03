@@ -97,6 +97,9 @@ const principal = async () => {
     analisadorArgumentos.parse();
     const opcoes = analisadorArgumentos.opts();
 
+    const indiceSeparador = process.argv.indexOf('--');
+    const argumentosPrograma = indiceSeparador !== -1 ? process.argv.slice(indiceSeparador + 1) : [];
+
     if (comandoTestar) {
         const { executarTestes } = require('./nucleo-testes');
         await executarTestes(process.cwd());
@@ -121,7 +124,8 @@ const principal = async () => {
             opcoes.codigo || codigoOuNomeArquivo,
             opcoes.dialeto,
             opcoes.performance,
-            usarDepuradorPadrao
+            usarDepuradorPadrao,
+            argumentosPrograma
         );
     } else if (codigoOuNomeArquivo) {
         // Se o dialeto não foi definido explicitamente pelo usuário, tenta inferir pela extensão do arquivo.
@@ -142,7 +146,8 @@ const principal = async () => {
                     codigo,
                     dialeto,
                     opcoes.performance,
-                    usarDepuradorPadrao
+                    usarDepuradorPadrao,
+                    argumentosPrograma
                 );
             }
 
@@ -150,7 +155,8 @@ const principal = async () => {
                 codigoOuNomeArquivo,
                 dialeto,
                 opcoes.performance,
-                usarDepuradorPadrao
+                usarDepuradorPadrao,
+                argumentosPrograma
             );
         }
     } else {

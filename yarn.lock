@@ -277,10 +277,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@designliquido/birl@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.6.9.tgz#5bed6d98d455e0497cb4883150eb1d0b48be2160"
-  integrity sha512-JNrBwKiK9kuEAFWT+GhhON44FpRDraqsfv2DBhwkstR34t+hYdN9mQ6Sqcykc2B0+4v8xgvLbWl/gRvi+GgThw==
+"@designliquido/birl@^0.6.10":
+  version "0.6.10"
+  resolved "https://registry.yarnpkg.com/@designliquido/birl/-/birl-0.6.10.tgz#b340b9547ab18596964a641a4c7880fa624653bf"
+  integrity sha512-fYIZeqTQybZcBA6GxFzb+aotGiQsJgD0IP9gtxjCdnBw+twPJvnxe6cF6u7YcQRSk58ijLqV7KJXPPY7SttkwQ==
   dependencies:
     lodash "^4.17.21"
 
@@ -390,10 +390,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/delegua@^1.24.1":
-  version "1.24.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.24.1.tgz#cdf02161a7a353cb00a23421b6fa4452438dee23"
-  integrity sha512-pF5J9Qa/oJYN1A3bgg5O8aniWdPNHApuklKfXGR6eZkIufQE1S8ErqNNQp6xLoyDrA63s9AIkbrjFUhlKqAL4A==
+"@designliquido/delegua@^1.24.2":
+  version "1.24.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.24.2.tgz#b4bc07064a915a0a0faa112024ab971efe2d0766"
+  integrity sha512-6TfbTrmBBEzKz72V81swPGpYFUHCITDpWrl0gb2fN/KgQurTE1uNQdWcl+hHiGoVc1SkR8pLwhGycea7hLK48w==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
@@ -424,34 +424,34 @@
     sqlite "^5.1.1"
     sqlite3 "^5.1.7"
 
-"@designliquido/mapler@^0.7.9":
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.7.9.tgz#71856df55a795405d24b55c7a1978151c36aa3b0"
-  integrity sha512-0N7vYX80rPsXGiXYuCq6nH26i4l/ctbrZuba+6uBbxxOEtQ4+KC0/Vyos5a3V2XDDq2OclJsHj8JIlcw+0S21w==
+"@designliquido/mapler@^0.7.10":
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/@designliquido/mapler/-/mapler-0.7.10.tgz#dc67708ad14311fdd71fc161092d4388b4f83823"
+  integrity sha512-82NUp2bBNKQerxhZ2IhJvzt7tR8P68YH3z22Vs3SDlkQPu9YCywoZgFS8eq4nATZuRVQSiJvbJ5NktcsEpxcqw==
   dependencies:
     lodash "^4.17.21"
     node-fetch "2"
 
-"@designliquido/portugol-studio@^0.11.9":
-  version "0.11.9"
-  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.11.9.tgz#f5921f4cd1fb717aff06be5561bd960f2f41f693"
-  integrity sha512-RcUIUC+S9ZOuq49RXFrhnjSSyGBgAXwwGoBJzy1/vFro7teDpBKRNQsE3poWVZedWUKIRcLMh43xBkIhXkNEow==
+"@designliquido/portugol-studio@^0.11.10":
+  version "0.11.10"
+  resolved "https://registry.yarnpkg.com/@designliquido/portugol-studio/-/portugol-studio-0.11.10.tgz#b4cb0bafbfb7adcd6fa8b19df4be3c57a597d6bb"
+  integrity sha512-quHHFBJ6CunoHyM6rGR1bNLGFfOYIuIxxua3pp79i92qiwfzOOw/+jPVCz72D+8rPXi1nVK2kpvvIpZuMXuyAA==
   dependencies:
     lodash "^4.17.21"
     node-fetch "2"
     xml2js "^0.6.2"
 
-"@designliquido/potigol@^0.11.9":
-  version "0.11.9"
-  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.11.9.tgz#a50267d477b132a2331e7c1171df538b87c43348"
-  integrity sha512-+N4g43P2vEVSkwbbNHV5nchVSFahvEU8sq1KJ0NudnRFgmxUyyNf263pzw+m1pG8rr0oaHjkGT0qGpiKayrLGw==
+"@designliquido/potigol@^0.11.10":
+  version "0.11.10"
+  resolved "https://registry.yarnpkg.com/@designliquido/potigol/-/potigol-0.11.10.tgz#e81d037b7bbf48c9de8c4ddf62b806f2cfa846b6"
+  integrity sha512-z3NJdW6jJwsF9ln4eAn01A2NbW5zKXsJ762HsEHWAnVhniLop2sZTh00pfsMomWqUP9eXpeb0X3Viq7reVGaHg==
   dependencies:
     lodash "^4.17.21"
 
-"@designliquido/visualg@^0.9.9":
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.9.9.tgz#edd7e5e401d627b8c1226395c0c51ab965bf9dbc"
-  integrity sha512-IQvhhqmJXm6W6/naPkJdW2cps0q5htMJhRqyuGrb8ZfK17BLzj8Ev7ez1TQMBgJj2Q91FvkBIs0shyHUysCLkw==
+"@designliquido/visualg@^0.9.10":
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/@designliquido/visualg/-/visualg-0.9.10.tgz#36ca0c0a70fb7999fe24abe0dfd32054504faa8c"
+  integrity sha512-G1t+AcQbf/VQv55b3+uWjP7oj1Mpxtkg/gUg7dUVDzJiKKY7L7sUalmIr1N10ml8cnGBcjLQayquNxScLSRW4g==
   dependencies:
     lodash "^4.17.21"
 

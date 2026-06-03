@@ -74,6 +74,7 @@ import { InterpretadorPituguesComDepuracaoImportacao } from "./interpretador/dia
 import { InterpretadorPituguesComImportacao } from "./interpretador/dialetos/interpretador-pitugues-com-importacao";
 import { InterpretadorPortugolStudioComDepuracaoImportacao, InterpretadorPortugolStudioComImportacao } from "./interpretador/dialetos";
 import { DespachadorFFINodeJs } from "./ffi";
+import { definirArgumentosPrograma } from "./mecanismo-importacao-bibliotecas";
 
 export class NucleoExecucao
     extends NucleoComum
@@ -114,6 +115,7 @@ export class NucleoExecucao
     funcaoDeRetorno: Function;
     funcaoDeRetornoMesmaLinha: Function;
     funcaoLimpaTela: Function;
+    argumentosPrograma: string[] = [];
 
     constructor(
         versao: string,
@@ -411,6 +413,7 @@ export class NucleoExecucao
     }
 
     async executarCodigoComoArgumento(codigo: string): Promise<void> {
+        definirArgumentosPrograma(this.argumentosPrograma);
         const retornoLexador = this.lexador.mapear([codigo], -1);
         const retornoAvaliadorSintatico = await this.avaliadorSintatico.analisar(
             retornoLexador,
@@ -428,6 +431,7 @@ export class NucleoExecucao
     async carregarEExecutarArquivo(
         caminhoRelativoArquivo: string
     ): Promise<any> {
+        definirArgumentosPrograma(this.argumentosPrograma);
         const caminhoAbsolutoPrimeiroArquivo = caminho.resolve(
             caminhoRelativoArquivo
         );

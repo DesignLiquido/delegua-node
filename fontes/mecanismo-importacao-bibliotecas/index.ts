@@ -6,6 +6,14 @@ import { pathToFileURL } from 'url';
 import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
+import { criarModuloArgumentos } from '../bibliotecas/argumentos';
+
+let _argumentosPrograma: string[] = [];
+
+export const definirArgumentosPrograma = (args: string[]): void => {
+    _argumentosPrograma = args;
+};
+
 import { InfraestruturaElectron, InfraestruturaVazia, InfraestruturaWebView, InfraestruturaWindows, InterfaceGrafica } from '@designliquido/delegua-interface-grafica';
 import { InfraestruturaInvocacaoElectron, localizarElectron } from '../infraestruturas/invocacao-electron/infraestrutura-invocacao-electron';
 import { criarHostWindows, podeUsarHostWindows } from '../infraestruturas/host-windows/infraestrutura-host-windows';
@@ -327,6 +335,10 @@ function carregarBibliotecaInterfaceGrafica(): DeleguaModulo {
 
 export default async function (nome: string) {
     const nomeLower = nome.toLowerCase();
+    if (nomeLower === 'argumentos') {
+        return criarModuloArgumentos(_argumentosPrograma);
+    }
+
     if (nomeLower === 'interfacegrafica' || nomeLower === 'interface-grafica') {
         return carregarBibliotecaInterfaceGrafica();
     }
