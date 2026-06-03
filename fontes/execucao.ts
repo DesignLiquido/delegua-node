@@ -164,6 +164,8 @@ const principal = async () => {
     }
 };
 
+export { principal };
+
 if (require.main === module) {
     principal();
 }
