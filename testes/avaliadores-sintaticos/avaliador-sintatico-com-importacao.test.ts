@@ -33,4 +33,81 @@ describe('Avaliador Sintático com Importação de Delégua', () => {
         expect(retornoAvaliadorSintatico).toBeTruthy();
         expect(retornoAvaliadorSintatico.declaracoes).toHaveLength(3);
     });
+
+    describe('declaracaoAjuda', () => {
+        it('Deve analisar ajuda sem parênteses', async () => {
+            const retornoLexador = lexador.mapear(['ajuda'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar ajuda() sem argumentos', async () => {
+            const retornoLexador = lexador.mapear(['ajuda()'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar ajuda(escreva) com identificador como argumento', async () => {
+            const retornoLexador = lexador.mapear(['ajuda(escreva)'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar ajuda(para) com palavra-chave como argumento', async () => {
+            const retornoLexador = lexador.mapear(['ajuda(para)'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar ajuda("texto") com literal texto como argumento', async () => {
+            const retornoLexador = lexador.mapear(['ajuda("escreva")'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar ajuda(se) com palavra-chave SE', async () => {
+            const retornoLexador = lexador.mapear(['ajuda(se)'], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+    });
+
+    describe('declaracaoTendoComo', () => {
+        it('Deve analisar bloco tendo <expr> como <id> { }', async () => {
+            const retornoLexador = lexador.mapear([
+                'tendo 1 como x {',
+                '    escreva(x)',
+                '}'
+            ], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(1);
+        });
+
+        it('Deve analisar tendo com expressão de variável', async () => {
+            const retornoLexador = lexador.mapear([
+                'var lista = [1, 2, 3]',
+                'tendo lista como elementos {',
+                '    escreva(elementos)',
+                '}'
+            ], -1);
+            const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+
+            expect(retorno.erros).toHaveLength(0);
+            expect(retorno.declaracoes).toHaveLength(2);
+        });
+    });
 });

@@ -8,7 +8,9 @@ import {
     visitarConstrutoImportarBiblioteca,
     visitarDeclaracaoConst,
     visitarDeclaracaoDefinicaoFuncao,
-    visitarExpressaoModuloDeclaracoes
+    visitarExpressaoModuloDeclaracoes,
+    obterAjudaPorNome,
+    visitarDeclaracaoAjuda
 } from "../../fontes/interpretador/comum";
 
 // Mock do mecanismo de importação de bibliotecas
@@ -371,6 +373,153 @@ describe('Interpretador Comum', () => {
 
             // Não deve adicionar ao módulo, mas também não deve dar erro
             expect(resultado).toBeInstanceOf(DeleguaModulo);
+        });
+    });
+
+    describe('obterAjudaPorNome', () => {
+        it('Deve retornar conteúdo para tópico existente no banco de ajuda', () => {
+            const resultado = obterAjudaPorNome(interpretadorMock, 'escreva');
+            expect(resultado).not.toBeNull();
+            expect(typeof resultado).toBe('string');
+        });
+
+        it('Deve retornar nulo quando variável não existe no escopo e tópico não é reservado', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue(null);
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'xyzTopicoBogus999');
+            expect(resultado).toBeNull();
+        });
+
+        it('Deve retornar ajuda genérica para palavra reservada não documentada', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockImplementation(() => { throw new Error('Variável não encontrada'); });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'fazer');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('fazer');
+        });
+
+        it('Deve retornar nulo quando variável existe mas não tem valor', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue(null);
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'xyzBogus999');
+            expect(resultado).toBeNull();
+        });
+
+        it('Deve retornar ajuda de variável numérica', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'número', valor: 42 });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaVariavel');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('número');
+            expect(resultado).toContain('42');
+        });
+
+        it('Deve retornar ajuda de variável texto', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'texto', valor: 'olá mundo' });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaVariavel');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('texto');
+        });
+
+        it('Deve retornar ajuda de variável lógica', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'lógico', valor: true });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaVariavel');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('lógico');
+        });
+
+        it('Deve retornar ajuda de variável vetor', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'vetor', valor: [1, 2, 3] });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaVariavel');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('vetor');
+        });
+
+        it('Deve retornar ajuda de variável dicionário', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'dicionário', valor: { chave: 'valor' } });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaVariavel');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('dicionário');
+        });
+
+        it('Deve retornar ajuda de função definida pelo usuário (DeleguaFuncao)', () => {
+            const funcao = new DeleguaFuncao('minhaFuncao', {
+                parametros: [],
+                tipo: 'número',
+                tipoExplicito: true
+            } as any);
+
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'função', valor: funcao });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'minhaFuncao');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('minhaFuncao');
+        });
+    });
+
+    describe('visitarDeclaracaoAjuda', () => {
+        it('Deve retornar sinalização de modo interativo quando chamada sem argumentos', async () => {
+            const declaracao = { funcao: false, elemento: null } as any;
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__modoAjuda).toBe(true);
+        });
+
+        it('Deve retornar conteúdo de ajuda para tópico existente via elemento Variavel', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { simbolo: { lexema: 'escreva' } }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+            expect(typeof resultado.conteudo).toBe('string');
+        });
+
+        it('Deve retornar conteúdo de ajuda para literal numérico', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: 42 }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+            expect(typeof resultado.conteudo).toBe('string');
+        });
+
+        it('Deve retornar conteúdo de ajuda para literal texto', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: 'escreva' }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve usar fallback quando tópico não encontrado', async () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockImplementation(() => { throw new Error('não encontrado'); });
+
+            const declaracao = {
+                funcao: true,
+                elemento: { simbolo: { lexema: 'topicoDesconhecidoXyz' } }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
         });
     });
 });
