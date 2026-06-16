@@ -230,6 +230,132 @@ tente {
                 nucleoExecucao.configurarDialeto('egua', false, true);
             }).toThrow('Dialeto egua não suporta depuração.');
         });
+
+        it('Deve configurar dialeto Calango', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('calango');
+
+            expect(nucleoExecucao.dialeto).toBe('calango');
+            expect(nucleoExecucao.lexador).toBeDefined();
+            expect(nucleoExecucao.avaliadorSintatico).toBeDefined();
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto Prisma', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('prisma');
+
+            expect(nucleoExecucao.dialeto).toBe('prisma');
+            expect(nucleoExecucao.lexador).toBeDefined();
+            expect(nucleoExecucao.avaliadorSintatico).toBeDefined();
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto Tenda', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('tenda');
+
+            expect(nucleoExecucao.dialeto).toBe('tenda');
+            expect(nucleoExecucao.lexador).toBeDefined();
+            expect(nucleoExecucao.avaliadorSintatico).toBeDefined();
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto Égua', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('egua');
+
+            expect(nucleoExecucao.dialeto).toBe('egua');
+            expect(nucleoExecucao.lexador).toBeDefined();
+            expect(nucleoExecucao.avaliadorSintatico).toBeDefined();
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar Mapler com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('mapler', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('mapler');
+            expect(nucleoExecucao.resolvedor).toBeDefined();
+        });
+
+        it('Deve configurar Pitugues com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('pitugues', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('pitugues');
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar Portugol Studio com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('portugol-studio', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('portugol-studio');
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar Potigol com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('potigol', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('potigol');
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar VisuAlg com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('visualg', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('visualg');
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto padrão com depurador', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('delegua', false, true, false);
+
+            expect(nucleoExecucao.dialeto).toBe('delegua');
+            expect(nucleoExecucao.interpretador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto pituguês (com acento)', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('pituguês');
+
+            expect(nucleoExecucao.dialeto).toBe('pituguês');
+            expect(nucleoExecucao.lexador).toBeDefined();
+        });
+
+        it('Deve configurar dialeto délégua (com acento)', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto('delégua');
+
+            expect(nucleoExecucao.dialeto).toBe('delégua');
+            expect(nucleoExecucao.lexador).toBeDefined();
+        });
+    });
+
+    describe('finalizarDepuracao', () => {
+        it('Deve executar sem erro quando servidorDepuracao é nulo', () => {
+            const nucleoExecucao = new NucleoExecucao('0.1');
+            nucleoExecucao.configurarDialeto();
+            // servidorDepuracao não foi inicializado — deve executar sem erro
+            expect(() => nucleoExecucao.finalizarDepuracao()).not.toThrow();
+        });
+    });
+
+    describe('erroEmTempoDeExecucao (acesso via execução com erro)', () => {
+        it('Deve capturar erros em tempo de execução sem travar', async () => {
+            const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+            try {
+                const nucleoExecucao = new NucleoExecucao('0.1');
+                nucleoExecucao.configurarDialeto();
+                await nucleoExecucao.executarCodigoComoArgumento('var x = funçaoInexistente()');
+            } finally {
+                consoleSpy.mockRestore();
+            }
+        });
     });
 
     describe('executarLinhas', () => {

@@ -121,6 +121,69 @@ describe('Classe de Módulo', () => {
         });
     });
 
+    describe('chamar', () => {
+        it('Deve instanciar a implementação com argumentos resolvidos', () => {
+            class MinhaClasse {
+                valor: number;
+                constructor(v: number) { this.valor = v; }
+            }
+
+            const classeDeModulo = new ClasseDeModulo('MinhaClasse', 'modulo', MinhaClasse, {}, {});
+            const resultado = classeDeModulo.chamar(null, [{ valor: 42 }]);
+
+            expect(resultado.valor).toBe(42);
+        });
+
+        it('Deve retornar proxy que substitui constructor por Object', () => {
+            class MinhaClasse {
+                nome: string;
+                constructor() { this.nome = 'teste'; }
+            }
+
+            const classeDeModulo = new ClasseDeModulo('MinhaClasse', 'modulo', MinhaClasse, {}, {});
+            const resultado = classeDeModulo.chamar(null, []);
+
+            expect(resultado.nome).toBe('teste');
+            expect(resultado.constructor).toBe(Object);
+        });
+
+        it('Deve suportar set no proxy', () => {
+            class MinhaClasse {
+                valor: number = 0;
+            }
+
+            const classeDeModulo = new ClasseDeModulo('MinhaClasse', 'modulo', MinhaClasse, {}, {});
+            const resultado = classeDeModulo.chamar(null, []);
+            resultado.valor = 99;
+
+            expect(resultado.valor).toBe(99);
+        });
+
+        it('Deve funcionar com lista de argumentos vazia', () => {
+            class ClasseSemArgs {
+                status: string = 'ok';
+            }
+
+            const classeDeModulo = new ClasseDeModulo('ClasseSemArgs', 'modulo', ClasseSemArgs, {}, {});
+            const resultado = classeDeModulo.chamar(null, []);
+
+            expect(resultado.status).toBe('ok');
+        });
+
+        it('Deve resolver argumentos sem propriedade valor diretamente', () => {
+            class ClasseComArg {
+                x: number;
+                constructor(v: number) { this.x = v; }
+            }
+
+            const classeDeModulo = new ClasseDeModulo('ClasseComArg', 'modulo', ClasseComArg, {}, {});
+            // Argumento sem .valor deve ser passado diretamente
+            const resultado = classeDeModulo.chamar(null, [10]);
+
+            expect(resultado.x).toBe(10);
+        });
+    });
+
     describe('Propriedades', () => {
         it('Deve permitir acesso às propriedades', () => {
             const propriedades = {

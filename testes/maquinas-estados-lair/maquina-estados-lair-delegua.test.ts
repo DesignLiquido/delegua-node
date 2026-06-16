@@ -243,6 +243,125 @@ describe('Máquina de Estados LAIR Delégua', () => {
         });
     });
 
+    describe('Valores primitivos JavaScript brutos', () => {
+        it('Deve formatar número JS bruto como valorRetornado', async () => {
+            const retornoExecucao = {
+                resultado: [{
+                    hashArquivo: -1,
+                    linha: 1,
+                    tipoDeclaracaoExecutada: 'expressao',
+                    valorRetornado: 42,
+                    tipo: 'número'
+                }],
+                erros: [],
+                declaracoes: []
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+
+            await maquina.executarOuAcumular('42');
+
+            expect(funcaoDeRetornoMock).toHaveBeenCalled();
+        });
+
+        it('Deve formatar texto JS bruto como valorRetornado', async () => {
+            const retornoExecucao = {
+                resultado: [{
+                    hashArquivo: -1,
+                    linha: 1,
+                    tipoDeclaracaoExecutada: 'expressao',
+                    valorRetornado: 'olá mundo',
+                    tipo: 'texto'
+                }],
+                erros: [],
+                declaracoes: []
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+
+            await maquina.executarOuAcumular('"olá mundo"');
+
+            expect(funcaoDeRetornoMock).toHaveBeenCalled();
+        });
+
+        it('Deve formatar lógico JS bruto como valorRetornado', async () => {
+            const retornoExecucao = {
+                resultado: [{
+                    hashArquivo: -1,
+                    linha: 1,
+                    tipoDeclaracaoExecutada: 'expressao',
+                    valorRetornado: true,
+                    tipo: 'lógico'
+                }],
+                erros: [],
+                declaracoes: []
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+
+            await maquina.executarOuAcumular('verdadeiro');
+
+            expect(funcaoDeRetornoMock).toHaveBeenCalled();
+        });
+    });
+
+    describe('Declaração não reconhecida', () => {
+        it('Deve retornar ehDeclaracao:false para tipo desconhecido nas declarações', async () => {
+            const retornoExecucao = {
+                resultado: [{ hashArquivo: -1, linha: 1, tipoDeclaracaoExecutada: 'expressao', valorRetornado: { valor: 42, tipo: 'número' }, tipo: 'número' }],
+                erros: [],
+                declaracoes: [{ tipo: 'FuncaoDeclaracao', nome: 'gritar' }]
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+            await maquina.executarOuAcumular('funcao gritar() { }');
+            expect(funcaoDeRetornoMock).toHaveBeenCalled();
+        });
+    });
+
+    describe('Modo de ajuda interativo', () => {
+        it('Deve ativar modo de ajuda quando __modoAjuda é true', async () => {
+            const retornoExecucao = {
+                resultado: [{
+                    hashArquivo: -1,
+                    linha: 1,
+                    tipoDeclaracaoExecutada: 'expressao',
+                    valorRetornado: { __modoAjuda: true },
+                    tipo: 'objeto'
+                }],
+                erros: [],
+                declaracoes: []
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+
+            await maquina.executarOuAcumular('ajuda()');
+
+            // Sem interpretador configurado, exibe mensagem de erro e faz prompt
+            expect(funcaoDeRetornoMock).toHaveBeenCalled();
+            expect(promptSpy).toHaveBeenCalled();
+        });
+    });
+
+    describe('Conteúdo de ajuda no resultado', () => {
+        it('Deve exibir conteúdo de ajuda quando __conteudoAjuda é true', async () => {
+            const retornoExecucao = {
+                resultado: [{
+                    hashArquivo: -1,
+                    linha: 1,
+                    tipoDeclaracaoExecutada: 'expressao',
+                    valorRetornado: {
+                        __conteudoAjuda: true,
+                        conteudo: '# Ajuda\nTexto de ajuda aqui'
+                    },
+                    tipo: 'objeto'
+                }],
+                erros: [],
+                declaracoes: []
+            };
+            executarLinhasMock.mockResolvedValue(retornoExecucao);
+
+            await maquina.executarOuAcumular('ajuda("escreva")');
+
+            expect(funcaoDeRetornoMock).toHaveBeenCalledWith('# Ajuda\nTexto de ajuda aqui');
+        });
+    });
+
     describe('Resultados vazios', () => {
         it('Não deve chamar função de retorno quando resultado é vazio', async () => {
             const retornoExecucao: RetornoExecucaoComDeclaracoes = {

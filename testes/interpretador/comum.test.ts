@@ -1,5 +1,5 @@
 import { Const, FuncaoDeclaracao } from "@designliquido/delegua/declaracoes";
-import { DeleguaFuncao, DeleguaModulo } from "@designliquido/delegua/interpretador/estruturas";
+import { DeleguaFuncao, DeleguaModulo, FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 import tiposDeSimbolos from '@designliquido/delegua/tipos-de-simbolos/delegua';
 
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../../fontes/construtos";
@@ -468,6 +468,51 @@ describe('Interpretador Comum', () => {
             expect(resultado).not.toBeNull();
             expect(resultado).toContain('minhaFuncao');
         });
+
+        it('Deve mapear parâmetros de DeleguaFuncao com abrangência', () => {
+            const funcao = new DeleguaFuncao('somar', {
+                parametros: [
+                    { abrangencia: { lexema: 'a' } },
+                    { abrangencia: { lexema: 'b' } }
+                ],
+                tipo: 'número',
+                tipoExplicito: true
+            } as any);
+
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'função', valor: funcao });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'somar');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('somar(a, b)');
+        });
+
+        it('Deve chamar pontoEntradaAjuda para FuncaoPadrao', () => {
+            const fp = new FuncaoPadrao(0, () => 'resultado');
+
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'funcao', valor: fp });
+
+            expect(() => obterAjudaPorNome(interpretadorMock, 'minhaFp')).not.toThrow();
+        });
+
+        it('Deve usar caminho legado para tipo não reconhecido', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockReturnValue({ tipo: 'objeto', valor: {} });
+
+            const resultado = obterAjudaPorNome(interpretadorMock, 'meuObjeto');
+            expect(resultado === null || typeof resultado === 'string').toBe(true);
+        });
+
+        it('Deve retornar ajuda genérica para palavra reservada sem docs locais', () => {
+            (interpretadorMock.pilhaEscoposExecucao.obterValorVariavel as jest.Mock)
+                .mockImplementation(() => { throw new Error('não encontrada'); });
+
+            // 'sustar' está em PALAVRAS_RESERVADAS_DELEGUA mas não em conteudo-ajuda.ts
+            const resultado = obterAjudaPorNome(interpretadorMock, 'sustar');
+            expect(resultado).not.toBeNull();
+            expect(resultado).toContain('sustar');
+        });
     });
 
     describe('visitarDeclaracaoAjuda', () => {
@@ -516,6 +561,86 @@ describe('Interpretador Comum', () => {
             const declaracao = {
                 funcao: true,
                 elemento: { simbolo: { lexema: 'topicoDesconhecidoXyz' } }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve extrair tópico de elemento com lexema direto', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { lexema: 'para' }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve extrair tópico de elemento com simbolo vazio e valor string', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { simbolo: {}, valor: 'escreva' }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve usar fallback para elemento sem estrutura reconhecida', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { foo: 'bar' }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve retornar ajuda para literal lógico', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: true }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve retornar ajuda para literal nulo', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: null }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve retornar ajuda para literal vetor', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: [1, 2, 3] }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve retornar ajuda para literal dicionário', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: { chave: 'texto' } }
+            } as any;
+
+            const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);
+            expect(resultado.__conteudoAjuda).toBe(true);
+        });
+
+        it('Deve retornar ajuda via fallback para literal sem tipo reconhecido', async () => {
+            const declaracao = {
+                funcao: true,
+                elemento: { valor: () => 'funcao' }
             } as any;
 
             const resultado = await visitarDeclaracaoAjuda(interpretadorMock, declaracao);

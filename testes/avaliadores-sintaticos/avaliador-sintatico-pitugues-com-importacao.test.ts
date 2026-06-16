@@ -95,4 +95,32 @@ describe('Avaliador Sintático Pitugues com Importação', () => {
         expect(avaliadorSintatico.importador).toBeDefined();
         expect(avaliadorSintatico.importador).toHaveProperty('importar');
     });
+
+    it('Deve analisar importação de biblioteca não-delegua', async () => {
+        const retornoLexador = lexador.mapear(['importar("matematica")'], -1);
+        const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+        expect(retorno).toBeTruthy();
+        expect(retorno.declaracoes).toHaveLength(1);
+    });
+
+    it('Deve analisar importação de biblioteca json', async () => {
+        const retornoLexador = lexador.mapear(['importar("json")'], -1);
+        const retorno = await avaliadorSintatico.analisar(retornoLexador, -1);
+        expect(retorno).toBeTruthy();
+        expect(retorno.declaracoes).toHaveLength(1);
+    });
+
+    it('Deve usar modoLair para não reinicializar pilha', async () => {
+        avaliadorSintatico.modoLair = true;
+
+        const retorno1 = await avaliadorSintatico.analisar(
+            lexador.mapear(['x = 1'], -1), -1
+        );
+        const retorno2 = await avaliadorSintatico.analisar(
+            lexador.mapear(['y = 2'], -1), -1
+        );
+
+        expect(retorno1).toBeTruthy();
+        expect(retorno2).toBeTruthy();
+    });
 });

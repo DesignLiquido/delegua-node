@@ -92,5 +92,22 @@ describe('realcador-sintaxe-ajuda', () => {
             expect(resultado).toBeTruthy();
             expect(resultado.split('\n')).toHaveLength(4);
         });
+
+        it('Deve processar string com barra invertida no código (bloco exemplos)', () => {
+            // Cobre o caminho de escape de backslash no realcador de linha
+            // ehLinhaDeCodigo requer pelo menos 2 espaços de indentação
+            const conteudo = [
+                '**Exemplos:**',
+                '  escreva("caminho\\\\arquivo")'
+            ].join('\n');
+            const resultado = aplicarRealceSintaxe(conteudo);
+            expect(resultado).toBeTruthy();
+        });
+
+        it('Deve processar linha de citação markdown (blockquote)', () => {
+            const conteudo = '> Esta é uma citação de exemplo';
+            const resultado = aplicarRealceSintaxe(conteudo);
+            expect(resultado).toBeTruthy();
+        });
     });
 });
