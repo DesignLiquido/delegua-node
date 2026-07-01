@@ -16,6 +16,7 @@ import {
     VariavelDepuracao,
 } from '../../interfaces/depuracao';
 import { EscopoExecucaoInterface } from '@designliquido/delegua/interfaces/escopo-execucao';
+import { formatarValor, obterDeclaracaoAtual, RegistroReferencias } from '../referencias-depuracao';
 
 export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDepuracaoInterface {
     private readonly versaoDelegua: string;
@@ -23,9 +24,8 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
     private configuracaoLancamento: ConfiguracaoLancamento | null = null;
     private pontosParadaPendentes = new Map<string, number[]>();
-    private contadorReferencias = 1;
-    private mapeamentoFrames = new Map<number, number>();
-    private mapeamentoVariaveis = new Map<number, { [nome: string]: VariavelInterface }>();
+    private registroFrames = new RegistroReferencias<number>();
+    private registroVariaveis = new RegistroReferencias<{ [nome: string]: VariavelInterface }>();
 
     private nucleoExecucao: NucleoExecucao | null = null;
     private interpretador: InterpretadorComDepuracaoInterface | null = null;
@@ -51,9 +51,8 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
             programa: caminhoPrograma,
             dialeto,
         };
-        this.contadorReferencias = 1;
-        this.mapeamentoFrames.clear();
-        this.mapeamentoVariaveis.clear();
+        this.registroFrames.limpar();
+        this.registroVariaveis.limpar();
     }
 
     async definirPontosParada(caminhoArquivo: string, linhas: number[]): Promise<number[]> {
@@ -117,14 +116,14 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
             return [];
         }
 
-        this.mapeamentoFrames.clear();
-        this.mapeamentoVariaveis.clear();
+        this.registroFrames.limpar();
+        this.registroVariaveis.limpar();
 
         const pilhaEscopos = this.obterPilhaEscopos();
         const quadros: QuadroPilhaDepuracao[] = [];
         for (let indice = pilhaEscopos.length - 1; indice >= 0; indice--) {
             const escopo = pilhaEscopos[indice];
-            const declaracaoAtual = this.obterDeclaracaoAtual(escopo);
+            const declaracaoAtual = obterDeclaracaoAtual(escopo);
             if (!declaracaoAtual) {
                 continue;
             }
@@ -134,8 +133,7 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
                 continue;
             }
 
-            const frameId = this.proximaReferencia();
-            this.mapeamentoFrames.set(frameId, indice);
+            const frameId = this.registroFrames.registrar(indice);
             quadros.push({
                 id: frameId,
                 nome: declaracaoAtual.assinaturaMetodo || `escopo-${indice}`,
@@ -150,7 +148,7 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
     async obterEscopos(frameId: number): Promise<EscopoDepuracao[]> {
         this.garantirSessaoInicializada();
-        const indiceEscopo = this.mapeamentoFrames.get(frameId);
+        const indiceEscopo = this.registroFrames.obter(frameId);
         if (indiceEscopo === undefined || !this.interpretador) {
             return [];
         }
@@ -159,8 +157,7 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
         const escopo = pilhaEscopos[indiceEscopo];
         const variaveis = escopo?.espacoMemoria?.valores || {};
 
-        const variablesReference = this.proximaReferencia();
-        this.mapeamentoVariaveis.set(variablesReference, variaveis);
+        const variablesReference = this.registroVariaveis.registrar(variaveis);
 
         return [
             {
@@ -173,14 +170,14 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
     async obterVariaveis(variablesReference: number): Promise<VariavelDepuracao[]> {
         this.garantirSessaoInicializada();
-        const variaveis = this.mapeamentoVariaveis.get(variablesReference);
+        const variaveis = this.registroVariaveis.obter(variablesReference);
         if (!variaveis) {
             return [];
         }
 
         return Object.entries(variaveis).map(([nome, variavel]) => ({
             nome,
-            valor: this.formatarValor(variavel?.valor),
+            valor: formatarValor(variavel?.valor),
             tipo: variavel?.tipo,
             variablesReference: 0,
         }));
@@ -248,9 +245,8 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
         this.interpretador = null;
         this.nucleoExecucao = null;
-        this.contadorReferencias = 1;
-        this.mapeamentoFrames.clear();
-        this.mapeamentoVariaveis.clear();
+        this.registroFrames.limpar();
+        this.registroVariaveis.limpar();
     }
 
     private aplicarPontosParadaNoInterpretador(): void {
@@ -287,15 +283,7 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
 
         for (let indice = pilhaEscopos.length - 1; indice >= 0; indice--) {
             const escopo = pilhaEscopos[indice];
-            if (!escopo || !Array.isArray(escopo.declaracoes) || escopo.declaracoes.length <= 0) {
-                continue;
-            }
-
-            const posicaoAtual =
-                escopo.declaracaoAtual >= escopo.declaracoes.length
-                    ? escopo.declaracoes.length - 1
-                    : escopo.declaracaoAtual;
-            const declaracaoAtual = escopo.declaracoes[posicaoAtual];
+            const declaracaoAtual = obterDeclaracaoAtual(escopo);
             if (!declaracaoAtual) {
                 continue;
             }
@@ -321,46 +309,6 @@ export class PonteTempoExecucaoDepuracaoDelegua implements PonteTempoExecucaoDep
         }
 
         return pilhaEscopos as EscopoExecucaoInterface[];
-    }
-
-    private obterDeclaracaoAtual(escopo: EscopoExecucaoInterface): any {
-        if (!escopo || !Array.isArray(escopo.declaracoes) || escopo.declaracoes.length <= 0) {
-            return null;
-        }
-
-        const posicaoAtual =
-            escopo.declaracaoAtual >= escopo.declaracoes.length
-                ? escopo.declaracoes.length - 1
-                : escopo.declaracaoAtual;
-        return escopo.declaracoes[posicaoAtual];
-    }
-
-    private proximaReferencia(): number {
-        return this.contadorReferencias++;
-    }
-
-    private formatarValor(valor: any): string {
-        if (valor === null) {
-            return 'nulo';
-        }
-
-        if (valor === undefined) {
-            return 'indefinido';
-        }
-
-        if (typeof valor === 'string') {
-            return valor;
-        }
-
-        if (typeof valor === 'number' || typeof valor === 'boolean') {
-            return String(valor);
-        }
-
-        try {
-            return JSON.stringify(valor);
-        } catch {
-            return String(valor);
-        }
     }
 
     private async executarInstrucao(

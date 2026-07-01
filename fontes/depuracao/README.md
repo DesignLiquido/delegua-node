@@ -40,18 +40,29 @@ Para desenvolvimento em Windows, o Netcat pode ser instalado via [Cygwin](http:/
 
 ### Comandos disponíveis
 
+O depurador padrão existe também para fins didáticos: cada comando abaixo tem um equivalente direto
+no Adaptador DAP (seção seguinte), só que expresso em texto simples por TCP em vez de JSON-RPC. A
+tabela ["Comando padrão × DAP"](#comando-padrão--dap) no fim desta seção traz o mapeamento completo.
+
 -   `adentrar-escopo`: _Step Into_. Adentra o bloco de escopo da instrução atual, se houver;
 -   `adicionar-ponto-parada <arquivo> <linha>`: adiciona um ponto de parada no arquivo e linha indicados;
 -   `avaliar <código>`: avalia um trecho de código Delégua no contexto atual;
 -   `avaliar-variavel <nome>`: retorna o valor e tipo de uma variável pelo nome;
+-   `capacidades`: descreve a sessão atual (versão do `delegua`, dialeto e lista de comandos suportados);
 -   `continuar`: retoma a execução até o próximo ponto de parada ou o fim do programa;
--   `pilha-execucao`: exibe a pilha de execução atual;
+-   `definir-pontos-parada <arquivo> <l1,l2,...>`: substitui, numa única chamada, todos os pontos de parada do arquivo indicado;
+-   `encerrar-sessao`: finaliza a depuração do programa em execução e avisa todos os clientes conectados;
+-   `escopos <frameId>`: retorna a referência de variáveis (`variablesReference`) de um quadro obtido via `pilha-execucao`;
+-   `pilha-execucao`: exibe a pilha de execução atual, agora com um `frameId` ao fim de cada linha;
 -   `pontos-parada`: lista todos os pontos de parada ativos;
 -   `proximo`: executa a instrução atual e para na próxima (_Step Over_);
+-   `reiniciar <arquivo>`: carrega e prepara um novo arquivo para depuração, sem reiniciar o processo;
 -   `remover-ponto-parada <arquivo> <linha>`: remove um ponto de parada específico;
 -   `sair-escopo`: _Step Out_. Executa o restante do escopo atual e retorna ao escopo anterior;
--   `tchau`: encerra a conexão;
--   `variaveis`: lista todas as variáveis no escopo atual.
+-   `tchau`: encerra a conexão atual (a sessão de depuração continua ativa para outros clientes);
+-   `linhas-execucao`: lista as linhas de execução disponíveis (sempre uma: a linha de execução principal);
+-   `variaveis`: lista todas as variáveis no escopo atual (atalho plano, sem referências);
+-   `variaveis-referencia <variablesReference>`: lista as variáveis de uma referência obtida via `escopos`, permitindo navegar em objetos e vetores aninhados.
 
 **Exemplo de uso de `adicionar-ponto-parada`:**
 
@@ -60,6 +71,42 @@ adicionar-ponto-parada ./exemplos/importacao/dinamica/importacao-2.egua 5
 remover-ponto-parada ./exemplos/importacao/dinamica/importacao-2.egua 5
 ```
 
+**Exemplo de navegação por escopos/variáveis (drill-down):**
+
+```
+pilha-execucao
+--- pilha-execucao-resposta ---
+calcular(); --- D:\delegua\testes\index.delegua::<principal>::7::1
+--- fim-pilha-execucao-resposta ---
+
+escopos 1
+--- escopos-resposta ---
+Locais :: 1
+--- fim-escopos-resposta ---
+
+variaveis-referencia 1
+--- variaveis-referencia-resposta ---
+x :: Número :: 10 :: 0
+y :: Número :: 20 :: 0
+--- fim-variaveis-referencia-resposta ---
+```
+
+### Eventos assíncronos
+
+Além de respostas a comandos, o servidor envia eventos a todos os clientes conectados sem que
+precisem perguntar — equivalentes aos eventos `stopped`/`continued`/`terminated` do DAP:
+
+```
+--- evento: parado ---
+motivo:breakpoint
+arquivo:D:\delegua\testes\index.delegua::linha:5
+--- fim-evento ---
+```
+
+-   `continuado`: emitido assim que `continuar`/`proximo`/`adentrar-escopo`/`sair-escopo` retomam a execução;
+-   `parado`: emitido quando a execução para num ponto de parada (`motivo:breakpoint`) ou após um passo (`motivo:proximo`), com o arquivo e a linha atuais;
+-   `encerrado`: emitido quando o programa roda até o fim sem mais paradas, ou após `encerrar-sessao`.
+
 ### Formato das respostas
 
 Cada resposta é delimitada por marcadores de início e fim. Exemplo do comando `pilha-execucao`:
@@ -67,17 +114,37 @@ Cada resposta é delimitada por marcadores de início e fim. Exemplo do comando 
 ```
 Recebido comando 'pilha-execucao'
 --- pilha-execucao-resposta ---
-escreva('testando'); --- D:\delegua\testes\index.delegua::<principal>::1
+escreva('testando'); --- D:\delegua\testes\index.delegua::<principal>::1::1
 --- fim-pilha-execucao-resposta ---
 ```
 
 Formato de cada linha da pilha:
 
 ```
-instrução --- caminho-do-arquivo::assinatura-do-método::número-da-linha
+instrução --- caminho-do-arquivo::assinatura-do-método::número-da-linha::frameId
 ```
 
 > **Nota:** o comando `avaliar` possui um problema de condição de corrida e não é recomendado. Use `avaliar-variavel` para consultar valores.
+
+### Comando padrão × DAP
+
+| Comando padrão                | Requisição/evento DAP equivalente |
+|--------------------------------|------------------------------------|
+| `capacidades`                  | `initialize`                       |
+| `reiniciar`                    | `launch`                           |
+| `definir-pontos-parada`        | `setBreakpoints`                   |
+| `linhas-execucao`               | `threads`                          |
+| `pilha-execucao` (com `frameId`) | `stackTrace`                     |
+| `escopos`                      | `scopes`                           |
+| `variaveis-referencia`         | `variables`                        |
+| `continuar`                    | `continue`                         |
+| `proximo`                      | `next`                             |
+| `adentrar-escopo`              | `stepIn`                           |
+| `sair-escopo`                  | `stepOut`                          |
+| evento `continuado`            | evento `continued`                 |
+| evento `parado`                | evento `stopped`                   |
+| evento `encerrado`             | eventos `terminated`/`exited`      |
+| `encerrar-sessao`              | `disconnect`                       |
 
 ---
 

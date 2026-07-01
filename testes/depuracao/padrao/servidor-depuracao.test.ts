@@ -450,6 +450,180 @@ describe('ServidorDepuracao', () => {
 
             expect(socket.escritas.length).toBeGreaterThan(0);
         });
+
+        it('deve incluir um frameId ao final de cada linha da pilha (equivalente a stackTrace do DAP)', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoPilhaExecucao(socket as any);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain(`${caminhoArquivo}::calcular::5::1`);
+        });
+    });
+
+    describe('comandoCapacidades', () => {
+        it('deve responder versao, dialeto e lista de comandos suportados (equivalente a initialize do DAP)', () => {
+            (mockNucleoExecucao as any).versao = '1.22.4-teste';
+            (mockNucleoExecucao as any).dialeto = 'delegua';
+            const socket = new MockSocket();
+
+            servidorDepuracao.comandoCapacidades(socket as any);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('capacidades');
+            expect(saida).toContain('1.22.4-teste');
+            expect(saida).toContain('delegua');
+            expect(saida).toContain('continuar');
+            expect(saida).toContain('linhas-execucao');
+        });
+    });
+
+    describe('comandoLinhasExecucao', () => {
+        it('deve listar a linha de execução principal (equivalente a threads do DAP)', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoLinhasExecucao(socket as any);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('linhas-execucao');
+            expect(saida).toContain('1 :: thread-principal');
+        });
+    });
+
+    describe('comandoReiniciar', () => {
+        it('deve chamar carregarEExecutarArquivo do nucleo de execucao (equivalente a launch do DAP)', async () => {
+            const carregarMock = jest.fn().mockResolvedValue(undefined);
+            (mockNucleoExecucao as any).carregarEExecutarArquivo = carregarMock;
+            const socket = new MockSocket();
+
+            await servidorDepuracao.comandoReiniciar(['reiniciar', caminhoArquivo], socket as any);
+
+            expect(carregarMock).toHaveBeenCalledWith(caminhoArquivo);
+            expect(socket.escritas.join('')).toContain('reiniciar-resposta');
+        });
+
+        it('deve informar formato correto quando o arquivo nao e informado', async () => {
+            const socket = new MockSocket();
+            await servidorDepuracao.comandoReiniciar(['reiniciar'], socket as any);
+
+            expect(socket.escritas.join('')).toContain('Formato:');
+        });
+
+        it('deve informar quando o nucleo de execucao atual nao suporta recarregamento', async () => {
+            const socket = new MockSocket();
+            await servidorDepuracao.comandoReiniciar(['reiniciar', caminhoArquivo], socket as any);
+
+            expect(socket.escritas.join('')).toContain('não suporta recarregamento');
+        });
+    });
+
+    describe('comandoDefinirPontosParada', () => {
+        it('deve substituir pontos de parada do arquivo e responder verificado por linha (equivalente a setBreakpoints do DAP)', () => {
+            mockInterpretador.pontosParada = [{ hashArquivo: hashArquivo, linha: 99 } as PontoParada];
+            const socket = new MockSocket();
+
+            servidorDepuracao.comandoDefinirPontosParada(['definir-pontos-parada', caminhoArquivo, '2,3'], socket as any);
+
+            expect(mockInterpretador.pontosParada).toHaveLength(2);
+            expect(mockInterpretador.pontosParada.map((p: PontoParada) => p.linha).sort()).toEqual([2, 3]);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('2 :: verificado');
+            expect(saida).toContain('3 :: verificado');
+        });
+
+        it('deve marcar como nao-verificado uma linha invalida', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoDefinirPontosParada(['definir-pontos-parada', caminhoArquivo, '999'], socket as any);
+
+            expect(socket.escritas.join('')).toContain('999 :: nao-verificado');
+        });
+
+        it('deve informar formato correto quando faltar o arquivo', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoDefinirPontosParada(['definir-pontos-parada'], socket as any);
+
+            expect(socket.escritas.join('')).toContain('Formato:');
+        });
+    });
+
+    describe('comandoEncerrarSessao', () => {
+        it('deve finalizar a depuracao do nucleo, emitir evento encerrado e fechar o servidor (equivalente a disconnect do DAP)', () => {
+            const finalizarDepuracaoMock = jest.fn();
+            (mockNucleoExecucao as any).finalizarDepuracao = finalizarDepuracaoMock;
+            const socket = new MockSocket();
+            servidorDepuracao.conexoes[0] = socket;
+            const finalizarServidorSpy = jest.spyOn(servidorDepuracao, 'finalizarServidorDepuracao');
+
+            servidorDepuracao.comandoEncerrarSessao(socket as any);
+
+            expect(finalizarDepuracaoMock).toHaveBeenCalled();
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('encerrar-sessao');
+            expect(saida).toContain('--- evento: encerrado ---');
+            expect(finalizarServidorSpy).toHaveBeenCalled();
+        });
+    });
+
+    describe('comandoEscopos e comandoVariaveisReferencia', () => {
+        beforeEach(() => {
+            (mockInterpretador.pilhaEscoposExecucao.pilha[1] as any).espacoMemoria = {
+                valores: {
+                    x: { tipo: 'Número', valor: 10 },
+                    lista: { tipo: 'Vetor', valor: [1, 2, 3] },
+                },
+            };
+        });
+
+        it('deve retornar a referencia de variaveis de um frame valido (equivalente a scopes do DAP)', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoPilhaExecucao(socket as any);
+            servidorDepuracao.comandoEscopos(['escopos', '1'], socket as any);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('escopos');
+            expect(saida).toContain('Locais :: 1');
+        });
+
+        it('deve informar frameId nao encontrado quando pilha-execucao nao foi chamada antes', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoEscopos(['escopos', '1'], socket as any);
+
+            expect(socket.escritas.join('')).toContain('não encontrado');
+        });
+
+        it('deve listar variaveis de uma referencia e criar referencia filha para valores compostos (equivalente a variables do DAP)', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoPilhaExecucao(socket as any);
+            servidorDepuracao.comandoEscopos(['escopos', '1'], socket as any);
+            servidorDepuracao.comandoVariaveisReferencia(['variaveis-referencia', '1'], socket as any);
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('x :: Número :: 10 :: 0');
+            expect(saida).toMatch(/lista :: Vetor :: \[1,2,3\] :: [1-9]\d*/);
+        });
+
+        it('deve permitir navegar recursivamente num valor composto (drill-down)', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoPilhaExecucao(socket as any);
+            servidorDepuracao.comandoEscopos(['escopos', '1'], socket as any);
+            servidorDepuracao.comandoVariaveisReferencia(['variaveis-referencia', '1'], socket as any);
+
+            const saida = socket.escritas.join('');
+            const referenciaFilha = saida.match(/lista :: Vetor :: \[1,2,3\] :: (\d+)/)[1];
+
+            servidorDepuracao.comandoVariaveisReferencia(['variaveis-referencia', referenciaFilha], socket as any);
+
+            const saidaFilha = socket.escritas.join('');
+            expect(saidaFilha).toContain('0 :: number :: 1 :: 0');
+            expect(saidaFilha).toContain('1 :: number :: 2 :: 0');
+            expect(saidaFilha).toContain('2 :: number :: 3 :: 0');
+        });
+
+        it('deve informar referencia nao encontrada quando inexistente', () => {
+            const socket = new MockSocket();
+            servidorDepuracao.comandoVariaveisReferencia(['variaveis-referencia', '999'], socket as any);
+
+            expect(socket.escritas.join('')).toContain('não encontrada');
+        });
     });
 
     describe('operarConexao', () => {
@@ -594,6 +768,91 @@ describe('ServidorDepuracao', () => {
 
             expect(socket.escritas.some((e) => e.includes('pontos-parada'))).toBe(true);
             expect(socket.escritas.some((e) => e.includes('variaveis'))).toBe(true);
+        });
+
+        it('deve despachar comando capacidades ao receber dados', () => {
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('capacidades\n'));
+
+            expect(socket.escritas.some((e) => e.includes('capacidades'))).toBe(true);
+        });
+
+        it('deve despachar comando linhas-execucao ao receber dados', () => {
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('linhas-execucao\n'));
+
+            expect(socket.escritas.some((e) => e.includes('thread-principal'))).toBe(true);
+        });
+    });
+
+    describe('Fila de comandos por conexão e eventos assíncronos', () => {
+        let socket: MockSocket;
+
+        beforeEach(() => {
+            socket = new MockSocket();
+        });
+
+        it('deve serializar comandos assincronos pipelinados na mesma mensagem de dados', async () => {
+            const ordem: string[] = [];
+            const esperar = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            mockInterpretador.instrucaoPasso = jest.fn().mockImplementation(async () => {
+                ordem.push('proximo-inicio');
+                await esperar(20);
+                ordem.push('proximo-fim');
+            });
+            mockInterpretador.instrucaoContinuarInterpretacao = jest.fn().mockImplementation(async () => {
+                ordem.push('continuar-inicio');
+                await esperar(5);
+                ordem.push('continuar-fim');
+            });
+
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('proximo\ncontinuar\n'));
+
+            await esperar(50);
+
+            expect(ordem).toEqual(['proximo-inicio', 'proximo-fim', 'continuar-inicio', 'continuar-fim']);
+        });
+
+        it('deve capturar erro nao tratado de um comando assincrono e notificar a conexao em vez de travar', async () => {
+            mockInterpretador.instrucaoPasso = jest.fn().mockRejectedValue(new Error('falha inesperada'));
+
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('adentrar-escopo\n'));
+
+            await new Promise((resolve) => setTimeout(resolve, 10));
+
+            expect(
+                socket.escritas.some((e) => e.includes('--- erro ---') && e.includes('falha inesperada'))
+            ).toBe(true);
+        });
+
+        it('deve emitir eventos continuado e encerrado ao continuar ate o fim do programa', async () => {
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('continuar\n'));
+
+            await new Promise((resolve) => setTimeout(resolve, 10));
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('--- evento: continuado ---');
+            expect(saida).toContain('--- evento: encerrado ---');
+        });
+
+        it('deve emitir evento parado com motivo breakpoint quando o interpretador para', async () => {
+            mockInterpretador.instrucaoContinuarInterpretacao = jest.fn().mockImplementation(async () => {
+                mockInterpretador.pontoDeParadaAtivo = true;
+            });
+
+            servidorDepuracao.operarConexao(socket as any);
+            socket.emit('data', Buffer.from('continuar\n'));
+
+            await new Promise((resolve) => setTimeout(resolve, 10));
+
+            const saida = socket.escritas.join('');
+            expect(saida).toContain('--- evento: parado ---');
+            expect(saida).toContain('motivo:breakpoint');
+            expect(saida).toContain('linha:5');
         });
     });
 
