@@ -1,0 +1,24 @@
+// Exemplo de uso da biblioteca "argumentos" via importação estruturada.
+//
+// Experimente executar assim (argumentos do programa ficam após o "--"):
+// delegua exemplos/delegua/importacao/estruturada/bibliotecas/argumentos/importacao-argumentos-estruturada.delegua -- --nome=Maria --verbose entrada.txt
+
+importar tudo como argumentos de "argumentos"
+
+escreva('Argumentos posicionais: ', argumentos.argumentos)
+escreva('Quantidade de argumentos: ', argumentos.quantidade)
+escreva('Argumentos nomeados: ', argumentos.argumentosNomeados)
+
+se (argumentos.temArgumento('nome')) {
+    escreva('Olá, ', argumentos.obterArgumento('nome', 'desconhecido'), '!')
+}
+senao {
+    escreva('Nenhum nome informado. Use --nome=SeuNome para se identificar.')
+}
+
+se (argumentos.temArgumento('verbose')) {
+    escreva('Modo verboso ativado.')
+}
+
+var idioma = argumentos.obterArgumento('idioma', 'português')
+escreva('Idioma escolhido: ', idioma)

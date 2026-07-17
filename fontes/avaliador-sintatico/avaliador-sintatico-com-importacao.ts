@@ -348,8 +348,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
             if (!String(literalCaminho.valor).endsWith('.delegua')) {
                 const caminhoTexto = String(literalCaminho.valor);
-                if (!verificarModulosDelegua(caminhoTexto)) {
-                    // Módulo embutido do núcleo (ex.: "testes"): deixa o interpretador resolver.
+                if (caminhoTexto === 'testes') {
+                    // Módulo embutido do núcleo: deixa o interpretador resolver.
                     return declaracaoResolvida;
                 }
 
@@ -389,8 +389,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         if (!String(literalCaminho.valor).endsWith('.delegua')) {
             const caminhoTexto = String(literalCaminho.valor);
 
-            if (!verificarModulosDelegua(caminhoTexto)) {
-                // Módulo embutido do núcleo (ex.: "testes"): registra os elementos como
+            if (caminhoTexto === 'testes') {
+                // Módulo embutido do núcleo: registra os elementos como
                 // tipo 'qualquer' no escopo e deixa o interpretador resolver em runtime.
                 for (const simboloImportacao of declaracaoResolvida.elementosImportacao) {
                     this.pilhaEscopos.definirInformacoesVariavel(

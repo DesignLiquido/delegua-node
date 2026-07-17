@@ -1,0 +1,25 @@
+// Exemplo de uso da biblioteca "argumentos", que dá acesso aos argumentos
+// passados na linha de comando na hora de executar este arquivo.
+//
+// Experimente executar assim (argumentos do programa ficam após o "--"):
+// delegua exemplos/delegua/importacao/dinamica/bibliotecas/argumentos/importacao-argumentos.delegua -- --nome=Maria --verbose entrada.txt
+
+var argumentos = importar('argumentos')
+
+escreva('Argumentos posicionais: ', argumentos.argumentos)
+escreva('Quantidade de argumentos: ', argumentos.quantidade)
+escreva('Argumentos nomeados: ', argumentos.argumentosNomeados)
+
+se (argumentos.temArgumento('nome')) {
+    escreva('Olá, ', argumentos.obterArgumento('nome', 'desconhecido'), '!')
+}
+senao {
+    escreva('Nenhum nome informado. Use --nome=SeuNome para se identificar.')
+}
+
+se (argumentos.temArgumento('verbose')) {
+    escreva('Modo verboso ativado.')
+}
+
+var idioma = argumentos.obterArgumento('idioma', 'português')
+escreva('Idioma escolhido: ', idioma)
