@@ -35,12 +35,14 @@ export class NucleoTraducao
         arm: '.s',
         assemblyscript: '.as',
         delegua: '.delegua',
+        elixir: '.ex',
         javascript: '.js',
         js: '.js',
         alg: '.alg',
         visualg: '.alg',
         python: '.py',
         py: '.py',
+        ruby: '.rb',
         x64: '.nasm'
     }
 
@@ -197,7 +199,7 @@ export class NucleoTraducao
             retornoImportador.hashArquivo
         );
 
-        resultado = this.tradutor.traduzir(retornoAvaliadorSintatico.declaracoes);
+        resultado = await this.tradutor.traduzir(retornoAvaliadorSintatico.declaracoes);
 
         if (gerarArquivoSaida) {
             const linguagem = this.comandoTraducao?.split('-')[2] || '';

@@ -1,3 +1,6 @@
+import * as sistemaArquivos from 'fs';
+import * as caminho from 'path';
+
 import { NucleoTraducao } from "../fontes/nucleo-traducao";
 
 describe('Núcleo de tradução', () => {
@@ -144,6 +147,27 @@ describe('Núcleo de tradução', () => {
             expect(saida.length).toBeGreaterThan(0);
         });
 
+        // Regressão https://github.com/DesignLiquido/delegua/issues/1402
+        // `traduzirArquivo` não aguardava a Promise retornada por `tradutor.traduzir`,
+        // então a saída era o objeto `Promise` pendente em vez do código traduzido.
+        it('Deve traduzir Delégua para Elixir (não deve retornar Promise pendente)', async () => {
+            let saida = '';
+            const nucleoTraducao = new NucleoTraducao((texto: string) => { saida += texto; });
+            nucleoTraducao.iniciarTradutor('delegua-para-elixir');
+            await nucleoTraducao.traduzirArquivo('./exemplos/tradutores/delegua-para-elixir.delegua', false);
+            expect(saida).not.toContain('Promise');
+            expect(saida).toContain('IO.puts');
+        });
+
+        it('Deve traduzir Delégua para Ruby (não deve retornar Promise pendente)', async () => {
+            let saida = '';
+            const nucleoTraducao = new NucleoTraducao((texto: string) => { saida += texto; });
+            nucleoTraducao.iniciarTradutor('delegua-para-ruby');
+            await nucleoTraducao.traduzirArquivo('./exemplos/tradutores/delegua-para-ruby.delegua', false);
+            expect(saida).not.toContain('Promise');
+            expect(saida.length).toBeGreaterThan(0);
+        });
+
         it('Deve traduzir VisuAlg para Delégua', async () => {
             let saida = '';
             const nucleoTraducao = new NucleoTraducao((texto: string) => { saida += texto; });
@@ -156,6 +180,31 @@ describe('Núcleo de tradução', () => {
             const nucleoTraducao = new NucleoTraducao();
             expect(nucleoTraducao.funcaoDeRetorno).toBeDefined();
             expect(nucleoTraducao.funcaoDeRetornoMesmaLinha).toBeDefined();
+        });
+
+        // Regressão https://github.com/DesignLiquido/delegua/issues/1402
+        // A extensão de saída para `delegua-para-elixir` não estava mapeada em `extensoes`,
+        // então nenhum arquivo `.ex` era gerado ao usar a opção `-s`.
+        it('Deve gerar arquivo .ex ao traduzir Delégua para Elixir com gerarArquivoSaida', async () => {
+            const arquivoSaida = caminho.resolve('./exemplos/tradutores/delegua-para-elixir.ex');
+            if (sistemaArquivos.existsSync(arquivoSaida)) {
+                sistemaArquivos.unlinkSync(arquivoSaida);
+            }
+
+            const nucleoTraducao = new NucleoTraducao();
+            nucleoTraducao.iniciarTradutor('delegua-para-elixir');
+            await nucleoTraducao.traduzirArquivo('./exemplos/tradutores/delegua-para-elixir.delegua', true);
+
+            // A escrita do arquivo é assíncrona e não aguardada internamente, então
+            // aguardamos o próximo ciclo de eventos antes de verificar o resultado.
+            await new Promise((resolucao) => setTimeout(resolucao, 100));
+
+            expect(sistemaArquivos.existsSync(arquivoSaida)).toBe(true);
+            const conteudo = sistemaArquivos.readFileSync(arquivoSaida, 'utf8');
+            expect(conteudo).not.toContain('Promise');
+            expect(conteudo).toContain('IO.puts');
+
+            sistemaArquivos.unlinkSync(arquivoSaida);
         });
     });
 });

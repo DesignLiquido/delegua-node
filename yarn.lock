@@ -284,10 +284,12 @@
   dependencies:
     lodash "^4.17.21"
 
-"@designliquido/delegua-arquivos@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-arquivos/-/delegua-arquivos-0.0.4.tgz#fd98c0a829d6e882e93aa9e73223e50e04263540"
-  integrity sha512-d6ae8ywckt9x381YW44fgN9KSxn+UrGSDMD+mNDg28Z0EleyfV+wfd1lYUPSsDknY8hD6+mk1uuushgpG7sUoA==
+"@designliquido/delegua-arquivos@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-arquivos/-/delegua-arquivos-0.1.0.tgz#44aef1596d30f11b8e702b2885a2cc36d914e561"
+  integrity sha512-uQbYahZePN/PGuH0zW4Lh0Oweetgt1pmhipPa9i0uwllrjksslL2mQxLq836HV0uNeDajFuTM7AcItK2/hSv6Q==
+  dependencies:
+    "@designliquido/delegua" "^1.26.1"
 
 "@designliquido/delegua-criptografia@^0.3.4":
   version "0.3.4"
@@ -321,17 +323,17 @@
     "@designliquido/lincones-js" "^0.2.3"
     "@designliquido/lincones-sqlite" "^0.3.2"
 
-"@designliquido/delegua-estatistica@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.1.1.tgz#2b99f3185835521da9465b7f8c013bf1cad585f0"
-  integrity sha512-/D7cw6Mi++BuL1cA3CoePMDLnBtYN/Dr6sREaVjHm8sidXtFTzQpy91R9z9RMs/9pbIbzcPFYZeWifdZR5luCg==
+"@designliquido/delegua-estatistica@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-estatistica/-/delegua-estatistica-0.1.2.tgz#9a32bca11127c434ade71cb4f9bdffbc62fab3b4"
+  integrity sha512-otMH+2B6nsaN2iOIuGR23tmsnhxJe6AGtA0S5pAOdAVxOuDP3Z77lX0pm4xOdpWT5bmvm9PgwazuC9AkkJDGFg==
   dependencies:
-    "@designliquido/delegua-matematica" "^0.3.0"
+    "@designliquido/delegua-matematica" "^0.4.0"
 
-"@designliquido/delegua-fisica@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-fisica/-/delegua-fisica-0.1.0.tgz#c009e8007fab6b005d62e5fcdc75090562cbbb9f"
-  integrity sha512-7wMUG2JK/V0SQz7Vo3dYxohH30vPwOJXA+NoN9tYU5ECdjv2mIJc72ELjcI+OJtwczHOXyfhTmHIFOgDJ9DZGw==
+"@designliquido/delegua-fisica@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-fisica/-/delegua-fisica-0.1.1.tgz#13a71ecb7154e66a9b43c0ed24e3b76b08897d9d"
+  integrity sha512-9k87B13cM2QXAHznPn1xopAoOvSe03Ju0X5vgM2nryk5YWLAKfA1LivJozLrVUQmnJehL+Nmfh4zXBBAJgXDLg==
 
 "@designliquido/delegua-http@^0.1.3":
   version "0.1.3"
@@ -350,15 +352,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-interface-grafica/-/delegua-interface-grafica-0.1.0.tgz#c52b3b1f31b049fcb4fabc0a8a24c6b33c27ac74"
   integrity sha512-AFtLTjLv/Ts4yT6YO5L/1pbgryw7Bnkg9psyJyU/cyd5qTpQK/paP4W3GIU/2wycY7Hn8EXJwux8vDssf1O8dg==
 
-"@designliquido/delegua-json@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-json/-/delegua-json-0.3.0.tgz#a3e7b16df650d9bb442c8c7233815940f3b4a872"
-  integrity sha512-NLymuiB6V+ZZ8ZQC92qxxAcIPYTdyWSu0vExFC6cDfi8vkpH98GMAFraLWjy1bHsQxYh++sA5aev3w9BPjvCGg==
-
-"@designliquido/delegua-matematica@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-matematica/-/delegua-matematica-0.3.0.tgz#fbd1048bc0efbadcecf96c3486f8c376b6516846"
-  integrity sha512-UD276/tKuWuqky0FfwuI+QJ5M+nUpnGq9QWjqmqPJikXfhUjePpTR5bBz/Ni+6WfBtgW9FShJ4T9GH96jKYuGw==
+"@designliquido/delegua-json@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-json/-/delegua-json-0.3.1.tgz#f2bb496097862e00040d5ef17811e793eb6025af"
+  integrity sha512-ULXkyBCNWdZjWV3shNeIfiRKdduYJoXzDe9LXzADvV1PAEr65+HQX0H8S6t0cGK7LuRW0WI+RUSJhRBsoGpVUw==
 
 "@designliquido/delegua-matematica@^0.4.0":
   version "0.4.0"
