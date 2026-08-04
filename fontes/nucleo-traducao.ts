@@ -17,7 +17,24 @@ import { NucleoComum } from './nucleo-comum';
 import { Importador } from './importador';
 import { ImportadorJavaScript } from './importador/importador-javascript';
 
-export class NucleoTraducao 
+export const TRADUTORES_DISPONIVEIS = [
+    'delegua-para-arm',
+    'delegua-para-assemblyscript',
+    'delegua-para-as',
+    'delegua-para-elixir',
+    'delegua-para-js',
+    'delegua-para-javascript',
+    'delegua-para-py',
+    'delegua-para-python',
+    'delegua-para-ruby',
+    'delegua-para-x64',
+    'js-para-delegua',
+    'javascript-para-delegua',
+    'alg-para-delegua',
+    'visualg-para-delegua'
+];
+
+export class NucleoTraducao
     extends NucleoComum
 {
     importador: ImportadorInterface<any>;
@@ -167,7 +184,10 @@ export class NucleoTraducao
                 this.tradutor = new TradutorReversoVisuAlg();
                 break;
             default:
-                throw new Error(`Tradutor '${comandoTraducao}' não implementado.`);
+                throw new Error(
+                    `Tradutor '${comandoTraducao}' não implementado. ` +
+                    `Tradutores disponíveis: ${TRADUTORES_DISPONIVEIS.join(', ')}.`
+                );
         }
     }
 

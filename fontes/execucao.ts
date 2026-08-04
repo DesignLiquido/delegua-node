@@ -135,7 +135,12 @@ const principal = async () => {
         }
 
         if (opcoes.traduzir) {
-            await delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
+            try {
+                await delegua.traduzirArquivo(codigoOuNomeArquivo, opcoes.traduzir, opcoes.alvo, opcoes.saida);
+            } catch (erro: any) {
+                console.error(`Erro: ${erro.message}`);
+                process.exit(1);
+            }
         } else {
             if (codigoOuNomeArquivo === '-') {
                 let codigo = '';
