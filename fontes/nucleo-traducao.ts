@@ -2,14 +2,13 @@ import * as sistemaArquivos from 'fs';
 import * as caminho from 'path';
 
 import { AvaliadorSintaticoInterface, TradutorInterface } from '@designliquido/delegua/interfaces';
-import { PlataformaAlvoARM, TradutorAssemblyARM, TradutorElixir, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorRuby } from '@designliquido/delegua/tradutores';
+import { TradutorElixir, TradutorJavaScript, TradutorPython, TradutorReversoJavaScript, TradutorRuby } from '@designliquido/delegua/tradutores';
 import { TradutorAssemblyScript } from '@designliquido/delegua/tradutores/tradutor-assemblyscript';
 import { Lexador } from '@designliquido/delegua/lexador';
 import { AvaliadorSintatico } from '@designliquido/delegua/avaliador-sintatico';
 import { LexadorVisuAlg } from '@designliquido/visualg/lexador';
 import { AvaliadorSintaticoVisuAlg } from '@designliquido/visualg/avaliador-sintatico';
 import { TradutorReversoVisuAlg } from '@designliquido/visualg/tradutores';
-import { PlataformaAlvo, TradutorAssemblyX64 } from '@designliquido/delegua/tradutores/tradutor-assembly-x64';
 import { AvaliadorSintaticoJavaScript } from "@designliquido/delegua/avaliador-sintatico/traducao/avaliador-sintatico-javascript";
 
 import { ImportadorInterface } from './interfaces';
@@ -18,7 +17,6 @@ import { Importador } from './importador';
 import { ImportadorJavaScript } from './importador/importador-javascript';
 
 export const TRADUTORES_DISPONIVEIS = [
-    'delegua-para-arm',
     'delegua-para-assemblyscript',
     'delegua-para-as',
     'delegua-para-elixir',
@@ -27,7 +25,6 @@ export const TRADUTORES_DISPONIVEIS = [
     'delegua-para-py',
     'delegua-para-python',
     'delegua-para-ruby',
-    'delegua-para-x64',
     'js-para-delegua',
     'javascript-para-delegua',
     'alg-para-delegua',
@@ -49,7 +46,6 @@ export class NucleoTraducao
     comandoTraducao: string = '';
 
     extensoes = {
-        arm: '.s',
         assemblyscript: '.as',
         delegua: '.delegua',
         elixir: '.ex',
@@ -59,8 +55,7 @@ export class NucleoTraducao
         visualg: '.alg',
         python: '.py',
         py: '.py',
-        ruby: '.rb',
-        x64: '.nasm'
+        ruby: '.rb'
     }
 
     constructor(
@@ -80,21 +75,6 @@ export class NucleoTraducao
     iniciarTradutor(comandoTraducao: string, alvo: string = '') {
         this.comandoTraducao = comandoTraducao;
         switch (comandoTraducao) {
-            case 'delegua-para-arm':
-                this.importador = new Importador(
-                    new Lexador(false),
-                    this.arquivosAbertos,
-                    this.conteudoArquivosAbertos, 
-                    false
-                );
-                this.avaliadorSintatico = new AvaliadorSintatico();
-                let alvoResolvidoARM: PlataformaAlvoARM = 'linux-arm';
-                if (alvo === 'android') {
-                    alvoResolvidoARM = 'android';
-                }
-
-                this.tradutor = new TradutorAssemblyARM(alvoResolvidoARM);
-                break;
             case 'delegua-para-assemblyscript':
             case 'delegua-para-as':
                 this.importador = new Importador(
@@ -150,21 +130,6 @@ export class NucleoTraducao
 
                 this.avaliadorSintatico = new AvaliadorSintatico();
                 this.tradutor = new TradutorRuby();
-                break;
-            case 'delegua-para-x64':
-                this.importador = new Importador(
-                    new Lexador(false),
-                    this.arquivosAbertos,
-                    this.conteudoArquivosAbertos, 
-                    false
-                );
-                this.avaliadorSintatico = new AvaliadorSintatico();
-                let alvoResolvido: PlataformaAlvo = 'linux';
-                if (alvo === 'windows') {
-                    alvoResolvido = 'windows';
-                }
-
-                this.tradutor = new TradutorAssemblyX64(alvoResolvido);
                 break;
             case 'js-para-delegua':
             case 'javascript-para-delegua':

@@ -16,20 +16,6 @@ describe('Núcleo de tradução', () => {
     });
 
     describe('iniciarTradutor', () => {
-        it('delegua-para-arm', () => {
-            const nucleoTraducao = new NucleoTraducao();
-            nucleoTraducao.iniciarTradutor('delegua-para-arm');
-            expect(nucleoTraducao.tradutor).toBeDefined();
-            expect(nucleoTraducao.importador).toBeDefined();
-            expect(nucleoTraducao.avaliadorSintatico).toBeDefined();
-        });
-
-        it('delegua-para-arm com alvo android', () => {
-            const nucleoTraducao = new NucleoTraducao();
-            nucleoTraducao.iniciarTradutor('delegua-para-arm', 'android');
-            expect(nucleoTraducao.tradutor).toBeDefined();
-        });
-
         it('delegua-para-assemblyscript', () => {
             const nucleoTraducao = new NucleoTraducao();
             nucleoTraducao.iniciarTradutor('delegua-para-assemblyscript');
@@ -80,19 +66,6 @@ describe('Núcleo de tradução', () => {
             nucleoTraducao.iniciarTradutor('delegua-para-ruby');
             expect(nucleoTraducao.tradutor).toBeDefined();
             expect(nucleoTraducao.importador).toBeDefined();
-        });
-
-        it('delegua-para-x64 (alvo padrão linux)', () => {
-            const nucleoTraducao = new NucleoTraducao();
-            nucleoTraducao.iniciarTradutor('delegua-para-x64');
-            expect(nucleoTraducao.tradutor).toBeDefined();
-            expect(nucleoTraducao.importador).toBeDefined();
-        });
-
-        it('delegua-para-x64 com alvo windows', () => {
-            const nucleoTraducao = new NucleoTraducao();
-            nucleoTraducao.iniciarTradutor('delegua-para-x64', 'windows');
-            expect(nucleoTraducao.tradutor).toBeDefined();
         });
 
         it('javascript-para-delegua', () => {

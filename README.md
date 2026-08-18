@@ -53,6 +53,21 @@ npm install -g @designliquido/delegua-node
 No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras, bem como comandos executáveis por prompt de comando, como uso de arquivos ou código como argumento, ou o [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console). Por isso, a instalação da solução completa é recomendada para a maioria dos casos.
 
 
+## Tradução de código
+
+`delegua-node` traduz código Delégua para outras linguagens via a opção `-t, --traduzir` (veja `delegua --ajuda`). Valores suportados: `delegua-para-assemblyscript`/`delegua-para-as`, `delegua-para-elixir`, `delegua-para-js`/`delegua-para-javascript`, `delegua-para-py`/`delegua-para-python`, `delegua-para-ruby`, `js-para-delegua`/`javascript-para-delegua`, `alg-para-delegua`/`visualg-para-delegua`.
+
+### Compilação para arquiteturas de processador e WebAssembly (removida)
+
+Os comandos `delegua-para-arm` e `delegua-para-x64` **não são mais suportados aqui**. Essa funcionalidade foi movida para compiladores autocontidos, com toolchain próprio (montador/linker), em [`delegua-llvm-completo`](https://github.com/DesignLiquido/delegua-llvm-completo/tree/main/pacotes):
+
+- [`delegua-x64`](https://github.com/DesignLiquido/delegua-llvm-completo/tree/main/pacotes/delegua-x64) — substitui `delegua-para-x64`;
+- [`delegua-arm`](https://github.com/DesignLiquido/delegua-llvm-completo/tree/main/pacotes/delegua-arm) — substitui `delegua-para-arm`;
+- [`delegua-risc-v`](https://github.com/DesignLiquido/delegua-llvm-completo/tree/main/pacotes/delegua-risc-v);
+- [`delegua-wasm`](https://github.com/DesignLiquido/delegua-llvm-completo/tree/main/pacotes/delegua-wasm).
+
+Cada um desses pacotes é instalável e executável isoladamente (`npx delegua-x64 arquivo.delegua`, por exemplo) e cuida de todo o pipeline: tradução, montagem e _linkagem_ do binário final.
+
 ## Depuração
 
 `delegua-node` oferece dois modos de depuração independentes.

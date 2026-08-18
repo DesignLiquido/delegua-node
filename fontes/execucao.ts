@@ -33,7 +33,7 @@ const principal = async () => {
         .helpOption('-h, --ajuda', 'Exibe a ajuda para o comando.')
         .option(
             '-a, --alvo <alvo>',
-            'O alvo, para casos de tradução que são compilações. Para traduções do tipo `delegua-para-x64`, os alvos válidos são "linux" (padrão) e "windows". Para traduções do tipo `delegua-para-arm`, os alvos válidos são "linux-arm" (padrão) e "android".',
+            'O alvo, para casos de tradução que são compilações. Não utilizado pelos tradutores atuais (compilação para x64, ARM, RISC-V e WebAssembly foi movida para os pacotes `delegua-x64`, `delegua-arm`, `delegua-risc-v` e `delegua-wasm`).',
             ''
         )
         .option(
@@ -73,7 +73,7 @@ const principal = async () => {
         )
         .option(
             '-t, --traduzir <linguagem-para-linguagem>',
-            'Traduz o código do arquivo passado como parâmetro de arquivo. Valores válidos: delegua-para-arm, delegua-para-assemblyscript, delegua-para-as, delegua-para-elixir, delegua-para-js, delegua-para-javascript, delegua-para-py, delegua-para-python, delegua-para-ruby, delegua-para-x64, js-para-delegua, javascript-para-delegua, alg-para-delegua, visualg-para-delegua. Exemplo: `delegua-para-js`.',
+            'Traduz o código do arquivo passado como parâmetro de arquivo. Valores válidos: delegua-para-assemblyscript, delegua-para-as, delegua-para-elixir, delegua-para-js, delegua-para-javascript, delegua-para-py, delegua-para-python, delegua-para-ruby, js-para-delegua, javascript-para-delegua, alg-para-delegua, visualg-para-delegua. Exemplo: `delegua-para-js`. Compilação para x64, ARM, RISC-V e WebAssembly: veja os pacotes `delegua-x64`, `delegua-arm`, `delegua-risc-v` e `delegua-wasm`.',
         )
         .option(
             '-v, --versao',
