@@ -525,7 +525,7 @@ tente {
             const valorResultado = resultado.resultado[0] as any;
             expect(valorResultado).toHaveProperty('valorRetornado');
             expect(valorResultado.valorRetornado).toHaveProperty('valor', 3.14);
-            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'número');
+            expect(valorResultado.valorRetornado).toHaveProperty('tipo', 'real');
         });
     });
 
