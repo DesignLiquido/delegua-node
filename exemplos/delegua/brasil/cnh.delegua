@@ -1,0 +1,8 @@
+// Exemplo de uso do módulo "brasil" para CNH (Carteira Nacional de Habilitação).
+var brasil = importar("brasil")
+
+var cnh = brasil.gerarCnh()
+
+escreva("CNH gerada: " + brasil.formatarCnh(cnh))
+escreva("CNH válida? " + brasil.cnhValida(cnh))
+escreva("CNH limpa: " + brasil.limparCnh(brasil.formatarCnh(cnh)))

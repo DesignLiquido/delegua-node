@@ -1,0 +1,15 @@
+// Exemplo de uso do módulo "brasil" para telefones brasileiros.
+// Obs.: "fixo" é palavra reservada em Delégua (equivalente a uma constante), por isso a variável abaixo usa outro nome.
+var brasil = importar("brasil")
+
+var celular = brasil.gerarTelefone("celular")
+var telefoneFixo = brasil.gerarTelefone("fixo")
+
+escreva("Celular gerado: " + celular)
+escreva("Celular válido? " + brasil.telefoneValido(celular))
+escreva("É celular? " + brasil.celularValido(celular))
+escreva("Celular formatado: " + brasil.formatarTelefone(celular))
+
+escreva("Fixo gerado: " + telefoneFixo)
+escreva("É fixo? " + brasil.telefoneFixoValido(telefoneFixo))
+escreva("Fixo limpo: " + brasil.limparTelefone(brasil.formatarTelefone(telefoneFixo)))

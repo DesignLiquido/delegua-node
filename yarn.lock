@@ -270,6 +270,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@brazilian-utils/brazilian-utils@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@brazilian-utils/brazilian-utils/-/brazilian-utils-2.3.0.tgz#99873918cb752ff0ec651dbd4c9cd4046a449db2"
+  integrity sha512-gycd2tRqkWcS5bhSjFDgnvxIXjQuxr32xw5BAkflNpEp12r+FkuK60CDb48U7xJAszNt3sPW6u9hxEcea+CZPQ==
+
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz#00629c35a688e05a88b1cda684fb9d5e73f000a1"
@@ -290,6 +295,13 @@
   integrity sha512-uQbYahZePN/PGuH0zW4Lh0Oweetgt1pmhipPa9i0uwllrjksslL2mQxLq836HV0uNeDajFuTM7AcItK2/hSv6Q==
   dependencies:
     "@designliquido/delegua" "^1.26.1"
+
+"@designliquido/delegua-brasil@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-brasil/-/delegua-brasil-0.0.0.tgz#f7cc55aec1117b51442abf0ed0b00496aff919d9"
+  integrity sha512-JgwoIVMllilLf9low0sN1XiJBIkPsO0aaQWQfcDBoqppsXCZcm69lx1quk5haLRlJ1VnoL2dyHSEimwEGDd32Q==
+  dependencies:
+    "@brazilian-utils/brazilian-utils" "^2.3.0"
 
 "@designliquido/delegua-criptografia@^0.3.4":
   version "0.3.4"

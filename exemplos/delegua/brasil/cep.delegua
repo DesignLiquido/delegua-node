@@ -1,0 +1,16 @@
+// Exemplo de uso do módulo "brasil" para CEP.
+var brasil = importar("brasil")
+
+var cep = "01310-100"
+
+escreva("CEP válido? " + brasil.cepValido(cep))
+escreva("CEP limpo: " + brasil.limparCep(cep))
+escreva("CEP formatado: " + brasil.formatarCep(brasil.limparCep(cep)))
+escreva("CEP gerado: " + brasil.formatarCep(brasil.gerarCep()))
+
+// As duas funções a seguir consultam um serviço externo (ViaCEP) pela rede.
+var endereco = brasil.obterEnderecoPorCep(cep)
+escreva("Endereço encontrado: " + endereco["street"] + ", " + endereco["neighborhood"] + " - " + endereco["city"] + "/" + endereco["state"])
+
+var ceps = brasil.obterCepPorEndereco("SP", "São Paulo", "Avenida Paulista")
+escreva("Quantidade de CEPs encontrados: " + tamanho(ceps))

@@ -1,0 +1,20 @@
+// Exemplo de uso do módulo "brasil" para conta bancária.
+// A validação usa o algoritmo de dígito verificador de cada banco (informado pelo código).
+var brasil = importar("brasil")
+
+var contaValida = {
+    "banco": "341",
+    "agencia": "1097",
+    "conta": "11669",
+    "digito": "1"
+}
+
+var contaInvalida = {
+    "banco": "341",
+    "agencia": "1097",
+    "conta": "11669",
+    "digito": "9"
+}
+
+escreva("Conta bancária válida? " + brasil.contaBancariaValida(contaValida))
+escreva("Conta bancária válida? " + brasil.contaBancariaValida(contaInvalida))

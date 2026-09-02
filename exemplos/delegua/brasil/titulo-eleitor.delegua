@@ -1,0 +1,8 @@
+// Exemplo de uso do módulo "brasil" para título de eleitor.
+var brasil = importar("brasil")
+
+var titulo = brasil.gerarTituloEleitor("SP")
+
+escreva("Título gerado: " + brasil.formatarTituloEleitor(titulo))
+escreva("Título válido? " + brasil.tituloEleitorValido(titulo))
+escreva("Título limpo: " + brasil.limparTituloEleitor(brasil.formatarTituloEleitor(titulo)))

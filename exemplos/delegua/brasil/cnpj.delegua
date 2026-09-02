@@ -1,0 +1,12 @@
+// Exemplo de uso do módulo "brasil" para CNPJ.
+var brasil = importar("brasil")
+
+var cnpj = "11.222.333/0001-81"
+
+escreva("CNPJ válido? " + brasil.cnpjValido(cnpj))
+escreva("CNPJ limpo: " + brasil.limparCnpj(cnpj))
+escreva("CNPJ formatado: " + brasil.formatarCnpj(brasil.limparCnpj(cnpj)))
+
+var cnpjGerado = brasil.gerarCnpj()
+escreva("CNPJ gerado: " + brasil.formatarCnpj(cnpjGerado))
+escreva("CNPJ gerado é válido? " + brasil.cnpjValido(cnpjGerado))

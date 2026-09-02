@@ -1,0 +1,8 @@
+// Exemplo de uso do módulo "brasil" para RENAVAM.
+var brasil = importar("brasil")
+
+var numeroValido = "00512757410"
+var numeroInvalido = "11111111111"
+
+escreva("RENAVAM " + numeroValido + " é válido? " + brasil.renavamValido(numeroValido))
+escreva("RENAVAM " + numeroInvalido + " é válido? " + brasil.renavamValido(numeroInvalido))

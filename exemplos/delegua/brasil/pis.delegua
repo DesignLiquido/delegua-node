@@ -1,0 +1,8 @@
+// Exemplo de uso do módulo "brasil" para PIS/PASEP.
+var brasil = importar("brasil")
+
+var pis = brasil.gerarPis()
+
+escreva("PIS gerado: " + brasil.formatarPis(pis))
+escreva("PIS válido? " + brasil.pisValido(pis))
+escreva("PIS limpo: " + brasil.limparPis(brasil.formatarPis(pis)))

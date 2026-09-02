@@ -236,6 +236,7 @@ const importarPacoteExternoCompleto = async (nome: string) => {
 export const verificarModulosDelegua = (nome: string): string | boolean => {
     const modulos = {
         arquivos: '@designliquido/delegua-arquivos',
+        brasil: '@designliquido/delegua-brasil',
         criptografia: '@designliquido/delegua-criptografia',
         csv: '@designliquido/delegua-csv',
         dados: '@designliquido/delegua-dados',

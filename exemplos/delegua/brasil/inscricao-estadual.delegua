@@ -1,0 +1,9 @@
+// Exemplo de uso do módulo "brasil" para Inscrição Estadual.
+// A regra de validação depende da unidade federativa informada.
+var brasil = importar("brasil")
+
+var ieValidaSP = "110042490114"
+var ieInvalidaSP = "123456789"
+
+escreva("IE " + ieValidaSP + " (SP) é válida? " + brasil.inscricaoEstadualValida("SP", ieValidaSP))
+escreva("IE " + ieInvalidaSP + " (SP) é válida? " + brasil.inscricaoEstadualValida("SP", ieInvalidaSP))

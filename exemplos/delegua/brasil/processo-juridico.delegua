@@ -1,0 +1,9 @@
+// Exemplo de uso do módulo "brasil" para número de processo judicial (padrão CNJ).
+var brasil = importar("brasil")
+
+// O ano informado precisa ser igual ou posterior ao ano corrente.
+var processo = brasil.gerarProcessoJuridico({ "ano": 2099, "tribunal": 8 })
+
+escreva("Processo gerado: " + brasil.formatarProcessoJuridico(processo))
+escreva("Processo válido? " + brasil.processoJuridicoValido(processo))
+escreva("Processo limpo: " + brasil.limparProcessoJuridico(brasil.formatarProcessoJuridico(processo)))

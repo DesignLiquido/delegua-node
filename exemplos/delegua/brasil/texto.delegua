@@ -1,0 +1,5 @@
+// Exemplo de uso do módulo "brasil" para capitalização de texto.
+var brasil = importar("brasil")
+
+escreva(brasil.capitalizar("joão da silva"))
+escreva(brasil.capitalizar("república federativa do brasil", { "palavrasMinusculas": ["do"] }))

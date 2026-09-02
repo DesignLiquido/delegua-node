@@ -1,0 +1,12 @@
+// Exemplo de uso do módulo "brasil" para feriados nacionais e estaduais.
+var brasil = importar("brasil")
+
+var feriadosNacionais = brasil.obterFeriados(2026)
+escreva("Quantidade de feriados nacionais em 2026: " + tamanho(feriadosNacionais))
+escreva("Primeiro feriado: " + feriadosNacionais[0]["nome"] + " em " + feriadosNacionais[0]["data"])
+
+var feriadosSP = brasil.obterFeriados(2026, "SP")
+escreva("Quantidade de feriados em SP em 2026: " + tamanho(feriadosSP))
+
+// "ehFeriado" espera um objeto Date nativo do JavaScript como parâmetro,
+// o que hoje não tem um equivalente direto na linguagem Delégua.

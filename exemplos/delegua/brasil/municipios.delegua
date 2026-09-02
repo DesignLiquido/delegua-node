@@ -1,0 +1,9 @@
+// Exemplo de uso do módulo "brasil" para municípios brasileiros.
+// Estas funções consultam um serviço externo (IBGE) pela rede.
+var brasil = importar("brasil")
+
+var nomeMunicipio = brasil.obterMunicipioPorCodigo("3550308")
+escreva("Município do código 3550308: " + nomeMunicipio)
+
+var resultado = brasil.obterMunicipioPorNome("São Paulo", "SP")
+escreva("Município encontrado: " + resultado[0] + "/" + resultado[1])

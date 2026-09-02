@@ -1,0 +1,15 @@
+// Exemplo de uso do módulo "brasil" para estados e cidades.
+var brasil = importar("brasil")
+
+var estados = brasil.obterEstados()
+escreva("Quantidade de estados: " + tamanho(estados))
+
+para cada estado em estados {
+    se (estado["codigo"] == "PR") {
+        escreva("Estado encontrado: " + estado["nome"])
+    }
+}
+
+var cidadesParana = brasil.obterCidades("PR")
+escreva("Quantidade de cidades no Paraná: " + tamanho(cidadesParana))
+escreva("Primeira cidade: " + cidadesParana[0])

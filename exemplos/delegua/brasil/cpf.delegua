@@ -1,0 +1,12 @@
+// Exemplo de uso do módulo "brasil" (pacote @designliquido/delegua-brasil) para CPF.
+var brasil = importar("brasil")
+
+var cpf = "111.444.777-35"
+
+escreva("CPF válido? " + brasil.cpfValido(cpf))
+escreva("CPF limpo: " + brasil.limparCpf(cpf))
+escreva("CPF formatado: " + brasil.formatarCpf(brasil.limparCpf(cpf)))
+
+var cpfGerado = brasil.gerarCpf()
+escreva("CPF gerado: " + brasil.formatarCpf(cpfGerado))
+escreva("CPF gerado é válido? " + brasil.cpfValido(cpfGerado))

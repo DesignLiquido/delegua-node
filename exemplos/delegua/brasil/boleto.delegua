@@ -1,0 +1,12 @@
+// Exemplo de uso do módulo "brasil" para boleto bancário (linha digitável).
+var brasil = importar("brasil")
+
+var boleto = brasil.gerarBoleto()
+
+escreva("Boleto gerado: " + brasil.formatarBoleto(boleto))
+escreva("Boleto válido? " + brasil.boletoValido(boleto))
+
+var informacoes = brasil.obterInfoBoleto(boleto)
+escreva("Valor: " + informacoes["valorBoleto"])
+escreva("Código do banco: " + informacoes["codigoBanco"])
+escreva("Data de vencimento: " + informacoes["dataVencimento"])

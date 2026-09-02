@@ -1,0 +1,6 @@
+// Exemplo de uso do módulo "brasil" para formatação e leitura de valores monetários.
+var brasil = importar("brasil")
+
+escreva("Formatado: R$ " + brasil.formatarMoeda(1234.5))
+escreva("Formatado com precisão: R$ " + brasil.formatarMoeda(1234.5, { "precisao": 3 }))
+escreva("Valor lido: " + brasil.analisarMoeda("R$ 1.234,50"))

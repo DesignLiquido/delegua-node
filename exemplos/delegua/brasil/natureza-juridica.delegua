@@ -1,0 +1,10 @@
+// Exemplo de uso do módulo "brasil" para código de Natureza Jurídica.
+var brasil = importar("brasil")
+
+var naturezas = brasil.obterNaturezasJuridicas()
+escreva("Natureza jurídica do código 1015: " + naturezas["1015"])
+
+var codigoGerado = brasil.gerarNaturezaJuridica()
+escreva("Código gerado: " + brasil.formatarNaturezaJuridica(codigoGerado))
+escreva("Código válido? " + brasil.naturezaJuridicaValida(codigoGerado))
+escreva("Código limpo: " + brasil.limparNaturezaJuridica(brasil.formatarNaturezaJuridica(codigoGerado)))

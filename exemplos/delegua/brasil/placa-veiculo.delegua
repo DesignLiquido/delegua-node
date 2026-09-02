@@ -1,0 +1,13 @@
+// Exemplo de uso do módulo "brasil" para placas de veículo.
+// O formato é descrito com "L" (letra) e "N" (número); o padrão é "LLLNLNN" (Mercosul).
+var brasil = importar("brasil")
+
+var placaMercosul = brasil.gerarPlacaVeiculo("LLLNLNN")
+var placaAntiga = brasil.gerarPlacaVeiculo("LLLNNNN")
+
+escreva("Placa Mercosul gerada: " + brasil.formatarPlacaVeiculo(placaMercosul))
+escreva("Formato detectado: " + brasil.obterFormatoPlacaVeiculo(placaMercosul))
+escreva("Placa válida? " + brasil.placaVeiculoValida(placaMercosul))
+
+escreva("Placa antiga gerada: " + brasil.formatarPlacaVeiculo(placaAntiga))
+escreva("Formato detectado: " + brasil.obterFormatoPlacaVeiculo(placaAntiga))

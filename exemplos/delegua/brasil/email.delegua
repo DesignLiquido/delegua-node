@@ -1,0 +1,5 @@
+// Exemplo de uso do módulo "brasil" para validação de e-mail.
+var brasil = importar("brasil")
+
+escreva("contato@delegua.dev é válido? " + brasil.emailValido("contato@delegua.dev"))
+escreva("endereço-inválido é válido? " + brasil.emailValido("endereço-inválido"))

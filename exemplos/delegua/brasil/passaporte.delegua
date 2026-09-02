@@ -1,0 +1,8 @@
+// Exemplo de uso do módulo "brasil" para passaporte brasileiro.
+var brasil = importar("brasil")
+
+var passaporte = brasil.gerarPassaporte()
+
+escreva("Passaporte gerado: " + brasil.formatarPassaporte(passaporte))
+escreva("Passaporte válido? " + brasil.passaporteValido(passaporte))
+escreva("Passaporte limpo: " + brasil.limparPassaporte(brasil.formatarPassaporte(passaporte)))
