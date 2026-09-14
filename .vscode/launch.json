@@ -771,6 +771,33 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Delégua > Importação > Bibliotecas > Brasil > Boleto",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "args": [
+        "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
+        // "--depurador",
+        "./exemplos/delegua/brasil/boleto.delegua"
+      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register/transpile-only",
+        "-r",
+        "tsconfig-paths/register",
+        // "--preserve-symlinks"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "**/node_modules/@designliquido/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Delégua > Importação > Bibliotecas > Criptografia",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "cwd": "${workspaceRoot}",

@@ -296,10 +296,10 @@
   dependencies:
     "@designliquido/delegua" "^1.26.1"
 
-"@designliquido/delegua-brasil@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-brasil/-/delegua-brasil-0.0.0.tgz#f7cc55aec1117b51442abf0ed0b00496aff919d9"
-  integrity sha512-JgwoIVMllilLf9low0sN1XiJBIkPsO0aaQWQfcDBoqppsXCZcm69lx1quk5haLRlJ1VnoL2dyHSEimwEGDd32Q==
+"@designliquido/delegua-brasil@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-brasil/-/delegua-brasil-0.0.1.tgz#d58053f877335ca44d83b15eb44132fa2ceb34db"
+  integrity sha512-fkTdA3phXlvSaYnYWE/03D9R515ntESxoV6IHvqBq8My3wLl4UiEhkavvwSdJdhIImsdnJI857Htx5Au6ei6tg==
   dependencies:
     "@brazilian-utils/brazilian-utils" "^2.3.0"
 
@@ -409,10 +409,10 @@
     esprima "^4.0.1"
     lodash.clonedeep "^4.5.0"
 
-"@designliquido/delegua@^1.28.0":
-  version "1.28.0"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.28.0.tgz#9134a2015f3b7a53a07297d14a0eadba9dbabf05"
-  integrity sha512-SR0PhUk7rSkRLCWa3PF8yaw1RX6dbJsjKl308BoJvGK/BAyCpRCp44miewSOGQNcnVDbZ/LpqnXTnwbffYYPWg==
+"@designliquido/delegua@^1.28.1":
+  version "1.28.1"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua/-/delegua-1.28.1.tgz#605f9eb82a9b8fab93c08dfd335482eee53c2e96"
+  integrity sha512-htGlMsZ+M/wZRmpK+7UHjoAxcOpLaiF1Wu63BhZKOY6+zLOEL+Ox/o4VbtEWjGxJpIqo0gjnc1j34L8PISaVEA==
   dependencies:
     antlr4ts "^0.5.0-alpha.4"
     browser-process-hrtime "^1.0.0"
