@@ -1,0 +1,8 @@
+{
+  // Pacote de exemplo instalado pelo cliente `pacote` (realização node).
+  "nome": "saudacao",
+  "versao": "1.0.0",
+  "realizacoes": ["node", "llvm", "cgd"],
+  /* O ponto de entrada fica em um subdiretório para testar a resolução relativa. */
+  "pontoDeEntrada": "fontes/saudacao.delegua"
+}

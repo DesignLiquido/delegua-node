@@ -78,6 +78,28 @@ describe('Núcleo de execução', () => {
                 expect(retornoSaida[1]).toBe('Essa outra importação também funcionou.');
             });
         });
+
+        describe('Importação de pacotes da Pacoteca (pacotes/node/<nome>)', () => {
+            const executar = async (arquivo: string) => {
+                const retornoSaida: string[] = [];
+                const nucleoExecucao = new NucleoExecucao('0.1', (saida: string) => retornoSaida.push(saida));
+                nucleoExecucao.configurarDialeto();
+                await nucleoExecucao.carregarEExecutarArquivo(`./exemplos/delegua/importacao/pacoteca/${arquivo}`);
+                return retornoSaida;
+            };
+
+            it('Importação desestruturada', async () => {
+                expect(await executar('desestruturada.delegua')).toEqual(['Olá, Pacoteca!']);
+            });
+
+            it('Importação com tudo', async () => {
+                expect(await executar('tudo.delegua')).toEqual(['Olá, Pacoteca!']);
+            });
+
+            it('Importação dinâmica a partir de subdiretório', async () => {
+                expect(await executar('subdiretorio/dinamica.delegua')).toEqual(['Olá, Pacoteca!']);
+            });
+        });
     });
 
     it('Dialeto Égua executa bloco `pegue` quando comparação inválida ocorre', async () => {

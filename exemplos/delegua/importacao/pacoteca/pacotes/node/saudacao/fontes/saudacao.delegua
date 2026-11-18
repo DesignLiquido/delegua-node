@@ -1,0 +1,5 @@
+importar { exclamar } de "./auxiliar.delegua"
+
+funcao saudar(nome) {
+    escreva(exclamar("Olá, " + nome))
+}

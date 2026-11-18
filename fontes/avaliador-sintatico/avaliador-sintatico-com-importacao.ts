@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import {
     AcessoMetodo,
     Ajuda,
@@ -27,6 +29,7 @@ import tiposDeSimbolos from "@designliquido/delegua/tipos-de-simbolos/delegua";
 import { ImportadorInterface } from "../interfaces";
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 import { carregarBibliotecaDelegua, verificarModulosDelegua } from "../mecanismo-importacao-bibliotecas";
+import { resolverPacotePacoteca } from "../mecanismo-importacao-bibliotecas/resolvedor-pacoteca";
 import { ClasseDeModulo } from "../interpretador/estruturas";
 import { MicroAvaliadorAjuda } from "./micro-avaliador-ajuda";
 
@@ -181,8 +184,35 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         );
     }
 
-    protected async logicaComumImportacaoModulo(literalCaminho: Literal, simboloReferencia: SimboloInterface): Promise<ModuloDeclaracoes> {
+    /**
+     * Resolve `importar ... de 'nome'` para um pacote instalado pela Pacoteca em
+     * `pacotes/node/<nome>/`, procurando a partir do diretório do arquivo que importa.
+     * @returns O caminho absoluto do `pontoDeEntrada` do pacote, ou `null`.
+     */
+    protected resolverPacotePacoteca(literalCaminho: Literal, simboloReferencia: SimboloInterface): string | null {
         const caminhoTexto = String(literalCaminho.valor);
+        if (caminhoTexto.endsWith('.delegua')) {
+            return null;
+        }
+
+        const arquivoAtual = this.importador.arquivosAbertos?.[literalCaminho.hashArquivo];
+        const diretorioInicial = arquivoAtual
+            ? path.dirname(arquivoAtual)
+            : this.importador.diretorioBase;
+
+        try {
+            return resolverPacotePacoteca(caminhoTexto, diretorioInicial);
+        } catch (erro: any) {
+            throw this.erro(simboloReferencia, erro?.message ?? String(erro));
+        }
+    }
+
+    protected async logicaComumImportacaoModulo(
+        literalCaminho: Literal,
+        simboloReferencia: SimboloInterface,
+        caminhoResolvido?: string
+    ): Promise<ModuloDeclaracoes> {
+        const caminhoTexto = caminhoResolvido ?? String(literalCaminho.valor);
         const resultadoImportacao = this.importador.importar(
             caminhoTexto,
             literalCaminho.hashArquivo
@@ -277,11 +307,12 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
 
         // Chegando aqui sem erros, a importação é sintaticamente válida.
         const literalCaminho = caminho as Literal;
-        if (!String(literalCaminho.valor).endsWith('.delegua')) {
+        const caminhoPacote = this.resolverPacotePacoteca(literalCaminho, simboloAbertura);
+        if (!caminhoPacote && !String(literalCaminho.valor).endsWith('.delegua')) {
             return this.importarBibliotecaNode(literalCaminho);
         }
 
-        return await this.logicaComumImportacaoModulo(literalCaminho, simboloAbertura);
+        return await this.logicaComumImportacaoModulo(literalCaminho, simboloAbertura, caminhoPacote ?? undefined);
     }
 
     protected localizarDeclaracaoPorNomeEmModulo(
@@ -346,7 +377,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 new InformacaoElementoSintatico(declaracaoResolvida.simboloTudo.lexema, 'módulo')
             );
 
-            if (!String(literalCaminho.valor).endsWith('.delegua')) {
+            const caminhoPacoteTudo = this.resolverPacotePacoteca(literalCaminho, declaracaoResolvida.simboloTudo);
+            if (!caminhoPacoteTudo && !String(literalCaminho.valor).endsWith('.delegua')) {
                 const caminhoTexto = String(literalCaminho.valor);
                 if (caminhoTexto === 'testes') {
                     // Módulo embutido do núcleo: deixa o interpretador resolver.
@@ -362,7 +394,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
                 );
             }
 
-            const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.simboloTudo);
+            const moduloDeclaracoes = await this.logicaComumImportacaoModulo(
+                literalCaminho,
+                declaracaoResolvida.simboloTudo,
+                caminhoPacoteTudo ?? undefined
+            );
 
             return new Const(
                 declaracaoResolvida.simboloTudo,
@@ -386,7 +422,8 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
         const nomeReservadoModulo = `${literalCaminho.hashArquivo}_${literalCaminho.linha}_modulo`;
         const simboloReservadoModulo = { lexema: nomeReservadoModulo, hashArquivo: literalCaminho.hashArquivo, linha: literalCaminho.linha } as SimboloInterface;
 
-        if (!String(literalCaminho.valor).endsWith('.delegua')) {
+        const caminhoPacote = this.resolverPacotePacoteca(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
+        if (!caminhoPacote && !String(literalCaminho.valor).endsWith('.delegua')) {
             const caminhoTexto = String(literalCaminho.valor);
 
             if (caminhoTexto === 'testes') {
@@ -447,7 +484,11 @@ export class AvaliadorSintaticoComImportacao extends AvaliadorSintatico {
             return constantesImportadas;
         }
 
-        const moduloDeclaracoes = await this.logicaComumImportacaoModulo(literalCaminho, declaracaoResolvida.elementosImportacao[0]);
+        const moduloDeclaracoes = await this.logicaComumImportacaoModulo(
+            literalCaminho,
+            declaracaoResolvida.elementosImportacao[0],
+            caminhoPacote ?? undefined
+        );
         constantesImportadas.push(
             new Const(
                 simboloReservadoModulo,
