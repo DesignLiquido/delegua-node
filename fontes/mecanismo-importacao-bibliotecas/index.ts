@@ -7,6 +7,9 @@ import { ErroEmTempoDeExecucao } from '@designliquido/delegua/excecoes';
 import { DeleguaModulo, ClassePadrao, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
 
 import { criarModuloArgumentos } from '../bibliotecas/argumentos';
+import { criarModuloMemoria } from '../bibliotecas/memoria';
+import { criarModuloProcesso } from '../bibliotecas/processo';
+import { criarModuloRede } from '../bibliotecas/rede';
 
 let _argumentosPrograma: string[] = [];
 
@@ -338,6 +341,18 @@ export default async function (nome: string) {
     const nomeLower = nome.toLowerCase();
     if (nomeLower === 'argumentos') {
         return criarModuloArgumentos(_argumentosPrograma);
+    }
+
+    // Recursos do sistema operacional embutidos no delegua-node (mesma interface dos
+    // módulos homônimos do delegua-llvm). Têm prioridade sobre pacotes npm de mesmo nome.
+    if (nomeLower === 'processo') {
+        return criarModuloProcesso();
+    }
+    if (nomeLower === 'rede') {
+        return criarModuloRede();
+    }
+    if (nomeLower === 'memoria' || nomeLower === 'memória') {
+        return criarModuloMemoria();
     }
 
     if (nomeLower === 'interfacegrafica' || nomeLower === 'interface-grafica') {

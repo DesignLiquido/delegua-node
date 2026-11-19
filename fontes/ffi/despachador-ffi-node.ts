@@ -6,10 +6,15 @@ import { resolverNomeBiblioteca } from './resolver-biblioteca';
 
 const TIPOS_C: Record<string, string> = {
     numero: 'double',
+    número: 'double',
     inteiro: 'int',
     longo: 'int64',
     logico: 'bool',
+    lógico: 'bool',
+    byte: 'uint8_t',
     texto: 'string',
+    // Ponteiros opacos, como os do módulo `memoria` (endereços BigInt do koffi).
+    ponteiro: 'void *',
     qualquer: 'pointer',
     vazio: 'void',
 };
