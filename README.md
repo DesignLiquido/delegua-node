@@ -54,7 +54,7 @@ No entanto, este pacote por si só não contém as bibliotecas que fazem parte d
 
 ## Pacotes da Pacoteca
 
-Pacotes escritos em Delégua e instalados pelo cliente [`pacote`](https://github.com/DesignLiquido/pacote) ficam em `pacotes/node/<nome>/`. Uma importação por nome simples resolve para o `pontoDeEntrada` declarado no `pacoteca.jsonc` do pacote:
+Pacotes escritos em Delégua e instalados pelo cliente [`pacote`](https://github.com/DesignLiquido/pacote-go) ficam em `pacotes/node/<nome>/`. Uma importação por nome simples resolve para o `pontoDeEntrada` declarado no `pacoteca.jsonc` do pacote:
 
 ```js
 importar { saudar } de "saudacao"            // pacotes/node/saudacao/<pontoDeEntrada>
