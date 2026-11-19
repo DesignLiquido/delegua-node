@@ -1,0 +1,4 @@
+// O pacote é encontrado subindo a árvore de diretórios até `pacotes/`.
+var saudacao = importar("saudacao")
+
+saudacao.saudar("Pacoteca")

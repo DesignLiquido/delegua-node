@@ -52,6 +52,18 @@ npm install -g @designliquido/delegua-node
 
 No entanto, este pacote por si só não contém as bibliotecas que fazem parte do ecossistema de Delégua, como `delegua-matematica`, `delegua-http` e outras, bem como comandos executáveis por prompt de comando, como uso de arquivos ou código como argumento, ou o [Modo LAIR (Leia-Avalie-Imprima-Repita)](https://github.com/DesignLiquido/delegua-completo/blob/principal/README.md#usando-como-lair-leia-avalie-imprima-repita-em-console). Por isso, a instalação da solução completa é recomendada para a maioria dos casos.
 
+## Pacotes da Pacoteca
+
+Pacotes escritos em Delégua e instalados pelo cliente [`pacote`](https://github.com/DesignLiquido/pacote-go) ficam em `pacotes/node/<nome>/`. Uma importação por nome simples resolve para o `pontoDeEntrada` declarado no `pacoteca.jsonc` do pacote:
+
+```js
+importar { saudar } de "saudacao"            // pacotes/node/saudacao/<pontoDeEntrada>
+importar tudo como saudacao de "saudacao"
+var saudacao = importar("saudacao")
+```
+
+A busca começa no diretório do arquivo que importa e sobe a árvore até encontrar `pacotes/` (como o Node.js faz com `node_modules`). Se o pacote não estiver lá, ou não declarar um `pontoDeEntrada` `.delegua` (por exemplo, pacotes que só têm `pacoteNpm`), a importação segue o caminho de sempre: bibliotecas conhecidas e NPM.
+
 
 ## Tradução de código
 

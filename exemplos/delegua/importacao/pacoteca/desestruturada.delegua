@@ -1,0 +1,3 @@
+importar { saudar } de "saudacao"
+
+saudar("Pacoteca")
