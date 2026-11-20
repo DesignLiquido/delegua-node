@@ -374,10 +374,10 @@
   resolved "https://registry.yarnpkg.com/@designliquido/delegua-matematica/-/delegua-matematica-0.4.0.tgz#b1b9e06f6bb20040c056503a258275533485b135"
   integrity sha512-h8KdfnSKG98otwzjLvwwFatMGcUQdaKVvS4DUAeIyrmmxQYjkwt1B6TfAvSn79TTXJznYD62qrnVLLNfzX/VOg==
 
-"@designliquido/delegua-tempo@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-1.1.1.tgz#19be0f5ead261e3fcc8e85f0a743bb1810919f4d"
-  integrity sha512-h+/EnVylox9QEWVTwxnFukjCIdk9a9x5pMuMidFGY7QimpmO9jBDx1bY48AUt3997zOR16z1dMPoycbrH23R8w==
+"@designliquido/delegua-tempo@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@designliquido/delegua-tempo/-/delegua-tempo-1.2.0.tgz#1ee1f93e48c1f7a80ba6dc18a2de5198bc5640ac"
+  integrity sha512-BdAAlemhsOa8kpA6a/ajsyLgad7mVXK6IeEwNzo0aIH2jmBxd4cYvbi6Usjbb9rZHVE4wbbtbOQP9iPwv0QB4A==
   dependencies:
     dayjs "^1.11.13"
 

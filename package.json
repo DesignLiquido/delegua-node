@@ -47,7 +47,7 @@
         "@designliquido/delegua-imagens": "^0.0.0",
         "@designliquido/delegua-json": "^0.3.1",
         "@designliquido/delegua-matematica": "^0.4.0",
-        "@designliquido/delegua-tempo": "^1.1.1",
+        "@designliquido/delegua-tempo": "^1.2.0",
         "@designliquido/delegua-yaml": "^0.0.2",
         "@types/estree": "^1.0.7",
         "@types/jest": "^29.5.14",
