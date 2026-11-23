@@ -1,0 +1,5 @@
+// Nomes de nível superior de um módulo não vazam para quem o importa.
+importar tudo como ma de "./modulo-a.delegua"
+importar tudo como mb de "./modulo-b.delegua"
+
+escreva(ma.chamar_a() + mb.chamar_b())

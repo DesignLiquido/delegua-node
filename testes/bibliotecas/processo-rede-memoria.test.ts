@@ -122,6 +122,33 @@ describe('Biblioteca rede', () => {
         expect(await chamar(rede, 'conectar', '127.0.0.1', porta, 2000)).toBeNull();
     });
 
+    it('escreverArquivo envia os bytes do arquivo sem conversão de texto', async () => {
+        const fs = require('fs');
+        const os = require('os');
+        const path = require('path');
+        const diretorio = fs.mkdtempSync(path.join(os.tmpdir(), 'delegua-rede-'));
+        const caminhoArquivo = path.join(diretorio, 'binario.bin');
+        const bytes = Buffer.from([0xff, 0x00, 0x41, 0xc3, 0x28, 0x89]);
+        fs.writeFileSync(caminhoArquivo, bytes);
+
+        const rede = criarModuloRede();
+        const servidor = await chamar(rede, 'escutar', '127.0.0.1', 0);
+        const porta = await chamar(rede, 'portaLocal', servidor);
+        const cliente = await chamar(rede, 'conectar', '127.0.0.1', porta, 2000);
+        const conexao = await chamar(rede, 'aceitar', servidor, 2000);
+
+        expect(await chamar(rede, 'escreverArquivo', conexao, caminhoArquivo)).toBe(true);
+        expect(await chamar(rede, 'escreverArquivo', conexao, path.join(diretorio, 'nao-existe'))).toBe(false);
+        expect(await chamar(rede, 'ultimoErro')).toContain('falha ao ler arquivo');
+        await chamar(rede, 'fechar', conexao);
+        await new Promise((resolver) => setTimeout(resolver, 100));
+        expect(Buffer.compare(cliente.recebido, bytes)).toBe(0);
+
+        await chamar(rede, 'fechar', cliente);
+        await chamar(rede, 'fechar', servidor);
+        fs.rmSync(diretorio, { recursive: true, force: true });
+    });
+
     it('rejeita porta inválida', async () => {
         const rede = criarModuloRede();
         expect(await chamar(rede, 'escutar', '127.0.0.1', 70000)).toBeNull();

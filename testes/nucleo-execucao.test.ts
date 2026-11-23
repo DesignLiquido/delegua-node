@@ -37,6 +37,18 @@ describe('Núcleo de execução', () => {
     });
 
     describe('Importação', () => {
+        describe('Isolamento de módulos', () => {
+            it('Módulos com nomes internos iguais não se sobrescrevem', async () => {
+                let retornoSaida: string = '';
+                const funcaoDeRetorno = (saida: string) => retornoSaida += saida;
+                const nucleoExecucao = new NucleoExecucao('0.1', funcaoDeRetorno);
+                nucleoExecucao.configurarDialeto();
+                await nucleoExecucao.carregarEExecutarArquivo('./exemplos/delegua/importacao/isolamento/principal.delegua');
+
+                expect(retornoSaida).toBe('AB');
+            });
+        });
+
         describe('Importação dinâmica', () => {
             it('Importação de classes', async () => {
                 let retornoSaida: string = '';

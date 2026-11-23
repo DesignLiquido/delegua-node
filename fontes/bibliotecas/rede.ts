@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as net from 'net';
 
 import { DeleguaModulo, FuncaoPadrao } from '@designliquido/delegua/interpretador/estruturas';
@@ -291,6 +292,29 @@ export function criarModuloRede(): DeleguaModulo {
                 }
                 return await new Promise<boolean>((resolver) => {
                     conexao.socket.write(String(texto), 'utf-8', (erro?: Error | null) => {
+                        if (erro) ultimoErro = `falha ao escrever: ${erro.message}`;
+                        resolver(!erro);
+                    });
+                });
+            },
+        ],
+        escreverArquivo: [
+            2,
+            async (_interpretador: any, conexao: any, caminhoArquivo: string) => {
+                // Envia o conteúdo bruto (bytes) de um arquivo pela conexão, sem conversão de texto.
+                if (!(conexao instanceof SoqueteConexao) || !caminhoArquivo) {
+                    ultimoErro = 'argumentos inválidos';
+                    return false;
+                }
+                let conteudo: Buffer;
+                try {
+                    conteudo = await fs.promises.readFile(String(caminhoArquivo));
+                } catch (erro: any) {
+                    ultimoErro = `falha ao ler arquivo: ${erro.message}`;
+                    return false;
+                }
+                return await new Promise<boolean>((resolver) => {
+                    conexao.socket.write(conteudo, (erro?: Error | null) => {
                         if (erro) ultimoErro = `falha ao escrever: ${erro.message}`;
                         resolver(!erro);
                     });

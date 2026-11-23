@@ -1,0 +1,6 @@
+// Os dois módulos usam o mesmo nome interno, `interno`, para importações diferentes.
+importar tudo como interno de "./interno-a.delegua"
+
+funcao chamar_a() {
+    retorna interno.quem()
+}

@@ -25,6 +25,9 @@ describe('Interpretador Comum', () => {
         interpretadorMock = {
             erros: [],
             pilhaEscoposExecucao: {
+                pilha: [],
+                empilhar: jest.fn(),
+                removerUltimo: jest.fn(),
                 definirConstante: jest.fn(),
                 definirVariavel: jest.fn(),
                 registrarReferenciaFuncao: jest.fn(),

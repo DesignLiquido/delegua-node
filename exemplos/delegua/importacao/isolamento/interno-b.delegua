@@ -1,0 +1,4 @@
+// Implementação interna usada por modulo-b.delegua.
+funcao quem() {
+    retorna "B"
+}

@@ -1,6 +1,7 @@
-import { DeleguaFuncao, DeleguaModulo, FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
+import { DeleguaFuncao, DeleguaModulo, DescritorTipoClasse, FuncaoPadrao } from "@designliquido/delegua/interpretador/estruturas";
 import { Const, FuncaoDeclaracao, Ajuda } from "@designliquido/delegua/declaracoes";
 import { pontoEntradaAjuda } from "@designliquido/delegua/interpretador/comum";
+import { EspacoMemoria } from "@designliquido/delegua/interpretador/espaco-memoria";
 
 import { ImportarBiblioteca, ModuloDeclaracoes } from "../construtos";
 import { InterpretadorComImportacaoInterface } from "../interfaces/interpretador-com-importacao-interface";
@@ -127,7 +128,11 @@ export async function visitarDeclaracaoDefinicaoFuncao(
     interpretador: InterpretadorComImportacaoInterface,
     funcaoDeclaracao: FuncaoDeclaracao
 ): Promise<any> {
-    const funcao = new DeleguaFuncao(funcaoDeclaracao.simbolo.lexema, funcaoDeclaracao.funcao);
+    // Captura a pilha de escopos da definição (fecho léxico), como no interpretador do núcleo:
+    // funções de um módulo continuam enxergando os nomes de nível superior do módulo.
+    const funcao = new DeleguaFuncao(funcaoDeclaracao.simbolo.lexema, funcaoDeclaracao.funcao)
+        .capturarEscopo(interpretador.pilhaEscoposExecucao);
+    (funcao as any).documentacao = funcaoDeclaracao.documentacao;
     // TODO: Depreciar essa abordagem a favor do uso por referências?
     interpretador.pilhaEscoposExecucao.definirVariavel(funcaoDeclaracao.simbolo.lexema, funcao);
     interpretador.pilhaEscoposExecucao.registrarReferenciaFuncao(funcaoDeclaracao.id, funcao);
@@ -150,22 +155,62 @@ export async function visitarExpressaoModuloDeclaracoes(
     // O problema é como definir o nome do módulo.
     // Talvez o prefixo do arquivo?
     const modulo = new DeleguaModulo();
-    for (const subdeclaracao of declaracao.declaracoes) {
-        const componente = await interpretador.avaliar(subdeclaracao);
-        if (componente) {
-            if (componente.hasOwnProperty('operacao')) {
-                switch (componente.operacao) {
-                    case 'DefinicaoFuncao':
-                        const definicaoFuncaoCorrespondente: DeleguaFuncao = interpretador.pilhaEscoposExecucao.obterReferenciaFuncao(componente.id);
-                        modulo.componentes[componente.nome] = definicaoFuncaoCorrespondente;
-                        break;
-                    default:
-                        console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", componente);
-                        break;
+
+    // Cada módulo é avaliado em um escopo próprio, empilhado sobre o escopo atual.
+    // Assim, nomes de nível superior do módulo (funções, classes, variáveis e as
+    // importações que ele próprio faz) não vazam para o escopo de quem importa, e
+    // dois módulos podem usar os mesmos nomes internos sem que um sobrescreva o outro.
+    // As funções definidas no módulo capturam a pilha de escopos no momento da definição
+    // (fecho léxico), então continuam enxergando o escopo do módulo depois que ele é
+    // desempilhado. O escopo é apenas desempilhado (sem liberar referências do montão),
+    // para que vetores e dicionários de nível superior do módulo continuem válidos.
+    const espacoMemoriaModulo = new EspacoMemoria();
+    interpretador.pilhaEscoposExecucao.empilhar({
+        declaracoes: declaracao.declaracoes,
+        declaracaoAtual: 0,
+        espacoMemoria: espacoMemoriaModulo,
+        finalizado: false,
+        tipo: 'outro',
+        emLacoRepeticao: false
+    });
+
+    try {
+        for (const subdeclaracao of declaracao.declaracoes) {
+            const componente = await interpretador.avaliar(subdeclaracao);
+            if (componente) {
+                if (componente.hasOwnProperty('operacao')) {
+                    switch (componente.operacao) {
+                        case 'DefinicaoFuncao':
+                            const definicaoFuncaoCorrespondente: DeleguaFuncao = interpretador.pilhaEscoposExecucao.obterReferenciaFuncao(componente.id);
+                            modulo.componentes[componente.nome] = definicaoFuncaoCorrespondente;
+                            break;
+                        default:
+                            console.warn("visitarDeclaracaoModuloDeclaracoes Tratar: ", componente);
+                            break;
+                    }
                 }
             }
+        }
+    } finally {
+        interpretador.pilhaEscoposExecucao.removerUltimo();
+    }
 
-            // TODO: Casos em que não tenha `operacao` definida na resolução do componente.
+    // Demais nomes de nível superior (classes, variáveis, constantes) também são componentes do módulo.
+    for (const [nome, entrada] of Object.entries(espacoMemoriaModulo.valores)) {
+        if (modulo.componentes[nome] !== undefined) {
+            continue;
+        }
+
+        const valor = entrada && typeof entrada === 'object' && 'valor' in (entrada as any)
+            ? (entrada as any).valor
+            : entrada;
+        modulo.componentes[nome] = valor;
+
+        // Classes continuam visíveis também no escopo de quem importa: para o avaliador
+        // sintático, tipos definidos em código são globais, e chamadas como
+        // `modulo.Classe()` são resolvidas pelo nome da classe.
+        if (valor instanceof DescritorTipoClasse) {
+            interpretador.pilhaEscoposExecucao.definirVariavel(nome, valor);
         }
     }
 

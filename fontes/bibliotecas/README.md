@@ -9,7 +9,7 @@ Implementados diretamente no `delegua-node` (não são pacotes npm) e importados
 |---|---|---|
 | `argumentos` | `argumentos.ts` | Argumentos da linha de comando |
 | `processo` | `processo.ts` | `sair`, `escreverErro`, `sistemaOperacional`, `arquitetura`, `variavelAmbiente`, `definirVariavelAmbiente`, `executar`, `executarCapturando`, `ultimoCodigoSaida` |
-| `rede` | `rede.ts` | Soquetes TCP com tempo limite: `escutar`, `portaLocal`, `aceitar`, `conectar`, `ler`, `lerAte`, `escrever`, `fechar`, `ultimoErro`, `codificarComponenteUrl`, `decodificarComponenteUrl` |
+| `rede` | `rede.ts` | Soquetes TCP com tempo limite: `escutar`, `portaLocal`, `aceitar`, `conectar`, `ler`, `lerAte`, `escrever`, `escreverArquivo`, `fechar`, `ultimoErro`, `codificarComponenteUrl`, `decodificarComponenteUrl` |
 | `memoria` | `memoria.ts` | Memória bruta para FFI (koffi): `alocar`, `liberar`, `ler*`/`escrever*` em deslocamento, `textoDe`, `deslocar`, `copiar`, `tamanhoPonteiro` |
 
 Observações:
